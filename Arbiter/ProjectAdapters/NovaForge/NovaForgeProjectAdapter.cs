@@ -7,6 +7,8 @@
 // - exposes project info, build targets, and whitelisted tool actions to Arbiter
 // - wraps all requests in the standard BridgeRequestEnvelope
 //
+// Epic 6 / Task 6.2 — project-specific adapter implements IProjectAdapter
+//
 // Rules:
 // - must not directly access gameplay runtime internals
 // - must not contain WPF or UI code
@@ -14,15 +16,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
+// Pull in IProjectAdapter and BridgeResponse from the parent namespace
+using Arbiter.ProjectAdapters;
+
 namespace Arbiter.ProjectAdapters.NovaForge
 {
-    public sealed class NovaForgeProjectAdapter : IDisposable
+    public sealed class NovaForgeProjectAdapter : IProjectAdapter
     {
         private readonly NovaForgeProjectManifest _manifest;
         private readonly HttpClient               _http;
@@ -68,6 +74,12 @@ namespace Arbiter.ProjectAdapters.NovaForge
         public IReadOnlyList<BuildTargetModel> GetBuildTargets() =>
             _manifest.BuildTargets;
 
+        /// <summary>
+        /// IProjectAdapter: returns build target names for generic consumers.
+        /// </summary>
+        public IReadOnlyList<string> GetBuildTargetNames() =>
+            _manifest.BuildTargets.Select(t => t.Name).ToList();
+
         /// <summary>Returns all allowed tool actions from safety settings.</summary>
         public IReadOnlyList<string> GetAllowedToolActions() =>
             _manifest.SafetySettings.AllowedToolActions;
@@ -88,12 +100,10 @@ namespace Arbiter.ProjectAdapters.NovaForge
                 ProjectId = _manifest.Project.Id,
             };
 
-            var envelope = new BridgeRequestEnvelope
-            {
-                Service   = "SessionService",
-                Operation = "Connect",
-                Payload   = payload,
-            };
+            var envelope = BridgeRequestEnvelope.Create(
+                service:   "SessionService",
+                operation: "Connect",
+                payload:   payload);
 
             var response = await PostEnvelopeAsync(
                 "session/connect", envelope, cancellationToken);
@@ -113,10 +123,19 @@ namespace Arbiter.ProjectAdapters.NovaForge
                         if (connect != null)
                             _sessionToken = connect.SessionToken;
                     }
+
+                    if (string.IsNullOrEmpty(_sessionToken))
+                    {
+                        // Server responded 200 but payload had no token — treat as failure
+                        return new BridgeResponse(false,
+                            "Session connect succeeded but no session token was returned.");
+                    }
                 }
-                catch
+                catch (JsonException ex)
                 {
-                    // Token extraction best-effort; caller can check SessionToken
+                    // Deserialization failed — surface the error to the caller
+                    return new BridgeResponse(false,
+                        $"Session connect succeeded but token extraction failed: {ex.Message}");
                 }
             }
 
@@ -278,13 +297,11 @@ namespace Arbiter.ProjectAdapters.NovaForge
             string  service,
             string  operation,
             object? payload) =>
-            new BridgeRequestEnvelope
-            {
-                SessionId = _sessionToken,
-                Service   = service,
-                Operation = operation,
-                Payload   = payload,
-            };
+            BridgeRequestEnvelope.Create(
+                service:   service,
+                operation: operation,
+                sessionId: _sessionToken,
+                payload:   payload);
 
         private void AddSessionHeader(HttpRequestMessage request)
         {
@@ -333,6 +350,4 @@ namespace Arbiter.ProjectAdapters.NovaForge
         }
     }
 
-    /// <summary>Simple response wrapper for bridge calls.</summary>
-    public sealed record BridgeResponse(bool Success, string Body);
 }

@@ -9,6 +9,7 @@ namespace Arbiter.ProjectAdapters.NovaForge
 {
     /// <summary>
     /// Standard wrapper for every request sent from Arbiter to the NovaForge bridge.
+    /// Use <see cref="Create"/> to get a correctly initialised instance.
     /// </summary>
     public sealed class BridgeRequestEnvelope
     {
@@ -32,6 +33,27 @@ namespace Arbiter.ProjectAdapters.NovaForge
 
         [JsonPropertyName("payload")]
         public object? Payload { get; init; }
+
+        /// <summary>
+        /// Factory method that ensures ProtocolVersion and TimestampUtc are
+        /// always set at construction time rather than relying on property
+        /// initialiser evaluation order.
+        /// </summary>
+        public static BridgeRequestEnvelope Create(
+            string  service,
+            string  operation,
+            string  sessionId = "",
+            object? payload   = null) =>
+            new BridgeRequestEnvelope
+            {
+                ProtocolVersion = BridgeProtocol.Version,
+                RequestId       = Guid.NewGuid().ToString(),
+                SessionId       = sessionId,
+                Service         = service,
+                Operation       = operation,
+                TimestampUtc    = DateTime.UtcNow.ToString("o"),
+                Payload         = payload,
+            };
     }
 
     /// <summary>

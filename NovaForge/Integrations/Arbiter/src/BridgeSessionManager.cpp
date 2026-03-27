@@ -134,8 +134,9 @@ std::string BridgeSessionManager::generateToken()
     uint64_t a = dist(m_impl->rng);
     uint64_t b = dist(m_impl->rng);
 
-    // Set UUID v4 version and variant bits
+    // Set UUID v4 version field (bits 12-15 of octet 6 = 0100 = 4) per RFC 4122 §4.4
     a = (a & 0xFFFFFFFFFFFF0FFFULL) | 0x0000000000004000ULL;
+    // Set UUID variant field (bits 62-63 of octet 8 = 10) per RFC 4122 §4.1.1
     b = (b & 0x3FFFFFFFFFFFFFFFULL) | 0x8000000000000000ULL;
 
     std::ostringstream oss;

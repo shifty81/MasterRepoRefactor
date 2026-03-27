@@ -221,7 +221,7 @@ struct SessionConnectRequest
 struct SessionConnectResponse
 {
     BridgeResult result;
-    std::string  sessionToken;   // opaque token for subsequent requests
+    std::string  sessionToken;   // opaque token — obtained from SessionService Connect response
     std::string  serverVersion;
     std::string  projectId;
     bool         writeEnabled = false; // true when session allows mutating ops
