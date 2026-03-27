@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+vendor/
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# Build artifacts
+dist/
+build/
+out/
+target/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs and runtime files
+*.log
+*.pid
+*.seed
+*.lock
+!package-lock.json
+!yarn.lock
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# Test coverage
+coverage/
+.coverage
+htmlcov/
+.nyc_output/
+lcov.info
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
