@@ -1,7 +1,8 @@
 # AtlasRuntime — application framework, game loop, simulation, save/load
 
 set(ATLAS_RUNTIME_SOURCES
-    # placeholder — add source files here as they are created
+    src/AtlasRuntime_stub.cpp
+    # add source files here as runtime systems are implemented
 )
 
 add_library(AtlasRuntime STATIC ${ATLAS_RUNTIME_SOURCES})

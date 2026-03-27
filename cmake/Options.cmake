@@ -11,3 +11,11 @@ option(ATLAS_ENABLE_TOOLS_RUNTIME   "Enable Atlas tools runtime hooks"  ON)
 
 option(NOVAFORGE_ENABLE_ARBITER_INTEGRATION
     "Enable NovaForge Arbiter bridge integration"                       ON)
+
+# Epic 7: Compile-time feature guards
+# These flags ensure tooling-only code never leaks into shipping binaries.
+option(NOVAFORGE_ENABLE_BRIDGE_SERVER
+    "Enable the in-process bridge server (editor/dev builds only)"      ON)
+
+option(NOVAFORGE_ENABLE_AUDIT_LOGGING
+    "Enable bridge audit logging to disk (dev/editor builds only)"      ON)

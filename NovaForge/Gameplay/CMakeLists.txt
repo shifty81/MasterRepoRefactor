@@ -1,7 +1,8 @@
 # NovaForge Gameplay — game systems, factions, economy, missions, combat
 
 set(NOVAFORGE_GAMEPLAY_SOURCES
-    # placeholder — add source files here as they are created
+    src/NovaForgeGameplay_stub.cpp
+    # add source files here as gameplay systems are implemented
 )
 
 add_library(NovaForgeGameplay STATIC ${NOVAFORGE_GAMEPLAY_SOURCES})

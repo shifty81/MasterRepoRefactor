@@ -1,7 +1,8 @@
 # AtlasCore — core primitives, containers, memory, math, IO, logging
 
 set(ATLAS_CORE_SOURCES
-    # placeholder — add source files here as they are created
+    src/AtlasCore_stub.cpp
+    # add source files here as engine core systems are implemented
 )
 
 add_library(AtlasCore STATIC ${ATLAS_CORE_SOURCES})

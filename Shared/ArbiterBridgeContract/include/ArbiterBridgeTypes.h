@@ -16,6 +16,14 @@ namespace Arbiter::Bridge
 {
 
 // ============================================================
+// Protocol constants
+// ============================================================
+
+constexpr const char* kProtocolVersion = "1.0";
+constexpr uint16_t    kDefaultRestPort = 57100;
+constexpr uint16_t    kDefaultWsPort   = 57101;
+
+// ============================================================
 // Protocol versioning
 // ============================================================
 
@@ -159,6 +167,82 @@ struct ToolActionResult
     BridgeResult result;
     bool         wasDryRun = true;
     std::string  summary;
+};
+
+// ============================================================
+// Request / response envelopes (mirrors ToolProtocol JSON spec)
+// ============================================================
+
+/// Standard envelope for all bridge requests.
+struct BridgeRequestEnvelope
+{
+    std::string protocolVersion = kProtocolVersion;
+    std::string requestId;       // UUID string, set by caller
+    std::string sessionId;       // UUID string, obtained from SessionConnect
+    std::string service;         // e.g. "ProjectService"
+    std::string operation;       // e.g. "GetProjectInfo"
+    std::string timestampUtc;    // ISO 8601 UTC timestamp
+};
+
+/// Standard envelope for all bridge responses.
+struct BridgeResponseEnvelope
+{
+    std::string  protocolVersion = kProtocolVersion;
+    std::string  requestId;      // echoed from request
+    bool         success         = true;
+    std::string  errorCode;      // UPPER_SNAKE_CASE, empty on success
+    std::string  message;        // human-readable status
+};
+
+/// Standard envelope for WebSocket event streams.
+struct BridgeEventEnvelope
+{
+    std::string protocolVersion = kProtocolVersion;
+    std::string eventId;         // UUID string
+    std::string sessionId;
+    std::string service;
+    std::string eventType;       // e.g. "BuildProgress"
+    std::string timestampUtc;
+};
+
+// ============================================================
+// Session types
+// ============================================================
+
+/// Sent by Arbiter to establish a bridge session.
+struct SessionConnectRequest
+{
+    std::string protocolVersion = kProtocolVersion;
+    std::string clientVersion;
+    std::string projectId;
+};
+
+/// Returned by the backend on a successful session handshake.
+struct SessionConnectResponse
+{
+    BridgeResult result;
+    std::string  sessionToken;   // opaque token for subsequent requests
+    std::string  serverVersion;
+    std::string  projectId;
+    bool         writeEnabled = false; // true when session allows mutating ops
+};
+
+// ============================================================
+// Audit log
+// ============================================================
+
+/// A single structured entry written to the audit log.
+struct AuditLogEntry
+{
+    std::string timestampUtc;
+    std::string requestId;
+    std::string sessionId;
+    std::string service;
+    std::string operation;
+    bool        success    = true;
+    bool        wasDryRun  = false;
+    std::string summary;
+    std::string failReason; // populated on failure
 };
 
 } // namespace Arbiter::Bridge

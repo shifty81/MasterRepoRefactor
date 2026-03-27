@@ -1,7 +1,8 @@
 # NovaForge App — bootstrap, session, project context
 
 set(NOVAFORGE_APP_SOURCES
-    # placeholder — add source files here as they are created
+    src/NovaForgeApp_stub.cpp
+    # add source files here as bootstrap and session systems are implemented
 )
 
 add_library(NovaForgeApp STATIC ${NOVAFORGE_APP_SOURCES})

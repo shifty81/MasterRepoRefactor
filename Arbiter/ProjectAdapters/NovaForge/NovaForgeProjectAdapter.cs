@@ -3,8 +3,9 @@
 //
 // This adapter:
 // - loads the NovaForge project manifest
-// - connects to the NovaForge Arbiter bridge service
+// - connects to the NovaForge Arbiter bridge service via /session/connect
 // - exposes project info, build targets, and whitelisted tool actions to Arbiter
+// - wraps all requests in the standard BridgeRequestEnvelope
 //
 // Rules:
 // - must not directly access gameplay runtime internals
@@ -25,11 +26,20 @@ namespace Arbiter.ProjectAdapters.NovaForge
     {
         private readonly NovaForgeProjectManifest _manifest;
         private readonly HttpClient               _http;
+        private string                            _sessionToken = string.Empty;
         private bool                              _disposed;
+
+        private static readonly JsonSerializerOptions s_jsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true,
+        };
 
         public string ProjectId      => _manifest.Project.Id;
         public string ProjectName    => _manifest.Project.DisplayName;
         public string ProjectVersion => _manifest.Project.Version;
+
+        /// <summary>Returns the current session token, or empty if not connected.</summary>
+        public string SessionToken => _sessionToken;
 
         public NovaForgeProjectAdapter(string repoRoot)
         {
@@ -45,7 +55,7 @@ namespace Arbiter.ProjectAdapters.NovaForge
         }
 
         // ----------------------------------------------------------------
-        // Project info
+        // Project info (local — from manifest, no network call)
         // ----------------------------------------------------------------
 
         /// <summary>Returns cached project info from the manifest.</summary>
@@ -61,6 +71,70 @@ namespace Arbiter.ProjectAdapters.NovaForge
         /// <summary>Returns all allowed tool actions from safety settings.</summary>
         public IReadOnlyList<string> GetAllowedToolActions() =>
             _manifest.SafetySettings.AllowedToolActions;
+
+        // ----------------------------------------------------------------
+        // Session management  (Task 4.1 prerequisite — /session/connect)
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Establishes a bridge session with the NovaForge backend.
+        /// The session token is stored and used for all subsequent requests.
+        /// </summary>
+        public async Task<BridgeResponse> ConnectSessionAsync(
+            CancellationToken cancellationToken = default)
+        {
+            var payload = new SessionConnectPayload
+            {
+                ProjectId = _manifest.Project.Id,
+            };
+
+            var envelope = new BridgeRequestEnvelope
+            {
+                Service   = "SessionService",
+                Operation = "Connect",
+                Payload   = payload,
+            };
+
+            var response = await PostEnvelopeAsync(
+                "session/connect", envelope, cancellationToken);
+
+            if (response.Success)
+            {
+                // Extract the session token from the response payload
+                try
+                {
+                    var parsed = JsonSerializer.Deserialize<BridgeResponseEnvelope>(
+                        response.Body, s_jsonOptions);
+
+                    if (parsed?.Payload.HasValue == true)
+                    {
+                        var connect = JsonSerializer.Deserialize<SessionConnectResponse>(
+                            parsed.Payload.Value.GetRawText(), s_jsonOptions);
+                        if (connect != null)
+                            _sessionToken = connect.SessionToken;
+                    }
+                }
+                catch
+                {
+                    // Token extraction best-effort; caller can check SessionToken
+                }
+            }
+
+            return response;
+        }
+
+        /// <summary>Disconnects the current bridge session.</summary>
+        public async Task<BridgeResponse> DisconnectSessionAsync(
+            CancellationToken cancellationToken = default)
+        {
+            var response = await PostEnvelopeAsync(
+                "session/disconnect",
+                BuildEnvelope("SessionService", "Disconnect", null),
+                cancellationToken);
+
+            _sessionToken = string.Empty;
+            return response;
+        }
 
         // ----------------------------------------------------------------
         // Bridge connectivity
@@ -85,11 +159,12 @@ namespace Arbiter.ProjectAdapters.NovaForge
         }
 
         // ----------------------------------------------------------------
-        // Build
+        // Build  POST /build/run  (Task 4.3)
         // ----------------------------------------------------------------
 
         /// <summary>
         /// Requests a build via the bridge service.
+        /// Requires an active session (call ConnectSessionAsync first).
         /// </summary>
         public async Task<BridgeResponse> RequestBuildAsync(
             string              targetName,
@@ -104,23 +179,30 @@ namespace Arbiter.ProjectAdapters.NovaForge
                 rebuild       = false,
             };
 
-            return await PostAsync("build/run", payload, cancellationToken);
+            return await PostEnvelopeAsync(
+                "build/run",
+                BuildEnvelope("BuildService", "RunBuild", payload),
+                cancellationToken);
         }
 
         // ----------------------------------------------------------------
-        // Editor state
+        // Editor state  GET /editor/selection  (Task 4.2)
         // ----------------------------------------------------------------
 
         /// <summary>
         /// Queries the current editor selection snapshot.
+        /// Requires an active session.
         /// </summary>
         public async Task<BridgeResponse> GetEditorSelectionAsync(
             CancellationToken cancellationToken = default)
         {
             try
             {
-                var response = await _http.GetAsync(
-                    "editor/selection", cancellationToken);
+                var request = new HttpRequestMessage(
+                    HttpMethod.Get, "editor/selection");
+                AddSessionHeader(request);
+
+                var response = await _http.SendAsync(request, cancellationToken);
                 string content = await response.Content.ReadAsStringAsync(cancellationToken);
                 return new BridgeResponse(response.IsSuccessStatusCode, content);
             }
@@ -131,11 +213,12 @@ namespace Arbiter.ProjectAdapters.NovaForge
         }
 
         // ----------------------------------------------------------------
-        // Tool actions
+        // Tool actions  POST /editor/tools/run  (Task 4.4)
         // ----------------------------------------------------------------
 
         /// <summary>
-        /// Runs a whitelisted tool action. Defaults to dry-run for safety.
+        /// Runs a whitelisted tool action.
+        /// Defaults to dry-run for safety. Requires an active session.
         /// </summary>
         public async Task<BridgeResponse> RunToolActionAsync(
             string              actionName,
@@ -154,7 +237,10 @@ namespace Arbiter.ProjectAdapters.NovaForge
                 dryRun    = dryRun,
             };
 
-            return await PostAsync("editor/tools/run", payload, cancellationToken);
+            return await PostEnvelopeAsync(
+                "editor/tools/run",
+                BuildEnvelope("ToolService", "RunToolAction", payload),
+                cancellationToken);
         }
 
         // ----------------------------------------------------------------
@@ -188,17 +274,43 @@ namespace Arbiter.ProjectAdapters.NovaForge
             return false;
         }
 
-        private async Task<BridgeResponse> PostAsync(
-            string            endpoint,
-            object            payload,
-            CancellationToken cancellationToken)
+        private BridgeRequestEnvelope BuildEnvelope(
+            string  service,
+            string  operation,
+            object? payload) =>
+            new BridgeRequestEnvelope
+            {
+                SessionId = _sessionToken,
+                Service   = service,
+                Operation = operation,
+                Payload   = payload,
+            };
+
+        private void AddSessionHeader(HttpRequestMessage request)
+        {
+            if (!string.IsNullOrEmpty(_sessionToken))
+                request.Headers.TryAddWithoutValidation(
+                    "X-Bridge-Session", _sessionToken);
+        }
+
+        private async Task<BridgeResponse> PostEnvelopeAsync(
+            string                  endpoint,
+            BridgeRequestEnvelope   envelope,
+            CancellationToken       cancellationToken)
         {
             try
             {
-                string json    = JsonSerializer.Serialize(payload);
+                string json    = JsonSerializer.Serialize(envelope);
                 var    content = new StringContent(json, Encoding.UTF8, "application/json");
-                var    response = await _http.PostAsync(endpoint, content, cancellationToken);
-                string body    = await response.Content.ReadAsStringAsync(cancellationToken);
+
+                var httpRequest = new HttpRequestMessage(HttpMethod.Post, endpoint)
+                {
+                    Content = content,
+                };
+                AddSessionHeader(httpRequest);
+
+                var    response = await _http.SendAsync(httpRequest, cancellationToken);
+                string body     = await response.Content.ReadAsStringAsync(cancellationToken);
                 return new BridgeResponse(response.IsSuccessStatusCode, body);
             }
             catch (Exception ex)
