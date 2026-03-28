@@ -1,4 +1,7 @@
-#include "Renderer.h"
+#include "Rendering/Renderer.h"
+#include "Modules/ModuleSubsystem.h"
+#include "Voxel/VoxelSubsystem.h"
+#include "World/World.h"
 #include <iostream>
 
 bool Renderer::Initialize()
@@ -7,9 +10,14 @@ bool Renderer::Initialize()
     return true;
 }
 
-void Renderer::Render(const World&)
+void Renderer::Render(const World& InWorld)
 {
-    std::cout << "[Renderer] Render\n";
+    ++FrameCounter;
+    std::cout << "[Renderer] Frame=" << FrameCounter
+              << " World=" << InWorld.GetWorldName()
+              << " Chunks=" << InWorld.GetVoxelSubsystem().GetChunkCount()
+              << " Modules=" << InWorld.GetModuleSubsystem().GetModuleCount()
+              << "\n";
 }
 
 void Renderer::Shutdown()

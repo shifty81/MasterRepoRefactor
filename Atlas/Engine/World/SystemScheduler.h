@@ -2,13 +2,13 @@
 
 class World;
 
-class Renderer
+class SystemScheduler
 {
 public:
     bool Initialize();
-    void Render(const World& InWorld);
+    void Tick(float DeltaTime, World& InWorld);
     void Shutdown();
 
 private:
-    int FrameCounter = 0;
+    int TickCounter = 0;
 };

@@ -1,0 +1,7 @@
+<UserControl x:Class="UI.AtlasSuite.Panels.HazardDebug.HazardDebugPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="12">
+        <TextBlock Text="Hazard Debug Panel" FontSize="18" FontWeight="Bold"/>
+    </Grid>
+</UserControl>

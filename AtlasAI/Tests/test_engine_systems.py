@@ -585,5 +585,227 @@ class TestScriptingVMImpl(unittest.TestCase):
         self.assertIn("m_eventHandlers", self._read())
 
 
+# =============================================================================
+# Phase 2 Runtime — Core (App + EngineKernel)
+# =============================================================================
+
+class TestPhase2CoreFilesExist(unittest.TestCase):
+    def _check(self, path):
+        self.assertTrue((REPO_ROOT / path).exists(), f"Missing: {path}")
+
+    def test_app_header(self):
+        self._check("Atlas/Engine/Core/App.h")
+
+    def test_app_source(self):
+        self._check("Atlas/Engine/Core/App.cpp")
+
+    def test_engine_kernel_header(self):
+        self._check("Atlas/Engine/Core/EngineKernel.h")
+
+    def test_engine_kernel_source(self):
+        self._check("Atlas/Engine/Core/EngineKernel.cpp")
+
+
+class TestPhase2AppContent(unittest.TestCase):
+    def _read(self):
+        return (REPO_ROOT / "Atlas/Engine/Core/App.h").read_text(encoding="utf-8")
+
+    def test_has_app_class(self):
+        self.assertIn("class App", self._read())
+
+    def test_has_initialize(self):
+        self.assertIn("Initialize", self._read())
+
+    def test_has_run(self):
+        self.assertIn("Run", self._read())
+
+    def test_has_shutdown(self):
+        self.assertIn("Shutdown", self._read())
+
+
+class TestPhase2EngineKernelContent(unittest.TestCase):
+    def _read(self):
+        return (REPO_ROOT / "Atlas/Engine/Core/EngineKernel.h").read_text(encoding="utf-8")
+
+    def test_has_engine_kernel_class(self):
+        self.assertIn("class EngineKernel", self._read())
+
+    def test_has_tick(self):
+        self.assertIn("Tick", self._read())
+
+    def test_has_data_registry(self):
+        self.assertIn("DataRegistry", self._read())
+
+
+# =============================================================================
+# Phase 2 Runtime — World + SystemScheduler
+# =============================================================================
+
+class TestPhase2WorldFilesExist(unittest.TestCase):
+    def _check(self, path):
+        self.assertTrue((REPO_ROOT / path).exists(), f"Missing: {path}")
+
+    def test_world_header(self):
+        self._check("Atlas/Engine/World/World.h")
+
+    def test_world_source(self):
+        self._check("Atlas/Engine/World/World.cpp")
+
+    def test_system_scheduler_header(self):
+        self._check("Atlas/Engine/World/SystemScheduler.h")
+
+    def test_system_scheduler_source(self):
+        self._check("Atlas/Engine/World/SystemScheduler.cpp")
+
+
+class TestPhase2WorldContent(unittest.TestCase):
+    def _read(self):
+        return (REPO_ROOT / "Atlas/Engine/World/World.h").read_text(encoding="utf-8")
+
+    def test_has_world_class(self):
+        self.assertIn("class World", self._read())
+
+    def test_has_get_voxel_subsystem(self):
+        self.assertIn("GetVoxelSubsystem", self._read())
+
+    def test_has_get_module_subsystem(self):
+        self.assertIn("GetModuleSubsystem", self._read())
+
+    def test_has_get_entity_registry(self):
+        self.assertIn("GetEntityRegistry", self._read())
+
+
+# =============================================================================
+# Phase 2 Runtime — ECS (Entity + Component Registry)
+# =============================================================================
+
+class TestPhase2ECSFilesExist(unittest.TestCase):
+    def _check(self, path):
+        self.assertTrue((REPO_ROOT / path).exists(), f"Missing: {path}")
+
+    def test_entity_types_header(self):
+        self._check("Atlas/Engine/ECS/EntityTypes.h")
+
+    def test_entity_registry_header(self):
+        self._check("Atlas/Engine/ECS/EntityRegistry.h")
+
+    def test_entity_registry_source(self):
+        self._check("Atlas/Engine/ECS/EntityRegistry.cpp")
+
+    def test_component_registry_header(self):
+        self._check("Atlas/Engine/ECS/ComponentRegistry.h")
+
+    def test_component_registry_source(self):
+        self._check("Atlas/Engine/ECS/ComponentRegistry.cpp")
+
+
+# =============================================================================
+# Phase 2 Runtime — Voxel (StructureRegistry + VoxelSubsystem)
+# =============================================================================
+
+class TestPhase2VoxelFilesExist(unittest.TestCase):
+    def _check(self, path):
+        self.assertTrue((REPO_ROOT / path).exists(), f"Missing: {path}")
+
+    def test_structure_registry_header(self):
+        self._check("Atlas/Engine/Voxel/StructureRegistry.h")
+
+    def test_structure_registry_source(self):
+        self._check("Atlas/Engine/Voxel/StructureRegistry.cpp")
+
+    def test_voxel_subsystem_header(self):
+        self._check("Atlas/Engine/Voxel/VoxelSubsystem.h")
+
+    def test_voxel_subsystem_source(self):
+        self._check("Atlas/Engine/Voxel/VoxelSubsystem.cpp")
+
+
+class TestPhase2VoxelSubsystemContent(unittest.TestCase):
+    def _read(self):
+        return (REPO_ROOT / "Atlas/Engine/Voxel/VoxelSubsystem.h").read_text(encoding="utf-8")
+
+    def test_has_voxel_subsystem_class(self):
+        self.assertIn("class VoxelSubsystem", self._read())
+
+    def test_has_get_chunk_count(self):
+        self.assertIn("GetChunkCount", self._read())
+
+
+# =============================================================================
+# Phase 2 Runtime — Modules (ModuleRegistry + ModuleSubsystem)
+# =============================================================================
+
+class TestPhase2ModulesFilesExist(unittest.TestCase):
+    def _check(self, path):
+        self.assertTrue((REPO_ROOT / path).exists(), f"Missing: {path}")
+
+    def test_module_registry_header(self):
+        self._check("Atlas/Engine/Modules/ModuleRegistry.h")
+
+    def test_module_registry_source(self):
+        self._check("Atlas/Engine/Modules/ModuleRegistry.cpp")
+
+    def test_module_subsystem_header(self):
+        self._check("Atlas/Engine/Modules/ModuleSubsystem.h")
+
+    def test_module_subsystem_source(self):
+        self._check("Atlas/Engine/Modules/ModuleSubsystem.cpp")
+
+
+class TestPhase2ModuleSubsystemContent(unittest.TestCase):
+    def _read(self):
+        return (REPO_ROOT / "Atlas/Engine/Modules/ModuleSubsystem.h").read_text(encoding="utf-8")
+
+    def test_has_module_subsystem_class(self):
+        self.assertIn("class ModuleSubsystem", self._read())
+
+    def test_has_get_module_count(self):
+        self.assertIn("GetModuleCount", self._read())
+
+
+# =============================================================================
+# Phase 2 Runtime — Tooling + Data Registry
+# =============================================================================
+
+class TestPhase2ToolingDataFilesExist(unittest.TestCase):
+    def _check(self, path):
+        self.assertTrue((REPO_ROOT / path).exists(), f"Missing: {path}")
+
+    def test_tooling_subsystem_header(self):
+        self._check("Atlas/Engine/Tooling/ToolingSubsystem.h")
+
+    def test_tooling_subsystem_source(self):
+        self._check("Atlas/Engine/Tooling/ToolingSubsystem.cpp")
+
+    def test_data_registry_header(self):
+        self._check("Atlas/Engine/Data/DataRegistry.h")
+
+    def test_data_registry_source(self):
+        self._check("Atlas/Engine/Data/DataRegistry.cpp")
+
+    def test_main_cpp(self):
+        self._check("Atlas/Engine/src/main.cpp")
+
+    def test_reactor_mk1_data(self):
+        self._check("NovaForge/Content/Data/Modules/reactor_mk1.json")
+
+    def test_phase2_readme(self):
+        self._check("Docs/Atlas/README_Phase2_Runtime.md")
+
+
+class TestPhase2DataRegistryContent(unittest.TestCase):
+    def _read(self):
+        return (REPO_ROOT / "Atlas/Engine/Data/DataRegistry.h").read_text(encoding="utf-8")
+
+    def test_has_data_registry_class(self):
+        self.assertIn("class DataRegistry", self._read())
+
+    def test_has_initialize(self):
+        self.assertIn("Initialize", self._read())
+
+    def test_has_get_loaded_module_definitions(self):
+        self.assertIn("GetLoadedModuleDefinitions", self._read())
+
+
 if __name__ == "__main__":
     unittest.main()
