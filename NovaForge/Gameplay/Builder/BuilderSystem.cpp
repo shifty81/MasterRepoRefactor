@@ -52,7 +52,7 @@ bool BuilderSystem::detachModule(uint64_t bpId, const std::string& socketId)
         {
             if (s.socketId != socketId || !s.occupied) continue;
             s.occupied   = false;
-            s.occupantId = {};
+            s.occupantId.clear();
             bp.validated = false;
             return true;
         }

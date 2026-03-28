@@ -31,7 +31,9 @@ bool ProgressionSystem::awardXP(uint64_t entityId, const std::string& skillId, f
         return true;
     }
     // First time this entity trains this skill
-    SkillProgress sp; sp.skillId = skillId; sp.currentXP = xp;
+    SkillProgress sp;
+    sp.skillId    = skillId;
+    sp.currentXP  = xp;
     const float xpp = def.xpPerLevel > 0.0f ? def.xpPerLevel : 1.0f;
     while (sp.currentLevel < def.maxLevel && sp.currentXP >= xpp)
     {
