@@ -15,7 +15,7 @@ void UIWidgetRegistry::Unregister(const std::string& id) {
     m_widgets.erase(id);
 }
 
-bool UIWidgetRegistry::GetWidget(const std::string& id) {
+bool UIWidgetRegistry::InvokeWidget(const std::string& id) {
     auto it = m_widgets.find(id);
     if (it == m_widgets.end()) return false;
     it->second();

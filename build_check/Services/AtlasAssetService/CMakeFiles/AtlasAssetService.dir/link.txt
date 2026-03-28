@@ -1,2 +1,0 @@
-/usr/bin/ar qc libAtlasAssetService.a CMakeFiles/AtlasAssetService.dir/src/AtlasAssetService.cpp.o
-/usr/bin/ranlib libAtlasAssetService.a

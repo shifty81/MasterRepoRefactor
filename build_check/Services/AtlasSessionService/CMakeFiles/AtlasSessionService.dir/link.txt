@@ -1,2 +1,0 @@
-/usr/bin/ar qc libAtlasSessionService.a CMakeFiles/AtlasSessionService.dir/src/AtlasSessionService.cpp.o
-/usr/bin/ranlib libAtlasSessionService.a

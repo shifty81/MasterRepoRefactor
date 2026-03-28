@@ -1,2 +1,0 @@
-/usr/bin/ar qc libAtlasRuntime.a CMakeFiles/AtlasRuntime.dir/src/AtlasRuntime_stub.cpp.o
-/usr/bin/ranlib libAtlasRuntime.a

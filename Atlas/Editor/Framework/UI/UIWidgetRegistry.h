@@ -14,8 +14,8 @@ public:
     void Register(const std::string& id, WidgetFactory factory);
     void Unregister(const std::string& id);
 
-    /** Returns true and invokes the widget if found; false otherwise. */
-    bool GetWidget(const std::string& id);
+    /** Invokes the widget factory for `id`. Returns true if found, false otherwise. */
+    bool InvokeWidget(const std::string& id);
 
 private:
     UIWidgetRegistry() = default;

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libAtlasTelemetryService.a CMakeFiles/AtlasTelemetryService.dir/src/AtlasTelemetryService.cpp.o
-/usr/bin/ranlib libAtlasTelemetryService.a

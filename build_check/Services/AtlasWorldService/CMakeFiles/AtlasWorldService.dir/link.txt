@@ -1,2 +1,0 @@
-/usr/bin/ar qc libAtlasWorldService.a CMakeFiles/AtlasWorldService.dir/src/AtlasWorldService.cpp.o
-/usr/bin/ranlib libAtlasWorldService.a

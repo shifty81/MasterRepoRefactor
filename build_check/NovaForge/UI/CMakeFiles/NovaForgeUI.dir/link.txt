@@ -1,2 +1,0 @@
-/usr/bin/ar qc libNovaForgeUI.a CMakeFiles/NovaForgeUI.dir/src/RuntimeUIShell.cpp.o CMakeFiles/NovaForgeUI.dir/src/Widgets/HUDLayer.cpp.o CMakeFiles/NovaForgeUI.dir/src/Widgets/InventoryScreen.cpp.o CMakeFiles/NovaForgeUI.dir/src/Widgets/ContractBoardUI.cpp.o CMakeFiles/NovaForgeUI.dir/src/Widgets/StationTerminalUI.cpp.o CMakeFiles/NovaForgeUI.dir/src/Widgets/FleetProgressionPanel.cpp.o
-/usr/bin/ranlib libNovaForgeUI.a
