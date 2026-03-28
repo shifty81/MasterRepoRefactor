@@ -61,6 +61,20 @@ set(ATLAS_EDITOR_SOURCES
     Docs/DesignDocPanel.cpp
     Docs/FeatureChecklistPanel.cpp
     Docs/ADLPanel.cpp
+
+    # Panels (Console, ECS Inspector, Net Inspector)
+    Panels/ConsolePanel.cpp
+    Panels/ECSInspectorPanel.cpp
+    Panels/NetInspectorPanel.cpp
+
+    # EditorServices — AI backends
+    EditorServices/AI/AIAggregator.cpp
+    EditorServices/AI/LocalLLMBackend.cpp
+    EditorServices/AI/TemplateAIBackend.cpp
+
+    # Framework/UI — theme & widget registry
+    Framework/UI/UIThemeManager.cpp
+    Framework/UI/UIWidgetRegistry.cpp
 )
 
 add_library(AtlasEditor STATIC ${ATLAS_EDITOR_SOURCES})
@@ -82,6 +96,9 @@ target_include_directories(AtlasEditor
              "${CMAKE_CURRENT_SOURCE_DIR}/Prefabs"
              "${CMAKE_CURRENT_SOURCE_DIR}/AI"
              "${CMAKE_CURRENT_SOURCE_DIR}/Docs"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Panels"
+             "${CMAKE_CURRENT_SOURCE_DIR}/EditorServices"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Framework/UI"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 

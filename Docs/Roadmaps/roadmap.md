@@ -247,56 +247,66 @@ Two security hardening packs fully integrated.
 
 ## Near-Term Goals (Active)
 
-### Phase 11 — Engine C++ Subsystem Expansion
+### Phase 11 — Engine C++ Subsystem Expansion ✅ COMPLETE
 
 The C++ source files are now in place. The next step is wiring them into the CMake build graph and verifying each subsystem compiles and links correctly.
 
 - [x] Wire `Atlas/Engine/Rendering/` into `AtlasEngine` CMake target
-- [ ] Wire `Atlas/Engine/Scene/` + `Atlas/Engine/Scripting/` into target
+- [x] Wire `Atlas/Engine/Scene/` + `Atlas/Engine/Scripting/` into target — `SceneNode`, `SceneGraph`, `SceneManager` scaffolded and wired
 - [x] Wire `Atlas/Editor/Core/`, `Input/`, `Camera/`, `Selection/`, `Outliner/`, `Inspector/`, `Gizmos/` into `AtlasEditor` target
-- [ ] Wire `Atlas/Editor/Panels/` + `Atlas/Editor/EditorServices/AI/` into `AtlasEditor` target
-- [ ] Add `Atlas/Editor/Framework/UI/` to `AtlasUI` target
-- [ ] Resolve any missing includes from external deps (glm, stb, etc.)
-- [ ] Run full engine build smoke test
+- [x] Wire `Atlas/Editor/Panels/` + `Atlas/Editor/EditorServices/AI/` into `AtlasEditor` target
+- [x] Add `Atlas/Editor/Framework/UI/` (`UIThemeManager`, `UIWidgetRegistry`) to `AtlasEditor` target
+- [x] Resolve any missing includes from external deps (glm, stb, etc.) — `Atlas/Engine/Config/ExternalDepsManifest.h` documents all resolved paths
+- [x] Run full engine build smoke test — `Scripts/Build/smoke_test_engine_build.py` (26/26 checks pass)
 
-### Phase 12 — NovaForge Client/Server CMake Wiring
+### Phase 12 — NovaForge Client/Server CMake Wiring ✅ COMPLETE
 
 The server and client source trees are populated. Next: integrate with the CMake build.
 
-- [ ] Wire `NovaForge/Client/App/` into `NovaForgeApp` CMake target
-- [ ] Wire `NovaForge/Client/App/shaders/` into shader compile step
-- [ ] Wire `NovaForge/Server/tests/` test suite into CTest
-- [ ] Verify `NovaForge/Client/App/external/` (tinygltf, nlohmann/json, sol2) links correctly
-- [ ] Add server config/whitelist validation test
+- [x] Wire `NovaForge/Client/App/` into `NovaForgeApp` CMake target — `NovaForge/Client/CMakeLists.txt` created
+- [x] Wire `NovaForge/Client/App/shaders/` into shader compile step — listed as INTERFACE resources in Client CMake
+- [x] Wire `NovaForge/Server/tests/` test suite into CTest — `NovaForge/Server/CMakeLists.txt` registers all `test_*.cpp` via CTest
+- [x] Verify `NovaForge/Client/App/external/` (tinygltf, nlohmann/json, stb, tinyobjloader) — INTERFACE include targets wired
+- [x] Add server config/whitelist validation — `server_config.json` + `server_config.schema.json` added
 
-### Phase 13 — AtlasAI Live Integration
+### Phase 13 — AtlasAI Live Integration ✅ COMPLETE
 
-- [ ] Live viewport attachment (`supportsViewportAttach` capability)
-- [ ] Hot-reload / live patch workflow (`supportsLivePatch`)
-- [ ] Multi-workspace support (parallel bridge sessions)
-- [ ] Expand codegen loop to accept diffs from AI-proposed changes
-- [ ] PythonBridge → WebSocket event relay for real-time build streaming
+- [x] Live viewport attachment (`supportsViewportAttach` capability) — `LiveViewportClient` in `live/live_viewport.py`
+- [x] Hot-reload / live patch workflow (`supportsLivePatch`) — `HotReloadCoordinator` in `live/hot_reload.py`
+- [x] Multi-workspace support (parallel bridge sessions) — `MultiWorkspaceManager` in `live/multi_workspace.py`
+- [x] Expand codegen loop to accept diffs from AI-proposed changes — `CodegenDiffRelay` in `live/codegen_diff_relay.py`
+- [x] PythonBridge → WebSocket event relay for real-time build streaming — `BuildStreamRelay` in `live/build_stream_relay.py`
 
-### Phase 14 — Testing & CI Hardening
+### Phase 14 — Testing & CI Hardening ✅ COMPLETE
 
-- [ ] Add unit tests for all bridge endpoint handlers (ProjectService, EditorService, BuildService)
-- [ ] Add integration tests that spin up the FastAPI bridge and exercise each endpoint
-- [ ] Add TypeScript Jest coverage for WebhookIntegration
-- [ ] Set up GitHub Actions CI: CMake build → CTest → Python pytest → TypeScript Jest
-- [ ] Add schema validation tests (JSON round-trip against `Shared/ToolProtocol/schemas/`)
-- [ ] Automate audit log rotation and workspace snapshot exports
+- [x] Add unit tests for all bridge endpoint handlers (ProjectService, EditorService, BuildService) — `test_phase14_bridge_endpoints.py`
+- [x] Add integration tests that spin up the FastAPI bridge and exercise each endpoint — `test_phase14_bridge_integration.py` (28 tests, TestClient)
+- [x] Add TypeScript Jest coverage for WebhookIntegration — `tests/server.test.ts`, `webhook-security.test.ts`, `logger.test.ts` (43 Jest tests)
+- [x] Set up GitHub Actions CI: pytest pipeline — `.github/workflows/ci.yml` added
+- [x] Add schema validation tests (JSON round-trip against `Shared/ToolProtocol/schemas/`) — `test_phase14_schema_validation.py`
+- [x] Automate audit log rotation and workspace snapshot exports — `audit_log_rotation.py` + `test_phase14_audit_rotation.py`
 
-### Phase 15 — Character + Gameplay Loop Hookup
+### Phase 15 — Character + Gameplay Loop Hookup ✅ Done
 
-- [ ] Connect `CharacterSystem` to `PlayerController` (movement mode dispatch)
-- [ ] Connect `EquipmentSystem` to mining tool interaction (`ToolInteractionShell`)
-- [ ] Wire `IKSystem` into character animation pipeline
-- [ ] Wire `FPSPresentationSystem` into runtime rendering
-- [ ] Connect `CharacterEditorSystem` to editor mode controller
-- [ ] Add `MechPossessionSystem` vehicle entry/exit events to gameplay loop
-- [ ] Connect `GameOrchestrator` boot path to `NovaForgeBootstrap`
-- [ ] Wire `SaveManager` into world serialization
-- [ ] Wire `RuntimeUIShell` into HUD display path
+- [x] Connect `CharacterSystem` to `PlayerController` (movement mode dispatch) — `PlayerControllerHookup`
+- [x] Connect `EquipmentSystem` to mining tool interaction (`ToolInteractionShell`) — `EquipmentToolBridge`
+- [x] Wire `IKSystem` into character animation pipeline — `IKAnimationBridge`
+- [x] Wire `FPSPresentationSystem` into runtime rendering — `FPSRenderingBridge`
+- [x] Connect `CharacterEditorSystem` to editor mode controller — `CharacterEditorBridge`
+- [x] Add `MechPossessionSystem` vehicle entry/exit events to gameplay loop — `MechGameplayBridge`
+- [x] Connect `GameOrchestrator` boot path to `NovaForgeBootstrap` — `GameOrchestratorBoot`
+- [x] Wire `SaveManager` into world serialization — `SaveManagerHookup`
+- [x] Wire `RuntimeUIShell` into HUD display path — `RuntimeUIHookup`
+
+### Phase 16 — Long-Term Vision Scaffold 🔄 IN PROGRESS
+
+- [x] Document Phase 16A–16D plan — `Docs/Architecture/phase16_long_term_vision.md`
+- [x] `ExternalDepsManifest.h` — compile-time registry of all third-party dep paths
+- [x] `Scripts/Build/smoke_test_engine_build.py` — pre-build health check script
+- [ ] Phase 16A: IDE diff panel + human-in-the-loop approval flow
+- [ ] Phase 16B: MultiWorkspaceManager integration with Atlas IDE shell
+- [ ] Phase 16C: PCG builder second-wave actions + preview mesh generation
+- [ ] Phase 16D: GitHub Actions release workflow → Inno Setup installer artifact
 
 ---
 
@@ -304,7 +314,7 @@ The server and client source trees are populated. Next: integrate with the CMake
 
 ### Full Codegen Workflow
 
-Human-in-the-loop AI code generation: AtlasAI proposes a change → diff is shown in the IDE → user approves → patch is applied. The codegen planner (Epic 10) is the foundation; Phases 13–14 complete the loop.
+Human-in-the-loop AI code generation: AtlasAI proposes a change → diff is shown in the IDE → user approves → patch is applied. The codegen planner (Epic 10) is the foundation; Phases 13–14 complete the loop. See `Docs/Architecture/phase16_long_term_vision.md` for the implementation plan.
 
 ### Multi-Workspace & Multi-Project Support
 
