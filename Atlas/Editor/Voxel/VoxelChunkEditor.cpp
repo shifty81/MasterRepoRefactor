@@ -132,9 +132,9 @@ void VoxelChunkEditor::TriggerMeshRebuild()
 
 std::vector<uint8_t> VoxelChunkEditor::Serialise() const
 {
-    // Format: [kTotal * 2 bytes]  each cell: {material, shape}
+    // Format: [kTotal * kBytesPerCell bytes]  each cell: {material, shape}
     std::vector<uint8_t> buf;
-    buf.reserve(static_cast<size_t>(kTotal) * 2);
+    buf.reserve(static_cast<size_t>(kTotal) * kBytesPerCell);
     for (const auto& c : m_cells)
     {
         buf.push_back(c.material);
@@ -145,7 +145,7 @@ std::vector<uint8_t> VoxelChunkEditor::Serialise() const
 
 bool VoxelChunkEditor::Deserialise(const std::vector<uint8_t>& data)
 {
-    if (data.size() != static_cast<size_t>(kTotal) * 2) return false;
+    if (data.size() != static_cast<size_t>(kTotal) * kBytesPerCell) return false;
     for (int32_t i = 0; i < kTotal; ++i)
     {
         m_cells[static_cast<size_t>(i)].material = data[static_cast<size_t>(i) * 2];

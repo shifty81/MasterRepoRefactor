@@ -40,6 +40,16 @@ set(ATLAS_EDITOR_SOURCES
 
     # PCG debug mode (C4)
     PCG/PCGDebugSystem.cpp
+
+    # Outliner + Inspector completion (C2)
+    Outliner/SceneHierarchySystem.cpp
+
+    # Gizmo + Placement completion (C3)
+    Gizmos/PlacementSystem.cpp
+
+    # Prefab / Template authoring (C7)
+    Prefabs/PrefabLibrary.cpp
+    Prefabs/PrefabManager.cpp
 )
 
 add_library(AtlasEditor STATIC ${ATLAS_EDITOR_SOURCES})
@@ -58,6 +68,7 @@ target_include_directories(AtlasEditor
              "${CMAKE_CURRENT_SOURCE_DIR}/Framework"
              "${CMAKE_CURRENT_SOURCE_DIR}/Voxel"
              "${CMAKE_CURRENT_SOURCE_DIR}/PCG"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Prefabs"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 

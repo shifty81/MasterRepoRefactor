@@ -8,6 +8,7 @@ set(NOVAFORGE_APP_SOURCES
     src/App.cpp
     src/GameOrchestrator.cpp
     src/DataRegistry.cpp
+    Bootstrap/WorldBootstrap.cpp
 )
 
 add_library(NovaForgeApp STATIC ${NOVAFORGE_APP_SOURCES})
@@ -15,6 +16,7 @@ add_library(NovaForgeApp STATIC ${NOVAFORGE_APP_SOURCES})
 target_include_directories(NovaForgeApp
     PUBLIC
         "${CMAKE_CURRENT_SOURCE_DIR}/include"
+        "${CMAKE_CURRENT_SOURCE_DIR}/Bootstrap"
     PRIVATE
         "${CMAKE_CURRENT_SOURCE_DIR}"
         # Renderer.h

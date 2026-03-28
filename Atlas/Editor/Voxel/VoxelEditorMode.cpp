@@ -93,7 +93,6 @@ bool VoxelEditorMode::DeserialiseAll(const std::vector<uint8_t>& data)
 
     uint32_t count = read32();
     m_chunks.clear();
-    constexpr size_t kBytesPerCell = 2; // material byte + shape byte
     constexpr size_t kBlobSize = static_cast<size_t>(kChunkSize) *
                                   kChunkSize * kChunkSize * kBytesPerCell;
     for (uint32_t i = 0; i < count; ++i)

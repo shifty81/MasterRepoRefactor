@@ -9,6 +9,7 @@ set(NOVAFORGE_GAMEPLAY_SOURCES
     # Economy
     Economy/TradeMarket.cpp
     Economy/ResourceRegistry.cpp
+    Economy/LootResolver.cpp
 
     # Factions
     Factions/FactionRegistry.cpp
@@ -52,6 +53,15 @@ set(NOVAFORGE_GAMEPLAY_SOURCES
     # World simulation (D4)
     WorldSim/WorldSimSystem.cpp
 
+    # Inventory system (D1)
+    Inventory/InventorySystem.cpp
+
+    # Storage system (D2)
+    Storage/StorageSystem.cpp
+
+    # Progression reward system (D3)
+    Progression/ProgressionRewardSystem.cpp
+
     # Characters (Phase 1)
     Characters/CharacterSystem.cpp
     Characters/CharacterControllerShell.cpp
@@ -78,6 +88,8 @@ target_include_directories(NovaForgeGameplay
              "${CMAKE_CURRENT_SOURCE_DIR}/Manufacturing"
              "${CMAKE_CURRENT_SOURCE_DIR}/Fleet"
              "${CMAKE_CURRENT_SOURCE_DIR}/WorldSim"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Inventory"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Storage"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 

@@ -14,6 +14,9 @@ struct VoxelPos { int32_t x = 0, y = 0, z = 0; };
 /// Default chunk side length in voxels (power of 2 for bit-mask ops).
 constexpr int32_t kChunkSize = 16;
 
+/// Bytes used per voxel cell in the serialised blob (material + shape).
+constexpr size_t kBytesPerCell = 2;
+
 /// One voxel cell — material index 0 means empty/air.
 struct VoxelCell
 {
