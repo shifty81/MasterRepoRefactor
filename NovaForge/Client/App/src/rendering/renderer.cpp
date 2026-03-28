@@ -366,11 +366,11 @@ bool Renderer::createEntityVisual(const std::shared_ptr<Entity>& entity) {
     // Set health data
     const auto& health = entity->getHealth();
     visual.currentShield = health.currentShield;
-    visual.maxShield = health.maxShield;
+    visual.maxShield = static_cast<float>(health.maxShield);
     visual.currentArmor = health.currentArmor;
-    visual.maxArmor = health.maxArmor;
+    visual.maxArmor = static_cast<float>(health.maxArmor);
     visual.currentHull = health.currentHull;
-    visual.maxHull = health.maxHull;
+    visual.maxHull = static_cast<float>(health.maxHull);
     
     // Store visual
     m_entityVisuals[entityId] = std::move(visual);
@@ -401,11 +401,11 @@ void Renderer::updateEntityVisuals(const std::unordered_map<std::string, std::sh
             // Update health data
             const auto& health = entity->getHealth();
             visual.currentShield = health.currentShield;
-            visual.maxShield = health.maxShield;
+            visual.maxShield = static_cast<float>(health.maxShield);
             visual.currentArmor = health.currentArmor;
-            visual.maxArmor = health.maxArmor;
+            visual.maxArmor = static_cast<float>(health.maxArmor);
             visual.currentHull = health.currentHull;
-            visual.maxHull = health.maxHull;
+            visual.maxHull = static_cast<float>(health.maxHull);
         }
     }
 }

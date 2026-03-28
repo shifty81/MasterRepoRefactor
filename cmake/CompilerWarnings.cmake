@@ -5,6 +5,7 @@ function(masterrepo_set_compiler_warnings target)
         target_compile_options(${target} PRIVATE
             /W4
             /WX
+            /FS      # serialise PDB writes (prevents C1041 in parallel builds)
             /wd4100  # unreferenced formal parameter
             /wd4505  # unreferenced local function has been removed
         )

@@ -17,7 +17,7 @@ LightManager::~LightManager() {
 
 int LightManager::addLight(const Light& light) {
     m_lights.push_back(light);
-    return m_lights.size() - 1;
+    return static_cast<int>(m_lights.size()) - 1;
 }
 
 void LightManager::removeLight(int index) {

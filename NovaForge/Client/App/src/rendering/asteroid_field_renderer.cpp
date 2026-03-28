@@ -148,9 +148,9 @@ void AsteroidFieldRenderer::displaceVertices(
 ) {
     for (size_t i = 0; i < vertices.size(); i++) {
         // Use hash for deterministic randomness
-        float r1 = hash(seed, i * 3);
-        float r2 = hash(seed, i * 3 + 1);
-        float r3 = hash(seed, i * 3 + 2);
+        float r1 = hash(seed, static_cast<int>(i) * 3);
+        float r2 = hash(seed, static_cast<int>(i) * 3 + 1);
+        float r3 = hash(seed, static_cast<int>(i) * 3 + 2);
         
         // Displace along normal direction
         glm::vec3 displacement = vertices[i].normal * amount * (r1 - 0.5f) * 2.0f;

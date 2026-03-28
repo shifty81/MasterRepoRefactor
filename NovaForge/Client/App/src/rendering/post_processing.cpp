@@ -347,7 +347,7 @@ GLuint PostProcessing::applyBloom(GLuint inputTexture) {
     // Start from smallest mip and work upward
     GLuint result = m_mipBuffers[m_mipBuffers.size() - 1]->getTexture();
     
-    for (int i = m_mipBuffers.size() - 2; i >= 0; i--) {
+    for (int i = static_cast<int>(m_mipBuffers.size()) - 2; i >= 0; i--) {
         // Bind target buffer
         m_blurBuffers[0]->bind();
         

@@ -98,8 +98,8 @@ void EntityPicker::screenToWorldRay(
 ) {
     // Convert mouse coordinates from screen space to normalized device coordinates (NDC)
     // OpenGL: origin at bottom-left, Y-axis points up
-    float x = (2.0f * mouseX) / screenWidth - 1.0f;
-    float y = 1.0f - (2.0f * mouseY) / screenHeight;  // Flip Y axis
+    float x = static_cast<float>((2.0 * mouseX) / screenWidth - 1.0);
+    float y = static_cast<float>(1.0 - (2.0 * mouseY) / screenHeight);  // Flip Y axis
     float z = 1.0f;  // Point on far plane
     
     // Normalized device coordinates
