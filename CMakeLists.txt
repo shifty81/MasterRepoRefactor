@@ -69,6 +69,12 @@ if(NOT TARGET GLEW::GLEW)
         set(glew-cmake_BUILD_SHARED     OFF CACHE BOOL "" FORCE)
         set(glew-cmake_BUILD_STATIC     ON  CACHE BOOL "" FORCE)
         set(ONLY_LIBS                   ON  CACHE BOOL "" FORCE)
+        # glew-cmake 2.2.0 uses cmake_minimum_required(VERSION 2.8.12); CMake >=3.27
+        # rejects versions below 3.5.  Set the policy floor before populating so
+        # the sub-project is treated as if it had declared VERSION 3.5 at minimum.
+        if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.27")
+            set(CMAKE_POLICY_VERSION_MINIMUM 3.5)
+        endif()
         FetchContent_MakeAvailable(glew)
         # Alias to GLEW::GLEW if the target name differs
         if(TARGET libglew_static AND NOT TARGET GLEW::GLEW)
