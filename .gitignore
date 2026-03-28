@@ -13,6 +13,7 @@ dist/
 build/
 Build/
 !Scripts/Build/
+!Logs/build/
 out/
 target/
 obj/
@@ -38,12 +39,9 @@ Thumbs.db
 *.lock
 !package-lock.json
 !yarn.lock
-# Repository-level log directories (generated at runtime by logging infra)
-Logs/
-logs/
-!NovaForge/Server/logs/.gitkeep
-!NovaForge/Client/logs/.gitkeep
-!AtlasAI/AIEngine/AtlasAIEngine/logs/.gitkeep
+# Repository-level log directories — files ARE tracked so debug sessions can
+# be reviewed in the repo.  Run Scripts/Logging/clear_logs.sh locally once
+# issues are resolved.
 
 # Environment and secrets
 .env

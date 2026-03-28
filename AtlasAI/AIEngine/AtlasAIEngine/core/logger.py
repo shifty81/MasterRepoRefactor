@@ -48,7 +48,9 @@ _SYSTEM_LOG_DIRS: dict[str, str] = {
 
 def _find_repo_root(start: Path | None = None) -> Path:
     """Walk upward from *start* (default: this file's directory) to find the
-    repository root — identified by the presence of ``roadmap.json``.
+    repository root — identified by the presence of a ``LICENSE`` file, which
+    exists only at the repository root (sub-library directories carry their
+    own ``CMakeLists.txt`` but not a ``LICENSE``).
 
     We limit traversal to 8 levels.  This is deliberately generous: the
     deepest any AtlasAI source file currently sits relative to the repo root
@@ -56,18 +58,19 @@ def _find_repo_root(start: Path | None = None) -> Path:
     nested future layouts while avoiding runaway traversal to filesystem root
     on misconfigured or containerised environments.
 
-    Falls back to a directory two levels above this file if not found.
+    Falls back to a directory five levels above this file (repo root) if not
+    found.
     """
     candidate = (start or Path(__file__).resolve().parent)
     for _ in range(_MAX_REPO_TRAVERSAL_DEPTH):
-        if (candidate / "roadmap.json").exists():
+        if (candidate / "LICENSE").exists():
             return candidate
         parent = candidate.parent
         if parent == candidate:
             break
         candidate = parent
-    # Fallback: two levels above the core/ package (AtlasAI Engine root)
-    return Path(__file__).resolve().parent.parent
+    # Fallback: five levels above core/ → AtlasAIEngine/ → AIEngine/ → AtlasAI/ → repo root
+    return Path(__file__).resolve().parents[4]
 
 
 def get_system_log_path(system: str, filename: str | None = None) -> Path:

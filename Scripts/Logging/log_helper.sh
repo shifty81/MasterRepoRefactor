@@ -18,7 +18,7 @@ _log_find_repo_root() {
     local dir
     dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     for _ in $(seq 1 8); do
-        [[ -f "$dir/CMakeLists.txt" ]] && { echo "$dir"; return 0; }
+        [[ -f "$dir/LICENSE" ]] && { echo "$dir"; return 0; }
         dir="$(dirname "$dir")"
     done
     # Fallback: two levels above Scripts/Logging/

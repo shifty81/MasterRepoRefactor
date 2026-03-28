@@ -45,6 +45,9 @@ ALLOWLIST: set[str] = {
     "DropBox",
     # Build output (git-ignored, but may appear locally)
     "Build",
+    # Log directories (tracked in git for debugging; cleared via Scripts/Logging/clear_logs.sh)
+    "Logs",
+    "logs",
     # Essential root files
     "CMakeLists.txt",
     "README.md",
