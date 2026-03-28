@@ -9,6 +9,7 @@ set(NOVAFORGE_GAMEPLAY_SOURCES
     # Economy
     Economy/TradeMarket.cpp
     Economy/ResourceRegistry.cpp
+    Economy/LootResolver.cpp
 
     # Factions
     Factions/FactionRegistry.cpp
@@ -34,6 +35,50 @@ set(NOVAFORGE_GAMEPLAY_SOURCES
     # Builder
     Builder/BuilderSystem.cpp
 
+    # Salvage
+    Salvage/SalvageSystem.cpp
+
+    # Station services
+    Station/StationServices.cpp
+
+    # Manufacturing
+    Manufacturing/ManufacturingQueue.cpp
+
+    # Contract rewards
+    Missions/ContractRewardSystem.cpp
+
+    # Fleet system (D4)
+    Fleet/FleetSystem.cpp
+
+    # World simulation (D4)
+    WorldSim/WorldSimSystem.cpp
+
+    # Inventory system (D1)
+    Inventory/InventorySystem.cpp
+
+    # Storage system (D2)
+    Storage/StorageSystem.cpp
+
+    # Progression reward system (D3)
+    Progression/ProgressionRewardSystem.cpp
+
+    # Unified data registry (A3)
+    Data/UnifiedDataRegistry.cpp
+
+    # Season / Titan Race (I1)
+    Season/TitanRaceSystem.cpp
+
+    # Anomaly system (I2)
+    Anomaly/AnomalySystem.cpp
+
+    # War / Sector system (I3)
+    WarSector/WarSectorSystem.cpp
+
+    # J1/J2/J7 — Gameplay connectors
+    Integration/GameplayConnector.cpp
+    Integration/ContractRewardConnector.cpp
+    Integration/MarketContractBridge.cpp
+
     # Characters (Phase 1)
     Characters/CharacterSystem.cpp
     Characters/CharacterControllerShell.cpp
@@ -55,6 +100,18 @@ add_library(NovaForgeGameplay STATIC ${NOVAFORGE_GAMEPLAY_SOURCES})
 
 target_include_directories(NovaForgeGameplay
     PUBLIC  "${CMAKE_CURRENT_SOURCE_DIR}"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Salvage"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Station"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Manufacturing"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Fleet"
+             "${CMAKE_CURRENT_SOURCE_DIR}/WorldSim"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Inventory"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Storage"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Data"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Season"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Anomaly"
+             "${CMAKE_CURRENT_SOURCE_DIR}/WarSector"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Integration"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
