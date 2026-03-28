@@ -15,6 +15,10 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BUILD_DIR="${REPO_ROOT}/Build"
 
+# shellcheck source=Scripts/Logging/log_helper.sh
+source "${REPO_ROOT}/Scripts/Logging/log_helper.sh"
+log_init "test"
+
 CONFIG="Debug"
 VERBOSE=false
 FILTER=""
@@ -81,6 +85,7 @@ echo "  Filter : ${FILTER:-'(all)'}"
 echo "================================================================"
 echo ""
 
+log_section "CTest"
 ctest "${CTEST_ARGS[@]}"
 
 echo ""

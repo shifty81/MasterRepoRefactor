@@ -7,6 +7,11 @@ set -euo pipefail
 
 SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VALIDATE_DIR="${SCRIPTS_DIR}/../Validate"
+REPO_ROOT="$(cd "${SCRIPTS_DIR}/../.." && pwd)"
+
+# shellcheck source=Scripts/Logging/log_helper.sh
+source "${REPO_ROOT}/Scripts/Logging/log_helper.sh"
+log_init "ci"
 
 BOUNDARY_SCRIPT="${VALIDATE_DIR}/validate_boundaries.py"
 NAMING_SCRIPT="${VALIDATE_DIR}/validate_naming.py"
@@ -29,11 +34,13 @@ echo "================================================================"
 echo ""
 
 BOUNDARY_STATUS=0
+log_section "Boundary Checks"
 echo "[validate] Running boundary checks ..."
 python3 "$BOUNDARY_SCRIPT" || BOUNDARY_STATUS=$?
 
 echo ""
 NAMING_STATUS=0
+log_section "Naming Convention Checks"
 echo "[validate] Running naming convention checks ..."
 python3 "$NAMING_SCRIPT" || NAMING_STATUS=$?
 

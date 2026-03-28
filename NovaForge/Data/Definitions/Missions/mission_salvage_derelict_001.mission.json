@@ -1,0 +1,9 @@
+{
+  "id": "mission_salvage_derelict_001",
+  "type": "salvage",
+  "title": "Recover Reactor Components",
+  "giver_faction": "frontier_union",
+  "rewards": {
+    "credits": 2500
+  }
+}

@@ -6,6 +6,10 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
+# shellcheck source=Scripts/Logging/log_helper.sh
+source "${REPO_ROOT}/Scripts/Logging/log_helper.sh"
+log_init "setup"
+
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
@@ -30,13 +34,13 @@ check_cmake() {
         CMAKE_MAJOR="${CMAKE_VER%%.*}"
         CMAKE_MINOR="${CMAKE_VER#*.}"; CMAKE_MINOR="${CMAKE_MINOR%%.*}"
         if [[ $CMAKE_MAJOR -gt 3 ]] || { [[ $CMAKE_MAJOR -eq 3 ]] && [[ $CMAKE_MINOR -ge 20 ]]; }; then
-            ok "cmake $CMAKE_VER"
+            log_ok "cmake $CMAKE_VER"
         else
-            warn "cmake $CMAKE_VER found but >= 3.20 is required"
+            log_warn "cmake $CMAKE_VER found but >= 3.20 is required"
             MISSING_TOOLS+=(cmake)
         fi
     else
-        miss "cmake (>= 3.20 required)"
+        log_error "cmake (>= 3.20 required)"
         MISSING_TOOLS+=(cmake)
     fi
 }
@@ -44,11 +48,11 @@ check_cmake() {
 # ── C++ compiler ──────────────────────────────────────────────────────────────
 check_cxx() {
     if command -v g++ &>/dev/null; then
-        ok "g++ $(g++ --version | head -1)"
+        log_ok "g++ $(g++ --version | head -1)"
     elif command -v clang++ &>/dev/null; then
-        ok "clang++ $(clang++ --version | head -1)"
+        log_ok "clang++ $(clang++ --version | head -1)"
     else
-        miss "C++ compiler (g++ or clang++ required)"
+        log_error "C++ compiler (g++ or clang++ required)"
         MISSING_TOOLS+=(g++)
     fi
 }
@@ -56,9 +60,9 @@ check_cxx() {
 # ── python3 ───────────────────────────────────────────────────────────────────
 check_python3() {
     if command -v python3 &>/dev/null; then
-        ok "python3 $(python3 --version)"
+        log_ok "python3 $(python3 --version)"
     else
-        miss "python3"
+        log_error "python3"
         MISSING_TOOLS+=(python3)
     fi
 }
@@ -66,13 +70,14 @@ check_python3() {
 # ── dotnet ────────────────────────────────────────────────────────────────────
 check_dotnet() {
     if command -v dotnet &>/dev/null; then
-        ok "dotnet $(dotnet --version)"
+        log_ok "dotnet $(dotnet --version)"
     else
-        miss "dotnet SDK (required for AtlasAI C# components)"
+        log_warn "dotnet SDK (required for AtlasAI C# components)"
         MISSING_TOOLS+=(dotnet)
     fi
 }
 
+log_section "Dependency Check"
 check_cmake
 check_cxx
 check_python3
@@ -87,6 +92,7 @@ else
     echo ""
 
     if command -v apt-get &>/dev/null; then
+        log_section "Install Missing Packages"
         echo "  Attempting to install missing packages via apt-get ..."
         APT_PACKAGES=()
         for tool in "${MISSING_TOOLS[@]}"; do
@@ -95,7 +101,7 @@ else
                 g++)     APT_PACKAGES+=(g++) ;;
                 python3) APT_PACKAGES+=(python3) ;;
                 dotnet)
-                    warn "dotnet must be installed manually from https://dotnet.microsoft.com/download"
+                    log_warn "dotnet must be installed manually from https://dotnet.microsoft.com/download"
                     ;;
             esac
         done
@@ -111,7 +117,7 @@ else
             check_python3
         fi
     else
-        warn "apt-get not available. Please install missing tools manually."
+        log_warn "apt-get not available. Please install missing tools manually."
     fi
 fi
 

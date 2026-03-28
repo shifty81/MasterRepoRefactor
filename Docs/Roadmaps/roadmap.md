@@ -61,14 +61,108 @@ All 7 source zips committed to `New Implementations that need addressed/` have b
 
 ---
 
+## New Zip Packs Integrated ✅ COMPLETE
+
+All 19 root-level zip packs audited and fully committed.  The duplicate
+`MasterRepo_Gameplay_Foundation_Pack (1).zip` was skipped.  All zips moved to
+`Docs/Archive/ZipFiles/`.
+
+| Zip Pack | Contents Migrated To |
+|----------|----------------------|
+| `MasterRepo_Phase2_Runtime_Pack.zip` | `NovaForge/Server/Source/` — Core, World, Entity, Voxel, Modules, Rendering, Tooling |
+| `MasterRepo_Phase3_1_Integration_Pack.zip` | `NovaForge/Server/Source/` — Core + World integration; `NovaForge/Data/Definitions/` items/recipes/missions/factions |
+| `MasterRepo_Phase3_Full_Pack.zip` | `NovaForge/Server/Source/` — Input, HUD UI, Gameplay session, ShipInterior |
+| `MasterRepo_Phase4_EVA_Airlock_Tether_Foundation_Pack.zip` | `NovaForge/Server/Source/Gameplay/EVA` + Airlock + Tether + Environment |
+| `MasterRepo_Phase5_Salvage_Mining_Pack.zip` | `NovaForge/Server/Source/Gameplay/Salvage` + Mining |
+| `MasterRepo_Phase6_PCG_Pack.zip` | `NovaForge/Server/Source/PCG/` + `NovaForge/Data/PCG/` |
+| `MasterRepo_Phase7_Economy_Progression_Pack.zip` | `NovaForge/Server/Source/Gameplay/Economy` + Progression + Upgrades |
+| `MasterRepo_Phase8_Factions_Contracts_Trade_Pack.zip` | `NovaForge/Server/Source/Gameplay/Factions` + Contracts + Trade + WorldSim |
+| `MasterRepo_Phase9_Stations_Manufacturing_Storage_Pack.zip` | `NovaForge/Server/Source/Gameplay/Stations` + Manufacturing + Storage + Services |
+| `MasterRepo_Phase10_Fleet_Ship_Progression_Meta_Pack.zip` | `NovaForge/Server/Source/Gameplay/Fleet` + Ships + Meta |
+| `MasterRepo_Phase11_Sector_War_Anomaly_Pack.zip` | `NovaForge/Server/Source/Gameplay/Sectors` + War + Anomalies |
+| `MasterRepo_Phase12_Titan_Endgame_Season_Pack.zip` | `NovaForge/Server/Source/Gameplay/Titan` + Endgame + Season |
+| `MasterRepo_Phase12_1_Season_Config_Patch_Pack.zip` | `NovaForge/Server/Source/Config` + Season patch; `NovaForge/Data/Config/` |
+| `MasterRepo_Phase13_Vertical_Slice_Pack.zip` | `NovaForge/Server/Source/Core/GameOrchestrator`, UI, Save, Integration, Debug |
+| `MasterRepo_Legacy_Adapter_Pack.zip` | `NovaForge/Server/Source/LegacyAdapters/` — full legacy migration layer |
+| `MasterRepo_NovaForge_First_Live_Ingestion_Pass.zip` | `NovaForge/Data/LegacyIngested/` + ingestion manifest |
+| `MasterRepo_DataRegistry_Expansion_Pack.zip` | `NovaForge/Server/Source/Data/DataRegistry.cpp` + DataRecordModels |
+| `MasterRepo_Gameplay_Foundation_Pack.zip` | `NovaForge/Server/Source/Gameplay/` — PlayerController, Inventory, Crafting, Mission, GameplayManager, UI hooks |
+| `MasterRepo_Master_Delivery_Bundle.zip` | `Docs/Architecture/` — 6 architectural design docs (Entity/Component, Rendering, Save/Load, Networking, Security, Gap Closure) |
+
+**Root directory cleanup:** `docs/` (architecture specs) → `Docs/Architecture/`; empty `src/` and `tests/` placeholders removed.
+
+---
+
+## Logging Infrastructure ✅ COMPLETE
+
+Proper logging wired into every executable and runnable component across the project.
+
+### Shared Logging Utilities
+
+| File | Purpose |
+|------|---------|
+| `Scripts/Logging/log_helper.sh` | Bash library sourced by all shell scripts — `log_init` creates a timestamped log file and tees all stdout+stderr; `log_section` emits labelled dividers |
+| `Shared/Logging/MasterLogger.h` | C++17 header-only singleton — dual console+file output, five severity levels (DEBUG/INFO/WARN/ERROR/FATAL), thread-safe, ISO 8601 timestamps, convenience macros `MR_LOG_*` |
+| `Shared/Logging/log_utils.py` | Python utility for tools outside AtlasAI — `get_tool_logger(name, subsystem)` creates rotating file + console handler under `Logs/<subsystem>/` |
+
+### Log Directory Layout
+
+```
+<repo_root>/
+├── Logs/                      ← top-level runtime log tree (git-ignored)
+│   ├── build/                 ← Scripts/Build/build.sh, clean.sh, test.sh
+│   ├── ci/                    ← Scripts/CI/ci_build.sh, ci_validate.sh
+│   ├── setup/                 ← Scripts/Setup/setup.sh, Scripts/Bootstrap/bootstrap.sh
+│   ├── validate/              ← validate_naming.py, validate_boundaries.py
+│   ├── game_tools/            ← contract_scan.py, validate_json.py
+│   ├── ai_dev/                ← agent_loop.py
+│   └── tools/                 ← generic tool default
+├── AtlasAI/AIEngine/AtlasAIEngine/logs/
+│   ├── arbiter_engine/        ← server.py
+│   ├── python_bridge/         ← fastapi_bridge.py  ← NOW LOGGING
+│   ├── host_app/
+│   ├── vs_extension/
+│   └── self_build/
+├── NovaForge/Server/logs/     ← server build + test shell scripts
+└── NovaForge/Client/logs/     ← client build scripts
+```
+
+### Components Hooked
+
+| Component | Type | Logging Method |
+|-----------|------|----------------|
+| `Scripts/Build/build.sh` | Bash | `log_helper.sh` → `Logs/build/build_<ts>.log` |
+| `Scripts/Build/clean.sh` | Bash | `log_helper.sh` → `Logs/build/build_<ts>.log` |
+| `Scripts/Build/test.sh` | Bash | `log_helper.sh` → `Logs/test/test_<ts>.log` |
+| `Scripts/CI/ci_build.sh` | Bash | `log_helper.sh` → `Logs/ci/ci_<ts>.log` |
+| `Scripts/CI/ci_validate.sh` | Bash | `log_helper.sh` → `Logs/ci/ci_<ts>.log` |
+| `Scripts/Setup/setup.sh` | Bash | `log_helper.sh` → `Logs/setup/setup_<ts>.log` |
+| `Scripts/Bootstrap/bootstrap.sh` | Bash | `log_helper.sh` → `Logs/setup/setup_<ts>.log` |
+| `Scripts/Validate/validate_naming.py` | Python | `log_utils.py` → `Logs/validate/validate.log` |
+| `Scripts/Validate/validate_boundaries.py` | Python | `log_utils.py` → `Logs/validate/validate.log` |
+| `NovaForge/Tools/GameTools/contract_scan.py` | Python | `log_utils.py` → `Logs/game_tools/game_tools.log` |
+| `NovaForge/Tools/GameTools/validate_json.py` | Python | `log_utils.py` → `Logs/game_tools/game_tools.log` |
+| `NovaForge/Tools/AIDev/core/agent_loop.py` | Python | `log_utils.py` → `Logs/ai_dev/ai_dev.log` |
+| `AtlasAI/AIEngine/PythonBridge/fastapi_bridge.py` | Python | Inline rotating handler → `Logs/python_bridge/python_bridge.log` |
+| `AtlasAI/AIEngine/AtlasAIEngine/server.py` | Python | `core/logger.py` → `logs/arbiter_engine/arbiter_engine.log` (existing) |
+| `NovaForge/Server/Source/main.cpp` | C++ | `MasterLogger.h` → `Logs/server/masterrepo_server.log` |
+| `NovaForge/Server/Source/Core/App.cpp` | C++ | `MasterLogger.h` (via Init in main) |
+| `NovaForge/Server/Source/Core/EngineKernel.cpp` | C++ | `MasterLogger.h` (via Init in main) |
+| `NovaForge/Server/build.sh` | Bash | Existing tee → `logs/server_build_<ts>.log` |
+| `NovaForge/Server/run_tests.sh` | Bash | Existing tee → `logs/server_tests_<ts>.log` |
+| `NovaForge/Client/build_test*.sh` | Bash | Existing tee → `logs/` |
+
+---
+
 ## Current Status
 
 ```
-Tests passing: 7 C++ integration tests · 263 Python unit tests
-Source files:  ~2,370 C++ · 210 Python · 35 C# · 23 TypeScript
+Tests passing:  7 C++ integration tests · 263 Python unit tests
+Source files:  ~2,560 C++ · 215 Python · 35 C# · 23 TypeScript
 Architecture:  Stable — all 10 foundation epics complete
 Bridge:        REST + WebSocket endpoints operational
 AI Engine:     41 modules · 12 LLM backends · agentic self-build loop
+Logging:       Unified across all shell scripts, Python tools, and C++ runtime
 ```
 
 ---
