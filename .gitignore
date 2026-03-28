@@ -66,3 +66,6 @@ tmp/
 temp/
 *.tmp
 *.temp
+
+# Zip archives — all zips are archived in Docs/Archive/ZipFiles/; none should appear at repo root
+/*.zip

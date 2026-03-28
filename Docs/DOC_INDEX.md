@@ -16,6 +16,7 @@ Foundational rules that govern the structure of the monorepo. These documents ar
 | [monorepo_layout.md](Architecture/monorepo_layout.md) | Describes the physical directory layout of the monorepo, including the purpose of every top-level folder and key sub-folders. |
 | [dependency_rules.md](Architecture/dependency_rules.md) | Enumerates the hard dependency direction rules: which zones may depend on which, and which dependencies are permanently forbidden. |
 | [shipping_separation.md](Architecture/shipping_separation.md) | Documents the rules that prevent AtlasAI tooling code from leaking into shipping client/server builds. Covers editor-only guards and build configuration isolation. |
+| [intake_policy.md](Architecture/intake_policy.md) | **Root intake policy** — the classification and routing rules that govern every file added to the repo. Enforced by `Scripts/Validate/validate_root.py` and processed by `Scripts/Intake/process_intake.py`. |
 
 ---
 
@@ -39,6 +40,7 @@ High-level design vision and canon documents.
 |---|---|
 | [MASTER_DESIGN_DOCUMENT.md](Design/MASTER_DESIGN_DOCUMENT.md) | Authoritative unified design document covering all systems, features, and architecture decisions. All work should be evaluated against this document. |
 | [MISSING_SYSTEMS_ADDENDUM.md](Design/MISSING_SYSTEMS_ADDENDUM.md) | Extension to the master design that makes explicit the major systems needed for stability, scalability, and long-term cohesion that were not fully elaborated in the main document. |
+| [MASTER_REPO_DIRECTIVE.md](Design/MASTER_REPO_DIRECTIVE.md) | Converted from the original planning chat: unified refactor blueprint — project identity, pillars, non-negotiable rules, target structure, and launch strategy. |
 
 ---
 
@@ -86,7 +88,17 @@ Docs for Arbiter tooling modules. Each sub-folder will contain module-level docu
 
 | Location | Description |
 |---|---|
-| [Archive/Chats/](Archive/Chats/) | Raw chat session transcripts used as source material for architecture and design decisions (RepoDirective1, RepoDirective2, etc.). |
+| [Archive/Chats/](Archive/Chats/) | Raw chat session transcripts used as source material for architecture and design decisions. Superseded by `Docs/Design/MASTER_REPO_DIRECTIVE.md`. |
+| [Archive/ZipFiles/](Archive/ZipFiles/) | All migrated source zip archives — fully processed into the live repo tree. Retained for reference. |
+| [Archive/Planning/](Archive/Planning/) | Legacy planning documents (checklist, migration sheets, execution plans). Superseded by the live roadmap. |
+
+---
+
+## Launching & Running
+
+| Document | Description |
+|---|---|
+| [LAUNCHING.md](LAUNCHING.md) | Build instructions, launch flags, boot sequence overview, and playtest / CI smoke-test guide. |
 
 ---
 
