@@ -1,5 +1,5 @@
 """
-Arbiter AI — Model Downloader
+AtlasAI — Model Downloader
 Detects available hardware, recommends the best GGUF model, and downloads it
 from HuggingFace Hub to the standard model folder.
 """

@@ -1,5 +1,5 @@
 """
-Arbiter AI — LLM Interface
+AtlasAI — LLM Interface
 Handles hardware-aware model loading and response generation.
 Supports local LLaMA-style models via llama-cpp-python, Ollama, or a stub fallback.
 """

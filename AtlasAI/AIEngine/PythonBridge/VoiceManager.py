@@ -1,5 +1,5 @@
 """
-Arbiter AI — Text-to-Speech Voice Manager
+AtlasAI — Text-to-Speech Voice Manager
 Supports pyttsx3 (offline), Coqui TTS, or console fallback.
 """
 

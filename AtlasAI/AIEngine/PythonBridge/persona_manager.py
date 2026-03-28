@@ -1,5 +1,5 @@
 """
-Arbiter AI — Persona Manager
+AtlasAI — Persona Manager
 Manages switchable personas that shape Arbiter's behaviour and LLM system prompt.
 
 Built-in personas (Phase 1):
