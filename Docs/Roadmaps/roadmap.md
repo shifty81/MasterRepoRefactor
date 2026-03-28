@@ -157,7 +157,7 @@ Proper logging wired into every executable and runnable component across the pro
 ## Current Status
 
 ```
-Tests passing:  7 C++ integration tests · 352 Python unit tests
+Tests passing:  7 C++ integration tests · 1,762 Python unit tests
 Source files:  ~2,650 C++ · 215 Python · 35 C# · 23 TypeScript
 Architecture:  Stable — all 10 foundation epics complete
 Bridge:        REST + WebSocket endpoints operational
@@ -166,6 +166,8 @@ Logging:       Unified across all shell scripts, Python tools, and C++ runtime
 Character:     Phase 1 + Phase 2 character systems migrated (Equipment, Animation, IK, FPS, Mech)
 Editor:        T1-T3 foundation migrated (Core, Input, Camera, Selection, Outliner, Inspector, Gizmos)
 Orchestration: Unified repo consolidation migrated (App, GameOrchestrator, World, Renderer, Save, UI)
+Launch:        Executable entry point (MasterRepoRuntime), LaunchConfig, GameSystemsRegistry, PlaytestSession, TestHarness, EditorLaunchBridge, RuntimeDiagnostics complete
+Repo cleanup:  All root-level zips archived; planning docs in Docs/Archive/; intake policy enforced
 ```
 
 ---
@@ -180,6 +182,42 @@ All 4 root-level zip packs migrated:
 | `MasterRepo_T1_T3_Editor_Foundation_Pack.zip` | ✅ Done | `Atlas/Editor/Core/`, `Atlas/Editor/Input/`, `Atlas/Editor/Camera/`, `Atlas/Editor/Selection/`, `Atlas/Editor/Outliner/`, `Atlas/Editor/Inspector/`, `Atlas/Editor/Gizmos/`, `Atlas/Config/Editor/` |
 | `MasterRepo_Character_System_Pack.zip` | ✅ Done | `NovaForge/Gameplay/Characters/` (CharacterSystem, CharacterControllerShell, Animation, Equipment, Mech), `NovaForge/Data/Definitions/Characters,Equipment,Animation/` |
 | `MasterRepo_Character_Phase2_Pack.zip` | ✅ Done | `NovaForge/Gameplay/Characters/Core/` (StateAuthority, TransitionRules), `Characters/IK/`, `Characters/FPS/`, `Characters/Editor/`, `Characters/Tools/`, `NovaForge/Data/Definitions/IK,Tools/` |
+
+---
+
+### K-Series — Launch & Executable System ✅ COMPLETE
+
+All systems required to boot a testable executable are in place.
+
+| ID | System | Location | Tests |
+|----|--------|----------|-------|
+| K1 | `LaunchConfig` — CLI arg parsing, mode/flag resolution | `Atlas/Engine/Config/` | 15 |
+| K2 | `GameSystemsRegistry` — global subsystem health tracker | `Atlas/Engine/Core/` | 15 |
+| K3 | `PlaytestSession` — headless automated smoke-test runner | `NovaForge/App/` | 8 |
+| K4 | `RuntimeDiagnostics` — engine health report aggregator | `Atlas/Engine/Core/` | 6 |
+| K5 | `EditorLaunchBridge` — editor boot sequence coordinator | `Atlas/Editor/Core/` | 11 |
+| K6 | `TestHarness` — multi-case CI test orchestrator | `NovaForge/App/` | 8 |
+
+**Launch entry point:** `NovaForge/App/src/main.cpp` → `MasterRepoRuntime` executable  
+**Launch script:** `Scripts/Run/launch.sh`  
+**Documentation:** `Docs/LAUNCHING.md`
+
+---
+
+### Repo Cleanup & Intake Policy ✅ COMPLETE
+
+| Item | Status |
+|------|--------|
+| All root `.zip` files archived to `Docs/Archive/ZipFiles/` | ✅ |
+| All planning `.md` files archived to `Docs/Archive/Planning/` | ✅ |
+| `New Implementations that need addressed/` folder removed | ✅ |
+| Chat exports converted to `Docs/Design/MASTER_REPO_DIRECTIVE.md` | ✅ |
+| `validate_root.py` CI gate (no stray root files) | ✅ |
+| `process_intake.py` — classify & route any new root-level drop | ✅ |
+| `Intake/` staging directory (sanctioned root-level staging area) | ✅ |
+| `Docs/Architecture/intake_policy.md` — classification rules | ✅ |
+| `validate_naming.py` exemption updated (old folder removed) | ✅ |
+| Root is clean: `validate_root.py` passes | ✅ |
 
 ---
 
