@@ -67,6 +67,8 @@ ALLOWLIST: set[str] = {
     "pyproject.toml",
     "setup.cfg",
     "setup.py",
+    # Debug log written by Python tools (local debugging aid; gitignored)
+    "debug.log",
 }
 
 

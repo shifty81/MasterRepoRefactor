@@ -28,7 +28,7 @@ public:
         
         // Align time: time to reach 75% max velocity
         float getAlignTime() const {
-            return -log(0.25) * getAgility() / 1000000.0f;
+            return -logf(0.25f) * getAgility() / 1000000.0f;
         }
     };
 

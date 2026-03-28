@@ -61,7 +61,7 @@ def get_tool_logger(
     subsystem: str = "tools",
     level: int = logging.DEBUG,
 ) -> logging.Logger:
-    """Return a logger that writes to console and a rotating file.
+    """Return a logger that writes to console, a rotating subsystem file, and a root debug log.
 
     Parameters
     ----------
@@ -85,6 +85,10 @@ def get_tool_logger(
     whether the caller's module name is a child of *subsystem* in the
     logging hierarchy.  The guard key is ``name`` so multiple callers inside
     the same module never duplicate handlers.
+
+    In addition to the per-subsystem rotating log file, a flat ``debug.log``
+    is written directly to the repository root for convenient debugging
+    (e.g., ``cat debug.log`` at the root to see all tool output at once).
     """
     logger = logging.getLogger(name)
     # Only add handlers once per unique logger name
@@ -102,9 +106,10 @@ def get_tool_logger(
         console_handler.setFormatter(formatter)
         logger.addHandler(console_handler)
 
-        # ── File handler (rotating) ───────────────────────────────────────────
         try:
             repo_root = _find_repo_root()
+
+            # ── Subsystem file handler (rotating) ────────────────────────────
             log_dir = repo_root / "Logs" / subsystem
             log_dir.mkdir(parents=True, exist_ok=True)
             log_file = log_dir / f"{subsystem}.log"
@@ -116,6 +121,19 @@ def get_tool_logger(
             )
             file_handler.setFormatter(formatter)
             logger.addHandler(file_handler)
+
+            # ── Root debug log (flat, append-mode) ────────────────────────────
+            # Written to <repo_root>/debug.log so all Python tool output is
+            # visible in one place without navigating into Logs/ subdirectories.
+            root_log_file = repo_root / "debug.log"
+            root_handler = logging.FileHandler(
+                root_log_file,
+                mode="a",
+                encoding="utf-8",
+            )
+            root_handler.setFormatter(formatter)
+            logger.addHandler(root_handler)
+
         except OSError:
             # If we can't write the log file (e.g. read-only filesystem in CI),
             # continue with console-only logging.

@@ -668,6 +668,7 @@ void AtlasTitleScreen::renderCharacterPreviewViewport(AtlasContext& ctx, Rect ar
     float centerX = area.x + area.w * 0.5f;
     float centerY = area.y + area.h * 0.55f;       // vertical centre of viewport
     float scale   = area.h * 0.38f;                 // character height in pixels
+    (void)scale;
 
     // Camera orbit angles
     float yawRad   = m_previewCamYaw * 3.14159f / 180.0f;
@@ -767,8 +768,8 @@ void AtlasTitleScreen::renderCharacterPreviewViewport(AtlasContext& ctx, Rect ar
         float verts[8][3] = {
             {-hw, baseY,      -hd}, { hw, baseY,      -hd},
             { hw, baseY,       hd}, {-hw, baseY,       hd},
-            {-hw, baseY + part.scaleY, -hd}, { hw, baseY + part.scaleY, -hd},
-            { hw, baseY + part.scaleY,  hd}, {-hw, baseY + part.scaleY,  hd},
+            {-hw, baseY + hh * 2.0f, -hd}, { hw, baseY + hh * 2.0f, -hd},
+            { hw, baseY + hh * 2.0f,  hd}, {-hw, baseY + hh * 2.0f,  hd},
         };
 
         // Project all 8 vertices

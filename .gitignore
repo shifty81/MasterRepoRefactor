@@ -83,3 +83,6 @@ temp/
 MasterRepoRefactor-main.zip
 resolve-zip-conflict.bat
 New Text Document.txt
+
+# Root-level debug log written by Python tools (local debugging aid)
+/debug.log

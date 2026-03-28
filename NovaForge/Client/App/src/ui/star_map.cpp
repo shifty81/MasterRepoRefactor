@@ -364,7 +364,7 @@ void StarMap::renderGalaxyView() {
         glBindBuffer(GL_ARRAY_BUFFER, m_lineVBO);
         glBufferData(GL_ARRAY_BUFFER, lines.size() * sizeof(float), lines.data(), GL_DYNAMIC_DRAW);
         glLineWidth(m_connectionWidth);
-        glDrawArrays(GL_LINES, 0, lines.size() / 7);
+        glDrawArrays(GL_LINES, 0, static_cast<GLsizei>(lines.size() / 7));
     }
     
     // Render systems (points)
@@ -373,7 +373,7 @@ void StarMap::renderGalaxyView() {
         glBindBuffer(GL_ARRAY_BUFFER, m_systemVBO);
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_DYNAMIC_DRAW);
         glPointSize(m_systemNodeSize);
-        glDrawArrays(GL_POINTS, 0, vertices.size() / 7);
+        glDrawArrays(GL_POINTS, 0, static_cast<GLsizei>(vertices.size() / 7));
     }
     
     glBindVertexArray(0);
@@ -439,7 +439,7 @@ void StarMap::renderSystemView() {
         
         // Use larger points for celestials
         glPointSize(m_systemNodeSize * 2.0f);
-        glDrawArrays(GL_POINTS, 0, vertices.size() / 7);
+        glDrawArrays(GL_POINTS, 0, static_cast<GLsizei>(vertices.size() / 7));
     }
     
     glBindVertexArray(0);
@@ -537,7 +537,7 @@ void StarMap::renderTacticalOverlay() {
         glBindBuffer(GL_ARRAY_BUFFER, m_lineVBO);
         glBufferData(GL_ARRAY_BUFFER, lines.size() * sizeof(float), lines.data(), GL_DYNAMIC_DRAW);
         glLineWidth(1.0f);
-        glDrawArrays(GL_LINES, 0, lines.size() / 7);
+        glDrawArrays(GL_LINES, 0, static_cast<GLsizei>(lines.size() / 7));
     }
     
     glBindVertexArray(0);
@@ -663,7 +663,7 @@ std::vector<std::string> StarMap::getRouteToDestination() const {
 }
 
 int StarMap::getJumpsToDestination() const {
-    return m_route.size();
+    return static_cast<int>(m_route.size());
 }
 
 void StarMap::zoomMap(float delta) {
@@ -706,8 +706,8 @@ void StarMap::handleMouseRelease(int x, int y) {
 
 void StarMap::handleMouseMove(int x, int y) {
     if (m_dragging) {
-        float deltaX = x - m_lastMouseX;
-        float deltaY = y - m_lastMouseY;
+        float deltaX = static_cast<float>(x - m_lastMouseX);
+        float deltaY = static_cast<float>(y - m_lastMouseY);
         
         rotateMap(deltaX * 0.5f, -deltaY * 0.5f);
     }

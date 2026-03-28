@@ -186,7 +186,7 @@ std::shared_ptr<Mesh> StationRenderer::createSolariStation() {
         glm::vec3 spireBase(spireX, bodyHeight, spireZ);
         glm::vec3 spireTop(spireX, bodyHeight + spireHeight, spireZ);
         
-        unsigned int baseIdx = vertices.size();
+        unsigned int baseIdx = static_cast<unsigned int>(vertices.size());
         
         // Cone for spire
         for (int i = 0; i <= 8; i++) {
@@ -206,7 +206,7 @@ std::shared_ptr<Mesh> StationRenderer::createSolariStation() {
         vTip.position = spireTop;
         vTip.normal = glm::vec3(0.0f, 1.0f, 0.0f);
         vTip.color = glm::vec3(1.0f, 0.9f, 0.4f);
-        unsigned int tipIdx = vertices.size();
+        unsigned int tipIdx = static_cast<unsigned int>(vertices.size());
         vertices.push_back(vTip);
         
         // Create cone triangles
@@ -233,7 +233,7 @@ std::shared_ptr<Mesh> StationRenderer::createVeyrenStation() {
     
     // Helper to add a box at position
     auto addBox = [&](glm::vec3 center, float w, float h, float d, glm::vec3 color) {
-        unsigned int baseIdx = vertices.size();
+        unsigned int baseIdx = static_cast<unsigned int>(vertices.size());
         
         // 8 vertices of the box
         glm::vec3 corners[8] = {
@@ -381,7 +381,7 @@ std::shared_ptr<Mesh> StationRenderer::createAurelianStation() {
         float angle = i * glm::pi<float>() / 2.0f;
         glm::vec3 offset(podDistance * cos(angle), 0.0f, podDistance * sin(angle));
         
-        unsigned int baseIdx = vertices.size();
+        unsigned int baseIdx = static_cast<unsigned int>(vertices.size());
         
         for (int ring = 0; ring <= podRings; ring++) {
             float phi = glm::pi<float>() * (float)ring / podRings;
@@ -428,9 +428,8 @@ std::shared_ptr<Mesh> StationRenderer::createKeldariStation() {
     
     // Create irregular scaffolding structure using cylinders
     auto addCylinder = [&](glm::vec3 start, glm::vec3 end, float radius, glm::vec3 color) {
-        unsigned int baseIdx = vertices.size();
+        unsigned int baseIdx = static_cast<unsigned int>(vertices.size());
         glm::vec3 dir = end - start;
-        float length = glm::length(dir);
         glm::vec3 up = glm::normalize(dir);
         
         // Find perpendicular vector
@@ -491,7 +490,6 @@ std::shared_ptr<Mesh> StationRenderer::createKeldariStation() {
     addCylinder(glm::vec3(280, 700, -320), glm::vec3(290, 700, 280), crossBeamRadius, metalColor);
     
     // Central habitation module (box)
-    unsigned int baseIdx = vertices.size();
     glm::vec3 center(0, 400, 0);
     const float habWidth = 400.0f;
     const float habHeight = 300.0f;
@@ -596,7 +594,7 @@ std::shared_ptr<Mesh> StationRenderer::createAstrahus() {
         glm::vec3 armStart = direction * coreRadius;
         glm::vec3 armEnd = direction * (coreRadius + armLength);
         
-        unsigned int baseIdx = vertices.size();
+        unsigned int baseIdx = static_cast<unsigned int>(vertices.size());
         
         for (int i = 0; i <= armSegments; i++) {
             float theta = (float)i / armSegments * 2.0f * glm::pi<float>();

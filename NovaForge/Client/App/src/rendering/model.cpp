@@ -1219,7 +1219,7 @@ ShipDesignTraits Model::getDesignTraits(const std::string& faction, const std::s
 void Model::addWeaponHardpoints(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices,
                                  float posZ, float offsetX, float offsetY, int count, const glm::vec3& color) {
     float hardpointSize = 0.15f;
-    int startIdx = vertices.size();
+    int startIdx = static_cast<int>(vertices.size());
     
     for (int i = 0; i < count; ++i) {
         float side = (i % 2 == 0) ? 1.0f : -1.0f;
@@ -1246,7 +1246,7 @@ void Model::addWeaponHardpoints(std::vector<Vertex>& vertices, std::vector<unsig
 void Model::addEngineDetail(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices,
                             float posZ, float width, float height, int count, const glm::vec3& color) {
     float exhaustSize = 0.2f;
-    int startIdx = vertices.size();
+    int startIdx = static_cast<int>(vertices.size());
     
     for (int i = 0; i < count; ++i) {
         float angle = (i * 2.0f * PI) / count;
@@ -1273,7 +1273,7 @@ void Model::addHullPanelLines(std::vector<Vertex>& vertices, std::vector<unsigne
                               float startZ, float endZ, float width, const glm::vec3& color) {
     float panelWidth = 0.05f;
     int panelCount = static_cast<int>((startZ - endZ) / 1.0f);
-    int startIdx = vertices.size();
+    int startIdx = static_cast<int>(vertices.size());
     
     for (int i = 0; i < panelCount; ++i) {
         float z = startZ - i * 1.0f;
@@ -1296,7 +1296,7 @@ void Model::addHullPanelLines(std::vector<Vertex>& vertices, std::vector<unsigne
  */
 void Model::addSpireDetail(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices,
                            float posZ, float height, const glm::vec3& color) {
-    int startIdx = vertices.size();
+    int startIdx = static_cast<int>(vertices.size());
     
     // Central spire point
     vertices.push_back({{posZ, 0.0f, height * 1.5f}, {0.0f, 0.0f, 1.0f}, {}, color});
@@ -1321,7 +1321,7 @@ void Model::addSpireDetail(std::vector<Vertex>& vertices, std::vector<unsigned i
  */
 void Model::addAsymmetricDetail(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices,
                                 float posZ, float offset, const glm::vec3& color) {
-    int startIdx = vertices.size();
+    int startIdx = static_cast<int>(vertices.size());
     
     // Asymmetric protruding structure
     vertices.push_back({{posZ, offset, 0.0f}, {0.0f, 1.0f, 0.0f}, {}, color});
