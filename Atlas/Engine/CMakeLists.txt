@@ -1,7 +1,8 @@
 # AtlasEngine — ECS, world, scene, assets, rendering, physics, audio
 
 set(ATLAS_ENGINE_SOURCES
-    # placeholder — add source files here as they are created
+    src/AtlasEngine_stub.cpp
+    # add source files here as engine systems are implemented
 )
 
 add_library(AtlasEngine STATIC ${ATLAS_ENGINE_SOURCES})

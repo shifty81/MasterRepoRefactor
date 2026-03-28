@@ -1,7 +1,8 @@
 # AtlasUI — custom UI framework, layout, controls, styling, rendering, themes
 
 set(ATLAS_UI_SOURCES
-    # placeholder — add source files here as they are created
+    src/AtlasUI_stub.cpp
+    # add source files here as UI framework systems are implemented
 )
 
 add_library(AtlasUI STATIC ${ATLAS_UI_SOURCES})

@@ -1,7 +1,8 @@
 # NovaForge World — galaxy, sectors, planets, stations, ships, encounters
 
 set(NOVAFORGE_WORLD_SOURCES
-    # placeholder — add source files here as they are created
+    src/NovaForgeWorld_stub.cpp
+    # add source files here as world systems are implemented
 )
 
 add_library(NovaForgeWorld STATIC ${NOVAFORGE_WORLD_SOURCES})

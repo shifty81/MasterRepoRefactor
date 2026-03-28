@@ -10,6 +10,7 @@
 #pragma once
 
 #include <ArbiterBridgeTypes.h>
+#include "BridgeAuditLogger.h"
 #include <functional>
 #include <memory>
 #include <string>
@@ -23,8 +24,8 @@ namespace NovaForge::Integration::Arbiter
 
 struct BridgeServiceConfig
 {
-    uint16_t    restPort          = 57100;
-    uint16_t    wsPort            = 57101;
+    uint16_t    restPort          = ::Arbiter::Bridge::kDefaultRestPort;
+    uint16_t    wsPort            = ::Arbiter::Bridge::kDefaultWsPort;
     bool        bindLoopbackOnly  = true;
     uint32_t    timeoutSeconds    = 30;
 };
@@ -45,40 +46,130 @@ public:
     ArbiterBridgeService();
     ~ArbiterBridgeService();
 
+    // --------------------------------------------------------
     // Lifecycle
+    // --------------------------------------------------------
     bool start(const BridgeServiceConfig& config);
     void stop();
     bool isRunning() const;
 
-    // Logging
+    // --------------------------------------------------------
+    // Logging and audit
+    // --------------------------------------------------------
     void setLogCallback(BridgeLogCallback callback);
+    void setAuditLogger(BridgeAuditLogger* logger);
 
-    // Project info
-    ::Arbiter::Bridge::ProjectInfo      getProjectInfo() const;
+    // --------------------------------------------------------
+    // Session management (Epic 4 / Task 4.1)
+    // --------------------------------------------------------
 
-    // Build
-    ::Arbiter::Bridge::BuildResult      runBuild(
+    /// Establishes a new bridge session and returns a session token.
+    ::Arbiter::Bridge::SessionConnectResponse connectSession(
+        const ::Arbiter::Bridge::SessionConnectRequest& request);
+
+    /// Disconnects and invalidates the session for the given token.
+    ::Arbiter::Bridge::BridgeResult disconnectSession(
+        const std::string& sessionToken);
+
+    // --------------------------------------------------------
+    // Project info endpoint  GET /project/info  (Task 4.1)
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::ProjectInfo getProjectInfo(
+        const std::string& sessionToken) const;
+
+    // --------------------------------------------------------
+    // Build endpoint  POST /build/run  (Task 4.3)
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::BuildResult runBuild(
+        const std::string&                    sessionToken,
         const ::Arbiter::Bridge::BuildTarget& target);
 
-    // Editor state
-    ::Arbiter::Bridge::EditorSelectionSnapshot getEditorSelection() const;
+    // --------------------------------------------------------
+    // Editor state endpoint  GET /editor/selection  (Task 4.2)
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::EditorSelectionSnapshot getEditorSelection(
+        const std::string& sessionToken) const;
 
+    // --------------------------------------------------------
     // File operations
-    ::Arbiter::Bridge::BridgeResult     openFile(
-        const ::Arbiter::Bridge::OpenFileRequest& request);
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::BridgeResult openFile(
+        const std::string&                          sessionToken,
+        const ::Arbiter::Bridge::OpenFileRequest&   request);
 
-    // Tool actions (whitelisted only)
+    // --------------------------------------------------------
+    // Tool actions endpoint  POST /editor/tools/run  (Task 4.4)
+    // --------------------------------------------------------
     ::Arbiter::Bridge::ToolActionResult runToolAction(
-        const ::Arbiter::Bridge::ToolActionRequest& request);
+        const std::string&                              sessionToken,
+        const ::Arbiter::Bridge::ToolActionRequest&     request);
+
+    // --------------------------------------------------------
+    // Epic 10 / Task 10.1 — Search roots  GET /project/search-roots
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::ProjectSearchRoots getSearchRoots(
+        const std::string& sessionToken) const;
+
+    // --------------------------------------------------------
+    // Epic 10 / Task 10.2 — Builder / PCG tool hooks  POST /editor/tools/builder
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::BuilderToolResult runBuilderTool(
+        const std::string&                           sessionToken,
+        const ::Arbiter::Bridge::BuilderToolRequest& request);
+
+    // --------------------------------------------------------
+    // Epic 10 / Task 10.3 — Richer editor state  GET /editor/state
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::EditorStateSnapshot getEditorState(
+        const std::string& sessionToken) const;
+
+    // --------------------------------------------------------
+    // Epic 10 / Task 10.4 — Codegen workflow
+    //   POST /codegen/propose
+    //   GET  /codegen/diff
+    //   POST /codegen/approve
+    //   POST /codegen/apply
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::CodegenProposal proposeCodegen(
+        const std::string&                              sessionToken,
+        const ::Arbiter::Bridge::CodegenProposalRequest& request);
+
+    ::Arbiter::Bridge::CodegenDiff getCodegenDiff(
+        const std::string& sessionToken,
+        const std::string& proposalId) const;
+
+    ::Arbiter::Bridge::CodegenApplyResult approveAndApplyCodegen(
+        const std::string&                               sessionToken,
+        const ::Arbiter::Bridge::CodegenApprovalRequest& request);
+
+    // --------------------------------------------------------
+    // Epic 10 / Task 10.5 — Workspace dashboard  GET /workspace/dashboard
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::WorkspaceDashboard getWorkspaceDashboard(
+        const std::string& sessionToken) const;
 
 private:
     struct Impl;
     std::unique_ptr<Impl> m_impl;
 
+    bool validateSession(const std::string& token) const;
+    bool validateWriteSession(const std::string& token) const;
     bool isToolActionAllowed(::Arbiter::Bridge::ToolActionId actionId) const;
+    bool isBuilderToolActionAllowed(::Arbiter::Bridge::BuilderToolActionId actionId) const;
+
     void log(const std::string& message);
+    void auditLog(
+        const std::string& requestId,
+        const std::string& sessionId,
+        const std::string& service,
+        const std::string& operation,
+        bool               success,
+        const std::string& summary,
+        bool               wasDryRun  = false,
+        const std::string& failReason = {}) const;
 
     BridgeLogCallback   m_logCallback;
+    BridgeAuditLogger*  m_auditLogger = nullptr;
     BridgeServiceConfig m_config;
     bool                m_running = false;
 };
