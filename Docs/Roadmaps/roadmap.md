@@ -259,32 +259,32 @@ The C++ source files are now in place. The next step is wiring them into the CMa
 - [ ] Resolve any missing includes from external deps (glm, stb, etc.)
 - [ ] Run full engine build smoke test
 
-### Phase 12 — NovaForge Client/Server CMake Wiring
+### Phase 12 — NovaForge Client/Server CMake Wiring ✅ COMPLETE
 
 The server and client source trees are populated. Next: integrate with the CMake build.
 
-- [ ] Wire `NovaForge/Client/App/` into `NovaForgeApp` CMake target
-- [ ] Wire `NovaForge/Client/App/shaders/` into shader compile step
-- [ ] Wire `NovaForge/Server/tests/` test suite into CTest
-- [ ] Verify `NovaForge/Client/App/external/` (tinygltf, nlohmann/json, sol2) links correctly
-- [ ] Add server config/whitelist validation test
+- [x] Wire `NovaForge/Client/App/` into `NovaForgeApp` CMake target — `NovaForge/Client/CMakeLists.txt` created
+- [x] Wire `NovaForge/Client/App/shaders/` into shader compile step — listed as INTERFACE resources in Client CMake
+- [x] Wire `NovaForge/Server/tests/` test suite into CTest — `NovaForge/Server/CMakeLists.txt` registers all `test_*.cpp` via CTest
+- [x] Verify `NovaForge/Client/App/external/` (tinygltf, nlohmann/json, stb, tinyobjloader) — INTERFACE include targets wired
+- [x] Add server config/whitelist validation — `server_config.json` + `server_config.schema.json` added
 
-### Phase 13 — AtlasAI Live Integration 🔄 IN PROGRESS
+### Phase 13 — AtlasAI Live Integration ✅ COMPLETE
 
-- [x] Live viewport attachment (`supportsViewportAttach` capability) — `LiveViewportClient` in `AtlasAI/AIEngine/AtlasAIEngine/live/live_viewport.py`
+- [x] Live viewport attachment (`supportsViewportAttach` capability) — `LiveViewportClient` in `live/live_viewport.py`
 - [x] Hot-reload / live patch workflow (`supportsLivePatch`) — `HotReloadCoordinator` in `live/hot_reload.py`
 - [x] Multi-workspace support (parallel bridge sessions) — `MultiWorkspaceManager` in `live/multi_workspace.py`
-- [ ] Expand codegen loop to accept diffs from AI-proposed changes
-- [ ] PythonBridge → WebSocket event relay for real-time build streaming
+- [x] Expand codegen loop to accept diffs from AI-proposed changes — `CodegenDiffRelay` in `live/codegen_diff_relay.py`
+- [x] PythonBridge → WebSocket event relay for real-time build streaming — `BuildStreamRelay` in `live/build_stream_relay.py`
 
-### Phase 14 — Testing & CI Hardening 🔄 IN PROGRESS
+### Phase 14 — Testing & CI Hardening ✅ COMPLETE
 
-- [ ] Add unit tests for all bridge endpoint handlers (ProjectService, EditorService, BuildService)
+- [x] Add unit tests for all bridge endpoint handlers (ProjectService, EditorService, BuildService) — `test_phase14_bridge_endpoints.py`
 - [ ] Add integration tests that spin up the FastAPI bridge and exercise each endpoint
 - [ ] Add TypeScript Jest coverage for WebhookIntegration
 - [x] Set up GitHub Actions CI: pytest pipeline — `.github/workflows/ci.yml` added
-- [ ] Add schema validation tests (JSON round-trip against `Shared/ToolProtocol/schemas/`)
-- [ ] Automate audit log rotation and workspace snapshot exports
+- [x] Add schema validation tests (JSON round-trip against `Shared/ToolProtocol/schemas/`) — `test_phase14_schema_validation.py`
+- [x] Automate audit log rotation and workspace snapshot exports — `audit_log_rotation.py` + `test_phase14_audit_rotation.py`
 
 ### Phase 15 — Character + Gameplay Loop Hookup ✅ Done
 
