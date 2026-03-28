@@ -1,0 +1,42 @@
+[
+{
+"id": "runtime-gameplay-overview",
+"title": "Runtime gameplay overview",
+"kind": "knowledge_chunk",
+"summary": "Runtime owns the NovaForge playable loop, binding ship interior traversal, airlock use, EVA, salvage, repair, mission resolution, and save/load.",
+"source": "docs/EXPANDED_RUNTIME_GAMEPLAY_SPEC.md",
+"keywords": ["runtime", "gameplay", "mission", "salvage", "save/load", "airlock", "eva"],
+},
+{
+"id": "vertical-slice-state-model",
+"title": "Vertical slice phase state model",
+"kind": "state_machine",
+"summary": "The vertical slice uses explicit states: Booting, InShip, AirlockCycling, EVA, SalvageActive, HazardResponse, ReturnTransit, MissionComplete, Debrief, SavePending.",
+"source": "docs/EXPANDED_RUNTIME_GAMEPLAY_SPEC.md",
+"keywords": ["state machine", "game mode", "phase transitions", "vertical slice"],
+},
+{
+"id": "rig-controller-contract",
+"title": "Rig controller responsibilities",
+"kind": "code_contract",
+"summary": "RigController owns first-person possession, movement mode switching, interaction focus, equipped tool routing, and tool update hooks.",
+"source": "code/Runtime/Player/RigController.h",
+"keywords": ["rig", "player", "first person", "controller", "tool", "movement"],
+},
+{
+"id": "session-bootstrap-contract",
+"title": "Session bootstrap responsibilities",
+"kind": "code_contract",
+"summary": "SessionBootstrap owns scenario load, optional save restore, deterministic seed injection, player rig spawn, and startup mission context.",
+"source": "code/Runtime/Session/SessionBootstrap.h",
+"keywords": ["bootstrap", "session", "scenario", "save", "seed", "spawn"],
+},
+{
+"id": "arbiter-use-guidance",
+"title": "Arbiter use guidance for runtime gameplay",
+"kind": "operational_rule",
+"summary": "Arbiter should use these files for planning, scaffolding, and documentation grounding, but runtime mutations should still go through the project command gateway.",
+"source": "arbiter/INGESTION_MANIFEST.json",
+"keywords": ["arbiter", "ingestion", "planning", "command gateway"],
+},
+]

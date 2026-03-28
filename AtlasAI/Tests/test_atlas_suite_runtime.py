@@ -381,6 +381,138 @@ class TestAtlasSuiteDocs:
     def test_builder_salvage_smoke_test_md(self):
         assert _p("Docs/AtlasSuite/BUILDER_SALVAGE_SMOKE_TEST.md").exists()
 
+    def test_combat_repair_fire_breach_scaffold_md(self):
+        assert _p("Docs/AtlasSuite/COMBAT_REPAIR_FIRE_BREACH_RUNTIME_SCAFFOLD.md").exists()
+
+    def test_combat_repair_fire_breach_smoke_test_md(self):
+        assert _p("Docs/AtlasSuite/COMBAT_REPAIR_FIRE_BREACH_SMOKE_TEST.md").exists()
+
+
+# ---------------------------------------------------------------------------
+# NovaForge Runtime — Combat (extended)
+# ---------------------------------------------------------------------------
+
+class TestNovaForgeCombatExtended:
+    def test_damage_profile(self):
+        assert _p("NovaForge/Runtime/Combat/DamageProfile.cs").exists()
+
+    def test_combat_event_record(self):
+        assert _p("NovaForge/Runtime/Combat/CombatEventRecord.cs").exists()
+
+    def test_icombat_state_service(self):
+        assert _p("NovaForge/Runtime/Combat/ICombatStateService.cs").exists()
+
+    def test_combat_state_service(self):
+        assert _p("NovaForge/Runtime/Combat/CombatStateService.cs").exists()
+
+
+# ---------------------------------------------------------------------------
+# NovaForge Runtime — Hazards
+# ---------------------------------------------------------------------------
+
+class TestNovaForgeHazards:
+    def test_breach_state(self):
+        assert _p("NovaForge/Runtime/Hazards/Breach/BreachState.cs").exists()
+
+    def test_ibreach_service(self):
+        assert _p("NovaForge/Runtime/Hazards/Breach/IBreachService.cs").exists()
+
+    def test_breach_service(self):
+        assert _p("NovaForge/Runtime/Hazards/Breach/BreachService.cs").exists()
+
+    def test_fire_state(self):
+        assert _p("NovaForge/Runtime/Hazards/Fire/FireState.cs").exists()
+
+    def test_ifire_service(self):
+        assert _p("NovaForge/Runtime/Hazards/Fire/IFireService.cs").exists()
+
+    def test_fire_service(self):
+        assert _p("NovaForge/Runtime/Hazards/Fire/FireService.cs").exists()
+
+
+# ---------------------------------------------------------------------------
+# NovaForge Runtime — Repair
+# ---------------------------------------------------------------------------
+
+class TestNovaForgeRepair:
+    def test_repair_action_def(self):
+        assert _p("NovaForge/Runtime/Repair/RepairActionDef.cs").exists()
+
+    def test_irepair_action_service(self):
+        assert _p("NovaForge/Runtime/Repair/IRepairActionService.cs").exists()
+
+    def test_repair_action_service(self):
+        assert _p("NovaForge/Runtime/Repair/RepairActionService.cs").exists()
+
+
+# ---------------------------------------------------------------------------
+# NovaForge Runtime — SaveLoad (extended)
+# ---------------------------------------------------------------------------
+
+class TestNovaForgeSaveLoadExtended:
+    def test_combat_repair_save_state(self):
+        assert _p("NovaForge/Runtime/SaveLoad/CombatRepairSaveState.cs").exists()
+
+
+# ---------------------------------------------------------------------------
+# NovaForge Runtime — DevWorld smoke tests (extended)
+# ---------------------------------------------------------------------------
+
+class TestNovaForgeDevWorldSmokeExtended:
+    def test_combat_repair_fire_breach_smoke_test_service(self):
+        assert _p("NovaForge/Runtime/DevWorld/Services/CombatRepairFireBreachSmokeTestService.cs").exists()
+
+
+# ---------------------------------------------------------------------------
+# Atlas UI — AtlasSuite Debug Panels (combat/repair/hazard)
+# ---------------------------------------------------------------------------
+
+class TestAtlasSuiteCombatRepairPanels:
+    def test_combat_debug_panel_xaml(self):
+        assert _p("Atlas/UI/AtlasSuite/Panels/CombatDebug/CombatDebugPanel.xaml").exists()
+
+    def test_combat_debug_panel_cs(self):
+        assert _p("Atlas/UI/AtlasSuite/Panels/CombatDebug/CombatDebugPanel.xaml.cs").exists()
+
+    def test_repair_debug_panel_xaml(self):
+        assert _p("Atlas/UI/AtlasSuite/Panels/RepairDebug/RepairDebugPanel.xaml").exists()
+
+    def test_repair_debug_panel_cs(self):
+        assert _p("Atlas/UI/AtlasSuite/Panels/RepairDebug/RepairDebugPanel.xaml.cs").exists()
+
+    def test_hazard_debug_panel_xaml(self):
+        assert _p("Atlas/UI/AtlasSuite/Panels/HazardDebug/HazardDebugPanel.xaml").exists()
+
+    def test_hazard_debug_panel_cs(self):
+        assert _p("Atlas/UI/AtlasSuite/Panels/HazardDebug/HazardDebugPanel.xaml.cs").exists()
+
+    def test_combat_repair_fire_breach_playtest_command(self):
+        assert _p("Atlas/UI/AtlasSuite/PlaytestHost/CombatRepairFireBreachPlaytestCommand.cs").exists()
+
+
+# ---------------------------------------------------------------------------
+# NovaForge Content — Combat & Repair data
+# ---------------------------------------------------------------------------
+
+class TestNovaForgeContentCombatRepair:
+    def test_dev_combat_repair_config(self):
+        assert _p("NovaForge/Content/Config/dev_combat_repair_fire_breach.json").exists()
+
+    def test_damage_profile_kinetic_slug(self):
+        assert _p("NovaForge/Content/Data/Combat/damage_profile_kinetic_slug_mk1.json").exists()
+
+    def test_dev_damage_hull_segment(self):
+        assert _p("NovaForge/Content/Data/Combat/dev_damage_hull_segment.json").exists()
+
+    def test_emergency_breach_patch(self):
+        assert _p("NovaForge/Content/Data/Repair/emergency_breach_patch.json").exists()
+
+    def test_portable_fire_suppress(self):
+        assert _p("NovaForge/Content/Data/Repair/portable_fire_suppress.json").exists()
+
+    def test_field_hull_restore(self):
+        assert _p("NovaForge/Content/Data/Repair/field_hull_restore.json").exists()
+
 
 # ---------------------------------------------------------------------------
 # Archive — zips and chats moved correctly
@@ -402,11 +534,68 @@ class TestArchive:
     def test_builder_salvage_pack_archived(self):
         assert _p("Docs/Archive/ZipFiles/atlas_suite_builder_salvage_pack.zip").exists()
 
+    def test_combat_repair_pack_archived(self):
+        assert _p("Docs/Archive/ZipFiles/atlas_suite_combat_repair_pack.zip").exists()
+
     def test_chat_export_1_archived(self):
         assert _p("Docs/Archive/Chats/New Text Document.txt").exists()
 
     def test_chat_export_2_archived(self):
         assert _p("Docs/Archive/Chats/New Text Document (2).txt").exists()
+
+    def test_chat_export_3_archived(self):
+        assert _p("Docs/Archive/Chats/New Text Document (3).txt").exists()
+
+
+# ---------------------------------------------------------------------------
+# NovaForge Runtime — Vertical Slice (Gameplay, Session, Player, UI)
+# ---------------------------------------------------------------------------
+
+class TestNovaForgeVerticalSlice:
+    def test_vertical_slice_game_mode_header(self):
+        assert _p("NovaForge/Runtime/Gameplay/VerticalSliceGameMode.h").exists()
+
+    def test_vertical_slice_game_mode_source(self):
+        assert _p("NovaForge/Runtime/Gameplay/VerticalSliceGameMode.cpp").exists()
+
+    def test_session_bootstrap_header(self):
+        assert _p("NovaForge/Runtime/Session/SessionBootstrap.h").exists()
+
+    def test_session_bootstrap_source(self):
+        assert _p("NovaForge/Runtime/Session/SessionBootstrap.cpp").exists()
+
+    def test_rig_controller_header(self):
+        assert _p("NovaForge/Runtime/Player/RigController.h").exists()
+
+    def test_rig_controller_source(self):
+        assert _p("NovaForge/Runtime/Player/RigController.cpp").exists()
+
+    def test_hud_runtime_controller_header(self):
+        assert _p("NovaForge/Runtime/UI/HudRuntimeController.h").exists()
+
+    def test_hud_runtime_controller_source(self):
+        assert _p("NovaForge/Runtime/UI/HudRuntimeController.cpp").exists()
+
+
+# ---------------------------------------------------------------------------
+# Docs — Runtime gameplay spec
+# ---------------------------------------------------------------------------
+
+class TestRuntimeGameplayDocs:
+    def test_expanded_runtime_gameplay_spec(self):
+        assert _p("Docs/Runtime/EXPANDED_RUNTIME_GAMEPLAY_SPEC.md").exists()
+
+
+# ---------------------------------------------------------------------------
+# AtlasAI — Ingestion files
+# ---------------------------------------------------------------------------
+
+class TestAtlasAIIngestion:
+    def test_ingestion_manifest(self):
+        assert _p("AtlasAI/Ingestion/INGESTION_MANIFEST.json").exists()
+
+    def test_knowledge_chunks(self):
+        assert _p("AtlasAI/Ingestion/knowledge_chunks.json").exists()
 
     def test_zips_not_in_root(self):
         root_zips = list(REPO_ROOT.glob("*.zip"))
