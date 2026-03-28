@@ -33,7 +33,6 @@ bin/
 Thumbs.db
 
 # Logs and runtime files
-*.log
 *.pid
 *.seed
 *.lock

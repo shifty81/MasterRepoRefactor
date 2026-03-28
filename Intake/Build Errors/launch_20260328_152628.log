@@ -1,0 +1,4 @@
+[log] Session started — 2026-03-28T19:26:28Z
+[log] Log file: /c/GIT PROJECTS/MasterRepoRefactor/Logs/launch/launch_20260328_152628.log
+  [ERROR] Executable not found: /c/GIT PROJECTS/MasterRepoRefactor/Build/NovaForge/App/MasterRepoRuntime
+  [ERROR] Run with --build first, or build manually with Scripts/Build/build.sh

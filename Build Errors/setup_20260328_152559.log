@@ -1,0 +1,53 @@
+[log] Session started — 2026-03-28T19:25:59Z
+[log] Log file: /c/GIT PROJECTS/MasterRepoRefactor/Logs/setup/setup_20260328_152559.log
+================================================================
+  MasterRepo Setup
+  Repo     : /c/GIT PROJECTS/MasterRepoRefactor
+  Build dir: /c/GIT PROJECTS/MasterRepoRefactor/Build
+================================================================
+
+[setup] Build directory already exists: /c/GIT PROJECTS/MasterRepoRefactor/Build
+
+──────────────────────────────────────────────────────────────
+  [2026-03-28T19:25:59Z] CMake Configure
+──────────────────────────────────────────────────────────────
+[setup] Running CMake configure (Debug, tests enabled) ...
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.19045.
+-- Shared: AtlasBridgeContract configured
+-- Shared: MasterLogger (header-only) configured
+-- AtlasCore: configured
+-- AtlasEngine: configured
+-- AtlasRuntime: configured
+-- AtlasEditor: configured
+-- AtlasUI: configured
+-- Atlas: modules configured
+-- NovaForgeGameplay: configured
+-- NovaForgeWorld: configured
+-- NovaForgeSave: configured
+-- NovaForgeUI: configured
+-- NovaForgeApp: configured
+-- NovaForge Client: configured
+-- NovaForge Server: configured
+-- NovaForge: modules configured
+-- AtlasBuildService: configured
+-- AtlasAssetService: configured
+-- AtlasWorldService: configured
+-- AtlasSessionService: configured
+-- AtlasTelemetryService: configured
+-- Services: configured
+-- Tests/Integration: configured
+-- Tests/BuildVerification: configured
+-- Tests/Tooling: configured
+-- Tests: configured
+-- Configuring done (0.1s)
+-- Generating done (4.6s)
+-- Build files have been written to: C:/GIT PROJECTS/MasterRepoRefactor/Build
+
+================================================================
+  Setup complete.
+
+  To build:      ./Scripts/Build/build.sh
+  To test:       ./Scripts/Build/test.sh
+  To clean:      ./Scripts/Build/clean.sh
+  To build+test: ./Scripts/CI/ci_build.sh
+================================================================
