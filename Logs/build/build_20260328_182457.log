@@ -1,0 +1,34 @@
+[log] Session started — 2026-03-28T22:24:57Z
+[log] Log file: /c/GIT PROJECTS/MasterRepoRefactor/Logs/build/build_20260328_182457.log
+
+──────────────────────────────────────────────────────────────
+  [2026-03-28T22:24:57Z] Clean Build Artifacts
+──────────────────────────────────────────────────────────────
+[clean] Removing build artifacts in '/c/GIT PROJECTS/MasterRepoRefactor/Build' ...
+/c/GIT PROJECTS/MasterRepoRefactor/Build/ALL_BUILD.dir
+/c/GIT PROJECTS/MasterRepoRefactor/Build/ALL_BUILD.vcxproj
+/c/GIT PROJECTS/MasterRepoRefactor/Build/ALL_BUILD.vcxproj.filters
+/c/GIT PROJECTS/MasterRepoRefactor/Build/Atlas
+/c/GIT PROJECTS/MasterRepoRefactor/Build/CMakeCache.txt
+/c/GIT PROJECTS/MasterRepoRefactor/Build/CMakeFiles
+/c/GIT PROJECTS/MasterRepoRefactor/Build/cmake_install.cmake
+/c/GIT PROJECTS/MasterRepoRefactor/Build/CTestTestfile.cmake
+/c/GIT PROJECTS/MasterRepoRefactor/Build/DartConfiguration.tcl
+/c/GIT PROJECTS/MasterRepoRefactor/Build/INSTALL.dir
+/c/GIT PROJECTS/MasterRepoRefactor/Build/INSTALL.vcxproj
+/c/GIT PROJECTS/MasterRepoRefactor/Build/INSTALL.vcxproj.filters
+/c/GIT PROJECTS/MasterRepoRefactor/Build/MasterRepo.sln
+/c/GIT PROJECTS/MasterRepoRefactor/Build/NovaForge
+/c/GIT PROJECTS/MasterRepoRefactor/Build/RUN_TESTS.dir
+/c/GIT PROJECTS/MasterRepoRefactor/Build/RUN_TESTS.vcxproj
+/c/GIT PROJECTS/MasterRepoRefactor/Build/RUN_TESTS.vcxproj.filters
+/c/GIT PROJECTS/MasterRepoRefactor/Build/Services
+/c/GIT PROJECTS/MasterRepoRefactor/Build/Shared
+/c/GIT PROJECTS/MasterRepoRefactor/Build/Testing
+/c/GIT PROJECTS/MasterRepoRefactor/Build/Tests
+/c/GIT PROJECTS/MasterRepoRefactor/Build/x64
+/c/GIT PROJECTS/MasterRepoRefactor/Build/ZERO_CHECK.dir
+/c/GIT PROJECTS/MasterRepoRefactor/Build/ZERO_CHECK.vcxproj
+/c/GIT PROJECTS/MasterRepoRefactor/Build/ZERO_CHECK.vcxproj.filters
+/c/GIT PROJECTS/MasterRepoRefactor/Build/_deps
+[clean] Done.
