@@ -4,8 +4,7 @@
 Rules enforced:
 - No source files should contain the legacy "Arbiter" name in their content
   (case-insensitive).
-  Exceptions: files under 'New Implementations that need addressed/' and
-  Docs/Archive/
+  Exceptions: files under Docs/Archive/
 - C++ files in Atlas/ should declare at least one of the allowed namespaces:
   Atlas::, NovaForge::, or Atlas::Bridge
 - C# files in AtlasAI/ should use the AtlasAI.* namespace
@@ -36,7 +35,6 @@ LEGACY_NAME_RE = re.compile(r'\barbiter\b', re.IGNORECASE)
 
 # Paths that are explicitly exempt from the legacy-name check
 LEGACY_EXEMPT_SUBSTRINGS = [
-    "New Implementations that need addressed",
     "Docs/Archive",
     "Docs\\Archive",
 ]

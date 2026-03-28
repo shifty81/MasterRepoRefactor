@@ -16,6 +16,7 @@ Foundational rules that govern the structure of the monorepo. These documents ar
 | [monorepo_layout.md](Architecture/monorepo_layout.md) | Describes the physical directory layout of the monorepo, including the purpose of every top-level folder and key sub-folders. |
 | [dependency_rules.md](Architecture/dependency_rules.md) | Enumerates the hard dependency direction rules: which zones may depend on which, and which dependencies are permanently forbidden. |
 | [shipping_separation.md](Architecture/shipping_separation.md) | Documents the rules that prevent AtlasAI tooling code from leaking into shipping client/server builds. Covers editor-only guards and build configuration isolation. |
+| [intake_policy.md](Architecture/intake_policy.md) | **Root intake policy** — the classification and routing rules that govern every file added to the repo. Enforced by `Scripts/Validate/validate_root.py` and processed by `Scripts/Intake/process_intake.py`. |
 
 ---
 
