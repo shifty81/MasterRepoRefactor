@@ -1,2 +1,0 @@
-/usr/bin/ar qc libNovaForgeApp.a CMakeFiles/NovaForgeApp.dir/src/NovaForgeApp_stub.cpp.o CMakeFiles/NovaForgeApp.dir/src/NovaForgeProjectContext.cpp.o CMakeFiles/NovaForgeApp.dir/src/NovaForgeSession.cpp.o CMakeFiles/NovaForgeApp.dir/src/NovaForgeBootstrap.cpp.o
-/usr/bin/ranlib libNovaForgeApp.a

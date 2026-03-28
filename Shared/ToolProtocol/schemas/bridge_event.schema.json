@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BridgeEventEnvelope",
+  "description": "Standard envelope for Atlas Bridge WebSocket event streams. Mirrors the BridgeEventEnvelope struct in Shared/AtlasBridgeContract/include/AtlasBridgeTypes.h.",
+  "type": "object",
+  "required": ["protocolVersion", "eventId", "sessionId", "service", "eventType", "timestampUtc"],
+  "additionalProperties": false,
+  "properties": {
+    "protocolVersion": {
+      "type": "string",
+      "description": "Bridge protocol version string reported by the server.",
+      "example": "1.0"
+    },
+    "eventId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Server-assigned UUID that uniquely identifies this event."
+    },
+    "sessionId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Session UUID of the session that triggered or is subscribed to this event."
+    },
+    "service": {
+      "type": "string",
+      "description": "Service that emitted the event, e.g. \"BuildService\", \"EditorService\".",
+      "minLength": 1
+    },
+    "eventType": {
+      "type": "string",
+      "description": "Machine-readable event type name, e.g. \"BuildProgress\", \"SelectionChanged\", \"SessionClosed\".",
+      "minLength": 1
+    },
+    "timestampUtc": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp of when the event was emitted by the server."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Optional service-specific event data. Schema is defined per service/eventType."
+    }
+  }
+}

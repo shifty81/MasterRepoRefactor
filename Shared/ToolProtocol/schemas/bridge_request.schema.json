@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BridgeRequestEnvelope",
+  "description": "Standard envelope for all Atlas Bridge HTTP/WebSocket requests. Mirrors the BridgeRequestEnvelope struct in Shared/AtlasBridgeContract/include/AtlasBridgeTypes.h.",
+  "type": "object",
+  "required": ["protocolVersion", "requestId", "sessionId", "service", "operation", "timestampUtc"],
+  "additionalProperties": false,
+  "properties": {
+    "protocolVersion": {
+      "type": "string",
+      "description": "Bridge protocol version string. Must match kProtocolVersion on the server.",
+      "example": "1.0"
+    },
+    "requestId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Caller-assigned UUID that uniquely identifies this request. Echoed back in the response envelope."
+    },
+    "sessionId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Session UUID obtained from a prior SessionConnect handshake."
+    },
+    "service": {
+      "type": "string",
+      "description": "Target service name, e.g. \"ProjectService\", \"EditorService\", \"BuildService\".",
+      "minLength": 1
+    },
+    "operation": {
+      "type": "string",
+      "description": "Operation to invoke on the target service, e.g. \"GetProjectInfo\", \"RunBuild\".",
+      "minLength": 1
+    },
+    "timestampUtc": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp of when the request was created by the caller."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Optional service-specific request data. Schema is defined per service/operation."
+    }
+  }
+}

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libNovaForgeGameplay.a CMakeFiles/NovaForgeGameplay.dir/src/NovaForgeGameplay_stub.cpp.o
-/usr/bin/ranlib libNovaForgeGameplay.a

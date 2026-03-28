@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SessionConnectRequest",
+  "description": "Payload sent by AtlasAI to establish a bridge session. Sent as the payload of a BridgeRequestEnvelope targeting SessionService/Connect. Mirrors the SessionConnectRequest struct in Shared/AtlasBridgeContract/include/AtlasBridgeTypes.h.",
+  "type": "object",
+  "required": ["clientVersion", "projectId"],
+  "additionalProperties": false,
+  "properties": {
+    "protocolVersion": {
+      "type": "string",
+      "description": "Bridge protocol version the client expects. If omitted the server uses the envelope-level protocolVersion.",
+      "example": "1.0"
+    },
+    "clientVersion": {
+      "type": "string",
+      "description": "Version string of the AtlasAI client, used for compatibility checking.",
+      "minLength": 1
+    },
+    "projectId": {
+      "type": "string",
+      "description": "Identifier of the project the client wants to connect to. Must match a loaded project on the server.",
+      "minLength": 1
+    }
+  }
+}
