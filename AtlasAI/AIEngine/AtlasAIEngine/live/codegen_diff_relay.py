@@ -11,8 +11,8 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from core.codegen_planner import CodegenPlanner
-    from live.hot_reload import HotReloadCoordinator
+    from ..core.codegen_planner import CodegenPlanner
+    from .hot_reload import HotReloadCoordinator
 
 logger = logging.getLogger(__name__)
 
