@@ -11,6 +11,8 @@ env/
 # Build artifacts
 dist/
 build/
+Build/
+!Scripts/Build/
 out/
 target/
 *.o
