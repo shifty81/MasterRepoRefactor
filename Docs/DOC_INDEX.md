@@ -39,6 +39,7 @@ High-level design vision and canon documents.
 |---|---|
 | [MASTER_DESIGN_DOCUMENT.md](Design/MASTER_DESIGN_DOCUMENT.md) | Authoritative unified design document covering all systems, features, and architecture decisions. All work should be evaluated against this document. |
 | [MISSING_SYSTEMS_ADDENDUM.md](Design/MISSING_SYSTEMS_ADDENDUM.md) | Extension to the master design that makes explicit the major systems needed for stability, scalability, and long-term cohesion that were not fully elaborated in the main document. |
+| [MASTER_REPO_DIRECTIVE.md](Design/MASTER_REPO_DIRECTIVE.md) | Converted from the original planning chat: unified refactor blueprint — project identity, pillars, non-negotiable rules, target structure, and launch strategy. |
 
 ---
 
@@ -86,7 +87,17 @@ Docs for Arbiter tooling modules. Each sub-folder will contain module-level docu
 
 | Location | Description |
 |---|---|
-| [Archive/Chats/](Archive/Chats/) | Raw chat session transcripts used as source material for architecture and design decisions (RepoDirective1, RepoDirective2, etc.). |
+| [Archive/Chats/](Archive/Chats/) | Raw chat session transcripts used as source material for architecture and design decisions. Superseded by `Docs/Design/MASTER_REPO_DIRECTIVE.md`. |
+| [Archive/ZipFiles/](Archive/ZipFiles/) | All migrated source zip archives — fully processed into the live repo tree. Retained for reference. |
+| [Archive/Planning/](Archive/Planning/) | Legacy planning documents (checklist, migration sheets, execution plans). Superseded by the live roadmap. |
+
+---
+
+## Launching & Running
+
+| Document | Description |
+|---|---|
+| [LAUNCHING.md](LAUNCHING.md) | Build instructions, launch flags, boot sequence overview, and playtest / CI smoke-test guide. |
 
 ---
 
