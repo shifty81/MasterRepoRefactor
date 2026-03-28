@@ -1,0 +1,33 @@
+{
+"pack_name": "MasterRepo Phase2 Runtime Gameplay / Scaffolding / Arbiter Ingestion",
+"version": "1.0.0",
+"purpose": [
+"Deep runtime gameplay system spec",
+"Code scaffolding for vertical slice runtime modules",
+"Structured ingestion inputs for Arbiter knowledge and planning"
+],
+"ingestion_priority": [
+"docs/EXPANDED_RUNTIME_GAMEPLAY_SPEC.md",
+"code/Runtime/Session/SessionBootstrap.h",
+"code/Runtime/Gameplay/VerticalSliceGameMode.h",
+"code/Runtime/Player/RigController.h",
+"code/Runtime/UI/HudRuntimeController.h"
+],
+"tags": [
+"runtime",
+"vertical-slice",
+"rig",
+"salvage",
+"mission",
+"economy",
+"save-load",
+"arbiter"
+],
+"rules": {
+"canonical_player_term": "rig",
+"engine_owns_gameplay": false,
+"runtime_ui_is_editor_ui": false,
+"voxel_lowpoly_hybrid": true,
+"arbiter_must_use_command_gateway": true
+}
+}

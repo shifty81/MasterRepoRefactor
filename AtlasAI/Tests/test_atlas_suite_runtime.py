@@ -543,6 +543,60 @@ class TestArchive:
     def test_chat_export_2_archived(self):
         assert _p("Docs/Archive/Chats/New Text Document (2).txt").exists()
 
+    def test_chat_export_3_archived(self):
+        assert _p("Docs/Archive/Chats/New Text Document (3).txt").exists()
+
+
+# ---------------------------------------------------------------------------
+# NovaForge Runtime — Vertical Slice (Gameplay, Session, Player, UI)
+# ---------------------------------------------------------------------------
+
+class TestNovaForgeVerticalSlice:
+    def test_vertical_slice_game_mode_header(self):
+        assert _p("NovaForge/Runtime/Gameplay/VerticalSliceGameMode.h").exists()
+
+    def test_vertical_slice_game_mode_source(self):
+        assert _p("NovaForge/Runtime/Gameplay/VerticalSliceGameMode.cpp").exists()
+
+    def test_session_bootstrap_header(self):
+        assert _p("NovaForge/Runtime/Session/SessionBootstrap.h").exists()
+
+    def test_session_bootstrap_source(self):
+        assert _p("NovaForge/Runtime/Session/SessionBootstrap.cpp").exists()
+
+    def test_rig_controller_header(self):
+        assert _p("NovaForge/Runtime/Player/RigController.h").exists()
+
+    def test_rig_controller_source(self):
+        assert _p("NovaForge/Runtime/Player/RigController.cpp").exists()
+
+    def test_hud_runtime_controller_header(self):
+        assert _p("NovaForge/Runtime/UI/HudRuntimeController.h").exists()
+
+    def test_hud_runtime_controller_source(self):
+        assert _p("NovaForge/Runtime/UI/HudRuntimeController.cpp").exists()
+
+
+# ---------------------------------------------------------------------------
+# Docs — Runtime gameplay spec
+# ---------------------------------------------------------------------------
+
+class TestRuntimeGameplayDocs:
+    def test_expanded_runtime_gameplay_spec(self):
+        assert _p("Docs/Runtime/EXPANDED_RUNTIME_GAMEPLAY_SPEC.md").exists()
+
+
+# ---------------------------------------------------------------------------
+# AtlasAI — Ingestion files
+# ---------------------------------------------------------------------------
+
+class TestAtlasAIIngestion:
+    def test_ingestion_manifest(self):
+        assert _p("AtlasAI/Ingestion/INGESTION_MANIFEST.json").exists()
+
+    def test_knowledge_chunks(self):
+        assert _p("AtlasAI/Ingestion/knowledge_chunks.json").exists()
+
     def test_zips_not_in_root(self):
         root_zips = list(REPO_ROOT.glob("*.zip"))
         assert root_zips == [], f"Unexpected zip(s) in root: {root_zips}"
