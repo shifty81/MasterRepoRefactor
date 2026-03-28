@@ -1,0 +1,112 @@
+<Window x:Class="AtlasSuite.App.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:AtlasSuite.App.ViewModels"
+        xmlns:panels="clr-namespace:AtlasSuite.App.Views.Panels"
+        mc:Ignorable="d"
+        Title="{Binding Title}"
+        Height="950"
+        Width="1600"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <!-- FIX: removed 8 duplicate implicit DataTemplate entries for PanelViewModel.
+             WPF only applies the last implicit template per type; duplicates are unreachable noise.
+             One implicit template routes each panel's Content through a ContentPresenter. -->
+        <DataTemplate DataType="{x:Type vm:PanelViewModel}">
+            <ContentPresenter Content="{Binding Content}" />
+        </DataTemplate>
+    </Window.Resources>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open NovaForge" Command="{Binding OpenProjectCommand}" />
+                <Separator />
+                <MenuItem Header="Exit" Click="OnExitClick" />
+            </MenuItem>
+            <MenuItem Header="Playtest">
+                <MenuItem Header="Run Dev World" Command="{Binding StartPlaytestCommand}" />
+                <MenuItem Header="Stop" Command="{Binding StopPlaytestCommand}" />
+            </MenuItem>
+        </Menu>
+
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Content="Open Project" Command="{Binding OpenProjectCommand}" />
+                <Separator />
+                <Button Content="Playtest" Command="{Binding StartPlaytestCommand}" />
+                <Button Content="Stop" Command="{Binding StopPlaytestCommand}" />
+            </ToolBar>
+        </ToolBarTray>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="320" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="250" />
+            </Grid.RowDefinitions>
+
+            <TabControl Grid.Column="0" Grid.RowSpan="2" ItemsSource="{Binding LeftPanels}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:PanelViewModel}">
+                        <TextBlock Text="{Binding Title}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate DataType="{x:Type vm:PanelViewModel}">
+                        <ContentPresenter Content="{Binding Content}" />
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+
+            <TabControl Grid.Column="1" Grid.Row="0" ItemsSource="{Binding CenterPanels}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:PanelViewModel}">
+                        <TextBlock Text="{Binding Title}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate DataType="{x:Type vm:PanelViewModel}">
+                        <Border Margin="6" Padding="12" BorderThickness="1">
+                            <TextBlock Text="{Binding Content}" />
+                        </Border>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+
+            <!-- FIX: removed 2 duplicate implicit DataTemplate entries from TabControl.Resources.
+                 Only the ItemTemplate and ContentTemplate are needed here. -->
+            <TabControl Grid.Column="2" Grid.RowSpan="2" ItemsSource="{Binding RightPanels}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:PanelViewModel}">
+                        <TextBlock Text="{Binding Title}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate DataType="{x:Type vm:PanelViewModel}">
+                        <ContentPresenter Content="{Binding Content}" />
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+
+            <TabControl Grid.Column="1" Grid.Row="1" ItemsSource="{Binding BottomPanels}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:PanelViewModel}">
+                        <TextBlock Text="{Binding Title}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate DataType="{x:Type vm:PanelViewModel}">
+                        <ContentPresenter Content="{Binding Content}" />
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </Grid>
+    </DockPanel>
+</Window>

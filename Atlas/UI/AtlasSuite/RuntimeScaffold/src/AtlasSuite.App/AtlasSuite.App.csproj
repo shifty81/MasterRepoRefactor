@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <AssemblyName>AtlasSuite.App</AssemblyName>
+    <RootNamespace>AtlasSuite.App</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AtlasSuite.Core\AtlasSuite.Core.csproj" />
+    <ProjectReference Include="..\AtlasSuite.Modules.AI\AtlasSuite.Modules.AI.csproj" />
+    <ProjectReference Include="..\AtlasSuite.Modules.Engine\AtlasSuite.Modules.Engine.csproj" />
+    <ProjectReference Include="..\AtlasSuite.Modules.Project\AtlasSuite.Modules.Project.csproj" />
+    <ProjectReference Include="..\AtlasSuite.Plugins.Abstractions\AtlasSuite.Plugins.Abstractions.csproj" />
+    <ProjectReference Include="..\AtlasSuite.Plugin.Sample\AtlasSuite.Plugin.Sample.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Resources\Layouts\DefaultWorkspace.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
