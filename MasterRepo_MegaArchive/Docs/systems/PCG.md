@@ -1,3 +1,0 @@
-# PCG
-
-Procedural generation pipeline.

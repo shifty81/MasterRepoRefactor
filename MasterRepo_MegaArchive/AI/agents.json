@@ -1,8 +1,0 @@
-{
-  "agents": [
-    "CodeAgent",
-    "BuildAgent",
-    "RefactorAgent",
-    "PCGAgent"
-  ]
-}
