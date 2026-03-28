@@ -1,7 +1,8 @@
 # AtlasEditor — editor framework, panels, commands, selection, tools
 
 set(ATLAS_EDITOR_SOURCES
-    # placeholder — add source files here as they are created
+    src/AtlasEditor_stub.cpp
+    # add source files here as editor framework systems are implemented
 )
 
 add_library(AtlasEditor STATIC ${ATLAS_EDITOR_SOURCES})
