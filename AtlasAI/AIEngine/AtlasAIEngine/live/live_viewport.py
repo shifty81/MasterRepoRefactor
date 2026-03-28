@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 logger = logging.getLogger(__name__)
 
@@ -43,8 +43,13 @@ class LiveViewportClient:
             self._config.capability,
         )
         # Stub: a real implementation would open a WebSocket / named-pipe here.
+        # Reuse the running loop when one exists; otherwise create a new one so
+        # this client can also be used in non-async contexts.
+        try:
+            self._loop = asyncio.get_running_loop()
+        except RuntimeError:
+            self._loop = asyncio.new_event_loop()
         self._connected = True
-        self._loop = asyncio.new_event_loop()
         logger.info(
             "LiveViewportClient: attached to %s:%d",
             self._config.host,
