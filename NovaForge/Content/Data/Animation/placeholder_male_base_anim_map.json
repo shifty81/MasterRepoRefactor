@@ -1,0 +1,29 @@
+{
+  "_comment": "Maps animation clip IDs used by the character layer system to the clips provided by placeholder_male_base. Any missing clips fall back to the default listed in character_layers.animation.json.",
+  "character_id": "placeholder_male_base",
+  "skeleton_id": "base_humanoid",
+  "is_placeholder": true,
+  "clip_map": {
+    "anim_fps_idle":       "placeholder_idle_01",
+    "anim_fps_walk_f":     "placeholder_walk_fwd",
+    "anim_fps_walk_b":     "placeholder_walk_bwd",
+    "anim_fps_walk_l":     "placeholder_walk_left",
+    "anim_fps_walk_r":     "placeholder_walk_right",
+    "anim_fps_run_f":      "placeholder_run_fwd",
+    "anim_fps_jump":       "placeholder_jump",
+    "anim_fps_land":       "placeholder_land",
+    "anim_fps_crouch":     "placeholder_crouch_idle",
+    "anim_fps_eva_float":  "placeholder_eva_float",
+    "anim_add_breathing":  "placeholder_breathing",
+    "anim_tool_idle":      "placeholder_tool_idle",
+    "anim_tool_use":       "placeholder_tool_use",
+    "anim_fingers_relaxed":"placeholder_fingers_relaxed"
+  },
+  "retarget_settings": {
+    "source_rig": "placeholder_skeleton",
+    "target_rig": "base_humanoid",
+    "hip_height_correction": true,
+    "preserve_foot_contact": true
+  },
+  "placeholder_note": "All clip IDs prefixed with 'placeholder_' are stand-in names. Replace with final animation assets when the character art is production-ready."
+}

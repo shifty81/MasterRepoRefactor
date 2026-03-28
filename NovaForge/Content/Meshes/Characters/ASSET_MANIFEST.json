@@ -1,0 +1,92 @@
+{
+  "_comment": "Expected mesh files for the placeholder_male_base character. Add actual .glb files to this directory. Binary mesh files are git-ignored — see .gitignore. This manifest is the authoritative list of what the engine should load.",
+  "manifest_version": 1,
+  "character_id": "placeholder_male_base",
+  "asset_source": {
+    "name": "Free Low-Poly Male Base",
+    "provider": "Quaternius — Ultimate Low Poly Humans",
+    "license": "CC0 (Public Domain)",
+    "url": "https://quaternius.com/packs/ultimatecharacters.html",
+    "alt_source": "https://opengameart.org (search: low poly male base)",
+    "import_format": "glTF 2.0 (.glb preferred)"
+  },
+  "expected_files": [
+    {
+      "file": "free_lowpoly_male_base.glb",
+      "description": "Full combined mesh — used for quick integration smoke test",
+      "max_tris": 6500,
+      "skeleton_required": true
+    },
+    {
+      "file": "mesh_head_lowpoly.glb",
+      "description": "Head slot — no hair, flat-shaded face geometry",
+      "max_tris": 800,
+      "skeleton_required": false
+    },
+    {
+      "file": "mesh_torso_lowpoly.glb",
+      "description": "Torso slot — neutral suit placeholder torso",
+      "max_tris": 1200,
+      "skeleton_required": false
+    },
+    {
+      "file": "mesh_arm_l_lowpoly.glb",
+      "description": "Left arm slot",
+      "max_tris": 500,
+      "skeleton_required": false
+    },
+    {
+      "file": "mesh_arm_r_lowpoly.glb",
+      "description": "Right arm slot",
+      "max_tris": 500,
+      "skeleton_required": false
+    },
+    {
+      "file": "mesh_leg_l_lowpoly.glb",
+      "description": "Left leg slot",
+      "max_tris": 600,
+      "skeleton_required": false
+    },
+    {
+      "file": "mesh_leg_r_lowpoly.glb",
+      "description": "Right leg slot",
+      "max_tris": 600,
+      "skeleton_required": false
+    },
+    {
+      "file": "mesh_hands_lowpoly.glb",
+      "description": "Hands slot — used for third-person shadow",
+      "max_tris": 400,
+      "skeleton_required": false
+    },
+    {
+      "file": "mesh_feet_lowpoly.glb",
+      "description": "Feet slot",
+      "max_tris": 400,
+      "skeleton_required": false
+    },
+    {
+      "file": "mesh_fps_hands_lowpoly.glb",
+      "description": "First-person hands mesh — visible in FPS camera",
+      "max_tris": 600,
+      "skeleton_required": true,
+      "note": "Must include hand_r and hand_l bones at minimum"
+    },
+    {
+      "file": "mesh_placeholder_shadow_capsule.glb",
+      "description": "Low-res capsule used for real-time shadow casting",
+      "max_tris": 64,
+      "skeleton_required": false
+    }
+  ],
+  "import_settings": {
+    "scale_factor": 1.0,
+    "up_axis": "Y",
+    "forward_axis": "Z_NEGATIVE",
+    "apply_vertex_colors": true,
+    "bake_materials_to_vertex_colors": true,
+    "smooth_normals": false,
+    "import_animations": true,
+    "animation_naming_prefix": "placeholder_"
+  }
+}

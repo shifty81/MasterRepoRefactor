@@ -1,0 +1,26 @@
+{
+  "_comment": "FPS rig attachment offsets for placeholder_male_base on the RigController. These are local-space offsets applied when the player mesh is hidden and replaced by the first-person hand/tool mesh.",
+  "character_id": "placeholder_male_base",
+  "fps_camera": {
+    "eye_socket_bone": "head",
+    "local_offset": [0.0, 0.0, 0.06],
+    "local_rotation_deg": [0.0, 0.0, 0.0]
+  },
+  "fps_hands": {
+    "mesh_id": "mesh_fps_hands_lowpoly",
+    "socket": "socket_hand_r",
+    "local_offset": [0.18, -0.22, 0.45],
+    "local_rotation_deg": [0.0, 0.0, 0.0]
+  },
+  "rig_slots": {
+    "helmet":   { "socket": "socket_helmet",   "attach_bone": "head" },
+    "torso":    { "socket": "socket_backpack",  "attach_bone": "spine_back" },
+    "backpack": { "socket": "socket_backpack",  "attach_bone": "spine_back" },
+    "primary":  { "socket": "socket_hand_r",   "attach_bone": "hand_r" },
+    "secondary":{ "socket": "socket_hand_l",   "attach_bone": "hand_l" },
+    "holster_r":{ "socket": "socket_hip_r",    "attach_bone": "thigh_r" },
+    "holster_l":{ "socket": "socket_hip_l",    "attach_bone": "thigh_l" }
+  },
+  "third_person_visible": false,
+  "shadow_mesh_id": "mesh_placeholder_shadow_capsule"
+}

@@ -2,14 +2,28 @@
   "id": "player_character_001",
   "display_name": "Player Character",
   "style": "low_poly_modular",
+  "skeleton_id": "base_humanoid",
+  "base_definition": "placeholder_male_base",
+  "rig_definition": "placeholder_male_base_rig",
+  "anim_map": "placeholder_male_base_anim_map",
   "movement_modes": ["fps", "eva", "mech"],
   "parts": [
-    { "id": "head_base", "type": "head", "mesh": "mesh_head_lowpoly" },
-    { "id": "torso_base", "type": "torso", "mesh": "mesh_torso_lowpoly" },
-    { "id": "backpack_base", "type": "backpack", "mesh": "mesh_backpack_lowpoly" }
+    { "id": "head_base",    "slot": "Head",    "mesh": "mesh_head_lowpoly" },
+    { "id": "torso_base",   "slot": "Torso",   "mesh": "mesh_torso_lowpoly" },
+    { "id": "arm_l_base",   "slot": "ArmLeft", "mesh": "mesh_arm_l_lowpoly" },
+    { "id": "arm_r_base",   "slot": "ArmRight","mesh": "mesh_arm_r_lowpoly" },
+    { "id": "leg_l_base",   "slot": "LegLeft", "mesh": "mesh_leg_l_lowpoly" },
+    { "id": "leg_r_base",   "slot": "LegRight","mesh": "mesh_leg_r_lowpoly" },
+    { "id": "hands_base",   "slot": "Hands",   "mesh": "mesh_hands_lowpoly" },
+    { "id": "feet_base",    "slot": "Feet",    "mesh": "mesh_feet_lowpoly" }
   ],
   "sockets": [
-    { "id": "socket_hand_r", "bone": "hand_r", "category": "tool" },
-    { "id": "socket_helmet", "bone": "head", "category": "helmet" }
+    { "id": "socket_hand_r",    "bone": "hand_r",     "category": "tool" },
+    { "id": "socket_hand_l",    "bone": "hand_l",     "category": "tool" },
+    { "id": "socket_backpack",  "bone": "spine_back", "category": "backpack" },
+    { "id": "socket_helmet",    "bone": "head",       "category": "helmet" },
+    { "id": "socket_tool_mount","bone": "thigh_r",    "category": "holster" },
+    { "id": "socket_hip_r",     "bone": "thigh_r",    "category": "holster" },
+    { "id": "socket_hip_l",     "bone": "thigh_l",    "category": "holster" }
   ]
 }

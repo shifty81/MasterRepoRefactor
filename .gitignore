@@ -69,3 +69,15 @@ temp/
 
 # Zip archives — all zips are archived in Docs/Archive/ZipFiles/; none should appear at repo root
 
+# Binary mesh/asset files — not stored in source control.
+# Add them locally to NovaForge/Content/Meshes/ after downloading the free placeholder assets.
+# See Docs/Art/CHARACTER_PLACEHOLDER_GUIDE.md for download and import instructions.
+NovaForge/Content/Meshes/**/*.glb
+NovaForge/Content/Meshes/**/*.fbx
+NovaForge/Content/Meshes/**/*.obj
+NovaForge/Content/Meshes/**/*.gltf
+NovaForge/Content/Meshes/**/*.dae
+# Keep manifests and .gitkeep files
+!NovaForge/Content/Meshes/**/ASSET_MANIFEST.json
+!NovaForge/Content/Meshes/**/.gitkeep
+

@@ -1,0 +1,80 @@
+{
+  "_comment": "Placeholder low-poly male base character. Drop the free asset (see Docs/Art/CHARACTER_PLACEHOLDER_GUIDE.md) into NovaForge/Content/Meshes/Characters/ and this definition wires up automatically.",
+  "id": "placeholder_male_base",
+  "display_name": "Male Base (Placeholder)",
+  "source_asset": "free_lowpoly_male_base.glb",
+  "style": "low_poly_flat_shaded",
+  "skeleton_id": "base_humanoid",
+  "max_tri_count": 6500,
+  "use_vertex_colors": true,
+  "flat_shaded": true,
+  "scale_meters": 1.8,
+  "eye_height_meters": 1.68,
+  "movement_modes": ["fps", "eva", "mech"],
+  "body_parts": [
+    {
+      "slot": "Head",
+      "mesh_id": "mesh_head_lowpoly",
+      "source_bone": "head",
+      "tri_budget": 800
+    },
+    {
+      "slot": "Torso",
+      "mesh_id": "mesh_torso_lowpoly",
+      "source_bone": "spine_02",
+      "tri_budget": 1200
+    },
+    {
+      "slot": "ArmLeft",
+      "mesh_id": "mesh_arm_l_lowpoly",
+      "source_bone": "upperarm_l",
+      "tri_budget": 500
+    },
+    {
+      "slot": "ArmRight",
+      "mesh_id": "mesh_arm_r_lowpoly",
+      "source_bone": "upperarm_r",
+      "tri_budget": 500
+    },
+    {
+      "slot": "LegLeft",
+      "mesh_id": "mesh_leg_l_lowpoly",
+      "source_bone": "thigh_l",
+      "tri_budget": 600
+    },
+    {
+      "slot": "LegRight",
+      "mesh_id": "mesh_leg_r_lowpoly",
+      "source_bone": "thigh_r",
+      "tri_budget": 600
+    },
+    {
+      "slot": "Hands",
+      "mesh_id": "mesh_hands_lowpoly",
+      "source_bone": "hand_r",
+      "tri_budget": 400
+    },
+    {
+      "slot": "Feet",
+      "mesh_id": "mesh_feet_lowpoly",
+      "source_bone": "foot_r",
+      "tri_budget": 400
+    }
+  ],
+  "sockets": [
+    { "id": "socket_hand_r",    "bone": "hand_r",       "category": "tool",     "forward_axis": [1,0,0], "up_axis": [0,1,0] },
+    { "id": "socket_hand_l",    "bone": "hand_l",       "category": "tool",     "forward_axis": [1,0,0], "up_axis": [0,1,0] },
+    { "id": "socket_backpack",  "bone": "spine_back",   "category": "backpack", "forward_axis": [0,0,-1], "up_axis": [0,1,0] },
+    { "id": "socket_helmet",    "bone": "head",         "category": "helmet",   "forward_axis": [0,0,1],  "up_axis": [0,1,0] },
+    { "id": "socket_tool_mount","bone": "thigh_r",      "category": "holster",  "forward_axis": [0,-1,0], "up_axis": [0,0,1] },
+    { "id": "socket_hip_r",     "bone": "thigh_r",      "category": "holster",  "forward_axis": [1,0,0],  "up_axis": [0,1,0] },
+    { "id": "socket_hip_l",     "bone": "thigh_l",      "category": "holster",  "forward_axis": [-1,0,0], "up_axis": [0,1,0] }
+  ],
+  "default_palette": [
+    { "role": "skin_tone",    "hex": "#C8A882" },
+    { "role": "suit_primary", "hex": "#3B3B3B" },
+    { "role": "suit_accent",  "hex": "#2E4E78" }
+  ],
+  "archetype": "Colonist",
+  "is_placeholder": true
+}
