@@ -21,6 +21,7 @@ include(CompilerWarnings)
 add_subdirectory(Shared)
 add_subdirectory(Atlas)
 add_subdirectory(NovaForge)
+add_subdirectory(Services)
 
 if(MASTERREPO_BUILD_TESTS)
     enable_testing()

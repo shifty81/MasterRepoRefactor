@@ -1,0 +1,397 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" width="900" height="540">
+  <defs>
+    <!-- Background -->
+    <linearGradient id="arch_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06080f"/>
+      <stop offset="50%" style="stop-color:#090d1a"/>
+      <stop offset="100%" style="stop-color:#06080f"/>
+    </linearGradient>
+    <!-- Zone gradients -->
+    <linearGradient id="zone_atlas" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d2137"/>
+      <stop offset="100%" style="stop-color:#091626"/>
+    </linearGradient>
+    <linearGradient id="zone_nova" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1f1005"/>
+      <stop offset="100%" style="stop-color:#140b04"/>
+    </linearGradient>
+    <linearGradient id="zone_ai" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#060c14"/>
+    </linearGradient>
+    <linearGradient id="zone_shared" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1a0d"/>
+      <stop offset="100%" style="stop-color:#081208"/>
+    </linearGradient>
+    <!-- Header pills -->
+    <linearGradient id="pill_atlas" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1565c0"/>
+      <stop offset="100%" style="stop-color:#0d47a1"/>
+    </linearGradient>
+    <linearGradient id="pill_nova" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e65100"/>
+      <stop offset="100%" style="stop-color:#bf360c"/>
+    </linearGradient>
+    <linearGradient id="pill_ai" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00695c"/>
+      <stop offset="100%" style="stop-color:#004d40"/>
+    </linearGradient>
+    <linearGradient id="pill_shared" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4a148c"/>
+      <stop offset="100%" style="stop-color:#311b92"/>
+    </linearGradient>
+    <!-- Module card gradient -->
+    <linearGradient id="card_atlas" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a5c"/>
+      <stop offset="100%" style="stop-color:#0f2340"/>
+    </linearGradient>
+    <linearGradient id="card_nova" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3d1c08"/>
+      <stop offset="100%" style="stop-color:#2a1205"/>
+    </linearGradient>
+    <linearGradient id="card_ai" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a2a3a"/>
+      <stop offset="100%" style="stop-color:#061a26"/>
+    </linearGradient>
+    <linearGradient id="card_shared" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#200a40"/>
+      <stop offset="100%" style="stop-color:#140628"/>
+    </linearGradient>
+    <!-- Glow filter -->
+    <filter id="arch_glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Arrow marker blue -->
+    <marker id="arrow_blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#64b5f6" opacity="0.8"/>
+    </marker>
+    <!-- Arrow marker orange -->
+    <marker id="arrow_orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#ffb74d" opacity="0.8"/>
+    </marker>
+    <!-- Arrow marker cyan -->
+    <marker id="arrow_cyan" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4ecdc4" opacity="0.8"/>
+    </marker>
+    <!-- Arrow marker purple -->
+    <marker id="arrow_purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#ce93d8" opacity="0.8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="540" fill="url(#arch_bg)"/>
+
+  <!-- Subtle grid -->
+  <line x1="0" y1="60" x2="900" y2="60" stroke="#ffffff" stroke-width="0.2" opacity="0.04"/>
+  <line x1="0" y1="300" x2="900" y2="300" stroke="#ffffff" stroke-width="0.2" opacity="0.04"/>
+  <line x1="0" y1="440" x2="900" y2="440" stroke="#ffffff" stroke-width="0.2" opacity="0.04"/>
+  <line x1="225" y1="0" x2="225" y2="540" stroke="#ffffff" stroke-width="0.2" opacity="0.04"/>
+  <line x1="450" y1="0" x2="450" y2="540" stroke="#ffffff" stroke-width="0.2" opacity="0.04"/>
+  <line x1="675" y1="0" x2="675" y2="540" stroke="#ffffff" stroke-width="0.2" opacity="0.04"/>
+
+  <!-- ═══ TITLE ═══ -->
+  <text x="450" y="30" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="14" letter-spacing="5" fill="#ffffff" opacity="0.5">MASTERREPO — PLATFORM ARCHITECTURE</text>
+  <line x1="100" y1="40" x2="800" y2="40" stroke="#ffffff" stroke-width="0.4" opacity="0.1"/>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ATLAS ZONE (top left — engine foundation)
+  ════════════════════════════════════════════════════════════ -->
+  <rect x="16" y="52" width="390" height="228" rx="8" fill="url(#zone_atlas)" stroke="#1565c0" stroke-width="1" opacity="0.9"/>
+  <!-- Zone label pill -->
+  <rect x="16" y="52" width="390" height="28" rx="8" fill="url(#pill_atlas)" opacity="0.85"/>
+  <text x="26" y="71" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="700"
+        letter-spacing="3" fill="#ffffff">ATLAS</text>
+  <text x="86" y="71" font-family="'Segoe UI', Arial, sans-serif" font-size="10"
+        fill="#90caf9" opacity="0.8">— engine, editor, runtime, custom UI</text>
+
+  <!-- Atlas module cards - row 1 -->
+  <!-- AtlasEngine -->
+  <rect x="28" y="90" width="108" height="56" rx="5" fill="url(#card_atlas)" stroke="#1976d2" stroke-width="0.6"/>
+  <text x="82" y="109" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1.5" fill="#64b5f6">ENGINE</text>
+  <text x="82" y="122" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">ECS · Physics · Audio</text>
+  <text x="82" y="133" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">Camera · GraphVM · World</text>
+  <!-- AtlasRuntime -->
+  <rect x="148" y="90" width="108" height="56" rx="5" fill="url(#card_atlas)" stroke="#1976d2" stroke-width="0.6"/>
+  <text x="202" y="109" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1.5" fill="#64b5f6">RUNTIME</text>
+  <text x="202" y="122" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">App loop · Sim</text>
+  <text x="202" y="133" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">Platform · Assets</text>
+  <!-- AtlasUI -->
+  <rect x="268" y="90" width="108" height="56" rx="5" fill="url(#card_atlas)" stroke="#1976d2" stroke-width="0.6"/>
+  <text x="322" y="109" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1.5" fill="#64b5f6">CUSTOM UI</text>
+  <text x="322" y="122" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">No ImGui · Panels</text>
+  <text x="322" y="133" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">Docking · Themes</text>
+
+  <!-- Atlas row 2 -->
+  <!-- AtlasEditor -->
+  <rect x="28" y="158" width="108" height="56" rx="5" fill="url(#card_atlas)" stroke="#1976d2" stroke-width="0.6"/>
+  <text x="82" y="177" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1.5" fill="#64b5f6">EDITOR</text>
+  <text x="82" y="190" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">Panels · Inspector</text>
+  <text x="82" y="201" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">Asset Browser · AI</text>
+  <!-- AtlasCore -->
+  <rect x="148" y="158" width="108" height="56" rx="5" fill="url(#card_atlas)" stroke="#1976d2" stroke-width="0.6"/>
+  <text x="202" y="177" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1.5" fill="#64b5f6">CORE</text>
+  <text x="202" y="190" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">Logging · Config</text>
+  <text x="202" y="201" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">Math · Memory</text>
+  <!-- Rendering -->
+  <rect x="268" y="158" width="108" height="56" rx="5" fill="url(#card_atlas)" stroke="#1976d2" stroke-width="0.6"/>
+  <text x="322" y="177" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1.5" fill="#64b5f6">RENDERING</text>
+  <text x="322" y="190" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">Deferred · Shadows</text>
+  <text x="322" y="201" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#90caf9" opacity="0.7">Post FX · Scripting</text>
+
+  <!-- Atlas footer tags -->
+  <text x="28" y="232" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#64b5f6" opacity="0.6">
+    CMake: AtlasEngine · AtlasRuntime · AtlasEditor · AtlasUI · AtlasCore
+  </text>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NOVAFORGE ZONE (top right — game project)
+  ════════════════════════════════════════════════════════════ -->
+  <rect x="420" y="52" width="464" height="228" rx="8" fill="url(#zone_nova)" stroke="#e65100" stroke-width="1" opacity="0.9"/>
+  <!-- Zone label pill -->
+  <rect x="420" y="52" width="464" height="28" rx="8" fill="url(#pill_nova)" opacity="0.85"/>
+  <text x="430" y="71" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="700"
+        letter-spacing="3" fill="#ffffff">NOVAFORGE</text>
+  <text x="530" y="71" font-family="'Segoe UI', Arial, sans-serif" font-size="10"
+        fill="#ffcc80" opacity="0.8">— game project, world, data, content</text>
+
+  <!-- NovaForge row 1 -->
+  <rect x="432" y="90" width="100" height="56" rx="5" fill="url(#card_nova)" stroke="#e65100" stroke-width="0.6"/>
+  <text x="482" y="109" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ffb74d">CLIENT</text>
+  <text x="482" y="122" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">FPS · HUD · Input</text>
+  <text x="482" y="133" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Shaders · Rendering</text>
+
+  <rect x="544" y="90" width="100" height="56" rx="5" fill="url(#card_nova)" stroke="#e65100" stroke-width="0.6"/>
+  <text x="594" y="109" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ffb74d">SERVER</text>
+  <text x="594" y="122" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">ECS · Economy</text>
+  <text x="594" y="133" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Combat · Fleet</text>
+
+  <rect x="656" y="90" width="100" height="56" rx="5" fill="url(#card_nova)" stroke="#e65100" stroke-width="0.6"/>
+  <text x="706" y="109" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ffb74d">GAMEPLAY</text>
+  <text x="706" y="122" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Factions · Missions</text>
+  <text x="706" y="133" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Mining · Exploration</text>
+
+  <rect x="768" y="90" width="100" height="56" rx="5" fill="url(#card_nova)" stroke="#e65100" stroke-width="0.6"/>
+  <text x="818" y="109" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ffb74d">WORLD</text>
+  <text x="818" y="122" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Galaxy · Sectors</text>
+  <text x="818" y="133" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">PCG · Ships</text>
+
+  <!-- NovaForge row 2 -->
+  <rect x="432" y="158" width="100" height="56" rx="5" fill="url(#card_nova)" stroke="#e65100" stroke-width="0.6"/>
+  <text x="482" y="177" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ffb74d">DATA</text>
+  <text x="482" y="190" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Ships · Factions</text>
+  <text x="482" y="201" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Market · Blueprints</text>
+
+  <rect x="544" y="158" width="100" height="56" rx="5" fill="url(#card_nova)" stroke="#e65100" stroke-width="0.6"/>
+  <text x="594" y="177" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ffb74d">CONTENT</text>
+  <text x="594" y="190" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Materials · VFX</text>
+  <text x="594" y="201" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Scenes · Prefabs</text>
+
+  <rect x="656" y="158" width="100" height="56" rx="5" fill="url(#card_nova)" stroke="#e65100" stroke-width="0.6"/>
+  <text x="706" y="177" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ffb74d">TOOLS</text>
+  <text x="706" y="190" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Blender Gen · AI Dev</text>
+  <text x="706" y="201" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Validators · Game</text>
+
+  <rect x="768" y="158" width="100" height="56" rx="5" fill="url(#card_nova)" stroke="#e65100" stroke-width="0.6"/>
+  <text x="818" y="177" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ffb74d">TESTS</text>
+  <text x="818" y="190" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">Atlas · Integration</text>
+  <text x="818" y="201" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#ffcc80" opacity="0.7">530+ test files</text>
+
+  <text x="432" y="232" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#ffb74d" opacity="0.6">
+    CMake: NovaForgeApp · NovaForgeGameplay · NovaForgeWorld · NovaForgeIntegrationAtlasAI
+  </text>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ATLASAI ZONE (bottom left — tooling layer)
+  ════════════════════════════════════════════════════════════ -->
+  <rect x="16" y="296" width="390" height="228" rx="8" fill="url(#zone_ai)" stroke="#00695c" stroke-width="1" opacity="0.9"/>
+  <!-- Zone label pill -->
+  <rect x="16" y="296" width="390" height="28" rx="8" fill="url(#pill_ai)" opacity="0.85"/>
+  <text x="26" y="315" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="700"
+        letter-spacing="3" fill="#ffffff">ATLASAI</text>
+  <text x="92" y="315" font-family="'Segoe UI', Arial, sans-serif" font-size="10"
+        fill="#80cbc4" opacity="0.8">— AI tooling shell, IDE, automation</text>
+
+  <!-- AtlasAI row 1 -->
+  <rect x="28" y="334" width="108" height="56" rx="5" fill="url(#card_ai)" stroke="#00897b" stroke-width="0.6"/>
+  <text x="82" y="353" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#4ecdc4">AI ENGINE</text>
+  <text x="82" y="366" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">41 Modules · Agent</text>
+  <text x="82" y="377" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">12 LLM backends</text>
+
+  <rect x="148" y="334" width="108" height="56" rx="5" fill="url(#card_ai)" stroke="#00897b" stroke-width="0.6"/>
+  <text x="202" y="353" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#4ecdc4">HOST APP</text>
+  <text x="202" y="366" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">WPF · Chat · IDE</text>
+  <text x="202" y="377" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">Build · Workspace</text>
+
+  <rect x="268" y="334" width="108" height="56" rx="5" fill="url(#card_ai)" stroke="#00897b" stroke-width="0.6"/>
+  <text x="322" y="353" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#4ecdc4">PYTHON BRIDGE</text>
+  <text x="322" y="366" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">FastAPI · TTS/STT</text>
+  <text x="322" y="377" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">LLM · Web Chat UI</text>
+
+  <!-- AtlasAI row 2 -->
+  <rect x="28" y="402" width="108" height="56" rx="5" fill="url(#card_ai)" stroke="#00897b" stroke-width="0.6"/>
+  <text x="82" y="421" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#4ecdc4">VS EXTENSION</text>
+  <text x="82" y="434" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">AtlasAIVSIX · Chat</text>
+  <text x="82" y="445" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">Self-Build · Inline</text>
+
+  <rect x="148" y="402" width="108" height="56" rx="5" fill="url(#card_ai)" stroke="#00897b" stroke-width="0.6"/>
+  <text x="202" y="421" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#4ecdc4">AUTOMATION</text>
+  <text x="202" y="434" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">Codegen · Index</text>
+  <text x="202" y="445" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">Audit · Sessions</text>
+
+  <rect x="268" y="402" width="108" height="56" rx="5" fill="url(#card_ai)" stroke="#00897b" stroke-width="0.6"/>
+  <text x="322" y="421" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#4ecdc4">WEBHOOK / INSTALLER</text>
+  <text x="322" y="434" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">Jira · Linear · Azure</text>
+  <text x="322" y="445" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#80cbc4" opacity="0.7">Inno Setup · Win</text>
+
+  <text x="28" y="476" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#4ecdc4" opacity="0.6">
+    Python (263 tests) · C# WPF · TypeScript · FastAPI · 12 LLM backends
+  </text>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SHARED ZONE (bottom right — bridge contracts)
+  ════════════════════════════════════════════════════════════ -->
+  <rect x="420" y="296" width="464" height="114" rx="8" fill="url(#zone_shared)" stroke="#4a148c" stroke-width="1" opacity="0.9"/>
+  <!-- Zone label pill -->
+  <rect x="420" y="296" width="464" height="28" rx="8" fill="url(#pill_shared)" opacity="0.85"/>
+  <text x="430" y="315" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="700"
+        letter-spacing="3" fill="#ffffff">SHARED</text>
+  <text x="498" y="315" font-family="'Segoe UI', Arial, sans-serif" font-size="10"
+        fill="#ce93d8" opacity="0.8">— bridge contracts, protocols, manifests</text>
+
+  <!-- Shared cards -->
+  <rect x="432" y="334" width="130" height="56" rx="5" fill="url(#card_shared)" stroke="#6a1b9a" stroke-width="0.6"/>
+  <text x="497" y="353" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ce93d8">BRIDGE CONTRACT</text>
+  <text x="497" y="366" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#e1bee7" opacity="0.7">AtlasBridgeTypes.h</text>
+  <text x="497" y="377" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#e1bee7" opacity="0.7">Header-only interface</text>
+
+  <rect x="574" y="334" width="130" height="56" rx="5" fill="url(#card_shared)" stroke="#6a1b9a" stroke-width="0.6"/>
+  <text x="639" y="353" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ce93d8">TOOL PROTOCOL</text>
+  <text x="639" y="366" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#e1bee7" opacity="0.7">REST · WebSocket</text>
+  <text x="639" y="377" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#e1bee7" opacity="0.7">JSON schemas</text>
+
+  <rect x="716" y="334" width="152" height="56" rx="5" fill="url(#card_shared)" stroke="#6a1b9a" stroke-width="0.6"/>
+  <text x="792" y="353" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="9" font-weight="700" letter-spacing="1" fill="#ce93d8">PROJECT MANIFESTS</text>
+  <text x="792" y="366" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#e1bee7" opacity="0.7">novaforge.project.json</text>
+  <text x="792" y="377" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" fill="#e1bee7" opacity="0.7">Capabilities · Config</text>
+
+  <!-- ═══════════════════════════════════════════════════════
+       DEPENDENCY ARROWS
+  ════════════════════════════════════════════════════════════ -->
+
+  <!-- NovaForge → Atlas (NovaForge depends on Atlas) -->
+  <path d="M 420 175 L 406 175" stroke="#ffb74d" stroke-width="1.5" stroke-dasharray="5,3"
+        fill="none" marker-end="url(#arrow_orange)" opacity="0.6"/>
+  <text x="390" y="171" text-anchor="end" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7" fill="#ffb74d" opacity="0.5">uses</text>
+
+  <!-- AtlasAI → Shared (consumes contracts) -->
+  <path d="M 210 524 L 210 536 L 497 536 L 497 410" stroke="#ce93d8" stroke-width="1.2"
+        stroke-dasharray="4,3" fill="none" marker-end="url(#arrow_purple)" opacity="0.5"/>
+
+  <!-- NovaForge → Shared -->
+  <path d="M 639 280 L 639 296" stroke="#ce93d8" stroke-width="1.2" stroke-dasharray="4,3"
+        fill="none" marker-end="url(#arrow_purple)" opacity="0.5"/>
+
+  <!-- AtlasAI ↔ NovaForge (bridge) -->
+  <path d="M 406 380 L 420 380" stroke="#4ecdc4" stroke-width="1.8" fill="none"
+        marker-end="url(#arrow_cyan)" opacity="0.7"/>
+  <text x="413" y="375" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7" fill="#4ecdc4" opacity="0.7">bridge</text>
+
+  <!-- ═══════════════════════════════════════════════════════
+       LEGEND + STATS FOOTER
+  ════════════════════════════════════════════════════════════ -->
+  <rect x="420" y="424" width="464" height="100" rx="8" fill="#060c14" stroke="#1a1a2e" stroke-width="1"/>
+  <text x="440" y="444" font-family="'Segoe UI', Arial, sans-serif" font-size="9" letter-spacing="2.5"
+        fill="#ffffff" opacity="0.4">DEPENDENCY RULES · CURRENT STATUS</text>
+  <line x1="432" y1="450" x2="872" y2="450" stroke="#ffffff" stroke-width="0.3" opacity="0.1"/>
+
+  <!-- Rules col 1 -->
+  <text x="440" y="465" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" fill="#f44336" opacity="0.8">✗  Atlas → NovaForge (forbidden)</text>
+  <text x="440" y="478" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" fill="#f44336" opacity="0.8">✗  Atlas → AtlasAI (forbidden)</text>
+  <text x="440" y="491" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" fill="#f44336" opacity="0.8">✗  NovaForge → AtlasAI internals</text>
+  <text x="440" y="504" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" fill="#f44336" opacity="0.8">✗  No ImGui anywhere</text>
+
+  <!-- Rules col 2 -->
+  <text x="620" y="465" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" fill="#4caf50" opacity="0.8">✓  NovaForge → Atlas (allowed)</text>
+  <text x="620" y="478" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" fill="#4caf50" opacity="0.8">✓  AtlasAI → Shared contracts</text>
+  <text x="620" y="491" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" fill="#4caf50" opacity="0.8">✓  Shipping builds: zero AtlasAI code</text>
+  <text x="620" y="504" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" fill="#4caf50" opacity="0.8">✓  7 C++ tests · 263 Python tests pass</text>
+
+  <!-- Bottom signature -->
+  <line x1="0" y1="534" x2="900" y2="534" stroke="#ffffff" stroke-width="0.3" opacity="0.06"/>
+  <text x="450" y="538" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif"
+        font-size="7.5" letter-spacing="2" fill="#ffffff" opacity="0.2">MasterRepoRefactor — unified platform</text>
+</svg>

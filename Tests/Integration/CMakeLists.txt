@@ -29,6 +29,13 @@ if(NOVAFORGE_ENABLE_ATLASAI_INTEGRATION)
         SOURCES novaforge_epic10_test.cpp
         DEPS    NovaForgeIntegrationAtlasAI
     )
+
+    # MasterRepo NovaForge Live Ingestion — lifecycle, capture, callback tests.
+    masterrepo_add_test(
+        LiveIngestionTest
+        SOURCES live_ingestion_test.cpp
+        DEPS    NovaForgeIntegrationAtlasAI
+    )
 endif()
 
 message(STATUS "Tests/Integration: configured")

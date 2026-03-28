@@ -1,0 +1,85 @@
+{
+  "$schema": "../ToolProtocol/schemas/project-manifest.schema.json",
+  "schemaVersion": "1.0",
+  "project": {
+    "id": "masterrepo-legacy",
+    "displayName": "MasterRepo (Legacy Layout)",
+    "version": "0.1.0",
+    "description": "Compatibility adapter for the pre-refactor MasterRepo monorepo layout",
+    "repoRoot": "../../"
+  },
+  "capabilities": {
+    "supportsViewportAttach": false,
+    "supportsLivePatch": false,
+    "supportsAISession": true,
+    "supportsProjectIndexing": true,
+    "supportsMultiWorkspace": false
+  },
+  "buildTargets": [
+    {
+      "name": "AtlasEditor",
+      "displayName": "Atlas Editor",
+      "configuration": "Debug",
+      "platform": "Win64"
+    },
+    {
+      "name": "NovaForgeClient",
+      "displayName": "NovaForge Client",
+      "configuration": "Debug",
+      "platform": "Win64"
+    },
+    {
+      "name": "NovaForgeServer",
+      "displayName": "NovaForge Server",
+      "configuration": "Debug",
+      "platform": "Win64"
+    },
+    {
+      "name": "NovaForgeTests",
+      "displayName": "NovaForge Tests",
+      "configuration": "Debug",
+      "platform": "Win64"
+    }
+  ],
+  "bridge": {
+    "transport": "rest+websocket",
+    "host": "localhost",
+    "restPort": 57100,
+    "wsPort": 57101,
+    "timeoutSeconds": 30,
+    "bindLoopbackOnly": true
+  },
+  "legacyLayout": {
+    "enabled": true,
+    "sourceRoot": "src",
+    "testsRoot": "tests",
+    "docsRoot": "docs",
+    "legacyNamingPrefix": "Arbiter"
+  },
+  "repoPaths": {
+    "sourceRoot": "Atlas",
+    "gameRoot": "NovaForge",
+    "toolingRoot": "AtlasAI",
+    "sharedRoot": "Shared",
+    "docsRoot": "Docs",
+    "dataRoot": "NovaForge/Data",
+    "contentRoot": "NovaForge/Content",
+    "scriptsRoot": "Scripts",
+    "testsRoot": "Tests"
+  },
+  "safetySettings": {
+    "requireDryRunByDefault": true,
+    "requireSessionTokenForWrites": true,
+    "allowedToolActions": [
+      "ValidateData",
+      "RunPCGPreview",
+      "OpenScene",
+      "FocusEntity",
+      "RegenerateSchemas"
+    ],
+    "writeableRoots": [
+      "NovaForge/Data",
+      "NovaForge/Content"
+    ]
+  }
+}

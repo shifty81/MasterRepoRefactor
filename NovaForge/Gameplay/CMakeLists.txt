@@ -2,7 +2,37 @@
 
 set(NOVAFORGE_GAMEPLAY_SOURCES
     src/NovaForgeGameplay_stub.cpp
-    # add source files here as gameplay systems are implemented
+
+    # Combat
+    Combat/CombatSystem.cpp
+
+    # Economy
+    Economy/TradeMarket.cpp
+    Economy/ResourceRegistry.cpp
+
+    # Factions
+    Factions/FactionRegistry.cpp
+
+    # Missions
+    Missions/MissionRegistry.cpp
+
+    # Mining
+    Mining/MiningSystem.cpp
+
+    # Exploration
+    Exploration/ExplorationSystem.cpp
+
+    # PCG
+    PCG/PCGWorldGen.cpp
+
+    # Progression
+    Progression/ProgressionSystem.cpp
+
+    # Player Systems
+    PlayerSystems/PlayerController.cpp
+
+    # Builder
+    Builder/BuilderSystem.cpp
 )
 
 add_library(NovaForgeGameplay STATIC ${NOVAFORGE_GAMEPLAY_SOURCES})
