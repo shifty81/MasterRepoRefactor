@@ -1,0 +1,8 @@
+{
+  "default_mode": "game",
+  "default_tool_mode": "select",
+  "grid_snap_enabled": true,
+  "local_transform_mode": false,
+  "camera_move_speed": 500.0,
+  "show_dev_overlay": true
+}

@@ -1,0 +1,17 @@
+#pragma once
+
+#include <memory>
+
+class GameOrchestrator;
+
+class App
+{
+public:
+    bool Initialize();
+    void Run();
+    void Shutdown();
+
+private:
+    std::unique_ptr<GameOrchestrator> Orchestrator;
+    bool bRunning = false;
+};

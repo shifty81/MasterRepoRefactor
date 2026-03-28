@@ -2,6 +2,7 @@
 
 set(NOVAFORGE_WORLD_SOURCES
     src/NovaForgeWorld_stub.cpp
+    src/World.cpp
     # add source files here as world systems are implemented
 )
 

@@ -2,6 +2,7 @@
 
 set(ATLAS_ENGINE_SOURCES
     src/AtlasEngine_stub.cpp
+    Rendering/Renderer.cpp
     # add source files here as engine systems are implemented
 )
 
@@ -9,6 +10,7 @@ add_library(AtlasEngine STATIC ${ATLAS_ENGINE_SOURCES})
 
 target_include_directories(AtlasEngine
     PUBLIC  "${CMAKE_CURRENT_SOURCE_DIR}"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Rendering"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
