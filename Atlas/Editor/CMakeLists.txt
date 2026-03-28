@@ -24,6 +24,15 @@ set(ATLAS_EDITOR_SOURCES
 
     # Gizmos
     Gizmos/GizmoSystem.cpp
+
+    # Commands (undo/redo)
+    Commands/CommandStack.cpp
+    Commands/TransformCommand.cpp
+    Commands/PropertyEditCommand.cpp
+    Commands/VoxelEditCommand.cpp
+
+    # Validation toolkit
+    Validation/ValidationSystem.cpp
 )
 
 add_library(AtlasEditor STATIC ${ATLAS_EDITOR_SOURCES})
@@ -37,6 +46,9 @@ target_include_directories(AtlasEditor
              "${CMAKE_CURRENT_SOURCE_DIR}/Outliner"
              "${CMAKE_CURRENT_SOURCE_DIR}/Inspector"
              "${CMAKE_CURRENT_SOURCE_DIR}/Gizmos"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Commands"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Validation"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Framework"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 

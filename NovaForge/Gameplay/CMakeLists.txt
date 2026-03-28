@@ -34,6 +34,18 @@ set(NOVAFORGE_GAMEPLAY_SOURCES
     # Builder
     Builder/BuilderSystem.cpp
 
+    # Salvage
+    Salvage/SalvageSystem.cpp
+
+    # Station services
+    Station/StationServices.cpp
+
+    # Manufacturing
+    Manufacturing/ManufacturingQueue.cpp
+
+    # Contract rewards
+    Missions/ContractRewardSystem.cpp
+
     # Characters (Phase 1)
     Characters/CharacterSystem.cpp
     Characters/CharacterControllerShell.cpp
@@ -55,6 +67,9 @@ add_library(NovaForgeGameplay STATIC ${NOVAFORGE_GAMEPLAY_SOURCES})
 
 target_include_directories(NovaForgeGameplay
     PUBLIC  "${CMAKE_CURRENT_SOURCE_DIR}"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Salvage"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Station"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Manufacturing"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
