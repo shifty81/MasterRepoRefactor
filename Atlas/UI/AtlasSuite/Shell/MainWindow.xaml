@@ -1,0 +1,98 @@
+<Window x:Class="AtlasSuite.Shell.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewport="clr-namespace:AtlasSuite.ViewportHost"
+        mc:Ignorable="d"
+        Title="Atlas Suite"
+        Height="900"
+        Width="1500"
+        WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open Project" Click="OpenProject_Click" />
+                <MenuItem Header="Save Layout" Click="SaveLayout_Click" />
+                <Separator />
+                <MenuItem Header="Exit" Click="Exit_Click" />
+            </MenuItem>
+            <MenuItem Header="Play">
+                <MenuItem Header="Play" Click="Play_Click" />
+                <MenuItem Header="Stop" Click="Stop_Click" />
+                <MenuItem Header="Load Dev World" Click="LoadDevWorld_Click" />
+            </MenuItem>
+            <MenuItem Header="Tools">
+                <MenuItem Header="Command Palette" Click="CommandPalette_Click" />
+            </MenuItem>
+        </Menu>
+
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Content="Open" Click="OpenProject_Click" />
+                <Separator />
+                <Button Content="Play" Click="Play_Click" />
+                <Button Content="Stop" Click="Stop_Click" />
+                <Button Content="Dev World" Click="LoadDevWorld_Click" />
+            </ToolBar>
+        </ToolBarTray>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="320" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="220" />
+            </Grid.RowDefinitions>
+
+            <TabControl Grid.Column="0" Grid.RowSpan="2">
+                <TabItem Header="Content Browser">
+                    <TextBlock Margin="8" Text="Content Browser Placeholder" />
+                </TabItem>
+                <TabItem Header="World Outliner">
+                    <TextBlock Margin="8" Text="World Outliner Placeholder" />
+                </TabItem>
+            </TabControl>
+
+            <viewport:ViewportHostControl Grid.Column="1" Grid.Row="0" x:Name="ViewportHost" />
+
+            <TabControl Grid.Column="2" Grid.RowSpan="2">
+                <TabItem Header="Inspector">
+                    <TextBlock Margin="8" Text="Inspector Placeholder" />
+                </TabItem>
+                <TabItem Header="Rig Loadout">
+                    <TextBlock Margin="8" Text="Rig Loadout Placeholder" />
+                </TabItem>
+                <TabItem Header="Mission Debug">
+                    <TextBlock Margin="8" Text="Mission Debug Placeholder" />
+                </TabItem>
+                <TabItem Header="Economy Debug">
+                    <TextBlock Margin="8" Text="Economy Debug Placeholder" />
+                </TabItem>
+                <TabItem Header="Faction Debug">
+                    <TextBlock Margin="8" Text="Faction Debug Placeholder" />
+                </TabItem>
+            </TabControl>
+
+            <TabControl Grid.Column="1" Grid.Row="1">
+                <TabItem Header="Output Log">
+                    <TextBox Name="OutputLog"
+                             Margin="6"
+                             IsReadOnly="True"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto" />
+                </TabItem>
+                <TabItem Header="Debug Panel">
+                    <TextBlock Margin="8" Text="Debug Panel Placeholder" />
+                </TabItem>
+                <TabItem Header="Arbiter">
+                    <TextBlock Margin="8" Text="Arbiter Panel Placeholder" />
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </DockPanel>
+</Window>
