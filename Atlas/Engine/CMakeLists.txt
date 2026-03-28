@@ -24,6 +24,10 @@ set(ATLAS_ENGINE_SOURCES
     PCG/PCGDeterminismEngine.cpp
     # J8 — Schema version registry
     Config/SchemaVersionRegistry.cpp
+    # Phase 11 — Scene subsystem
+    Scene/SceneNode.cpp
+    Scene/SceneGraph.cpp
+    Scene/SceneManager.cpp
     # add source files here as engine systems are implemented
 )
 
@@ -41,6 +45,7 @@ target_include_directories(AtlasEngine
              "${CMAKE_CURRENT_SOURCE_DIR}/Config"
              "${CMAKE_CURRENT_SOURCE_DIR}/SaveLoad"
              "${CMAKE_CURRENT_SOURCE_DIR}/PCG"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Scene"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
