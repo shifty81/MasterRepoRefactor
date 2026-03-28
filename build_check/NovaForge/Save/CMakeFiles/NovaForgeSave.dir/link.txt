@@ -1,0 +1,2 @@
+/usr/bin/ar qc libNovaForgeSave.a CMakeFiles/NovaForgeSave.dir/src/SaveManager.cpp.o CMakeFiles/NovaForgeSave.dir/src/SaveSystem.cpp.o
+/usr/bin/ranlib libNovaForgeSave.a

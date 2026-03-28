@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -Wl,--dependency-file=CMakeFiles/LiveIngestionTest.dir/link.d CMakeFiles/LiveIngestionTest.dir/live_ingestion_test.cpp.o -o LiveIngestionTest  ../../NovaForge/Integrations/AtlasAI/libNovaForgeIntegrationAtlasAI.a ../../Atlas/Runtime/libAtlasRuntime.a ../../Atlas/Engine/libAtlasEngine.a ../../Atlas/Core/libAtlasCore.a

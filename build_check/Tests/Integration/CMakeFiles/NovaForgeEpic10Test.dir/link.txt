@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -Wl,--dependency-file=CMakeFiles/NovaForgeEpic10Test.dir/link.d CMakeFiles/NovaForgeEpic10Test.dir/novaforge_epic10_test.cpp.o -o NovaForgeEpic10Test  ../../NovaForge/Integrations/AtlasAI/libNovaForgeIntegrationAtlasAI.a ../../Atlas/Runtime/libAtlasRuntime.a ../../Atlas/Engine/libAtlasEngine.a ../../Atlas/Core/libAtlasCore.a

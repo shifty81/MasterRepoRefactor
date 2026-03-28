@@ -1,0 +1,2 @@
+/usr/bin/ar qc libNovaForgeWorld.a CMakeFiles/NovaForgeWorld.dir/src/NovaForgeWorld_stub.cpp.o CMakeFiles/NovaForgeWorld.dir/src/World.cpp.o
+/usr/bin/ranlib libNovaForgeWorld.a
