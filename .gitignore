@@ -32,19 +32,6 @@ bin/
 .DS_Store
 Thumbs.db
 
-# Logs and runtime files
-*.pid
-*.seed
-*.lock
-!package-lock.json
-!yarn.lock
-# Repository-level log directories (generated at runtime by logging infra)
-Logs/
-logs/
-!NovaForge/Server/logs/.gitkeep
-!NovaForge/Client/logs/.gitkeep
-!AtlasAI/AIEngine/AtlasAIEngine/logs/.gitkeep
-
 # Environment and secrets
 .env
 .env.local
