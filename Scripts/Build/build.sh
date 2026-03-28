@@ -17,6 +17,10 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 BUILD_DIR="${REPO_ROOT}/Build"
 
+# shellcheck source=Scripts/Logging/log_helper.sh
+source "${REPO_ROOT}/Scripts/Logging/log_helper.sh"
+log_init "build"
+
 CONFIG="Debug"
 JOBS=""
 ENABLE_TESTS="OFF"
@@ -91,6 +95,7 @@ echo "  BuildDir: $BUILD_DIR"
 echo "================================================================"
 
 if $CLEAN && [[ -d "$BUILD_DIR" ]]; then
+    log_section "Clean"
     echo "[clean] Removing $BUILD_DIR ..."
     rm -rf "$BUILD_DIR"
 fi
@@ -98,14 +103,14 @@ fi
 mkdir -p "$BUILD_DIR"
 cd "$BUILD_DIR"
 
-echo ""
+log_section "CMake Configure"
 echo "[cmake] Configuring ..."
 cmake .. \
     -DCMAKE_BUILD_TYPE="$CONFIG" \
     -DMASTERREPO_BUILD_TESTS="$ENABLE_TESTS" \
     -DNOVAFORGE_ENABLE_ATLASAI_INTEGRATION="$ENABLE_BRIDGE"
 
-echo ""
+log_section "CMake Build"
 echo "[cmake] Building with $JOBS jobs ..."
 cmake --build . --parallel "$JOBS"
 
