@@ -1,5 +1,5 @@
-// ArbiterWorkspace.cs
-// Central workspace manager for Arbiter.
+// AtlasAIWorkspace.cs
+// Central workspace manager for AtlasAI.
 //
 // Epic 6 / Task 6.5 — Standardize workspace loading
 // Epic 10 / Task 10.5 — Workspace dashboard surface
@@ -8,7 +8,7 @@
 // - Locate the project manifest for a given repo root
 // - Instantiate and activate the correct IProjectAdapter
 // - Manage the connection lifecycle (connect / disconnect)
-// - Expose the active adapter to the rest of Arbiter (shell, AI engine, etc.)
+// - Expose the active adapter to the rest of AtlasAI (shell, AI engine, etc.)
 // - Surface the workspace dashboard and search roots for the shell UI
 //
 // Rules:
@@ -22,16 +22,16 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Arbiter.ProjectAdapters;
-using Arbiter.ProjectAdapters.NovaForge;
+using AtlasAI.ProjectAdapters;
+using AtlasAI.ProjectAdapters.NovaForge;
 
-namespace Arbiter.HostApp.Workspace
+namespace AtlasAI.HostApp.Workspace
 {
     /// <summary>
-    /// Manages the active project workspace for Arbiter.
+    /// Manages the active project workspace for AtlasAI.
     /// Load a workspace by calling <see cref="LoadFromRepoRoot"/>.
     /// </summary>
-    public sealed class ArbiterWorkspace : IDisposable
+    public sealed class AtlasAIWorkspace : IDisposable
     {
         private IProjectAdapter? _adapter;
         private bool             _disposed;
@@ -44,13 +44,13 @@ namespace Arbiter.HostApp.Workspace
         /// Loads a workspace from a repo root directory.
         /// Auto-detects the project type from the manifest present in the repo.
         /// </summary>
-        public static ArbiterWorkspace LoadFromRepoRoot(string repoRoot)
+        public static AtlasAIWorkspace LoadFromRepoRoot(string repoRoot)
         {
             if (string.IsNullOrWhiteSpace(repoRoot))
                 throw new ArgumentException(
                     "repoRoot must not be null or empty.", nameof(repoRoot));
 
-            var workspace = new ArbiterWorkspace();
+            var workspace = new AtlasAIWorkspace();
             workspace._adapter = workspace.CreateAdapter(repoRoot);
             return workspace;
         }

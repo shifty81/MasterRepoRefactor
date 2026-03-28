@@ -21,11 +21,11 @@ and what dependencies are forbidden across zone boundaries.
 
 ### Does not own
 - NovaForge gameplay logic
-- Arbiter host UI, chat, archive, or automation internals
+- AtlasAI host UI, chat, archive, or automation internals
 - game-specific data tables or content
 
 ### Forbidden dependencies
-- Atlas must not depend on Arbiter
+- Atlas must not depend on AtlasAI
 - Atlas must not depend on NovaForge
 
 ---
@@ -37,20 +37,20 @@ and what dependencies are forbidden across zone boundaries.
 - client and server bootstraps
 - game data and content definitions
 - game-specific tools and validators
-- Arbiter-facing integration code (under `NovaForge/Integrations/Arbiter/` only)
+- AtlasAI-facing integration code (under `NovaForge/Integrations/AtlasAI/` only)
 
 ### Does not own
 - engine internals (consumed via Atlas API)
-- Arbiter host UI, chat, archive, or automation internals
+- AtlasAI host UI, chat, archive, or automation internals
 - build toolchain logic outside of game-specific wrappers
 
 ### Forbidden dependencies
-- NovaForge must not depend on Arbiter host, chat, archive, UI, or automation internals
+- NovaForge must not depend on AtlasAI host, chat, archive, UI, or automation internals
 - NovaForge may consume Shared contracts only for bridge integration
 
 ---
 
-## Arbiter
+## AtlasAI
 
 ### Owns
 - AI tooling shell (HostApp)
@@ -70,15 +70,15 @@ and what dependencies are forbidden across zone boundaries.
 - docking/shell logic of native editor panels
 
 ### Forbidden dependencies
-- Arbiter must not directly reference Atlas engine internals
-- Arbiter may use Shared contracts and project adapters only
+- AtlasAI must not directly reference Atlas engine internals
+- AtlasAI may use Shared contracts and project adapters only
 
 ---
 
 ## Shared
 
 ### Owns
-- bridge contracts (ArbiterBridgeContract)
+- bridge contracts (AtlasBridgeContract)
 - project manifests (ProjectManifests)
 - tool protocol definitions (ToolProtocol)
 - build metadata
@@ -87,7 +87,7 @@ and what dependencies are forbidden across zone boundaries.
 ### Does not own
 - gameplay logic
 - editor shell logic
-- Arbiter host UI code
+- AtlasAI host UI code
 - engine implementation details
 
 ### Rules
@@ -101,24 +101,24 @@ and what dependencies are forbidden across zone boundaries.
 ```
 Shared ─────────────► Atlas        ✓ allowed
 Shared ─────────────► NovaForge    ✓ allowed
-Shared ─────────────► Arbiter      ✓ allowed
+Shared ─────────────► AtlasAI      ✓ allowed
 
 Atlas ──────────────► NovaForge    ✗ forbidden
-Atlas ──────────────► Arbiter      ✗ forbidden
+Atlas ──────────────► AtlasAI      ✗ forbidden
 
-NovaForge ──────────► Arbiter internals  ✗ forbidden
+NovaForge ──────────► AtlasAI internals  ✗ forbidden
 NovaForge ──────────► Shared contracts  ✓ allowed (bridge only)
 
-Arbiter ────────────► Shared contracts           ✓ allowed
-Arbiter ────────────► ProjectAdapters/NovaForge  ✓ allowed
-Arbiter ────────────► NovaForge only through bridge/protocol  ✓ allowed
+AtlasAI ────────────► Shared contracts           ✓ allowed
+AtlasAI ────────────► ProjectAdapters/NovaForge  ✓ allowed
+AtlasAI ────────────► NovaForge only through bridge/protocol  ✓ allowed
 ```
 
 ---
 
 ## Shipping separation rules
 
-- Shipping client / server builds must not pull any Arbiter UI or tooling assemblies.
+- Shipping client / server builds must not pull any AtlasAI UI or tooling assemblies.
 - Editor-only integrations must be guarded by `MASTERREPO_BUILD_EDITOR` and
-  `NOVAFORGE_ENABLE_ARBITER_INTEGRATION` flags.
+  `NOVAFORGE_ENABLE_ATLASAI_INTEGRATION` flags.
 - Development-only tooling paths must not leak into runtime binaries.

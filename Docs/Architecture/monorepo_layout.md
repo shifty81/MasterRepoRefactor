@@ -6,7 +6,7 @@
 MasterRepo/
 ├── Atlas/          engine, editor framework, runtime foundations, custom UI
 ├── NovaForge/      game project, gameplay systems, data, content
-├── Arbiter/        AI tooling shell, automation, archive, VS extension
+├── AtlasAI/        AI tooling shell, automation, archive, VS extension
 ├── Shared/         bridge contracts, manifests, tool protocol only
 ├── Docs/           architecture, integration, and implementation docs
 ├── ThirdParty/     vendored external dependencies
@@ -42,32 +42,32 @@ NovaForge/
 ├── Data/            config, definitions, tables, recipes, modules, parts
 ├── Content/         prefabs, scenes, UI, audio, materials, VFX
 ├── Tools/           importers, validators, authoring, generators
-├── Integrations/    integration layers (Arbiter bridge under Integrations/Arbiter/)
+├── Integrations/    integration layers (AtlasAI bridge under Integrations/AtlasAI/)
 ├── App/             NovaForge app bootstrap, session, project context
 ├── Tests/           NovaForge unit and integration tests
 ├── Docs/            NovaForge-specific documentation
 └── CMake/           NovaForge CMake helpers
 ```
 
-## Arbiter structure
+## AtlasAI structure
 
 ```text
-Arbiter/
+AtlasAI/
 ├── HostApp/         shell, workspace, chat, logs, build, file explorer
 ├── AIEngine/        core, models, providers, tools, memory, sessions, planning
 ├── ProjectAdapters/ per-project adapters (NovaForge adapter here)
 ├── Archive/         ingestion, indexing, retrieval, storage
 ├── Automation/      workflows, jobs, triggers, audit
 ├── VisualStudioExtension/  tool window, commands, inline assist
-├── Tests/           Arbiter unit tests
-└── Config/          Arbiter configuration
+├── Tests/           AtlasAI unit tests
+└── Config/          AtlasAI configuration
 ```
 
 ## Shared structure
 
 ```text
 Shared/
-├── ArbiterBridgeContract/  C++ header-only bridge types
+├── AtlasBridgeContract/  C++ header-only bridge types
 ├── ProjectManifests/       novaforge.project.json and others
 ├── ToolProtocol/           protocol docs and schemas
 ├── BuildMetadata/          build metadata artifacts
@@ -87,7 +87,7 @@ Shared/
 - `NovaForgeApp`
 - `NovaForgeGameplay`
 - `NovaForgeWorld`
-- `NovaForgeIntegrationArbiter`
+- `NovaForgeIntegrationAtlasAI`
 
 ### Shared
-- `ArbiterBridgeContract` (INTERFACE library)
+- `AtlasBridgeContract` (INTERFACE library)

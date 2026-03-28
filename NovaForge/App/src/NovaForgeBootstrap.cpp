@@ -4,7 +4,7 @@
 #include "NovaForgeBootstrap.h"
 
 #if defined(NOVAFORGE_BRIDGE_SERVER_ENABLED)
-#   include "ArbiterBridgeService.h"
+#   include "AtlasBridgeService.h"
 #   include "BridgeAuditLogger.h"
 #endif
 
@@ -24,8 +24,8 @@ struct NovaForgeBootstrap::Impl
     bool                                     running = false;
 
 #if defined(NOVAFORGE_BRIDGE_SERVER_ENABLED)
-    std::unique_ptr<Integration::Arbiter::BridgeAuditLogger>  auditLogger;
-    std::unique_ptr<Integration::Arbiter::ArbiterBridgeService> bridgeService;
+    std::unique_ptr<Integration::AtlasAI::BridgeAuditLogger>  auditLogger;
+    std::unique_ptr<Integration::AtlasAI::AtlasBridgeService> bridgeService;
 #endif
 };
 
@@ -72,22 +72,22 @@ BootstrapResult NovaForgeBootstrap::run(const BootstrapConfig& config)
 #if defined(NOVAFORGE_BRIDGE_SERVER_ENABLED)
     if (config.startBridgeService)
     {
-        m_impl->auditLogger    = std::make_unique<Integration::Arbiter::BridgeAuditLogger>();
-        m_impl->bridgeService  = std::make_unique<Integration::Arbiter::ArbiterBridgeService>();
+        m_impl->auditLogger    = std::make_unique<Integration::AtlasAI::BridgeAuditLogger>();
+        m_impl->bridgeService  = std::make_unique<Integration::AtlasAI::AtlasBridgeService>();
 
         if (config.logCallback)
             m_impl->bridgeService->setLogCallback(config.logCallback);
 
         m_impl->bridgeService->setAuditLogger(m_impl->auditLogger.get());
 
-        Integration::Arbiter::BridgeServiceConfig svcCfg;
+        Integration::AtlasAI::BridgeServiceConfig svcCfg;
         if (!m_impl->bridgeService->start(svcCfg))
-            return { false, "Failed to start Arbiter bridge service" };
+            return { false, "Failed to start AtlasAI bridge service" };
 
         // -- Step 4: connect session -------------------------
         m_impl->session->onConnecting();
 
-        ::Arbiter::Bridge::SessionConnectRequest req;
+        ::Atlas::Bridge::SessionConnectRequest req;
         req.projectId     = m_impl->context->projectId();
         req.clientVersion = m_impl->context->version();
 

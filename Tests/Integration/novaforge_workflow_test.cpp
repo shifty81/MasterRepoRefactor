@@ -2,31 +2,31 @@
 // Epic 9 — First real workflow milestone (bridge-dependent tests).
 //
 // Proves the backbone works end-to-end in-process (no HTTP server required):
-//   Task 9.1 — Arbiter reads project info
-//   Task 9.2 — Arbiter queries active editor selection
-//   Task 9.3 — Arbiter launches a safe build target
-//   Task 9.4 — Arbiter runs one safe editor tool
+//   Task 9.1 — AtlasAI reads project info
+//   Task 9.2 — AtlasAI queries active editor selection
+//   Task 9.3 — AtlasAI launches a safe build target
+//   Task 9.4 — AtlasAI runs one safe editor tool
 //   Task 9.5 — Shipping isolation: endpoints reject unauthenticated calls
 //
-// Requires NOVAFORGE_ENABLE_ARBITER_INTEGRATION=ON.
+// Requires NOVAFORGE_ENABLE_ATLASAI_INTEGRATION=ON.
 // For context/session/bootstrap tests that run without the bridge,
 // see novaforge_context_test.cpp.
 
-#include "ArbiterBridgeService.h"
+#include "AtlasBridgeService.h"
 #include "BridgeAuditLogger.h"
 
 #include <cassert>
 #include <cstdlib>
 #include <string>
 
-using namespace NovaForge::Integration::Arbiter;
-using namespace Arbiter::Bridge;
+using namespace NovaForge::Integration::AtlasAI;
+using namespace Atlas::Bridge;
 
 // ============================================================
 // Helpers
 // ============================================================
 
-static std::string connectSession(ArbiterBridgeService& svc)
+static std::string connectSession(AtlasBridgeService& svc)
 {
     SessionConnectRequest req;
     req.projectId     = "novaforge";
@@ -37,13 +37,13 @@ static std::string connectSession(ArbiterBridgeService& svc)
 }
 
 // ============================================================
-// Task 9.1 — Arbiter reads project info
+// Task 9.1 — AtlasAI reads project info
 // ============================================================
 
 static void testTask91_ProjectInfo()
 {
     BridgeAuditLogger    logger;
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     svc.setAuditLogger(&logger);
     svc.start({});
 
@@ -64,12 +64,12 @@ static void testTask91_ProjectInfo()
 }
 
 // ============================================================
-// Task 9.2 — Arbiter queries active editor selection
+// Task 9.2 — AtlasAI queries active editor selection
 // ============================================================
 
 static void testTask92_EditorSelection()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     svc.start({});
     const std::string token = connectSession(svc);
 
@@ -83,12 +83,12 @@ static void testTask92_EditorSelection()
 }
 
 // ============================================================
-// Task 9.3 — Arbiter launches a safe build target
+// Task 9.3 — AtlasAI launches a safe build target
 // ============================================================
 
 static void testTask93_RunBuild()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     svc.start({});
     const std::string token = connectSession(svc);
 
@@ -115,13 +115,13 @@ static void testTask93_RunBuild()
 }
 
 // ============================================================
-// Task 9.4 — Arbiter runs one safe editor tool
+// Task 9.4 — AtlasAI runs one safe editor tool
 // ============================================================
 
 static void testTask94_ToolAction()
 {
     BridgeAuditLogger    logger;
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     svc.setAuditLogger(&logger);
     svc.start({});
     const std::string token = connectSession(svc);
@@ -167,7 +167,7 @@ static void testTask95_ShippingIsolation()
 
     // (a) Service not started → BackendUnavailable
     {
-        ArbiterBridgeService svc;
+        AtlasBridgeService svc;
         BuildTarget t;
         t.name = "NovaForgeClient";
         assert(svc.runBuild("", t).result.errorCode ==
@@ -176,7 +176,7 @@ static void testTask95_ShippingIsolation()
 
     // (b) Service running but empty / bad token → Unauthorized
     {
-        ArbiterBridgeService svc;
+        AtlasBridgeService svc;
         svc.start({});
 
         BuildTarget t;
@@ -197,7 +197,7 @@ static void testTask95_ShippingIsolation()
 
     // (c) After stop → BackendUnavailable
     {
-        ArbiterBridgeService svc;
+        AtlasBridgeService svc;
         svc.start({});
         const std::string token = connectSession(svc);
         svc.stop();

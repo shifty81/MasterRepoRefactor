@@ -1,15 +1,15 @@
 // NovaForgeProjectManifest.cs
-// Arbiter-side loader for the NovaForge project manifest.
+// AtlasAI-side loader for the NovaForge project manifest.
 //
 // This class reads novaforge.project.json from the Shared/ProjectManifests folder
-// and exposes its contents as a strongly-typed model for the Arbiter project adapter.
+// and exposes its contents as a strongly-typed model for the AtlasAI project adapter.
 
 using System;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Arbiter.ProjectAdapters.NovaForge
+namespace AtlasAI.ProjectAdapters.NovaForge
 {
     public sealed class ProjectCapabilitiesModel
     {
@@ -74,7 +74,7 @@ namespace Arbiter.ProjectAdapters.NovaForge
         public string GameRoot { get; init; } = "NovaForge";
 
         [JsonPropertyName("toolingRoot")]
-        public string ToolingRoot { get; init; } = "Arbiter";
+        public string ToolingRoot { get; init; } = "AtlasAI";
 
         [JsonPropertyName("sharedRoot")]
         public string SharedRoot { get; init; } = "Shared";

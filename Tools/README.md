@@ -1,6 +1,6 @@
 # Tools
 
-This folder contains repo-wide developer tools that are not specific to Arbiter or NovaForge.
+This folder contains repo-wide developer tools that are not specific to AtlasAI or NovaForge.
 
 ## Subfolders
 

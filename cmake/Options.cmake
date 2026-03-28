@@ -9,8 +9,8 @@ option(MASTERREPO_BUILD_SERVER      "Build server game targets"         ON)
 option(ATLAS_ENABLE_EDITOR          "Enable Atlas editor systems"       ON)
 option(ATLAS_ENABLE_TOOLS_RUNTIME   "Enable Atlas tools runtime hooks"  ON)
 
-option(NOVAFORGE_ENABLE_ARBITER_INTEGRATION
-    "Enable NovaForge Arbiter bridge integration"                       ON)
+option(NOVAFORGE_ENABLE_ATLASAI_INTEGRATION
+    "Enable NovaForge AtlasAI bridge integration"                       ON)
 
 # Epic 7: Compile-time feature guards
 # These flags ensure tooling-only code never leaks into shipping binaries.

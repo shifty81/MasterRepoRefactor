@@ -21,7 +21,7 @@ Module boundaries, dependency rules, and repo structure specifications.
 
 | Document | Description |
 |----------|-------------|
-| [Monorepo Layout](Architecture/monorepo_layout.md) | Top-level folder structure and module targets for Atlas, NovaForge, Arbiter, and Shared |
+| [Monorepo Layout](Architecture/monorepo_layout.md) | Top-level folder structure and module targets for Atlas, NovaForge, AtlasAI, and Shared |
 | [Repo Boundaries](Architecture/repo_boundaries.md) | Zone ownership, forbidden dependencies, and cross-boundary rules |
 | [Dependency Rules](Architecture/dependency_rules.md) | Dependency direction rules, allowed/forbidden module dependencies |
 | [Shipping Separation](Architecture/shipping_separation.md) | CMake flags and rules for editor/tooling-free shipping builds |
@@ -34,7 +34,7 @@ Bridge contracts, protocol specifications, and manifest schemas.
 
 | Document | Description |
 |----------|-------------|
-| [Arbiter Bridge](Integration/arbiter_bridge.md) | Transport model, request/response protocol, whitelisted tool actions |
+| [AtlasAI Bridge](Integration/atlasai_bridge.md) | Transport model, request/response protocol, whitelisted tool actions |
 | [Project Manifest Spec](Integration/project_manifest_spec.md) | Schema for `novaforge.project.json` — capabilities, build targets, bridge config |
 | [Tool Protocol](Integration/tool_protocol.md) | REST/WebSocket endpoint reference and event type reference |
 
@@ -70,7 +70,7 @@ Docs/
 ├── Roadmaps/                            (planned)
 ├── Atlas/                               (planned — engine, editor, UI, rendering docs)
 ├── NovaForge/                           (planned — world, gameplay, faction, builder docs)
-├── Arbiter/                             (planned — AI engine, automation, hostapp docs)
+├── AtlasAI/                             (planned — AI engine, automation, hostapp docs)
 └── Archive/
     └── Chats/                           original source directives
 ```

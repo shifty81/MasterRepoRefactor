@@ -9,7 +9,7 @@
 #include <iomanip>
 #include <sstream>
 
-namespace NovaForge::Integration::Arbiter
+namespace NovaForge::Integration::AtlasAI
 {
 
 // ============================================================
@@ -19,7 +19,7 @@ namespace NovaForge::Integration::Arbiter
 struct BridgeAuditLogger::Impl
 {
     std::string                                          logFilePath;
-    std::vector<::Arbiter::Bridge::AuditLogEntry>        entries;
+    std::vector<::Atlas::Bridge::AuditLogEntry>        entries;
     std::vector<AuditLogSink>                            sinks;
     static constexpr std::size_t                         kMaxInMemoryEntries = 1000;
 };
@@ -53,7 +53,7 @@ void BridgeAuditLogger::addSink(AuditLogSink sink)
 // Writing entries
 // ============================================================
 
-void BridgeAuditLogger::log(const ::Arbiter::Bridge::AuditLogEntry& entry)
+void BridgeAuditLogger::log(const ::Atlas::Bridge::AuditLogEntry& entry)
 {
     // Cap in-memory buffer
     if (m_impl->entries.size() >= Impl::kMaxInMemoryEntries)
@@ -101,7 +101,7 @@ void BridgeAuditLogger::log(
     bool               wasDryRun,
     const std::string& failReason)
 {
-    ::Arbiter::Bridge::AuditLogEntry entry;
+    ::Atlas::Bridge::AuditLogEntry entry;
     entry.timestampUtc = utcNowIso8601();
     entry.requestId    = requestId;
     entry.sessionId    = sessionId;
@@ -118,18 +118,18 @@ void BridgeAuditLogger::log(
 // Retrieval
 // ============================================================
 
-std::vector<::Arbiter::Bridge::AuditLogEntry> BridgeAuditLogger::getEntries() const
+std::vector<::Atlas::Bridge::AuditLogEntry> BridgeAuditLogger::getEntries() const
 {
     return m_impl->entries;
 }
 
-std::vector<::Arbiter::Bridge::AuditLogEntry> BridgeAuditLogger::getRecentEntries(
+std::vector<::Atlas::Bridge::AuditLogEntry> BridgeAuditLogger::getRecentEntries(
     std::size_t count) const
 {
     if (count >= m_impl->entries.size())
         return m_impl->entries;
 
-    return std::vector<::Arbiter::Bridge::AuditLogEntry>(
+    return std::vector<::Atlas::Bridge::AuditLogEntry>(
         m_impl->entries.end() - static_cast<std::ptrdiff_t>(count),
         m_impl->entries.end());
 }
@@ -158,4 +158,4 @@ std::string BridgeAuditLogger::utcNowIso8601()
     return oss.str();
 }
 
-} // namespace NovaForge::Integration::Arbiter
+} // namespace NovaForge::Integration::AtlasAI

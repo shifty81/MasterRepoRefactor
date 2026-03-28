@@ -1,6 +1,6 @@
 # MasterRepoRefactor
 
-A unified custom platform built around a monorepo architecture. Combines a game engine, editor/IDE, AI development assistant (Arbiter), runtime tooling, and procedural world framework. The flagship game NovaForge demonstrates the full platform capabilities.
+A unified custom platform built around a monorepo architecture. Combines a game engine, editor/IDE, AI development assistant (AtlasAI), runtime tooling, and procedural world framework. The flagship game NovaForge demonstrates the full platform capabilities.
 
 > **Design canon:** [Docs/Design/MASTER_DESIGN_DOCUMENT.md](Docs/Design/MASTER_DESIGN_DOCUMENT.md)
 > **Architecture:** [Docs/Architecture/monorepo_layout.md](Docs/Architecture/monorepo_layout.md)
@@ -14,7 +14,7 @@ MasterRepo is **not** just a game repo or just an AI coding tool. It is:
 
 - **A game engine** (Atlas) — custom rendering, ECS, physics, audio, input, UI framework
 - **A development environment** — custom editor/IDE with dockable panels, asset browser, code editor, and diff preview
-- **A project-aware AI operating layer** (Arbiter) — workspace indexing, patch generation, audit, and documentation
+- **A project-aware AI operating layer** (AtlasAI) — workspace indexing, patch generation, audit, and documentation
 - **A runtime world simulation framework** — EVA, ship interiors, life support, airlocks, PCG
 - **A content authoring platform** — ship/station builder, tooling overlay, design document system
 
@@ -28,7 +28,7 @@ The flagship game, **NovaForge**, is a low-poly first-person systemic sci-fi sur
 MasterRepoRefactor/
 ├── Atlas/          Engine, editor framework, runtime foundations, custom UI
 ├── NovaForge/      Game project — gameplay, world, data, content, tools
-├── Arbiter/        AI tooling shell — host app, AI engine, automation, VS extension
+├── AtlasAI/        AI tooling shell — host app, AI engine, automation, VS extension
 ├── Shared/         Bridge contracts, project manifests, tool protocol (interface only)
 ├── Docs/           Architecture, design, and integration documentation
 ├── ThirdParty/     Vendored external dependencies
@@ -49,10 +49,10 @@ See [Docs/Architecture/monorepo_layout.md](Docs/Architecture/monorepo_layout.md)
 |------|------|
 | **Atlas** | Engine runtime, renderer, ECS, custom UI framework, editor framework backend |
 | **NovaForge** | All game-specific systems, client/server bootstraps, game data and content |
-| **Arbiter** | AI shell (HostApp), AI engine, archive, automation, VS extension, project adapters |
-| **Shared** | Bridge contracts (`ArbiterBridgeContract`), project manifests, tool protocol types only |
+| **AtlasAI** | AI shell (HostApp), AI engine, archive, automation, VS extension, project adapters |
+| **Shared** | Bridge contracts (`AtlasBridgeContract`), project manifests, tool protocol types only |
 
-Key rule: dependencies flow **downward** — Atlas does not depend on NovaForge; NovaForge does not depend on Arbiter internals. See [Docs/Architecture/dependency_rules.md](Docs/Architecture/dependency_rules.md).
+Key rule: dependencies flow **downward** — Atlas does not depend on NovaForge; NovaForge does not depend on AtlasAI internals. See [Docs/Architecture/dependency_rules.md](Docs/Architecture/dependency_rules.md).
 
 ---
 
@@ -78,7 +78,7 @@ Key rule: dependencies flow **downward** — Atlas does not depend on NovaForge;
 
 | Document | Description |
 |----------|-------------|
-| [Arbiter Bridge](Docs/Integration/arbiter_bridge.md) | Transport model, protocol, and whitelisted tool actions |
+| [AtlasAI Bridge](Docs/Integration/atlasai_bridge.md) | Transport model, protocol, and whitelisted tool actions |
 | [Project Manifest Spec](Docs/Integration/project_manifest_spec.md) | `novaforge.project.json` schema |
 | [Tool Protocol](Docs/Integration/tool_protocol.md) | REST/WebSocket endpoint and event reference |
 
@@ -100,8 +100,8 @@ This project uses **CMake**. Each zone has its own `CMakeLists.txt`.
 | `NovaForgeApp` | NovaForge | Client/server bootstrap |
 | `NovaForgeGameplay` | NovaForge | Factions, combat, economy, PCG |
 | `NovaForgeWorld` | NovaForge | Galaxy, sectors, planets, ships |
-| `NovaForgeIntegrationArbiter` | NovaForge | Arbiter bridge integration layer |
-| `ArbiterBridgeContract` | Shared | Header-only bridge interface |
+| `NovaForgeIntegrationAtlasAI` | NovaForge | AtlasAI bridge integration layer |
+| `AtlasBridgeContract` | Shared | Header-only bridge interface |
 
 ### Shipping Builds
 
@@ -126,10 +126,10 @@ ctest --test-dir Build/
 
 - **No ImGui** — all UI is custom
 - **No Atlas → NovaForge dependencies**
-- **No Atlas → Arbiter dependencies**
-- **No NovaForge → Arbiter internals** (bridge contract only)
+- **No Atlas → AtlasAI dependencies**
+- **No NovaForge → AtlasAI internals** (bridge contract only)
 - **Shared must stay small** — it defines boundaries, not implementations
-- **Shipping builds must not include Arbiter UI or tooling**
+- **Shipping builds must not include AtlasAI UI or tooling**
 
 ---
 

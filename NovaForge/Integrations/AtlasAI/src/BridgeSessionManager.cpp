@@ -12,7 +12,7 @@
 #include <sstream>
 #include <unordered_map>
 
-namespace NovaForge::Integration::Arbiter
+namespace NovaForge::Integration::AtlasAI
 {
 
 // ============================================================
@@ -40,18 +40,18 @@ BridgeSessionManager::~BridgeSessionManager() = default;
 // Session creation
 // ============================================================
 
-::Arbiter::Bridge::SessionConnectResponse BridgeSessionManager::createSession(
-    const ::Arbiter::Bridge::SessionConnectRequest& request,
+::Atlas::Bridge::SessionConnectResponse BridgeSessionManager::createSession(
+    const ::Atlas::Bridge::SessionConnectRequest& request,
     const std::string& serverVersion)
 {
-    ::Arbiter::Bridge::SessionConnectResponse response;
+    ::Atlas::Bridge::SessionConnectResponse response;
 
-    if (request.protocolVersion != ::Arbiter::Bridge::kProtocolVersion)
+    if (request.protocolVersion != ::Atlas::Bridge::kProtocolVersion)
     {
-        response.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::VersionMismatch;
+        response.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::VersionMismatch;
         response.result.message   =
             "Protocol version mismatch: expected "
-            + std::string(::Arbiter::Bridge::kProtocolVersion)
+            + std::string(::Atlas::Bridge::kProtocolVersion)
             + ", got " + request.protocolVersion;
         return response;
     }
@@ -65,7 +65,7 @@ BridgeSessionManager::~BridgeSessionManager() = default;
 
     m_impl->sessions[session.sessionToken] = session;
 
-    response.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    response.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
     response.result.message   = "Session created";
     response.sessionToken     = session.sessionToken;
     response.serverVersion    = serverVersion;
@@ -172,4 +172,4 @@ std::string BridgeSessionManager::utcNowIso8601()
     return oss.str();
 }
 
-} // namespace NovaForge::Integration::Arbiter
+} // namespace NovaForge::Integration::AtlasAI

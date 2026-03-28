@@ -1,7 +1,7 @@
-// ArbiterBridgeService.cpp
-// NovaForge-side Arbiter bridge service implementation.
+// AtlasBridgeService.cpp
+// NovaForge-side AtlasAI bridge service implementation.
 
-#include "ArbiterBridgeService.h"
+#include "AtlasBridgeService.h"
 #include "BridgeSessionManager.h"
 
 #include <chrono>
@@ -13,39 +13,39 @@
 #include <atomic>
 #include <mutex>
 
-namespace NovaForge::Integration::Arbiter
+namespace NovaForge::Integration::AtlasAI
 {
 
 // ============================================================
 // Internal implementation state
 // ============================================================
 
-struct ArbiterBridgeService::Impl
+struct AtlasBridgeService::Impl
 {
     BridgeSessionManager sessionManager;
 
     // Allowed tool action IDs (original whitelist)
     std::unordered_set<uint32_t> allowedActionIds =
     {
-        static_cast<uint32_t>(::Arbiter::Bridge::ToolActionId::ValidateData),
-        static_cast<uint32_t>(::Arbiter::Bridge::ToolActionId::RunPCGPreview),
-        static_cast<uint32_t>(::Arbiter::Bridge::ToolActionId::OpenScene),
-        static_cast<uint32_t>(::Arbiter::Bridge::ToolActionId::FocusEntity),
-        static_cast<uint32_t>(::Arbiter::Bridge::ToolActionId::RegenerateSchemas),
+        static_cast<uint32_t>(::Atlas::Bridge::ToolActionId::ValidateData),
+        static_cast<uint32_t>(::Atlas::Bridge::ToolActionId::RunPCGPreview),
+        static_cast<uint32_t>(::Atlas::Bridge::ToolActionId::OpenScene),
+        static_cast<uint32_t>(::Atlas::Bridge::ToolActionId::FocusEntity),
+        static_cast<uint32_t>(::Atlas::Bridge::ToolActionId::RegenerateSchemas),
     };
 
     // Allowed builder tool action IDs (Epic 10 / Task 10.2)
     std::unordered_set<uint32_t> allowedBuilderActionIds =
     {
-        static_cast<uint32_t>(::Arbiter::Bridge::BuilderToolActionId::ValidateData),
-        static_cast<uint32_t>(::Arbiter::Bridge::BuilderToolActionId::RunPCGPreview),
-        static_cast<uint32_t>(::Arbiter::Bridge::BuilderToolActionId::OpenScene),
-        static_cast<uint32_t>(::Arbiter::Bridge::BuilderToolActionId::FocusEntity),
-        static_cast<uint32_t>(::Arbiter::Bridge::BuilderToolActionId::RegenerateSchemas),
-        static_cast<uint32_t>(::Arbiter::Bridge::BuilderToolActionId::RunBuilderInspect),
-        static_cast<uint32_t>(::Arbiter::Bridge::BuilderToolActionId::RunPCGDiagnostics),
-        static_cast<uint32_t>(::Arbiter::Bridge::BuilderToolActionId::GeneratePCGPreview),
-        static_cast<uint32_t>(::Arbiter::Bridge::BuilderToolActionId::ValidateBuilderData),
+        static_cast<uint32_t>(::Atlas::Bridge::BuilderToolActionId::ValidateData),
+        static_cast<uint32_t>(::Atlas::Bridge::BuilderToolActionId::RunPCGPreview),
+        static_cast<uint32_t>(::Atlas::Bridge::BuilderToolActionId::OpenScene),
+        static_cast<uint32_t>(::Atlas::Bridge::BuilderToolActionId::FocusEntity),
+        static_cast<uint32_t>(::Atlas::Bridge::BuilderToolActionId::RegenerateSchemas),
+        static_cast<uint32_t>(::Atlas::Bridge::BuilderToolActionId::RunBuilderInspect),
+        static_cast<uint32_t>(::Atlas::Bridge::BuilderToolActionId::RunPCGDiagnostics),
+        static_cast<uint32_t>(::Atlas::Bridge::BuilderToolActionId::GeneratePCGPreview),
+        static_cast<uint32_t>(::Atlas::Bridge::BuilderToolActionId::ValidateBuilderData),
     };
 
     std::atomic<uint32_t> buildIdCounter{0};
@@ -61,35 +61,35 @@ struct ArbiterBridgeService::Impl
     std::string  lastToolTimestampUtc;
 
     // Pending codegen proposals (proposalId → request snapshot)
-    std::unordered_map<std::string, ::Arbiter::Bridge::CodegenProposalRequest> pendingProposals;
+    std::unordered_map<std::string, ::Atlas::Bridge::CodegenProposalRequest> pendingProposals;
 };
 
 // ============================================================
 // Lifecycle
 // ============================================================
 
-ArbiterBridgeService::ArbiterBridgeService()
+AtlasBridgeService::AtlasBridgeService()
     : m_impl(std::make_unique<Impl>())
 {
 }
 
-ArbiterBridgeService::~ArbiterBridgeService()
+AtlasBridgeService::~AtlasBridgeService()
 {
     stop();
 }
 
-bool ArbiterBridgeService::start(const BridgeServiceConfig& config)
+bool AtlasBridgeService::start(const BridgeServiceConfig& config)
 {
     if (m_running)
     {
-        log("ArbiterBridgeService: already running");
+        log("AtlasBridgeService: already running");
         return false;
     }
 
     m_config  = config;
     m_running = true;
 
-    log("ArbiterBridgeService: started — REST port "
+    log("AtlasBridgeService: started — REST port "
         + std::to_string(config.restPort)
         + ", WS port "
         + std::to_string(config.wsPort)
@@ -98,17 +98,17 @@ bool ArbiterBridgeService::start(const BridgeServiceConfig& config)
     return true;
 }
 
-void ArbiterBridgeService::stop()
+void AtlasBridgeService::stop()
 {
     if (!m_running)
         return;
 
     m_impl->sessionManager.revokeAll();
     m_running = false;
-    log("ArbiterBridgeService: stopped — all sessions revoked");
+    log("AtlasBridgeService: stopped — all sessions revoked");
 }
 
-bool ArbiterBridgeService::isRunning() const
+bool AtlasBridgeService::isRunning() const
 {
     return m_running;
 }
@@ -117,23 +117,23 @@ bool ArbiterBridgeService::isRunning() const
 // Logging and audit
 // ============================================================
 
-void ArbiterBridgeService::setLogCallback(BridgeLogCallback callback)
+void AtlasBridgeService::setLogCallback(BridgeLogCallback callback)
 {
     m_logCallback = std::move(callback);
 }
 
-void ArbiterBridgeService::setAuditLogger(BridgeAuditLogger* logger)
+void AtlasBridgeService::setAuditLogger(BridgeAuditLogger* logger)
 {
     m_auditLogger = logger;
 }
 
-void ArbiterBridgeService::log(const std::string& message)
+void AtlasBridgeService::log(const std::string& message)
 {
     if (m_logCallback)
         m_logCallback(message);
 }
 
-void ArbiterBridgeService::auditLog(
+void AtlasBridgeService::auditLog(
     const std::string& requestId,
     const std::string& sessionId,
     const std::string& service,
@@ -155,30 +155,30 @@ void ArbiterBridgeService::auditLog(
 // Session management  (Task 4.1 prerequisite)
 // ============================================================
 
-::Arbiter::Bridge::SessionConnectResponse ArbiterBridgeService::connectSession(
-    const ::Arbiter::Bridge::SessionConnectRequest& request)
+::Atlas::Bridge::SessionConnectResponse AtlasBridgeService::connectSession(
+    const ::Atlas::Bridge::SessionConnectRequest& request)
 {
     if (!m_running)
     {
-        ::Arbiter::Bridge::SessionConnectResponse response;
-        response.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        ::Atlas::Bridge::SessionConnectResponse response;
+        response.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         response.result.message   = "Bridge service is not running";
         return response;
     }
 
     auto response = m_impl->sessionManager.createSession(
-        request, ::Arbiter::Bridge::kProtocolVersion);
+        request, ::Atlas::Bridge::kProtocolVersion);
 
     if (response.result.succeeded())
     {
-        log("ArbiterBridgeService: session connected — project=" + request.projectId
+        log("AtlasBridgeService: session connected — project=" + request.projectId
             + " token=" + response.sessionToken.substr(0, 8) + "...");
         auditLog({}, {}, "SessionService", "Connect",
                  true, "Session created for project=" + request.projectId);
     }
     else
     {
-        log("ArbiterBridgeService: session connect failed — " + response.result.message);
+        log("AtlasBridgeService: session connect failed — " + response.result.message);
         auditLog({}, {}, "SessionService", "Connect",
                  false, "Session create failed",
                  false, response.result.message);
@@ -187,24 +187,24 @@ void ArbiterBridgeService::auditLog(
     return response;
 }
 
-::Arbiter::Bridge::BridgeResult ArbiterBridgeService::disconnectSession(
+::Atlas::Bridge::BridgeResult AtlasBridgeService::disconnectSession(
     const std::string& sessionToken)
 {
-    ::Arbiter::Bridge::BridgeResult result;
+    ::Atlas::Bridge::BridgeResult result;
 
     if (!m_impl->sessionManager.validateToken(sessionToken))
     {
-        result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         result.message   = "Invalid or expired session token";
         return result;
     }
 
     m_impl->sessionManager.revokeSession(sessionToken);
-    log("ArbiterBridgeService: session disconnected");
+    log("AtlasBridgeService: session disconnected");
     auditLog({}, sessionToken, "SessionService", "Disconnect",
              true, "Session revoked");
 
-    result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
     result.message   = "Session disconnected";
     return result;
 }
@@ -213,12 +213,12 @@ void ArbiterBridgeService::auditLog(
 // Session validation helpers
 // ============================================================
 
-bool ArbiterBridgeService::validateSession(const std::string& token) const
+bool AtlasBridgeService::validateSession(const std::string& token) const
 {
     return m_impl->sessionManager.validateToken(token);
 }
 
-bool ArbiterBridgeService::validateWriteSession(const std::string& token) const
+bool AtlasBridgeService::validateWriteSession(const std::string& token) const
 {
     return m_impl->sessionManager.isWriteAuthorized(token);
 }
@@ -227,10 +227,10 @@ bool ArbiterBridgeService::validateWriteSession(const std::string& token) const
 // Project info  GET /project/info  (Task 4.1)
 // ============================================================
 
-::Arbiter::Bridge::ProjectInfo ArbiterBridgeService::getProjectInfo(
+::Atlas::Bridge::ProjectInfo AtlasBridgeService::getProjectInfo(
     const std::string& sessionToken) const
 {
-    ::Arbiter::Bridge::ProjectInfo info;
+    ::Atlas::Bridge::ProjectInfo info;
 
     if (!validateSession(sessionToken))
     {
@@ -258,15 +258,15 @@ bool ArbiterBridgeService::validateWriteSession(const std::string& token) const
 // Build  POST /build/run  (Task 4.3)
 // ============================================================
 
-::Arbiter::Bridge::BuildResult ArbiterBridgeService::runBuild(
+::Atlas::Bridge::BuildResult AtlasBridgeService::runBuild(
     const std::string&                    sessionToken,
-    const ::Arbiter::Bridge::BuildTarget& target)
+    const ::Atlas::Bridge::BuildTarget& target)
 {
-    ::Arbiter::Bridge::BuildResult result;
+    ::Atlas::Bridge::BuildResult result;
 
     if (!m_running)
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         result.result.message   = "Bridge service is not running";
         auditLog({}, sessionToken, "BuildService", "RunBuild",
                  false, "Service not running", false, result.result.message);
@@ -275,7 +275,7 @@ bool ArbiterBridgeService::validateWriteSession(const std::string& token) const
 
     if (!validateSession(sessionToken))
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         result.result.message   = "Invalid or expired session token";
         auditLog({}, sessionToken, "BuildService", "RunBuild",
                  false, "Unauthorized", false, result.result.message);
@@ -285,11 +285,11 @@ bool ArbiterBridgeService::validateWriteSession(const std::string& token) const
     const uint32_t buildId = ++m_impl->buildIdCounter;
     result.buildId = "build-" + std::to_string(buildId);
 
-    log("ArbiterBridgeService: build requested — target=" + target.name
+    log("AtlasBridgeService: build requested — target=" + target.name
         + " buildId=" + result.buildId);
 
     // TODO: integrate with actual build system (CMake/MSBuild dispatch)
-    result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
     result.result.message   = "Build queued";
     result.exitCode         = 0;
     result.outputLog        = "Build stub: target '" + target.name + "' queued with id "
@@ -314,10 +314,10 @@ bool ArbiterBridgeService::validateWriteSession(const std::string& token) const
 // Editor selection  GET /editor/selection  (Task 4.2)
 // ============================================================
 
-::Arbiter::Bridge::EditorSelectionSnapshot ArbiterBridgeService::getEditorSelection(
+::Atlas::Bridge::EditorSelectionSnapshot AtlasBridgeService::getEditorSelection(
     const std::string& sessionToken) const
 {
-    ::Arbiter::Bridge::EditorSelectionSnapshot snapshot;
+    ::Atlas::Bridge::EditorSelectionSnapshot snapshot;
 
     if (!validateSession(sessionToken))
         return snapshot; // empty snapshot — caller checks session separately
@@ -335,32 +335,32 @@ bool ArbiterBridgeService::validateWriteSession(const std::string& token) const
 // File operations
 // ============================================================
 
-::Arbiter::Bridge::BridgeResult ArbiterBridgeService::openFile(
+::Atlas::Bridge::BridgeResult AtlasBridgeService::openFile(
     const std::string&                        sessionToken,
-    const ::Arbiter::Bridge::OpenFileRequest& request)
+    const ::Atlas::Bridge::OpenFileRequest& request)
 {
-    ::Arbiter::Bridge::BridgeResult result;
+    ::Atlas::Bridge::BridgeResult result;
 
     if (!m_running)
     {
-        result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         result.message   = "Bridge service is not running";
         return result;
     }
 
     if (!validateSession(sessionToken))
     {
-        result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         result.message   = "Invalid or expired session token";
         auditLog({}, sessionToken, "EditorService", "OpenFile",
                  false, "Unauthorized", false, result.message);
         return result;
     }
 
-    log("ArbiterBridgeService: open file — " + request.filePath);
+    log("AtlasBridgeService: open file — " + request.filePath);
 
     // TODO: integrate with editor open-file command
-    result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
     result.message   = "Open file stub: not yet implemented";
 
     auditLog({}, sessionToken, "EditorService", "OpenFile",
@@ -373,23 +373,23 @@ bool ArbiterBridgeService::validateWriteSession(const std::string& token) const
 // Tool actions  POST /editor/tools/run  (Task 4.4)
 // ============================================================
 
-bool ArbiterBridgeService::isToolActionAllowed(
-    ::Arbiter::Bridge::ToolActionId actionId) const
+bool AtlasBridgeService::isToolActionAllowed(
+    ::Atlas::Bridge::ToolActionId actionId) const
 {
     return m_impl->allowedActionIds.count(
         static_cast<uint32_t>(actionId)) > 0;
 }
 
-::Arbiter::Bridge::ToolActionResult ArbiterBridgeService::runToolAction(
+::Atlas::Bridge::ToolActionResult AtlasBridgeService::runToolAction(
     const std::string&                              sessionToken,
-    const ::Arbiter::Bridge::ToolActionRequest&     request)
+    const ::Atlas::Bridge::ToolActionRequest&     request)
 {
-    ::Arbiter::Bridge::ToolActionResult result;
+    ::Atlas::Bridge::ToolActionResult result;
     result.wasDryRun = request.dryRun;
 
     if (!m_running)
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         result.result.message   = "Bridge service is not running";
         auditLog({}, sessionToken, "ToolService", "RunToolAction",
                  false, "Service not running", request.dryRun, result.result.message);
@@ -398,7 +398,7 @@ bool ArbiterBridgeService::isToolActionAllowed(
 
     if (!validateSession(sessionToken))
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         result.result.message   = "Invalid or expired session token";
         auditLog({}, sessionToken, "ToolService", "RunToolAction",
                  false, "Unauthorized", request.dryRun, result.result.message);
@@ -408,7 +408,7 @@ bool ArbiterBridgeService::isToolActionAllowed(
     // Require write authorization for non-dry-run actions
     if (!request.dryRun && !validateWriteSession(sessionToken))
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         result.result.message   = "Write authorization required for non-dry-run actions";
         auditLog({}, sessionToken, "ToolService", "RunToolAction",
                  false, "Write auth required", false, result.result.message);
@@ -417,7 +417,7 @@ bool ArbiterBridgeService::isToolActionAllowed(
 
     if (!isToolActionAllowed(request.actionId))
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::UnsupportedOp;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::UnsupportedOp;
         result.result.message   = "Tool action is not in the whitelist";
         auditLog({}, sessionToken, "ToolService", "RunToolAction",
                  false,
@@ -440,7 +440,7 @@ bool ArbiterBridgeService::isToolActionAllowed(
             ? kActionNames[static_cast<uint32_t>(request.actionId)]
             : actionIdStr;
 
-    log("ArbiterBridgeService: tool action id=" + actionIdStr
+    log("AtlasBridgeService: tool action id=" + actionIdStr
         + (request.dryRun ? " [DRY RUN]" : " [EXECUTE]"));
 
     // Update dashboard tracking
@@ -452,7 +452,7 @@ bool ArbiterBridgeService::isToolActionAllowed(
 
     if (request.dryRun)
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
         result.result.message   = "Dry-run: action would be permitted";
         result.summary          = "dry-run completed";
         auditLog({}, sessionToken, "ToolService", "RunToolAction",
@@ -461,7 +461,7 @@ bool ArbiterBridgeService::isToolActionAllowed(
     }
 
     // TODO: route to actual editor tool implementations
-    result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
     result.result.message   = "Tool action stub: not yet implemented";
     result.summary          = "stub executed";
 
@@ -475,8 +475,8 @@ bool ArbiterBridgeService::isToolActionAllowed(
 // Epic 10 / Task 10.2 — Builder / PCG tool validation helper
 // ============================================================
 
-bool ArbiterBridgeService::isBuilderToolActionAllowed(
-    ::Arbiter::Bridge::BuilderToolActionId actionId) const
+bool AtlasBridgeService::isBuilderToolActionAllowed(
+    ::Atlas::Bridge::BuilderToolActionId actionId) const
 {
     return m_impl->allowedBuilderActionIds.count(
         static_cast<uint32_t>(actionId)) > 0;
@@ -486,21 +486,21 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
 // Epic 10 / Task 10.1 — Search roots  GET /project/search-roots
 // ============================================================
 
-::Arbiter::Bridge::ProjectSearchRoots ArbiterBridgeService::getSearchRoots(
+::Atlas::Bridge::ProjectSearchRoots AtlasBridgeService::getSearchRoots(
     const std::string& sessionToken) const
 {
-    ::Arbiter::Bridge::ProjectSearchRoots roots;
+    ::Atlas::Bridge::ProjectSearchRoots roots;
 
     if (!m_running)
     {
-        roots.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        roots.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         roots.result.message   = "Bridge service is not running";
         return roots;
     }
 
     if (!validateSession(sessionToken))
     {
-        roots.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        roots.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         roots.result.message   = "Invalid or expired session token";
         return roots;
     }
@@ -514,11 +514,11 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
         { "Config",            "NovaForge/Data/Config", "config" },
         { "SourceAtlas",       "Atlas",            "source"  },
         { "SourceNovaForge",   "NovaForge",        "source"  },
-        { "SourceArbiter",     "Arbiter",          "source"  },
+        { "SourceAtlasAI",     "AtlasAI",          "source"  },
         { "SharedContracts",   "Shared",           "source"  },
     };
 
-    roots.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    roots.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
     roots.result.message   = "OK";
 
     auditLog({}, sessionToken, "ProjectService", "GetSearchRoots",
@@ -532,37 +532,37 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
 //   POST /editor/tools/builder
 // ============================================================
 
-::Arbiter::Bridge::BuilderToolResult ArbiterBridgeService::runBuilderTool(
+::Atlas::Bridge::BuilderToolResult AtlasBridgeService::runBuilderTool(
     const std::string&                           sessionToken,
-    const ::Arbiter::Bridge::BuilderToolRequest& request)
+    const ::Atlas::Bridge::BuilderToolRequest& request)
 {
-    ::Arbiter::Bridge::BuilderToolResult result;
+    ::Atlas::Bridge::BuilderToolResult result;
     result.wasDryRun = request.dryRun;
 
     if (!m_running)
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         result.result.message   = "Bridge service is not running";
         return result;
     }
 
     if (!validateSession(sessionToken))
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         result.result.message   = "Invalid or expired session token";
         return result;
     }
 
     if (!request.dryRun && !validateWriteSession(sessionToken))
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         result.result.message   = "Write authorization required for non-dry-run builder actions";
         return result;
     }
 
     if (!isBuilderToolActionAllowed(request.actionId))
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::UnsupportedOp;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::UnsupportedOp;
         result.result.message   = "Builder tool action is not in the whitelist";
         auditLog({}, sessionToken, "ToolService", "RunBuilderTool",
                  false,
@@ -576,7 +576,7 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
     const std::string actionIdStr =
         std::to_string(static_cast<uint32_t>(request.actionId));
 
-    log("ArbiterBridgeService: builder tool action id=" + actionIdStr
+    log("AtlasBridgeService: builder tool action id=" + actionIdStr
         + (request.dryRun ? " [DRY RUN]" : " [EXECUTE]"));
 
     // Update dashboard tracking
@@ -588,7 +588,7 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
 
     if (request.dryRun)
     {
-        result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+        result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
         result.result.message   = "Dry-run: builder action would be permitted";
         result.summary          = "dry-run completed";
         result.diagnosticsLog   = "";
@@ -599,10 +599,10 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
 
     // Diagnostic actions populate the log field
     const bool isDiagnostic =
-        (request.actionId == ::Arbiter::Bridge::BuilderToolActionId::RunPCGDiagnostics
-      || request.actionId == ::Arbiter::Bridge::BuilderToolActionId::RunBuilderInspect);
+        (request.actionId == ::Atlas::Bridge::BuilderToolActionId::RunPCGDiagnostics
+      || request.actionId == ::Atlas::Bridge::BuilderToolActionId::RunBuilderInspect);
 
-    result.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    result.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
     result.result.message   = "Builder tool stub: not yet implemented";
     result.summary          = "stub executed";
     result.diagnosticsLog   = isDiagnostic
@@ -619,32 +619,32 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
 // Epic 10 / Task 10.3 — Richer editor state  GET /editor/state
 // ============================================================
 
-::Arbiter::Bridge::EditorStateSnapshot ArbiterBridgeService::getEditorState(
+::Atlas::Bridge::EditorStateSnapshot AtlasBridgeService::getEditorState(
     const std::string& sessionToken) const
 {
-    ::Arbiter::Bridge::EditorStateSnapshot snap;
+    ::Atlas::Bridge::EditorStateSnapshot snap;
 
     if (!m_running)
     {
-        snap.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        snap.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         snap.result.message   = "Bridge service is not running";
         return snap;
     }
 
     if (!validateSession(sessionToken))
     {
-        snap.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        snap.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         snap.result.message   = "Invalid or expired session token";
         return snap;
     }
 
     // TODO: integrate with Atlas editor runtime to retrieve live state
-    snap.result.errorCode       = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    snap.result.errorCode       = ::Atlas::Bridge::BridgeErrorCode::Success;
     snap.activeScene            = "";  // populated by Atlas editor integration
     snap.activeMap              = "";
     snap.loadedWorldId          = "";
     snap.activeMode             = "Inspect"; // default editor mode
-    snap.simulationState        = ::Arbiter::Bridge::SimulationState::Stopped;
+    snap.simulationState        = ::Atlas::Bridge::SimulationState::Stopped;
     snap.selectedObjectName     = "";
     snap.selectedObjectType     = "";
     snap.selectedObjectId       = 0;
@@ -660,29 +660,29 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
 // Epic 10 / Task 10.4 — Codegen workflow
 // ============================================================
 
-::Arbiter::Bridge::CodegenProposal ArbiterBridgeService::proposeCodegen(
+::Atlas::Bridge::CodegenProposal AtlasBridgeService::proposeCodegen(
     const std::string&                               sessionToken,
-    const ::Arbiter::Bridge::CodegenProposalRequest& request)
+    const ::Atlas::Bridge::CodegenProposalRequest& request)
 {
-    ::Arbiter::Bridge::CodegenProposal proposal;
+    ::Atlas::Bridge::CodegenProposal proposal;
 
     if (!m_running)
     {
-        proposal.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        proposal.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         proposal.result.message   = "Bridge service is not running";
         return proposal;
     }
 
     if (!validateSession(sessionToken))
     {
-        proposal.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        proposal.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         proposal.result.message   = "Invalid or expired session token";
         return proposal;
     }
 
     if (request.targetFile.empty())
     {
-        proposal.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::InvalidRequest;
+        proposal.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::InvalidRequest;
         proposal.result.message   = "targetFile must not be empty";
         return proposal;
     }
@@ -700,10 +700,10 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
         m_impl->pendingProposals[proposal.proposalId] = request;
     }
 
-    proposal.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    proposal.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
     proposal.result.message   = "Proposal created";
 
-    log("ArbiterBridgeService: codegen proposed — id=" + proposal.proposalId
+    log("AtlasBridgeService: codegen proposed — id=" + proposal.proposalId
         + " file=" + request.targetFile);
 
     auditLog({}, sessionToken, "CodegenService", "ProposeCodegen",
@@ -713,22 +713,22 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
     return proposal;
 }
 
-::Arbiter::Bridge::CodegenDiff ArbiterBridgeService::getCodegenDiff(
+::Atlas::Bridge::CodegenDiff AtlasBridgeService::getCodegenDiff(
     const std::string& sessionToken,
     const std::string& proposalId) const
 {
-    ::Arbiter::Bridge::CodegenDiff diff;
+    ::Atlas::Bridge::CodegenDiff diff;
 
     if (!m_running)
     {
-        diff.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        diff.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         diff.result.message   = "Bridge service is not running";
         return diff;
     }
 
     if (!validateSession(sessionToken))
     {
-        diff.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        diff.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         diff.result.message   = "Invalid or expired session token";
         return diff;
     }
@@ -737,7 +737,7 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
     auto it = m_impl->pendingProposals.find(proposalId);
     if (it == m_impl->pendingProposals.end())
     {
-        diff.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::NotFound;
+        diff.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::NotFound;
         diff.result.message   = "Proposal not found: " + proposalId;
         return diff;
     }
@@ -755,28 +755,28 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
     diff.linesAdded   = 3;
     diff.linesRemoved = 0;
 
-    diff.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    diff.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
     diff.result.message   = "Diff generated";
 
     return diff;
 }
 
-::Arbiter::Bridge::CodegenApplyResult ArbiterBridgeService::approveAndApplyCodegen(
+::Atlas::Bridge::CodegenApplyResult AtlasBridgeService::approveAndApplyCodegen(
     const std::string&                               sessionToken,
-    const ::Arbiter::Bridge::CodegenApprovalRequest& request)
+    const ::Atlas::Bridge::CodegenApprovalRequest& request)
 {
-    ::Arbiter::Bridge::CodegenApplyResult applyResult;
+    ::Atlas::Bridge::CodegenApplyResult applyResult;
 
     if (!m_running)
     {
-        applyResult.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        applyResult.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         applyResult.result.message   = "Bridge service is not running";
         return applyResult;
     }
 
     if (!validateSession(sessionToken))
     {
-        applyResult.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        applyResult.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         applyResult.result.message   = "Invalid or expired session token";
         return applyResult;
     }
@@ -785,7 +785,7 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
     // rejection is read-only — it just discards the pending proposal.
     if (request.approved && !validateWriteSession(sessionToken))
     {
-        applyResult.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        applyResult.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         applyResult.result.message   = "Write authorization required to apply codegen";
         return applyResult;
     }
@@ -794,7 +794,7 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
     auto it = m_impl->pendingProposals.find(request.proposalId);
     if (it == m_impl->pendingProposals.end())
     {
-        applyResult.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::NotFound;
+        applyResult.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::NotFound;
         applyResult.result.message   = "Proposal not found: " + request.proposalId;
         return applyResult;
     }
@@ -805,10 +805,10 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
     if (request.approved)
     {
         applyResult.appliedFile      = it->second.targetFile;
-        applyResult.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+        applyResult.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
         applyResult.result.message   = "Proposal applied";
 
-        log("ArbiterBridgeService: codegen applied — proposal=" + request.proposalId
+        log("AtlasBridgeService: codegen applied — proposal=" + request.proposalId
             + " file=" + applyResult.appliedFile);
         auditLog({}, sessionToken, "CodegenService", "ApplyCodegen",
                  true, "applied proposal=" + request.proposalId
@@ -816,7 +816,7 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
     }
     else
     {
-        applyResult.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+        applyResult.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
         applyResult.result.message   = "Proposal rejected — no changes made";
         auditLog({}, sessionToken, "CodegenService", "ApplyCodegen",
                  true, "rejected proposal=" + request.proposalId);
@@ -832,26 +832,26 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
 // Epic 10 / Task 10.5 — Workspace dashboard  GET /workspace/dashboard
 // ============================================================
 
-::Arbiter::Bridge::WorkspaceDashboard ArbiterBridgeService::getWorkspaceDashboard(
+::Atlas::Bridge::WorkspaceDashboard AtlasBridgeService::getWorkspaceDashboard(
     const std::string& sessionToken) const
 {
-    ::Arbiter::Bridge::WorkspaceDashboard dash;
+    ::Atlas::Bridge::WorkspaceDashboard dash;
 
     if (!m_running)
     {
-        dash.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::BackendUnavailable;
+        dash.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::BackendUnavailable;
         dash.result.message   = "Bridge service is not running";
         return dash;
     }
 
     if (!validateSession(sessionToken))
     {
-        dash.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Unauthorized;
+        dash.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Unauthorized;
         dash.result.message   = "Invalid or expired session token";
         return dash;
     }
 
-    dash.result.errorCode  = ::Arbiter::Bridge::BridgeErrorCode::Success;
+    dash.result.errorCode  = ::Atlas::Bridge::BridgeErrorCode::Success;
     dash.projectId         = "novaforge";
     dash.projectName       = "NovaForge";
     dash.projectVersion    = "0.1.0";
@@ -880,10 +880,10 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
             { "Config",          "NovaForge/Data/Config", "config" },
             { "SourceAtlas",     "Atlas",             "source"  },
             { "SourceNovaForge", "NovaForge",         "source"  },
-            { "SourceArbiter",   "Arbiter",           "source"  },
+            { "SourceAtlasAI",   "AtlasAI",           "source"  },
             { "SharedContracts", "Shared",            "source"  },
         };
-        dash.searchRoots.result.errorCode = ::Arbiter::Bridge::BridgeErrorCode::Success;
+        dash.searchRoots.result.errorCode = ::Atlas::Bridge::BridgeErrorCode::Success;
     }
 
     dash.currentProjectStatus = m_impl->lastBuildTarget.empty() ? "idle" : "idle";
@@ -894,4 +894,4 @@ bool ArbiterBridgeService::isBuilderToolActionAllowed(
     return dash;
 }
 
-} // namespace NovaForge::Integration::Arbiter
+} // namespace NovaForge::Integration::AtlasAI

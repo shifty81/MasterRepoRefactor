@@ -52,7 +52,7 @@
   "repoPaths": {
     "sourceRoot": "Atlas",
     "gameRoot": "NovaForge",
-    "toolingRoot": "Arbiter",
+    "toolingRoot": "AtlasAI",
     "sharedRoot": "Shared",
     "docsRoot": "Docs",
     "dataRoot": "NovaForge/Data",

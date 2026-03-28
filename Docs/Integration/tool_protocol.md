@@ -191,7 +191,7 @@ See `BridgeAuditLogger.h` for the in-process audit log API.
 
 ## Version negotiation
 
-On first connection, Arbiter sends a handshake request to `/session/connect`:
+On first connection, AtlasAI sends a handshake request to `/session/connect`:
 
 ```json
 {
