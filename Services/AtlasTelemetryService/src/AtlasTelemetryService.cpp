@@ -23,7 +23,7 @@ void AtlasTelemetryService::log(LogLevel level, const std::string& source,
     {
         ++health_.errorCount;
         health_.lastError = message;
-        if (health_.errorCount > 0) health_.servicesHealthy = false;
+        health_.servicesHealthy = false;
     }
     else if (level == LogLevel::Warning)
     {
