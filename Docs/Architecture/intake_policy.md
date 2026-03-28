@@ -2,7 +2,7 @@
 
 > **Enforcement:** `Scripts/Validate/validate_root.py`  
 > **Processor:** `Scripts/Intake/process_intake.py`  
-> **Staging area:** `Intake/`  
+> **Staging areas:** `Intake/` (text/code) · `DropBox/` (large binaries & archives)  
 > **See also:** [repo_boundaries.md](repo_boundaries.md) · [monorepo_layout.md](monorepo_layout.md)
 
 ---
@@ -25,7 +25,8 @@ The policy exists to enforce the structural guarantees in `repo_boundaries.md` a
 | `AtlasAI/` | Directory | AI tooling zone |
 | `CMakeLists.txt` | File | Root CMake entry point |
 | `Docs/` | Directory | Documentation |
-| `Intake/` | Directory | Staging area for unclassified content |
+| `DropBox/` | Directory | **Staging for large binaries/archives (git-ignored inside)** |
+| `Intake/` | Directory | Staging area for text files / code |
 | `LICENSE` | File | Open-source licence |
 | `NovaForge/` | Directory | Game project zone |
 | `README.md` | File | Project overview |
@@ -43,15 +44,49 @@ Anything else triggers a validation failure.
 
 ---
 
+## Two Staging Areas
+
+### `Intake/` — text, code, and lightweight files
+
+Use `Intake/` for:
+- Markdown documents, chat exports, design notes
+- Small source files (`.h`, `.cpp`, `.cs`, `.py`)
+- JSON/YAML data or config
+
+Files placed in `Intake/` **are tracked by git** once committed.
+
+### `DropBox/` — large binaries and archives *(git-ignored internally)*
+
+Use `DropBox/` for:
+- Zip archives (`.zip`, `.7z`, `.rar`, `.tar.gz`, …)
+- 3-D source meshes (`.fbx`, `.obj`, `.blend`)
+- Installer binaries (`.exe`, `.msi`, `.dmg`)
+- Audio / video blobs
+
+> **Key property:** `DropBox/.gitignore` ignores all binary/archive patterns inside that
+> directory.  Dropping a zip into `DropBox/` keeps it **local only** — it will never
+> bloat the remote repository.
+
+Both staging areas are processed by the same script:
+
+```bash
+python3 Scripts/Intake/process_intake.py          # scans both Intake/ and DropBox/
+python3 Scripts/Intake/process_intake.py --source dropbox   # DropBox only
+python3 Scripts/Intake/process_intake.py --source intake    # Intake/ only
+```
+
+---
+
 ## Intake Stages
 
 ### Stage 1 — Drop
 
-Place the file or directory into `Intake/`. Do not commit at this point.
+Place the file or directory into `Intake/` (text/code) or `DropBox/` (archive/binary).
+Do not commit zip files directly to root or anywhere else.
 
 ### Stage 2 — Classify
 
-Run `Scripts/Intake/process_intake.py --classify` (dry-run). The processor reads every item in `Intake/` and prints a routing decision for each.
+Run `Scripts/Intake/process_intake.py --classify` (dry-run). The processor reads every item in both staging areas and prints a routing decision for each.
 
 ### Stage 3 — Route
 
@@ -63,7 +98,7 @@ The processor auto-appends a row to `Docs/Archive/ZipFiles/README.md` (for archi
 
 ### Stage 5 — Commit
 
-Commit the routed files from their canonical locations. `Intake/` should be empty (only `Intake/README.md` remains).
+Commit the routed files from their canonical locations. Both staging areas should be empty (only their `README.md` files remain).
 
 ---
 
@@ -76,6 +111,10 @@ Commit the routed files from their canonical locations. `Intake/` should be empt
 | All cases | `Docs/Archive/ZipFiles/` |
 
 After routing, the archive must be extracted and its contents migrated individually. The zip itself is retained in `Docs/Archive/ZipFiles/` as a reference artefact.
+
+> **Note on repo size:** Zip files already committed to git history can be pruned with
+> [BFG Repo Cleaner](https://rtyley.github.io/bfg-repo-cleaner/) once all content has been
+> integrated.  The `DropBox/.gitignore` prevents **future** zips from entering git at all.
 
 ---
 
@@ -161,7 +200,7 @@ Route is determined by the declared namespace and the subsystem name:
 
 ### Directories
 
-A whole directory dropped into `Intake/` is processed recursively: every file inside is classified individually. The directory is then moved as a unit to the nearest canonical destination.
+A whole directory dropped into either staging area is processed recursively: every file inside is classified individually. The directory is then moved as a unit to the nearest canonical destination.
 
 ---
 
@@ -184,9 +223,9 @@ Every intake run appends a record to `Logs/intake/intake_log.jsonl`:
 ```json
 {
   "timestamp": "2026-03-28T14:00:00Z",
-  "source": "Intake/SomeFile.md",
-  "destination": "Docs/Design/SomeFile.md",
-  "classification": "design_doc",
+  "source": "DropBox/SomeArchive.zip",
+  "destination": "Docs/Archive/ZipFiles/SomeArchive.zip",
+  "classification": "zip_archive",
   "dry_run": false
 }
 ```
@@ -198,10 +237,22 @@ This log is git-ignored but preserved locally for audit purposes.
 ## Frequently Asked Questions
 
 **Q: I have a large zip that contains both source and docs — what do I do?**  
-A: Drop the zip in `Intake/`. The processor routes the zip to `Docs/Archive/ZipFiles/`. Then extract it manually and drop the extracted contents back into `Intake/`. Run the processor again to route each file individually.
+A: Drop the zip in `DropBox/`. Run `process_intake.py` — it routes the zip to
+`Docs/Archive/ZipFiles/`. Then extract it manually and drop the extracted contents back
+into `Intake/` or `DropBox/`. Run the processor again to route each file individually.
 
 **Q: I want to add a new top-level directory to the repo.**  
 A: That requires an architecture decision. Update `Docs/Architecture/monorepo_layout.md` and `Scripts/Validate/validate_root.py` ALLOWLIST first, then add the directory.
 
 **Q: Does the intake processor modify any file content?**  
 A: No. It only moves files and optionally converts `.txt` chat exports to structured `.md` (by wrapping them in a markdown document shell). No source code is modified.
+
+**Q: How do I trim the repo of existing committed zips?**  
+A: Use [BFG Repo Cleaner](https://rtyley.github.io/bfg-repo-cleaner/):
+```bash
+bfg --delete-files "*.zip" --no-blob-protection
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+```
+All zip content should already be integrated before running BFG.
+

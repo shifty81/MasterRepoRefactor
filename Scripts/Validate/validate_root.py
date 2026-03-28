@@ -40,8 +40,9 @@ ALLOWLIST: set[str] = {
     "Scripts",
     "Docs",
     "cmake",
-    # Staging
+    # Staging / intake
     "Intake",
+    "DropBox",
     # Build output (git-ignored, but may appear locally)
     "Build",
     # Essential root files
