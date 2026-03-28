@@ -5,7 +5,7 @@
 // - This file must not expose arbitrary engine internals.
 // - All operations must be editor-safe and explicitly permissioned.
 // - Write operations default to dry-run unless explicitly overridden.
-// - This service is guarded by NOVAFORGE_ENABLE_ARBITER_INTEGRATION.
+// - This service is guarded by NOVAFORGE_ENABLE_ATLASAI_INTEGRATION.
 
 #pragma once
 

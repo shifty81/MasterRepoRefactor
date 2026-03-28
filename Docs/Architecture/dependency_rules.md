@@ -38,8 +38,8 @@ Core Platform / Utilities
 | `NovaForgeApp` | `AtlasRuntime` |
 | `NovaForgeGameplay` | `AtlasEngine` |
 | `NovaForgeWorld` | `AtlasEngine` |
-| `NovaForgeIntegrationAtlasAI` | `ArbiterBridgeContract`, `AtlasRuntime` |
-| `ArbiterBridgeContract` | nothing (header-only interface) |
+| `NovaForgeIntegrationAtlasAI` | `AtlasBridgeContract`, `AtlasRuntime` |
+| `AtlasBridgeContract` | nothing (header-only interface) |
 | AtlasAI C# adapters | `Shared/ToolProtocol`, manifests |
 
 ## Forbidden dependencies

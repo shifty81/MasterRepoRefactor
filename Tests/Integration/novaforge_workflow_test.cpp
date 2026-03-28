@@ -8,7 +8,7 @@
 //   Task 9.4 — AtlasAI runs one safe editor tool
 //   Task 9.5 — Shipping isolation: endpoints reject unauthenticated calls
 //
-// Requires NOVAFORGE_ENABLE_ARBITER_INTEGRATION=ON.
+// Requires NOVAFORGE_ENABLE_ATLASAI_INTEGRATION=ON.
 // For context/session/bootstrap tests that run without the bridge,
 // see novaforge_context_test.cpp.
 

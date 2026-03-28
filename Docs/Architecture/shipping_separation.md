@@ -10,21 +10,21 @@ or any development-only infrastructure.
 | Flag | Default | Purpose |
 |------|---------|---------|
 | `MASTERREPO_BUILD_EDITOR` | `ON` | Include editor targets |
-| `NOVAFORGE_ENABLE_ARBITER_INTEGRATION` | `ON` | Include NovaForge bridge layer |
+| `NOVAFORGE_ENABLE_ATLASAI_INTEGRATION` | `ON` | Include NovaForge bridge layer |
 | `MASTERREPO_BUILD_TOOLS` | `ON` | Include developer tool targets |
 
 For a shipping build, set:
 
 ```cmake
 -DMASTERREPO_BUILD_EDITOR=OFF
--DNOVAFORGE_ENABLE_ARBITER_INTEGRATION=OFF
+-DNOVAFORGE_ENABLE_ATLASAI_INTEGRATION=OFF
 -DMASTERREPO_BUILD_TOOLS=OFF
 ```
 
 ## Rules
 
-1. `NovaForge/Integrations/Arbiter/` must only be compiled when
-   `NOVAFORGE_ENABLE_ARBITER_INTEGRATION=ON`.
+1. `NovaForge/Integrations/AtlasAI/` must only be compiled when
+   `NOVAFORGE_ENABLE_ATLASAI_INTEGRATION=ON`.
 
 2. Atlas editor systems (`Atlas/Editor/`) must only be compiled when
    `ATLAS_ENABLE_EDITOR=ON`.
@@ -32,7 +32,7 @@ For a shipping build, set:
 3. AtlasAI is a C#/.NET project. It must never be referenced by C++ game
    or engine targets directly.
 
-4. Any header in `NovaForge/Integrations/Arbiter/include/` must be guarded
+4. Any header in `NovaForge/Integrations/AtlasAI/include/` must be guarded
    and never `#include`d from core gameplay or runtime code.
 
 ## Verification

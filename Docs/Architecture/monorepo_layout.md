@@ -42,7 +42,7 @@ NovaForge/
 ├── Data/            config, definitions, tables, recipes, modules, parts
 ├── Content/         prefabs, scenes, UI, audio, materials, VFX
 ├── Tools/           importers, validators, authoring, generators
-├── Integrations/    integration layers (Arbiter bridge under Integrations/Arbiter/)
+├── Integrations/    integration layers (AtlasAI bridge under Integrations/AtlasAI/)
 ├── App/             NovaForge app bootstrap, session, project context
 ├── Tests/           NovaForge unit and integration tests
 ├── Docs/            NovaForge-specific documentation
@@ -67,7 +67,7 @@ AtlasAI/
 
 ```text
 Shared/
-├── ArbiterBridgeContract/  C++ header-only bridge types
+├── AtlasBridgeContract/  C++ header-only bridge types
 ├── ProjectManifests/       novaforge.project.json and others
 ├── ToolProtocol/           protocol docs and schemas
 ├── BuildMetadata/          build metadata artifacts
@@ -90,4 +90,4 @@ Shared/
 - `NovaForgeIntegrationAtlasAI`
 
 ### Shared
-- `ArbiterBridgeContract` (INTERFACE library)
+- `AtlasBridgeContract` (INTERFACE library)

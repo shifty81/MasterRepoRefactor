@@ -78,7 +78,7 @@ and what dependencies are forbidden across zone boundaries.
 ## Shared
 
 ### Owns
-- bridge contracts (ArbiterBridgeContract)
+- bridge contracts (AtlasBridgeContract)
 - project manifests (ProjectManifests)
 - tool protocol definitions (ToolProtocol)
 - build metadata
@@ -120,5 +120,5 @@ AtlasAI ────────────► NovaForge only through bridge/pr
 
 - Shipping client / server builds must not pull any AtlasAI UI or tooling assemblies.
 - Editor-only integrations must be guarded by `MASTERREPO_BUILD_EDITOR` and
-  `NOVAFORGE_ENABLE_ARBITER_INTEGRATION` flags.
+  `NOVAFORGE_ENABLE_ATLASAI_INTEGRATION` flags.
 - Development-only tooling paths must not leak into runtime binaries.
