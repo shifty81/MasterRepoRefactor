@@ -1,0 +1,6 @@
+NovaForgeContextTest 3 0.000576712
+BridgeServiceIntegrationTest 3 0.00060328
+NovaForgeWorkflowTest 3 0.000641081
+NovaForgeEpic10Test 3 0.000666392
+BridgeTypesCompileTest 3 0.000499021
+---

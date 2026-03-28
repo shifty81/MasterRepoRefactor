@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/BridgeTypesCompileTest.dir/link.d CMakeFiles/BridgeTypesCompileTest.dir/bridge_types_compile_test.cpp.o -o BridgeTypesCompileTest
