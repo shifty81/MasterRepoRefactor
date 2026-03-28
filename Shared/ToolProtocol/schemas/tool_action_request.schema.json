@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ToolActionRequest",
+  "description": "Payload for invoking a whitelisted editor tool action. Sent as the payload of a BridgeRequestEnvelope targeting EditorService/RunToolAction. Mirrors the ToolActionRequest struct and ToolActionId enum in Shared/AtlasBridgeContract/include/AtlasBridgeTypes.h.",
+  "type": "object",
+  "required": ["actionId"],
+  "additionalProperties": false,
+  "properties": {
+    "actionId": {
+      "type": "integer",
+      "description": "Numeric identifier of the whitelisted tool action to invoke (ToolActionId enum). 0=ValidateData, 1=RunPCGPreview, 2=OpenScene, 3=FocusEntity, 4=RegenerateSchemas.",
+      "enum": [0, 1, 2, 3, 4]
+    },
+    "parameter": {
+      "type": "string",
+      "description": "Optional action-specific parameter string. Interpretation depends on actionId (e.g. scene path for OpenScene, entity id for FocusEntity)."
+    },
+    "dryRun": {
+      "type": "boolean",
+      "description": "When true the action is simulated but no persistent changes are committed. Defaults to true for safety.",
+      "default": true
+    }
+  }
+}
