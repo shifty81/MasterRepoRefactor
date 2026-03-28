@@ -18,6 +18,12 @@ import argparse
 from pathlib import Path
 from typing import Dict, List, Tuple, Any
 
+# ── Logging setup ─────────────────────────────────────────────────────────────
+_REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(_REPO_ROOT))
+from Shared.Logging.log_utils import get_tool_logger
+logger = get_tool_logger(__name__, subsystem="game_tools")
+
 
 class Colors:
     """ANSI color codes for terminal output"""
@@ -255,58 +261,64 @@ def main():
     parser.add_argument('--verbose', '-v', action='store_true', help='Show detailed output')
     parser.add_argument('--data-dir', type=str, default='data', help='Data directory to scan (default: data)')
     args = parser.parse_args()
-    
+
+    logger.info("JSON validation starting")
     print(f"{Colors.BOLD}{Colors.HEADER}EVE OFFLINE - JSON Validation Tool{Colors.ENDC}\n")
-    
+
     total_errors = 0
     total_warnings = 0
     total_files = 0
-    
+
     if args.file:
-        # Validate single file
         filepath = Path(args.file)
+        logger.info("Validating single file: %s", filepath)
         if not filepath.exists():
+            logger.error("File not found: %s", filepath)
             print_error(f"File not found: {filepath}")
             return 1
-        
+
         errors, warnings = validate_file(filepath, args.verbose)
         total_errors += errors
         total_warnings += warnings
         total_files = 1
     else:
-        # Validate all JSON files in data directory
         data_dir = Path(args.data_dir)
+        logger.info("Scanning data directory: %s", data_dir)
         if not data_dir.exists():
+            logger.error("Data directory not found: %s", data_dir)
             print_error(f"Data directory not found: {data_dir}")
             return 1
-        
-        # Find all JSON files
+
         json_files = sorted(data_dir.glob('**/*.json'))
-        
+
         if not json_files:
+            logger.warning("No JSON files found in %s", data_dir)
             print_warning(f"No JSON files found in {data_dir}")
             return 0
-        
+
+        logger.info("Found %d JSON files to validate", len(json_files))
         print_info(f"Scanning {len(json_files)} JSON files in {data_dir}/\n")
-        
+
         for filepath in json_files:
             errors, warnings = validate_file(filepath, args.verbose)
             total_errors += errors
             total_warnings += warnings
             total_files += 1
-    
-    # Print summary
+
     print(f"\n{Colors.BOLD}Summary:{Colors.ENDC}")
     print(f"  Files checked: {total_files}")
-    
+
     if total_errors == 0:
+        logger.info("Validation PASS — %d files, %d warnings", total_files, total_warnings)
         print_success(f"No errors found")
     else:
+        logger.error("Validation FAIL — %d error(s) in %d files", total_errors, total_files)
         print_error(f"{total_errors} error(s) found")
-    
+
     if total_warnings > 0:
+        logger.warning("%d warning(s) found", total_warnings)
         print_warning(f"{total_warnings} warning(s) found")
-    
+
     return 1 if total_errors > 0 else 0
 
 

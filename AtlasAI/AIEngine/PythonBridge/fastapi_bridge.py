@@ -116,6 +116,34 @@ def _load_env_file() -> None:
 # are in the environment when those modules evaluate their module-level constants.
 _load_env_file()
 
+# ── Logging setup ─────────────────────────────────────────────────────────────
+import logging as _logging
+import logging.handlers as _log_handlers
+
+_BRIDGE_LOG_DIR = Path(__file__).resolve().parents[3] / "Logs" / "python_bridge"
+_BRIDGE_LOG_DIR.mkdir(parents=True, exist_ok=True)
+_bridge_logger = _logging.getLogger("python_bridge")
+if not _bridge_logger.handlers:
+    _bridge_logger.setLevel(_logging.DEBUG)
+    _log_fmt = _logging.Formatter(
+        "%(asctime)s [%(levelname)-8s] %(name)s: %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+    _console_h = _logging.StreamHandler()
+    _console_h.setFormatter(_log_fmt)
+    _bridge_logger.addHandler(_console_h)
+    try:
+        _file_h = _log_handlers.RotatingFileHandler(
+            _BRIDGE_LOG_DIR / "python_bridge.log",
+            maxBytes=5 * 1024 * 1024,
+            backupCount=5,
+            encoding="utf-8",
+        )
+        _file_h.setFormatter(_log_fmt)
+        _bridge_logger.addHandler(_file_h)
+    except OSError:
+        pass
+_bridge_logger.info("PythonBridge starting up")
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
@@ -160,8 +188,10 @@ _ROADMAP_HISTORY_CHARS = 500                 # max chars per message used for ro
 async def lifespan(app: FastAPI):
     """Pre-load the LLM in a background thread so the first chat request is fast."""
     import threading
+    _bridge_logger.info("Lifespan startup — pre-loading LLM model")
     threading.Thread(target=preload_model, daemon=True, name="llm-preload").start()
     yield
+    _bridge_logger.info("Lifespan shutdown")
 
 
 app = FastAPI(title="AtlasAI Bridge", version="0.1.0", lifespan=lifespan)
@@ -1881,4 +1911,5 @@ for _stub_path, _stub_tag in [
 
 if __name__ == "__main__":
     import uvicorn
+    _bridge_logger.info("Starting PythonBridge server on 127.0.0.1:8000")
     uvicorn.run(app, host="127.0.0.1", port=8000)

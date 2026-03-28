@@ -39,6 +39,11 @@ from pathlib import Path
 _this_dir = Path(__file__).resolve().parent
 _repo_root = _this_dir.parent.parent  # ai_dev/core/ -> ai_dev/ -> repo root
 sys.path.insert(0, str(_this_dir.parent))
+sys.path.insert(0, str(_repo_root))
+
+# ── Logging setup ─────────────────────────────────────────────────────────────
+from Shared.Logging.log_utils import get_tool_logger
+logger = get_tool_logger(__name__, subsystem="ai_dev")
 
 from core.llm_interface import LocalLLM
 from core.context_manager import ContextManager
@@ -711,6 +716,7 @@ def _parse_args():
 
 
 if __name__ == "__main__":
+    logger.info("AgentLoop starting")
     args = _parse_args()
     agent = AgentLoop(
         auto_approve=args.auto_approve,
@@ -718,8 +724,12 @@ if __name__ == "__main__":
     )
 
     if args.auto_prompt:
+        logger.info("Mode: auto-iterate — prompt: %s", args.auto_prompt)
         agent.run_auto(args.auto_prompt)
     elif args.prompt:
+        logger.info("Mode: single — prompt: %s", args.prompt)
         agent.run_single(args.prompt)
     else:
+        logger.info("Mode: interactive")
         agent.run()
+    logger.info("AgentLoop exiting")

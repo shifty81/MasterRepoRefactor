@@ -20,6 +20,11 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
+# ── Logging setup ─────────────────────────────────────────────────────────────
+sys.path.insert(0, str(REPO_ROOT))
+from Shared.Logging.log_utils import get_tool_logger
+logger = get_tool_logger(__name__, subsystem="validate")
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def iter_files(directory: Path, extensions: tuple[str, ...]):
@@ -173,6 +178,7 @@ def run_atlasai_csharp_check() -> int:
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 def main() -> int:
+    logger.info("Boundary validation started — repo: %s", REPO_ROOT)
     print("=" * 64)
     print("  Boundary Validation")
     print(f"  Repo: {REPO_ROOT}")
@@ -180,17 +186,22 @@ def main() -> int:
     print()
 
     total_violations = 0
+    logger.info("Running Atlas boundary check …")
     total_violations += run_atlas_boundary_check()
     print()
+    logger.info("Running Shared boundary check …")
     total_violations += run_shared_boundary_check()
     print()
+    logger.info("Running AtlasAI C# boundary check …")
     total_violations += run_atlasai_csharp_check()
 
     print()
     print("=" * 64)
     if total_violations == 0:
+        logger.info("Result: PASS — no boundary violations found")
         print("  Result: PASS — no boundary violations found.")
     else:
+        logger.warning("Result: FAIL — %d violation(s) found", total_violations)
         print(f"  Result: FAIL — {total_violations} violation(s) found.")
     print("=" * 64)
 

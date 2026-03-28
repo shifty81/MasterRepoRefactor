@@ -7,6 +7,11 @@ set -euo pipefail
 SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_SCRIPT="${SCRIPTS_DIR}/../Build/build.sh"
 TEST_SCRIPT="${SCRIPTS_DIR}/../Build/test.sh"
+REPO_ROOT="$(cd "${SCRIPTS_DIR}/../.." && pwd)"
+
+# shellcheck source=Scripts/Logging/log_helper.sh
+source "${REPO_ROOT}/Scripts/Logging/log_helper.sh"
+log_init "ci"
 
 CI_CONFIG="${CI_BUILD_CONFIG:-Release}"
 CI_JOBS="${CI_BUILD_JOBS:-}"
@@ -33,10 +38,12 @@ if [[ -n "$CI_JOBS" ]]; then
 fi
 
 BUILD_STATUS=0
+log_section "Build"
 bash "$BUILD_SCRIPT" "${BUILD_ARGS[@]}" || BUILD_STATUS=$?
 
 TEST_STATUS=0
 if [[ $BUILD_STATUS -eq 0 ]]; then
+    log_section "Tests"
     bash "$TEST_SCRIPT" --config "$CI_CONFIG" || TEST_STATUS=$?
 else
     echo ""

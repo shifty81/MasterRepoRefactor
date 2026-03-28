@@ -14,6 +14,13 @@ Returns exit code 1 if violations are found.
 import argparse
 import pathlib
 import sys
+from pathlib import Path
+
+# ── Logging setup ─────────────────────────────────────────────────────────────
+_REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(_REPO_ROOT))
+from Shared.Logging.log_utils import get_tool_logger
+logger = get_tool_logger(__name__, subsystem="game_tools")
 
 # APIs forbidden in simulation code
 FORBIDDEN_PATTERNS = [
@@ -71,7 +78,9 @@ def main():
     args = parser.parse_args()
 
     root = pathlib.Path(args.path)
+    logger.info("Contract scan starting — root: %s", root)
     if not root.exists():
+        logger.error("Directory not found: %s", root)
         print(f"Error: directory {root} not found", file=sys.stderr)
         sys.exit(2)
 
@@ -85,7 +94,10 @@ def main():
             if filepath.suffix in SOURCE_EXTENSIONS:
                 if filepath.name in SKIP_FILES:
                     continue
-                all_violations.extend(scan_file(filepath))
+                hits = scan_file(filepath)
+                if hits:
+                    logger.warning("Violations in %s: %d", filepath, len(hits))
+                all_violations.extend(hits)
 
     # Also scan entire tree for banned library usage
     for filepath in root.rglob("*"):
@@ -104,11 +116,13 @@ def main():
                     )
 
     if all_violations:
+        logger.error("Contract scan FAIL — %d violation(s) found", len(all_violations))
         print(f"FAIL: {len(all_violations)} contract violation(s) found:\n")
         for v in all_violations:
             print(f"  {v}")
         sys.exit(1)
     else:
+        logger.info("Contract scan PASS — no violations found")
         print("PASS: No contract violations found.")
         sys.exit(0)
 

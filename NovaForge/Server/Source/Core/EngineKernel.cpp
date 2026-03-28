@@ -3,21 +3,25 @@
 #include "Rendering/Renderer.h"
 #include "Tooling/ToolingSubsystem.h"
 #include "World/World.h"
+#include "Shared/Logging/MasterLogger.h"
 #include <iostream>
 
 bool EngineKernel::Initialize()
 {
+    MR_LOG_INFO("EngineKernel::Initialize — begin");
     std::cout << "[Kernel] Initialize\n";
 
     Data = std::make_unique<DataRegistry>();
     if (!Data->Initialize("Data"))
     {
+        MR_LOG_ERROR("EngineKernel::Initialize — DataRegistry failed");
         return false;
     }
 
     RuntimeWorld = std::make_unique<World>();
     if (!RuntimeWorld->Initialize(*Data))
     {
+        MR_LOG_ERROR("EngineKernel::Initialize — World failed");
         return false;
     }
 
@@ -28,6 +32,7 @@ bool EngineKernel::Initialize()
     Tooling->Initialize();
 
     bInitialized = true;
+    MR_LOG_INFO("EngineKernel::Initialize — complete");
     return true;
 }
 
@@ -45,6 +50,7 @@ void EngineKernel::Tick(float DeltaTime)
 
 void EngineKernel::Shutdown()
 {
+    MR_LOG_INFO("EngineKernel::Shutdown — begin");
     std::cout << "[Kernel] Shutdown\n";
 
     if (Tooling)
@@ -72,4 +78,5 @@ void EngineKernel::Shutdown()
     }
 
     bInitialized = false;
+    MR_LOG_INFO("EngineKernel::Shutdown — complete");
 }
