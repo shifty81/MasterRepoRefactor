@@ -1,0 +1,15 @@
+{
+  "profileId": "devworld_vertical_slice",
+  "saveSlot": "devworld_slot_01",
+  "manifestVersion": 1,
+  "contributors": [
+    "rig",
+    "vehicles",
+    "builder_salvage",
+    "missions",
+    "economy",
+    "factions",
+    "combat_hazards"
+  ],
+  "autoValidateAfterLoad": true
+}
