@@ -62,6 +62,9 @@ set(NOVAFORGE_GAMEPLAY_SOURCES
     # Progression reward system (D3)
     Progression/ProgressionRewardSystem.cpp
 
+    # Unified data registry (A3)
+    Data/UnifiedDataRegistry.cpp
+
     # Characters (Phase 1)
     Characters/CharacterSystem.cpp
     Characters/CharacterControllerShell.cpp
@@ -90,6 +93,7 @@ target_include_directories(NovaForgeGameplay
              "${CMAKE_CURRENT_SOURCE_DIR}/WorldSim"
              "${CMAKE_CURRENT_SOURCE_DIR}/Inventory"
              "${CMAKE_CURRENT_SOURCE_DIR}/Storage"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Data"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 

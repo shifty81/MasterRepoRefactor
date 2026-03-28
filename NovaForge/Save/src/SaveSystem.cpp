@@ -54,6 +54,17 @@ bool SaveSystem::saveContracts(const SavedContractState& contracts)
     return true;
 }
 
+bool SaveSystem::saveFleet(const SavedFleetState& fleet)
+{
+    for (auto& f : m_bundle.fleets)
+    {
+        if (f.fleetId == fleet.fleetId) { f = fleet; m_dirty = true; return true; }
+    }
+    m_bundle.fleets.push_back(fleet);
+    m_dirty = true;
+    return true;
+}
+
 bool SaveSystem::flushToSlot(int slot)
 {
     if (slot < 0 || slot >= kMaxSlots) return false;

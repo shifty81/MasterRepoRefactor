@@ -72,6 +72,41 @@ struct SavedContractState
 };
 
 // --------------------------------------------------------------------------
+// Fleet save slot
+// --------------------------------------------------------------------------
+
+struct SavedFleetShip
+{
+    uint64_t    shipId   = 0;
+    std::string shipName;
+    std::string shipClass;
+};
+
+struct SavedFleetState
+{
+    uint64_t                    fleetId  = 0;
+    uint64_t                    ownerId  = 0;
+    std::string                 name;
+    std::string                 sectorId;
+    uint8_t                     status   = 0;
+    std::vector<SavedFleetShip> ships;
+};
+
+// --------------------------------------------------------------------------
+// Save metadata (slot header, used for save-select UI)
+// --------------------------------------------------------------------------
+
+struct SaveMetadata
+{
+    int         slot           = 0;
+    std::string playerName;
+    uint32_t    playTimeSeconds = 0;
+    std::string locationLabel;
+    uint32_t    saveVersion    = 1;
+    bool        valid          = false;
+};
+
+// --------------------------------------------------------------------------
 // Full save bundle
 // --------------------------------------------------------------------------
 
@@ -82,6 +117,8 @@ struct SaveBundle
     std::vector<SavedVoxelChunk> voxelChunks;
     SavedEconomyState     economy;
     SavedContractState    contracts;
+    std::vector<SavedFleetState> fleets;
+    SaveMetadata          metadata;
     bool                  valid = false;
 };
 
@@ -103,6 +140,7 @@ public:
     bool saveVoxelChunk(const SavedVoxelChunk& chunk);
     bool saveEconomy(const SavedEconomyState& economy);
     bool saveContracts(const SavedContractState& contracts);
+    bool saveFleet(const SavedFleetState& fleet);
 
     /// Flush the complete bundle to disk (slot 0 … kMaxSlots-1).
     bool flushToSlot(int slot);

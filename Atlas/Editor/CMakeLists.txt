@@ -50,6 +50,12 @@ set(ATLAS_EDITOR_SOURCES
     # Prefab / Template authoring (C7)
     Prefabs/PrefabLibrary.cpp
     Prefabs/PrefabManager.cpp
+
+    # Editor Dock Layout (B4 editor panel docking)
+    Core/EditorDockLayout.cpp
+
+    # AtlasAI editor workflow (E1)
+    AI/DiffReviewPanel.cpp
 )
 
 add_library(AtlasEditor STATIC ${ATLAS_EDITOR_SOURCES})
@@ -69,6 +75,7 @@ target_include_directories(AtlasEditor
              "${CMAKE_CURRENT_SOURCE_DIR}/Voxel"
              "${CMAKE_CURRENT_SOURCE_DIR}/PCG"
              "${CMAKE_CURRENT_SOURCE_DIR}/Prefabs"
+             "${CMAKE_CURRENT_SOURCE_DIR}/AI"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
