@@ -33,6 +33,22 @@ set(NOVAFORGE_GAMEPLAY_SOURCES
 
     # Builder
     Builder/BuilderSystem.cpp
+
+    # Characters (Phase 1)
+    Characters/CharacterSystem.cpp
+    Characters/CharacterControllerShell.cpp
+    Characters/Animation/AnimationController.cpp
+    Characters/Equipment/EquipmentSystem.cpp
+    Characters/Mech/MechPossessionSystem.cpp
+
+    # Characters (Phase 2)
+    Characters/Core/CharacterStateAuthority.cpp
+    Characters/Core/CharacterTransitionRules.cpp
+    Characters/Animation/AnimationLayerSystem.cpp
+    Characters/IK/IKSystem.cpp
+    Characters/FPS/FPSPresentationSystem.cpp
+    Characters/Editor/CharacterEditorSystem.cpp
+    Characters/Tools/ToolInteractionShell.cpp
 )
 
 add_library(NovaForgeGameplay STATIC ${NOVAFORGE_GAMEPLAY_SOURCES})

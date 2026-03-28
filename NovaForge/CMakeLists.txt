@@ -4,6 +4,8 @@ include(NovaForgeTargets)
 
 add_subdirectory(Gameplay)
 add_subdirectory(World)
+add_subdirectory(Save)
+add_subdirectory(UI)
 
 if(NOVAFORGE_ENABLE_ATLASAI_INTEGRATION)
     add_subdirectory(Integrations/AtlasAI)

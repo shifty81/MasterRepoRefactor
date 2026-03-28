@@ -157,13 +157,29 @@ Proper logging wired into every executable and runnable component across the pro
 ## Current Status
 
 ```
-Tests passing:  7 C++ integration tests · 263 Python unit tests
-Source files:  ~2,560 C++ · 215 Python · 35 C# · 23 TypeScript
+Tests passing:  7 C++ integration tests · 352 Python unit tests
+Source files:  ~2,650 C++ · 215 Python · 35 C# · 23 TypeScript
 Architecture:  Stable — all 10 foundation epics complete
 Bridge:        REST + WebSocket endpoints operational
 AI Engine:     41 modules · 12 LLM backends · agentic self-build loop
 Logging:       Unified across all shell scripts, Python tools, and C++ runtime
+Character:     Phase 1 + Phase 2 character systems migrated (Equipment, Animation, IK, FPS, Mech)
+Editor:        T1-T3 foundation migrated (Core, Input, Camera, Selection, Outliner, Inspector, Gizmos)
+Orchestration: Unified repo consolidation migrated (App, GameOrchestrator, World, Renderer, Save, UI)
 ```
+
+---
+
+### Root-Level Zip Migration ✅ COMPLETE (Session 8)
+
+All 4 root-level zip packs migrated:
+
+| Zip File | Status | Content Migrated To |
+|----------|--------|---------------------|
+| `MasterRepo_Unified_Repo_Consolidation_Pack.zip` | ✅ Done | `NovaForge/App/` (App, GameOrchestrator, DataRegistry), `NovaForge/World/`, `NovaForge/Save/`, `NovaForge/UI/`, `Atlas/Engine/Rendering/`, `Atlas/Editor/EditorShell`, `NovaForge/Data/Config/`, `Docs/Architecture/` |
+| `MasterRepo_T1_T3_Editor_Foundation_Pack.zip` | ✅ Done | `Atlas/Editor/Core/`, `Atlas/Editor/Input/`, `Atlas/Editor/Camera/`, `Atlas/Editor/Selection/`, `Atlas/Editor/Outliner/`, `Atlas/Editor/Inspector/`, `Atlas/Editor/Gizmos/`, `Atlas/Config/Editor/` |
+| `MasterRepo_Character_System_Pack.zip` | ✅ Done | `NovaForge/Gameplay/Characters/` (CharacterSystem, CharacterControllerShell, Animation, Equipment, Mech), `NovaForge/Data/Definitions/Characters,Equipment,Animation/` |
+| `MasterRepo_Character_Phase2_Pack.zip` | ✅ Done | `NovaForge/Gameplay/Characters/Core/` (StateAuthority, TransitionRules), `Characters/IK/`, `Characters/FPS/`, `Characters/Editor/`, `Characters/Tools/`, `NovaForge/Data/Definitions/IK,Tools/` |
 
 ---
 
@@ -173,8 +189,9 @@ Logging:       Unified across all shell scripts, Python tools, and C++ runtime
 
 The C++ source files are now in place. The next step is wiring them into the CMake build graph and verifying each subsystem compiles and links correctly.
 
-- [ ] Wire `Atlas/Engine/Rendering/` into `AtlasEngine` CMake target
+- [x] Wire `Atlas/Engine/Rendering/` into `AtlasEngine` CMake target
 - [ ] Wire `Atlas/Engine/Scene/` + `Atlas/Engine/Scripting/` into target
+- [x] Wire `Atlas/Editor/Core/`, `Input/`, `Camera/`, `Selection/`, `Outliner/`, `Inspector/`, `Gizmos/` into `AtlasEditor` target
 - [ ] Wire `Atlas/Editor/Panels/` + `Atlas/Editor/EditorServices/AI/` into `AtlasEditor` target
 - [ ] Add `Atlas/Editor/Framework/UI/` to `AtlasUI` target
 - [ ] Resolve any missing includes from external deps (glm, stb, etc.)
@@ -206,6 +223,18 @@ The server and client source trees are populated. Next: integrate with the CMake
 - [ ] Set up GitHub Actions CI: CMake build → CTest → Python pytest → TypeScript Jest
 - [ ] Add schema validation tests (JSON round-trip against `Shared/ToolProtocol/schemas/`)
 - [ ] Automate audit log rotation and workspace snapshot exports
+
+### Phase 15 — Character + Gameplay Loop Hookup
+
+- [ ] Connect `CharacterSystem` to `PlayerController` (movement mode dispatch)
+- [ ] Connect `EquipmentSystem` to mining tool interaction (`ToolInteractionShell`)
+- [ ] Wire `IKSystem` into character animation pipeline
+- [ ] Wire `FPSPresentationSystem` into runtime rendering
+- [ ] Connect `CharacterEditorSystem` to editor mode controller
+- [ ] Add `MechPossessionSystem` vehicle entry/exit events to gameplay loop
+- [ ] Connect `GameOrchestrator` boot path to `NovaForgeBootstrap`
+- [ ] Wire `SaveManager` into world serialization
+- [ ] Wire `RuntimeUIShell` into HUD display path
 
 ---
 
