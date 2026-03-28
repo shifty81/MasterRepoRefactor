@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011"
+                 xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity
+      Id="AtlasAIVSIX.shifty81.ArbiterAI"
+      Version="0.5.0"
+      Language="en-US"
+      Publisher="shifty81" />
+    <DisplayName>AtlasAI — AI-Powered Development Assistant</DisplayName>
+    <Description xml:space="preserve">
+AtlasAI integrates a fully local, self-hosted AI engine directly into Visual Studio 2022.
+
+FEATURES:
+• Dockable Chat Panel — conversational AI assistant (Ctrl+Alt+A)
+• 9 AI Commands — Ask, Explain, Fix, Refactor, Tests, Docs, Review, Insert, Open Chat
+• Inline Suggestions — AI completions triggered by // AtlasAI: comments (Roslyn-powered)
+• Context Injection — active file, selection and project automatically sent with every message
+• Build Event Integration — after every failed build, AI fix suggestions appear in the Error List
+• Persona System — choose from AtlasAI Assistant, Coder, Teacher, Organizer personalities
+• Settings Page — configure backend URL, personas, TTS, and inline suggestions (Tools → Options → AtlasAI)
+
+PRIVACY:
+All AI inference runs on your own hardware via the self-hosted AtlasAI backend (Python / FastAPI).
+No code, prompts, or telemetry is ever sent to any third-party cloud service.
+
+REQUIREMENTS:
+• Visual Studio 2022 (17.x) — Community, Professional, or Enterprise
+• Arbiter backend running locally (see https://github.com/shifty81/MasterRepoRefactor for setup)
+    </Description>
+    <Tags>AI, code assistant, chat, refactor, autocomplete, local LLM, copilot, offline</Tags>
+    <ProjectUrl>https://github.com/shifty81/MasterRepoRefactor</ProjectUrl>
+    <License>MIT</License>
+    <Icon>Resources\arbiter_icon.png</Icon>
+    <GettingStartedGuide>https://github.com/shifty81/MasterRepoRefactor#readme</GettingStartedGuide>
+    <ReleaseNotes>
+v0.5.0 — Initial VSIX release
+  • Chat panel (WebView2, full AtlasAI IDE interface)
+  • 9 context-aware AI commands with keyboard shortcuts
+  • Inline code suggestions via Roslyn InlineCompletionsProvider
+  • Build-event hook: AI fix suggestions surfaced in the Error List (M6-10)
+  • Settings page (Tools → Options → AtlasAI)
+  • Auto-detects AtlasAI backend on ports 8001 (Engine) and 8000 (Bridge)
+    </ReleaseNotes>
+    <MoreInfo>https://github.com/shifty81/MasterRepoRefactor/blob/main/VisualStudioExtension/INSTALL.md</MoreInfo>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Community"    Version="[17.0,18.0)" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Professional" Version="[17.0,18.0)" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Enterprise"   Version="[17.0,18.0)" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP"
+                DisplayName=".NET Framework"
+                Version="[4.7.2,)" />
+    <Dependency Id="Microsoft.VisualStudio.Component.CoreEditor"
+                DisplayName="Visual Studio core editor"
+                Version="[17.0,18.0)" />
+  </Dependencies>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor"
+                  Version="[17.0,18.0)"
+                  DisplayName="Visual Studio core editor" />
+  </Prerequisites>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage"
+           d:Source="Project"
+           d:ProjectName="%CurrentProject%"
+           Path="|AtlasAIVSIX;PkgdefProjectOutputGroup|" />
+    <Asset Type="Microsoft.VisualStudio.MefComponent"
+           d:Source="Project"
+           d:ProjectName="%CurrentProject%"
+           Path="|AtlasAIVSIX|" />
+  </Assets>
+</PackageManifest>

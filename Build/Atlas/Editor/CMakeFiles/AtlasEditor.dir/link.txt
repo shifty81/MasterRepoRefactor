@@ -1,0 +1,2 @@
+/usr/bin/ar qc libAtlasEditor.a CMakeFiles/AtlasEditor.dir/src/AtlasEditor_stub.cpp.o
+/usr/bin/ranlib libAtlasEditor.a
