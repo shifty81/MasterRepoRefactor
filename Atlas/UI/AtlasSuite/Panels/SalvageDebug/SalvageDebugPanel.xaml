@@ -1,0 +1,16 @@
+<UserControl x:Class="UI.AtlasSuite.Panels.SalvageDebug.SalvageDebugPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="8">
+        <StackPanel>
+            <TextBlock Text="Salvage Debug" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
+            <TextBlock Text="Construct ID"/>
+            <TextBox x:Name="ConstructIdTextBox" Text="dev_builder_salvage_construct" Margin="0,4,0,8"/>
+            <TextBlock Text="Placement ID"/>
+            <TextBox x:Name="PlacementIdTextBox" Text="part_001" Margin="0,4,0,8"/>
+            <Button Content="Mark For Salvage" Margin="0,0,0,4"/>
+            <Button Content="Cut / Detach / Recover" Margin="0,0,0,8"/>
+            <TextBlock Text="Scaffold panel only — wire commands to salvage runtime service." TextWrapping="Wrap"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

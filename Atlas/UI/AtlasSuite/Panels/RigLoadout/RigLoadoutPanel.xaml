@@ -1,0 +1,11 @@
+<UserControl x:Class="UI.AtlasSuite.Panels.RigLoadout.RigLoadoutPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Padding="12">
+        <StackPanel>
+            <TextBlock Text="Rig Loadout" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
+            <TextBlock Text="Starter WPF panel stub for rig equipment + quick slots."/>
+            <TextBlock Text="Bind this to PlayerRigState and inventory services." Margin="0,6,0,0"/>
+        </StackPanel>
+    </Border>
+</UserControl>
