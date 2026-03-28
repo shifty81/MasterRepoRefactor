@@ -56,6 +56,11 @@ set(ATLAS_EDITOR_SOURCES
 
     # AtlasAI editor workflow (E1)
     AI/DiffReviewPanel.cpp
+
+    # Editor Docs panels (H1/H2/H3)
+    Docs/DesignDocPanel.cpp
+    Docs/FeatureChecklistPanel.cpp
+    Docs/ADLPanel.cpp
 )
 
 add_library(AtlasEditor STATIC ${ATLAS_EDITOR_SOURCES})
@@ -76,6 +81,7 @@ target_include_directories(AtlasEditor
              "${CMAKE_CURRENT_SOURCE_DIR}/PCG"
              "${CMAKE_CURRENT_SOURCE_DIR}/Prefabs"
              "${CMAKE_CURRENT_SOURCE_DIR}/AI"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Docs"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 

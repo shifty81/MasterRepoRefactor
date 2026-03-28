@@ -8,6 +8,12 @@ set(ATLAS_ENGINE_SOURCES
     Input/InputContextManager.cpp
     AssetPipeline/AssetNamingRules.cpp
     AssetPipeline/AssetImportValidator.cpp
+    Physics/PhysicsWorld.cpp
+    Physics/PhysicsExtensions.cpp
+    Audio/AudioEngine.cpp
+    Audio/AudioSystem.cpp
+    Networking/NetSession.cpp
+    Scripting/ScriptingVM.cpp
     # add source files here as engine systems are implemented
 )
 
@@ -18,6 +24,10 @@ target_include_directories(AtlasEngine
              "${CMAKE_CURRENT_SOURCE_DIR}/Rendering"
              "${CMAKE_CURRENT_SOURCE_DIR}/Input"
              "${CMAKE_CURRENT_SOURCE_DIR}/AssetPipeline"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Physics"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Audio"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Networking"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Scripting"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 

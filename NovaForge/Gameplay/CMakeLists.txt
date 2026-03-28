@@ -65,6 +65,15 @@ set(NOVAFORGE_GAMEPLAY_SOURCES
     # Unified data registry (A3)
     Data/UnifiedDataRegistry.cpp
 
+    # Season / Titan Race (I1)
+    Season/TitanRaceSystem.cpp
+
+    # Anomaly system (I2)
+    Anomaly/AnomalySystem.cpp
+
+    # War / Sector system (I3)
+    WarSector/WarSectorSystem.cpp
+
     # Characters (Phase 1)
     Characters/CharacterSystem.cpp
     Characters/CharacterControllerShell.cpp
@@ -94,6 +103,9 @@ target_include_directories(NovaForgeGameplay
              "${CMAKE_CURRENT_SOURCE_DIR}/Inventory"
              "${CMAKE_CURRENT_SOURCE_DIR}/Storage"
              "${CMAKE_CURRENT_SOURCE_DIR}/Data"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Season"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Anomaly"
+             "${CMAKE_CURRENT_SOURCE_DIR}/WarSector"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
