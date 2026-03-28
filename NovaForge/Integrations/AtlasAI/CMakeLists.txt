@@ -4,6 +4,7 @@ set(NOVAFORGE_ATLASAI_INTEGRATION_SOURCES
     src/AtlasBridgeService.cpp
     src/BridgeSessionManager.cpp
     src/BridgeAuditLogger.cpp
+    src/LiveIngestionService.cpp
 )
 
 add_library(NovaForgeIntegrationAtlasAI STATIC
