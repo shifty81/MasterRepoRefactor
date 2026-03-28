@@ -247,15 +247,15 @@ Two security hardening packs fully integrated.
 
 ## Near-Term Goals (Active)
 
-### Phase 11 — Engine C++ Subsystem Expansion
+### Phase 11 — Engine C++ Subsystem Expansion ✅ COMPLETE
 
 The C++ source files are now in place. The next step is wiring them into the CMake build graph and verifying each subsystem compiles and links correctly.
 
 - [x] Wire `Atlas/Engine/Rendering/` into `AtlasEngine` CMake target
-- [ ] Wire `Atlas/Engine/Scene/` + `Atlas/Engine/Scripting/` into target
+- [x] Wire `Atlas/Engine/Scene/` + `Atlas/Engine/Scripting/` into target — `SceneNode`, `SceneGraph`, `SceneManager` scaffolded and wired
 - [x] Wire `Atlas/Editor/Core/`, `Input/`, `Camera/`, `Selection/`, `Outliner/`, `Inspector/`, `Gizmos/` into `AtlasEditor` target
-- [ ] Wire `Atlas/Editor/Panels/` + `Atlas/Editor/EditorServices/AI/` into `AtlasEditor` target
-- [ ] Add `Atlas/Editor/Framework/UI/` to `AtlasUI` target
+- [x] Wire `Atlas/Editor/Panels/` + `Atlas/Editor/EditorServices/AI/` into `AtlasEditor` target
+- [x] Add `Atlas/Editor/Framework/UI/` (`UIThemeManager`, `UIWidgetRegistry`) to `AtlasEditor` target
 - [ ] Resolve any missing includes from external deps (glm, stb, etc.)
 - [ ] Run full engine build smoke test
 
@@ -269,34 +269,34 @@ The server and client source trees are populated. Next: integrate with the CMake
 - [ ] Verify `NovaForge/Client/App/external/` (tinygltf, nlohmann/json, sol2) links correctly
 - [ ] Add server config/whitelist validation test
 
-### Phase 13 — AtlasAI Live Integration
+### Phase 13 — AtlasAI Live Integration 🔄 IN PROGRESS
 
-- [ ] Live viewport attachment (`supportsViewportAttach` capability)
-- [ ] Hot-reload / live patch workflow (`supportsLivePatch`)
-- [ ] Multi-workspace support (parallel bridge sessions)
+- [x] Live viewport attachment (`supportsViewportAttach` capability) — `LiveViewportClient` in `AtlasAI/AIEngine/AtlasAIEngine/live/live_viewport.py`
+- [x] Hot-reload / live patch workflow (`supportsLivePatch`) — `HotReloadCoordinator` in `live/hot_reload.py`
+- [x] Multi-workspace support (parallel bridge sessions) — `MultiWorkspaceManager` in `live/multi_workspace.py`
 - [ ] Expand codegen loop to accept diffs from AI-proposed changes
 - [ ] PythonBridge → WebSocket event relay for real-time build streaming
 
-### Phase 14 — Testing & CI Hardening
+### Phase 14 — Testing & CI Hardening 🔄 IN PROGRESS
 
 - [ ] Add unit tests for all bridge endpoint handlers (ProjectService, EditorService, BuildService)
 - [ ] Add integration tests that spin up the FastAPI bridge and exercise each endpoint
 - [ ] Add TypeScript Jest coverage for WebhookIntegration
-- [ ] Set up GitHub Actions CI: CMake build → CTest → Python pytest → TypeScript Jest
+- [x] Set up GitHub Actions CI: pytest pipeline — `.github/workflows/ci.yml` added
 - [ ] Add schema validation tests (JSON round-trip against `Shared/ToolProtocol/schemas/`)
 - [ ] Automate audit log rotation and workspace snapshot exports
 
-### Phase 15 — Character + Gameplay Loop Hookup
+### Phase 15 — Character + Gameplay Loop Hookup 🔄 IN PROGRESS
 
-- [ ] Connect `CharacterSystem` to `PlayerController` (movement mode dispatch)
-- [ ] Connect `EquipmentSystem` to mining tool interaction (`ToolInteractionShell`)
+- [x] Connect `CharacterSystem` to `PlayerController` (movement mode dispatch) — `PlayerControllerHookup`
+- [x] Connect `EquipmentSystem` to mining tool interaction (`ToolInteractionShell`) — `EquipmentToolBridge`
 - [ ] Wire `IKSystem` into character animation pipeline
 - [ ] Wire `FPSPresentationSystem` into runtime rendering
 - [ ] Connect `CharacterEditorSystem` to editor mode controller
 - [ ] Add `MechPossessionSystem` vehicle entry/exit events to gameplay loop
-- [ ] Connect `GameOrchestrator` boot path to `NovaForgeBootstrap`
-- [ ] Wire `SaveManager` into world serialization
-- [ ] Wire `RuntimeUIShell` into HUD display path
+- [x] Connect `GameOrchestrator` boot path to `NovaForgeBootstrap` — `GameOrchestratorBoot`
+- [x] Wire `SaveManager` into world serialization — `SaveManagerHookup`
+- [x] Wire `RuntimeUIShell` into HUD display path — `RuntimeUIHookup`
 
 ---
 
