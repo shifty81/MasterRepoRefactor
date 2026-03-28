@@ -286,14 +286,14 @@ The server and client source trees are populated. Next: integrate with the CMake
 - [ ] Add schema validation tests (JSON round-trip against `Shared/ToolProtocol/schemas/`)
 - [ ] Automate audit log rotation and workspace snapshot exports
 
-### Phase 15 — Character + Gameplay Loop Hookup 🔄 IN PROGRESS
+### Phase 15 — Character + Gameplay Loop Hookup ✅ Done
 
 - [x] Connect `CharacterSystem` to `PlayerController` (movement mode dispatch) — `PlayerControllerHookup`
 - [x] Connect `EquipmentSystem` to mining tool interaction (`ToolInteractionShell`) — `EquipmentToolBridge`
-- [ ] Wire `IKSystem` into character animation pipeline
-- [ ] Wire `FPSPresentationSystem` into runtime rendering
-- [ ] Connect `CharacterEditorSystem` to editor mode controller
-- [ ] Add `MechPossessionSystem` vehicle entry/exit events to gameplay loop
+- [x] Wire `IKSystem` into character animation pipeline — `IKAnimationBridge`
+- [x] Wire `FPSPresentationSystem` into runtime rendering — `FPSRenderingBridge`
+- [x] Connect `CharacterEditorSystem` to editor mode controller — `CharacterEditorBridge`
+- [x] Add `MechPossessionSystem` vehicle entry/exit events to gameplay loop — `MechGameplayBridge`
 - [x] Connect `GameOrchestrator` boot path to `NovaForgeBootstrap` — `GameOrchestratorBoot`
 - [x] Wire `SaveManager` into world serialization — `SaveManagerHookup`
 - [x] Wire `RuntimeUIShell` into HUD display path — `RuntimeUIHookup`
