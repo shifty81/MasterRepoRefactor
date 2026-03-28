@@ -641,7 +641,7 @@ namespace AtlasAIHost
         private void MenuOpenDocs_Click(object sender, RoutedEventArgs e)
         {
             try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                { FileName = "https://github.com/shifty81/Arbiter", UseShellExecute = true }); }
+                { FileName = "https://github.com/shifty81/MasterRepoRefactor", UseShellExecute = true }); }
             catch { /* ignore */ }
         }
 

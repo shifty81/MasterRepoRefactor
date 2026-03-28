@@ -1,2 +1,0 @@
-/usr/bin/ar qc libNovaForgeIntegrationAtlasAI.a CMakeFiles/NovaForgeIntegrationAtlasAI.dir/src/AtlasBridgeService.cpp.o CMakeFiles/NovaForgeIntegrationAtlasAI.dir/src/BridgeSessionManager.cpp.o CMakeFiles/NovaForgeIntegrationAtlasAI.dir/src/BridgeAuditLogger.cpp.o
-/usr/bin/ranlib libNovaForgeIntegrationAtlasAI.a

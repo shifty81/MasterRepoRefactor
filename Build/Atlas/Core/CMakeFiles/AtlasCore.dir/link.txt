@@ -1,2 +1,0 @@
-/usr/bin/ar qc libAtlasCore.a CMakeFiles/AtlasCore.dir/src/AtlasCore_stub.cpp.o
-/usr/bin/ranlib libAtlasCore.a

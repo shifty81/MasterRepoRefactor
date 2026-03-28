@@ -13,7 +13,7 @@
     },
     "clientVersion": {
       "type": "string",
-      "description": "Version string of the AtlasAI / Arbiter client, used for compatibility checking.",
+      "description": "Version string of the AtlasAI client, used for compatibility checking.",
       "minLength": 1
     },
     "projectId": {

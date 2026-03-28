@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "eg4ixYfRG2A=",
+  "success": true,
+  "projectFilePath": "/home/runner/work/MasterRepoRefactor/MasterRepoRefactor/AtlasAI/HostApp/AtlasAIHost.csproj",
+  "expectedPackageFiles": [
+    "/tmp/codeql-scratch-587ae486d6e864d4/dbs/csharp/working/packages/libgit2sharp/0.31.0/libgit2sharp.0.31.0.nupkg.sha512",
+    "/tmp/codeql-scratch-587ae486d6e864d4/dbs/csharp/working/packages/libgit2sharp.nativebinaries/2.0.323/libgit2sharp.nativebinaries.2.0.323.nupkg.sha512",
+    "/tmp/codeql-scratch-587ae486d6e864d4/dbs/csharp/working/packages/microsoft.web.webview2/1.0.3856.49/microsoft.web.webview2.1.0.3856.49.nupkg.sha512",
+    "/tmp/codeql-scratch-587ae486d6e864d4/dbs/csharp/working/packages/system.speech/9.0.1/system.speech.9.0.1.nupkg.sha512",
+    "/tmp/codeql-scratch-587ae486d6e864d4/dbs/csharp/working/packages/microsoft.netcore.app.ref/9.0.14/microsoft.netcore.app.ref.9.0.14.nupkg.sha512",
+    "/tmp/codeql-scratch-587ae486d6e864d4/dbs/csharp/working/packages/microsoft.windowsdesktop.app.ref/9.0.14/microsoft.windowsdesktop.app.ref.9.0.14.nupkg.sha512",
+    "/tmp/codeql-scratch-587ae486d6e864d4/dbs/csharp/working/packages/microsoft.aspnetcore.app.ref/9.0.14/microsoft.aspnetcore.app.ref.9.0.14.nupkg.sha512",
+    "/tmp/codeql-scratch-587ae486d6e864d4/dbs/csharp/working/packages/microsoft.netcore.app.host.linux-x64/9.0.14/microsoft.netcore.app.host.linux-x64.9.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -8,7 +8,7 @@ using System.Windows;
 namespace AtlasAIHost
 {
     /// <summary>
-    /// Start-up mode picker: ArbiterAI (port 8000) or Arbiter Engine (port 8001).
+    /// Start-up mode picker: AtlasAI (port 8000) or AtlasAI Engine (port 8001).
     /// </summary>
     public partial class LauncherWindow : Window
     {
@@ -115,7 +115,7 @@ namespace AtlasAIHost
 
         private void LaunchArbiterAI_Click(object sender, RoutedEventArgs e)
         {
-            AppConfig.Mode = "ArbiterAI";
+            AppConfig.Mode = "AtlasAI";
             AppConfig.ApiBaseUrl = "http://127.0.0.1:8000";
 
             if (!TryStartBridgeServer())
@@ -161,7 +161,7 @@ namespace AtlasAIHost
             OpenMainWindow();
         }
 
-        // ── Bridge server startup (ArbiterAI) ────────────────────────────────
+        // ── Bridge server startup (AtlasAI) ──────────────────────────────────
 
         private bool TryStartBridgeServer()
         {
