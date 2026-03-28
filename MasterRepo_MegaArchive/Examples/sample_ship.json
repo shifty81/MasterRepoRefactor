@@ -1,0 +1,7 @@
+{
+  "name": "starter_ship",
+  "modules": [
+    "cockpit",
+    "thruster"
+  ]
+}
