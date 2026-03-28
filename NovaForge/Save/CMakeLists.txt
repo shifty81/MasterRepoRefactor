@@ -2,6 +2,7 @@
 
 set(NOVAFORGE_SAVE_SOURCES
     src/SaveManager.cpp
+    src/SaveSystem.cpp
 )
 
 add_library(NovaForgeSave STATIC ${NOVAFORGE_SAVE_SOURCES})

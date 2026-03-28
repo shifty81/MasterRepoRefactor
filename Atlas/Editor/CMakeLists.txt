@@ -33,6 +33,13 @@ set(ATLAS_EDITOR_SOURCES
 
     # Validation toolkit
     Validation/ValidationSystem.cpp
+
+    # Voxel editor workflow (C1)
+    Voxel/VoxelChunkEditor.cpp
+    Voxel/VoxelEditorMode.cpp
+
+    # PCG debug mode (C4)
+    PCG/PCGDebugSystem.cpp
 )
 
 add_library(AtlasEditor STATIC ${ATLAS_EDITOR_SOURCES})
@@ -49,6 +56,8 @@ target_include_directories(AtlasEditor
              "${CMAKE_CURRENT_SOURCE_DIR}/Commands"
              "${CMAKE_CURRENT_SOURCE_DIR}/Validation"
              "${CMAKE_CURRENT_SOURCE_DIR}/Framework"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Voxel"
+             "${CMAKE_CURRENT_SOURCE_DIR}/PCG"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 

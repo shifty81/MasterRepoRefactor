@@ -46,6 +46,12 @@ set(NOVAFORGE_GAMEPLAY_SOURCES
     # Contract rewards
     Missions/ContractRewardSystem.cpp
 
+    # Fleet system (D4)
+    Fleet/FleetSystem.cpp
+
+    # World simulation (D4)
+    WorldSim/WorldSimSystem.cpp
+
     # Characters (Phase 1)
     Characters/CharacterSystem.cpp
     Characters/CharacterControllerShell.cpp
@@ -70,6 +76,8 @@ target_include_directories(NovaForgeGameplay
              "${CMAKE_CURRENT_SOURCE_DIR}/Salvage"
              "${CMAKE_CURRENT_SOURCE_DIR}/Station"
              "${CMAKE_CURRENT_SOURCE_DIR}/Manufacturing"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Fleet"
+             "${CMAKE_CURRENT_SOURCE_DIR}/WorldSim"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
