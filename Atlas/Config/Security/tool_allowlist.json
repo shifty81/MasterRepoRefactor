@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "tools": [
+    {
+      "toolId": "cmake_build",
+      "exe": "cmake.exe",
+      "allowedArgs": ["--build", "--preset", "--config"],
+      "workingRootPolicy": "repo_or_build_dir_only",
+      "timeoutSeconds": 300,
+      "networkAccess": false
+    }
+  ]
+}

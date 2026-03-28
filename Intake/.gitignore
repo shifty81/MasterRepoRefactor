@@ -1,0 +1,76 @@
+# Intake — binary/archive gitignore
+# Archive and binary files dropped here for intake are processed and routed
+# to their canonical destinations by process_intake.py.  They must NOT be
+# committed; only the processed output (in its destination directory) is
+# tracked in git.
+
+# --- Archive formats ---
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.bz2
+*.xz
+
+# --- Windows installer / macOS disk image / Linux package ---
+*.exe
+*.msi
+*.dmg
+*.pkg
+*.deb
+*.rpm
+*.appimage
+
+# --- 3-D source assets ---
+*.fbx
+*.obj
+*.dae
+*.blend
+*.max
+*.mb
+*.ma
+
+# --- Source art ---
+*.psd
+*.ai
+*.sketch
+*.xcf
+*.kra
+
+# --- Video ---
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+*.wmv
+*.flv
+
+# --- Audio blobs ---
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.aac
+*.wma
+
+# --- But DO track text / code files so lightweight drops can be versioned ---
+!*.md
+!*.txt
+!*.json
+!*.yaml
+!*.yml
+!*.h
+!*.hpp
+!*.cpp
+!*.cs
+!*.py
+!*.sh
+!*.bat
+!*.cmake
+!.gitignore

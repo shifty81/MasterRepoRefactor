@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "atlas://security/path_policy.schema.json",
+  "title": "Path Policy",
+  "type": "object",
+  "required": ["schemaVersion", "repoRoot", "protectedRoots", "generatedRoots", "archiveRoots", "sandboxRoots"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "generatedBy": { "type": "string" },
+    "lastUpdatedUtc": { "type": "string" },
+    "repoRoot": { "type": "string", "minLength": 1 },
+    "protectedRoots": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "generatedRoots": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "archiveRoots": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "sandboxRoots": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "externalSyncRoots": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+  },
+  "additionalProperties": false
+}

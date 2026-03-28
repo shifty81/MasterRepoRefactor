@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "modes": {
+    "observer": ["read_repo"],
+    "reviewer": ["read_repo", "read_logs"],
+    "editor": ["read_repo", "read_logs", "write_generated", "run_build", "archive_intake"],
+    "admin_local": ["*"]
+  }
+}

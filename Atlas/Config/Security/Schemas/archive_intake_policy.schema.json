@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "atlas://security/archive_intake_policy.schema.json",
+  "title": "Archive Intake Policy",
+  "type": "object",
+  "required": ["schemaVersion", "autoExtractZips", "quarantine", "generateReports"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "generatedBy": { "type": "string" },
+    "lastUpdatedUtc": { "type": "string" },
+    "autoExtractZips": { "type": "boolean" },
+    "quarantine": { "type": "boolean" },
+    "generateReports": { "type": "boolean" },
+    "scanSecrets": { "type": "boolean" },
+    "rejectExecutables": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

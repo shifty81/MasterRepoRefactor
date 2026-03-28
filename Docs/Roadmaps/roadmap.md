@@ -157,11 +157,13 @@ Proper logging wired into every executable and runnable component across the pro
 ## Current Status
 
 ```
-Tests passing:  7 C++ integration tests · 1,762 Python unit tests
-Source files:  ~2,650 C++ · 215 Python · 35 C# · 23 TypeScript
+Tests passing:  7 C++ integration tests · 2,068 Python unit tests (+83 platform hardening)
+Source files:  ~2,670 C++ · 216 Python · 35 C# · 23 TypeScript
 Architecture:  Stable — all 10 foundation epics complete
-Bridge:        REST + WebSocket endpoints operational
+Bridge:        REST + WebSocket endpoints operational; Atlas::Bridge::BridgeService hardened
 AI Engine:     41 modules · 12 LLM backends · agentic self-build loop
+Security:      SessionAuthority + CapabilityResolver + PathPolicyService + AuditEventWriter integrated
+Archive:       ArchiveIntakeService with quarantine, FNV-1a hashing, manifest + audit report
 Logging:       Unified across all shell scripts, Python tools, and C++ runtime
 Character:     Phase 1 + Phase 2 character systems migrated (Equipment, Animation, IK, FPS, Mech)
 Editor:        T1-T3 foundation migrated (Core, Input, Camera, Selection, Outliner, Inspector, Gizmos)
@@ -218,6 +220,28 @@ All systems required to boot a testable executable are in place.
 | `Docs/Architecture/intake_policy.md` — classification rules | ✅ |
 | `validate_naming.py` exemption updated (old folder removed) | ✅ |
 | Root is clean: `validate_root.py` passes | ✅ |
+
+---
+
+### Platform Hardening Pack v2 + Gap Closure Pack v1 ✅ COMPLETE
+
+Two security hardening packs fully integrated.
+
+| Pack | Content Migrated To |
+|------|---------------------|
+| `GapClosurePackV1_Docs.zip` | `Docs/AtlasSuite/Security/` — 9 security spec docs; `Atlas/Config/Security/Schemas/` — 5 JSON schemas |
+| `PlatformHardeningPackV2.zip` | `Atlas/Services/Security/` (SessionAuthority, CapabilityResolver, PathPolicyService, AuditEventWriter), `Atlas/Services/Archive/` (ArchiveIntakeService), `Atlas/Services/Bridge/` (CommandBroker, BridgeService), `Atlas/Services/Common/` (Status, Clock, TextUtil); `Atlas/Config/Security/` (4 runtime configs); `Tests/Security/` (C++ integration tests) |
+
+**New services:**
+- `SessionAuthority` — capability-based session lifecycle (create/validate/revoke/rotate)
+- `CapabilityResolver` — mode × capability evaluation with write-elevation guard
+- `PathPolicyService` — canonical path classification (protected/generated/archive/sandbox/external)
+- `AuditEventWriter` — JSONL tamper-auditable event log
+- `ArchiveIntakeService` — repo root-drop scanning, FNV-1a hashing, quarantine, manifest + report
+- `CommandBroker` — allowlisted tool execution with arg validation and dry-run enforcement
+- `BridgeService` — unified session → capability → path → command/intake dispatch
+
+**Tests added:** 83 Python integration tests in `AtlasAI/Tests/test_platform_hardening.py`
 
 ---
 

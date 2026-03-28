@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "autoExtractZips": true,
+  "quarantine": true,
+  "generateReports": true,
+  "allowedRepoRootNames": [
+    ".git",
+    ".github",
+    ".gitignore",
+    "Atlas",
+    "NovaForge",
+    "Docs",
+    "Config",
+    "Tests",
+    "Scripts",
+    "README.md",
+    "CMakeLists.txt",
+    "Archive"
+  ]
+}

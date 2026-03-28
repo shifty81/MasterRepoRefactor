@@ -689,6 +689,40 @@ class TestCppContentClassification:
 
 
 # =============================================================================
+# Tests — Intake staging area gitignore
+# =============================================================================
+
+class TestIntakeGitignore:
+    """Intake/.gitignore must exist and block binary/archive types from being committed."""
+
+    INTAKE_GITIGNORE = Path(__file__).resolve().parents[2] / "Intake" / ".gitignore"
+
+    def test_intake_gitignore_exists(self):
+        """Intake/.gitignore must exist to prevent archive files from being tracked."""
+        assert self.INTAKE_GITIGNORE.exists(), "Intake/.gitignore must exist"
+
+    def test_intake_gitignore_covers_zip(self):
+        """Intake/.gitignore must include *.zip pattern."""
+        content = self.INTAKE_GITIGNORE.read_text(encoding="utf-8")
+        assert "*.zip" in content, "Intake/.gitignore must ignore *.zip"
+
+    def test_intake_gitignore_covers_common_archive_types(self):
+        """Intake/.gitignore must cover major archive/binary formats."""
+        content = self.INTAKE_GITIGNORE.read_text(encoding="utf-8")
+        for pattern in ("*.7z", "*.rar", "*.tar", "*.exe"):
+            assert pattern in content, (
+                f"Intake/.gitignore must ignore {pattern}"
+            )
+
+    def test_intake_gitignore_allows_text_files(self):
+        """Intake/.gitignore must allow lightweight text/code files to be staged."""
+        content = self.INTAKE_GITIGNORE.read_text(encoding="utf-8")
+        assert "!*.md" in content, (
+            "Intake/.gitignore must allow *.md files (negation rule)"
+        )
+
+
+# =============================================================================
 # Tests — DropBox staging area
 # =============================================================================
 
