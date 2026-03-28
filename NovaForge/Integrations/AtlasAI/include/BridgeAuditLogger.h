@@ -1,30 +1,30 @@
 // BridgeAuditLogger.h
-// Structured audit logger for the NovaForge Arbiter bridge service.
+// Structured audit logger for the NovaForge AtlasAI bridge service.
 //
 // Every bridge operation (session connect, build request, tool action, etc.)
 // MUST be logged here so that all AI-triggered activity is auditable.
 //
 // Rules:
 // - Must not depend on gameplay or engine internals.
-// - Must be usable from ArbiterBridgeService without a running HTTP server.
+// - Must be usable from AtlasBridgeService without a running HTTP server.
 // - Log entries are written synchronously to avoid ordering ambiguity.
 
 #pragma once
 
-#include <ArbiterBridgeTypes.h>
+#include <AtlasBridgeTypes.h>
 #include <functional>
 #include <memory>
 #include <string>
 #include <vector>
 
-namespace NovaForge::Integration::Arbiter
+namespace NovaForge::Integration::AtlasAI
 {
 
 // ============================================================
 // Log sink callback type
 // ============================================================
 
-using AuditLogSink = std::function<void(const ::Arbiter::Bridge::AuditLogEntry&)>;
+using AuditLogSink = std::function<void(const ::Atlas::Bridge::AuditLogEntry&)>;
 
 // ============================================================
 // BridgeAuditLogger
@@ -52,7 +52,7 @@ public:
     // --------------------------------------------------------
 
     /// Logs a bridge operation result.
-    void log(const ::Arbiter::Bridge::AuditLogEntry& entry);
+    void log(const ::Atlas::Bridge::AuditLogEntry& entry);
 
     /// Convenience overload: logs a simple operation success/failure.
     void log(
@@ -70,10 +70,10 @@ public:
     // --------------------------------------------------------
 
     /// Returns all in-memory log entries (most recent last).
-    std::vector<::Arbiter::Bridge::AuditLogEntry> getEntries() const;
+    std::vector<::Atlas::Bridge::AuditLogEntry> getEntries() const;
 
     /// Returns the last N entries.
-    std::vector<::Arbiter::Bridge::AuditLogEntry> getRecentEntries(
+    std::vector<::Atlas::Bridge::AuditLogEntry> getRecentEntries(
         std::size_t count) const;
 
     /// Clears the in-memory entry buffer.
@@ -86,4 +86,4 @@ private:
     static std::string utcNowIso8601();
 };
 
-} // namespace NovaForge::Integration::Arbiter
+} // namespace NovaForge::Integration::AtlasAI

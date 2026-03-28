@@ -1,10 +1,10 @@
 // NovaForgeProjectAdapter.cs
-// Arbiter project adapter for NovaForge.
+// AtlasAI project adapter for NovaForge.
 //
 // This adapter:
 // - loads the NovaForge project manifest
-// - connects to the NovaForge Arbiter bridge service via /session/connect
-// - exposes project info, build targets, and whitelisted tool actions to Arbiter
+// - connects to the NovaForge AtlasAI bridge service via /session/connect
+// - exposes project info, build targets, and whitelisted tool actions to AtlasAI
 // - wraps all requests in the standard BridgeRequestEnvelope
 //
 // Epic 6 / Task 6.2 — project-specific adapter implements IProjectAdapter
@@ -24,9 +24,9 @@ using System.Threading;
 using System.Threading.Tasks;
 
 // Pull in IProjectAdapter and BridgeResponse from the parent namespace
-using Arbiter.ProjectAdapters;
+using AtlasAI.ProjectAdapters;
 
-namespace Arbiter.ProjectAdapters.NovaForge
+namespace AtlasAI.ProjectAdapters.NovaForge
 {
     public sealed class NovaForgeProjectAdapter : IProjectAdapter
     {

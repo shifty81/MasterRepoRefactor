@@ -5,12 +5,12 @@ include(NovaForgeTargets)
 add_subdirectory(Gameplay)
 add_subdirectory(World)
 
-if(NOVAFORGE_ENABLE_ARBITER_INTEGRATION)
-    add_subdirectory(Integrations/Arbiter)
+if(NOVAFORGE_ENABLE_ATLASAI_INTEGRATION)
+    add_subdirectory(Integrations/AtlasAI)
 endif()
 
 # App depends on the integration layer when the bridge is enabled,
-# so it must be added after Integrations/Arbiter.
+# so it must be added after Integrations/AtlasAI.
 add_subdirectory(App)
 
 message(STATUS "NovaForge: modules configured")

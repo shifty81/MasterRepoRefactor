@@ -1,15 +1,15 @@
 // bridge_types_compile_test.cpp
-// Build verification: confirms ArbiterBridgeTypes.h compiles cleanly and that
+// Build verification: confirms AtlasBridgeTypes.h compiles cleanly and that
 // all expected types, constants, and enum values are accessible.
 //
 // This test exits 0 on success. It uses only standard C++ and the shared header.
 
-#include <ArbiterBridgeTypes.h>
+#include <AtlasBridgeTypes.h>
 #include <cassert>
 #include <cstdlib>
 #include <string>
 
-using namespace Arbiter::Bridge;
+using namespace Atlas::Bridge;
 
 static void testProtocolConstants()
 {

@@ -1,17 +1,17 @@
-# ArbiterBridgeContract
+# AtlasBridgeContract
 
-This module defines the shared C++ contract types for the Arbiter ↔ NovaForge bridge.
+This module defines the shared C++ contract types for the AtlasAI ↔ NovaForge bridge.
 
 ## Purpose
 
 Provides a stable, versioned interface between:
 
-- `Arbiter` — AI tooling shell (C# / WPF)
+- `AtlasAI` — AI tooling shell (C# / WPF)
 - `NovaForge` — native C++ game and engine backend
 
 ## Contents
 
-### `include/ArbiterBridgeTypes.h`
+### `include/AtlasBridgeTypes.h`
 
 Defines all cross-boundary data types:
 

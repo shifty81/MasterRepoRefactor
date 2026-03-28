@@ -5,7 +5,7 @@
 //
 // Responsibilities:
 // - Create and validate the project context (paths, metadata)
-// - Start the Arbiter bridge service when the integration is enabled
+// - Start the AtlasAI bridge service when the integration is enabled
 // - Establish a bridge session and store the token in NovaForgeSession
 // - Provide a clean shutdown path that reverses all of the above
 //
@@ -24,10 +24,10 @@
 #include <string>
 
 // Forward declaration — avoid pulling the full bridge header into game code
-// when Arbiter integration is disabled.
+// when AtlasAI integration is disabled.
 #if defined(NOVAFORGE_BRIDGE_SERVER_ENABLED)
-namespace NovaForge::Integration::Arbiter { class ArbiterBridgeService; }
-namespace NovaForge::Integration::Arbiter { class BridgeAuditLogger; }
+namespace NovaForge::Integration::AtlasAI { class AtlasBridgeService; }
+namespace NovaForge::Integration::AtlasAI { class BridgeAuditLogger; }
 #endif
 
 namespace NovaForge::App
@@ -55,7 +55,7 @@ struct BootstrapConfig
     /// Override for project context (leave empty to use defaults).
     ProjectContextConfig contextConfig;
 
-    /// If true, attempt to start the Arbiter bridge service.
+    /// If true, attempt to start the AtlasAI bridge service.
     bool startBridgeService = true;
 
     /// Log callback forwarded to the bridge service.

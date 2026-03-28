@@ -1,5 +1,5 @@
 // BridgeSessionManager.h
-// Manages bridge session tokens for the NovaForge Arbiter bridge service.
+// Manages bridge session tokens for the NovaForge AtlasAI bridge service.
 //
 // Responsibilities:
 // - Generate unique session tokens on connect
@@ -9,11 +9,11 @@
 
 #pragma once
 
-#include <ArbiterBridgeTypes.h>
+#include <AtlasBridgeTypes.h>
 #include <memory>
 #include <string>
 
-namespace NovaForge::Integration::Arbiter
+namespace NovaForge::Integration::AtlasAI
 {
 
 // ============================================================
@@ -40,8 +40,8 @@ public:
     ~BridgeSessionManager();
 
     /// Creates a new session and returns the session token.
-    ::Arbiter::Bridge::SessionConnectResponse createSession(
-        const ::Arbiter::Bridge::SessionConnectRequest& request,
+    ::Atlas::Bridge::SessionConnectResponse createSession(
+        const ::Atlas::Bridge::SessionConnectRequest& request,
         const std::string& serverVersion);
 
     /// Returns true if the token is valid and the session is active.
@@ -72,4 +72,4 @@ private:
     std::string generateToken();
 };
 
-} // namespace NovaForge::Integration::Arbiter
+} // namespace NovaForge::Integration::AtlasAI

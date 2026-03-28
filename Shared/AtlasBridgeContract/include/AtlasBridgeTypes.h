@@ -1,5 +1,5 @@
-// ArbiterBridgeTypes.h
-// Shared bridge contract types between Arbiter AI tooling and NovaForge/Atlas backend.
+// AtlasBridgeTypes.h
+// Shared bridge contract types between AtlasAI tooling and NovaForge/Atlas backend.
 //
 // Rules:
 // - This file must have no dependency on WPF, gameplay, or engine internals.
@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 
-namespace Arbiter::Bridge
+namespace Atlas::Bridge
 {
 
 // ============================================================
@@ -209,7 +209,7 @@ struct BridgeEventEnvelope
 // Session types
 // ============================================================
 
-/// Sent by Arbiter to establish a bridge session.
+/// Sent by AtlasAI to establish a bridge session.
 struct SessionConnectRequest
 {
     std::string protocolVersion = kProtocolVersion;
@@ -249,7 +249,7 @@ struct AuditLogEntry
 // Epic 10 / Task 10.1 — Search roots
 // ============================================================
 
-/// One searchable root exposed to Arbiter for indexing and navigation.
+/// One searchable root exposed to AtlasAI for indexing and navigation.
 struct SearchRoot
 {
     std::string label; // e.g. "Docs", "DataTables", "SourceAtlas"
@@ -433,4 +433,4 @@ struct WorkspaceDashboard
     size_t             activeSessionCount = 0;
 };
 
-} // namespace Arbiter::Bridge
+} // namespace Atlas::Bridge

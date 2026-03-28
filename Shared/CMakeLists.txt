@@ -2,10 +2,10 @@
 
 include(SharedTargets)
 
-# ArbiterBridgeContract: C++ header-only interface library
-add_library(ArbiterBridgeContract INTERFACE)
-target_include_directories(ArbiterBridgeContract
-    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/ArbiterBridgeContract/include"
+# AtlasBridgeContract: C++ header-only interface library
+add_library(AtlasBridgeContract INTERFACE)
+target_include_directories(AtlasBridgeContract
+    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/AtlasBridgeContract/include"
 )
 
-message(STATUS "Shared: ArbiterBridgeContract configured")
+message(STATUS "Shared: AtlasBridgeContract configured")

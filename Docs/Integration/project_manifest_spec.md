@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The project manifest is the single source of truth for how Arbiter connects to
+The project manifest is the single source of truth for how AtlasAI connects to
 and interacts with a game project in MasterRepo.
 
 ## Location
@@ -70,4 +70,4 @@ Paths relative to repo root for each major area.
 | `requireDryRunByDefault` | bool | Tool actions default to dry-run |
 | `requireSessionTokenForWrites` | bool | Write ops require session token |
 | `allowedToolActions` | string[] | Whitelist of permitted tool actions |
-| `writeableRoots` | string[] | Paths Arbiter may write to |
+| `writeableRoots` | string[] | Paths AtlasAI may write to |

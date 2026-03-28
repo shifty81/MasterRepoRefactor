@@ -5,7 +5,7 @@
 // Epic 5 / Task 5.4 — Manifest-driven path resolution
 //
 // Rules:
-// - This class must not include gameplay, engine, or Arbiter headers.
+// - This class must not include gameplay, engine, or AtlasAI headers.
 // - All paths are resolved relative to the provided repoRoot at construction.
 // - Callers should treat the context as read-only after initialisation.
 

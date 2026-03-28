@@ -5,10 +5,10 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace Arbiter.ProjectAdapters.NovaForge
+namespace AtlasAI.ProjectAdapters.NovaForge
 {
     /// <summary>
-    /// Standard wrapper for every request sent from Arbiter to the NovaForge bridge.
+    /// Standard wrapper for every request sent from AtlasAI to the NovaForge bridge.
     /// Use <see cref="Create"/> to get a correctly initialised instance.
     /// </summary>
     public sealed class BridgeRequestEnvelope

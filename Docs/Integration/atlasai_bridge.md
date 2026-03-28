@@ -1,8 +1,8 @@
-# Arbiter Bridge
+# AtlasAI Bridge
 
 ## Overview
 
-The Arbiter bridge connects the Arbiter AI tooling shell (C# / WPF) to the
+The AtlasAI bridge connects the AtlasAI AI tooling shell (C# / WPF) to the
 NovaForge/Atlas native backend (C++).
 
 The bridge is intentionally kept narrow. It defines a stable, versioned protocol

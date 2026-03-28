@@ -1,7 +1,7 @@
 // novaforge_context_test.cpp
 // Tests for NovaForgeProjectContext, NovaForgeSession, and NovaForgeBootstrap.
 //
-// These tests are shipping-safe: they have NO dependency on ArbiterBridgeService.
+// These tests are shipping-safe: they have NO dependency on AtlasBridgeService.
 // They verify Epic 5 Task 5.2 (project context) and Task 5.1 (session/bootstrap).
 
 #include "NovaForgeBootstrap.h"

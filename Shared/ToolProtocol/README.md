@@ -1,6 +1,6 @@
 # Tool Protocol
 
-This folder defines the request/response protocol used by the Arbiter bridge.
+This folder defines the request/response protocol used by the AtlasAI bridge.
 
 ## Transport assumptions
 

@@ -1,5 +1,5 @@
-// ArbiterBridgeService.h
-// NovaForge-side bridge service that exposes safe editor and build operations to Arbiter.
+// AtlasBridgeService.h
+// NovaForge-side bridge service that exposes safe editor and build operations to AtlasAI.
 //
 // Rules:
 // - This file must not expose arbitrary engine internals.
@@ -9,13 +9,13 @@
 
 #pragma once
 
-#include <ArbiterBridgeTypes.h>
+#include <AtlasBridgeTypes.h>
 #include "BridgeAuditLogger.h"
 #include <functional>
 #include <memory>
 #include <string>
 
-namespace NovaForge::Integration::Arbiter
+namespace NovaForge::Integration::AtlasAI
 {
 
 // ============================================================
@@ -24,8 +24,8 @@ namespace NovaForge::Integration::Arbiter
 
 struct BridgeServiceConfig
 {
-    uint16_t    restPort          = ::Arbiter::Bridge::kDefaultRestPort;
-    uint16_t    wsPort            = ::Arbiter::Bridge::kDefaultWsPort;
+    uint16_t    restPort          = ::Atlas::Bridge::kDefaultRestPort;
+    uint16_t    wsPort            = ::Atlas::Bridge::kDefaultWsPort;
     bool        bindLoopbackOnly  = true;
     uint32_t    timeoutSeconds    = 30;
 };
@@ -37,14 +37,14 @@ struct BridgeServiceConfig
 using BridgeLogCallback = std::function<void(const std::string& message)>;
 
 // ============================================================
-// ArbiterBridgeService
+// AtlasBridgeService
 // ============================================================
 
-class ArbiterBridgeService
+class AtlasBridgeService
 {
 public:
-    ArbiterBridgeService();
-    ~ArbiterBridgeService();
+    AtlasBridgeService();
+    ~AtlasBridgeService();
 
     // --------------------------------------------------------
     // Lifecycle
@@ -64,63 +64,63 @@ public:
     // --------------------------------------------------------
 
     /// Establishes a new bridge session and returns a session token.
-    ::Arbiter::Bridge::SessionConnectResponse connectSession(
-        const ::Arbiter::Bridge::SessionConnectRequest& request);
+    ::Atlas::Bridge::SessionConnectResponse connectSession(
+        const ::Atlas::Bridge::SessionConnectRequest& request);
 
     /// Disconnects and invalidates the session for the given token.
-    ::Arbiter::Bridge::BridgeResult disconnectSession(
+    ::Atlas::Bridge::BridgeResult disconnectSession(
         const std::string& sessionToken);
 
     // --------------------------------------------------------
     // Project info endpoint  GET /project/info  (Task 4.1)
     // --------------------------------------------------------
-    ::Arbiter::Bridge::ProjectInfo getProjectInfo(
+    ::Atlas::Bridge::ProjectInfo getProjectInfo(
         const std::string& sessionToken) const;
 
     // --------------------------------------------------------
     // Build endpoint  POST /build/run  (Task 4.3)
     // --------------------------------------------------------
-    ::Arbiter::Bridge::BuildResult runBuild(
+    ::Atlas::Bridge::BuildResult runBuild(
         const std::string&                    sessionToken,
-        const ::Arbiter::Bridge::BuildTarget& target);
+        const ::Atlas::Bridge::BuildTarget& target);
 
     // --------------------------------------------------------
     // Editor state endpoint  GET /editor/selection  (Task 4.2)
     // --------------------------------------------------------
-    ::Arbiter::Bridge::EditorSelectionSnapshot getEditorSelection(
+    ::Atlas::Bridge::EditorSelectionSnapshot getEditorSelection(
         const std::string& sessionToken) const;
 
     // --------------------------------------------------------
     // File operations
     // --------------------------------------------------------
-    ::Arbiter::Bridge::BridgeResult openFile(
+    ::Atlas::Bridge::BridgeResult openFile(
         const std::string&                          sessionToken,
-        const ::Arbiter::Bridge::OpenFileRequest&   request);
+        const ::Atlas::Bridge::OpenFileRequest&   request);
 
     // --------------------------------------------------------
     // Tool actions endpoint  POST /editor/tools/run  (Task 4.4)
     // --------------------------------------------------------
-    ::Arbiter::Bridge::ToolActionResult runToolAction(
+    ::Atlas::Bridge::ToolActionResult runToolAction(
         const std::string&                              sessionToken,
-        const ::Arbiter::Bridge::ToolActionRequest&     request);
+        const ::Atlas::Bridge::ToolActionRequest&     request);
 
     // --------------------------------------------------------
     // Epic 10 / Task 10.1 — Search roots  GET /project/search-roots
     // --------------------------------------------------------
-    ::Arbiter::Bridge::ProjectSearchRoots getSearchRoots(
+    ::Atlas::Bridge::ProjectSearchRoots getSearchRoots(
         const std::string& sessionToken) const;
 
     // --------------------------------------------------------
     // Epic 10 / Task 10.2 — Builder / PCG tool hooks  POST /editor/tools/builder
     // --------------------------------------------------------
-    ::Arbiter::Bridge::BuilderToolResult runBuilderTool(
+    ::Atlas::Bridge::BuilderToolResult runBuilderTool(
         const std::string&                           sessionToken,
-        const ::Arbiter::Bridge::BuilderToolRequest& request);
+        const ::Atlas::Bridge::BuilderToolRequest& request);
 
     // --------------------------------------------------------
     // Epic 10 / Task 10.3 — Richer editor state  GET /editor/state
     // --------------------------------------------------------
-    ::Arbiter::Bridge::EditorStateSnapshot getEditorState(
+    ::Atlas::Bridge::EditorStateSnapshot getEditorState(
         const std::string& sessionToken) const;
 
     // --------------------------------------------------------
@@ -130,22 +130,22 @@ public:
     //   POST /codegen/approve
     //   POST /codegen/apply
     // --------------------------------------------------------
-    ::Arbiter::Bridge::CodegenProposal proposeCodegen(
+    ::Atlas::Bridge::CodegenProposal proposeCodegen(
         const std::string&                              sessionToken,
-        const ::Arbiter::Bridge::CodegenProposalRequest& request);
+        const ::Atlas::Bridge::CodegenProposalRequest& request);
 
-    ::Arbiter::Bridge::CodegenDiff getCodegenDiff(
+    ::Atlas::Bridge::CodegenDiff getCodegenDiff(
         const std::string& sessionToken,
         const std::string& proposalId) const;
 
-    ::Arbiter::Bridge::CodegenApplyResult approveAndApplyCodegen(
+    ::Atlas::Bridge::CodegenApplyResult approveAndApplyCodegen(
         const std::string&                               sessionToken,
-        const ::Arbiter::Bridge::CodegenApprovalRequest& request);
+        const ::Atlas::Bridge::CodegenApprovalRequest& request);
 
     // --------------------------------------------------------
     // Epic 10 / Task 10.5 — Workspace dashboard  GET /workspace/dashboard
     // --------------------------------------------------------
-    ::Arbiter::Bridge::WorkspaceDashboard getWorkspaceDashboard(
+    ::Atlas::Bridge::WorkspaceDashboard getWorkspaceDashboard(
         const std::string& sessionToken) const;
 
 private:
@@ -154,8 +154,8 @@ private:
 
     bool validateSession(const std::string& token) const;
     bool validateWriteSession(const std::string& token) const;
-    bool isToolActionAllowed(::Arbiter::Bridge::ToolActionId actionId) const;
-    bool isBuilderToolActionAllowed(::Arbiter::Bridge::BuilderToolActionId actionId) const;
+    bool isToolActionAllowed(::Atlas::Bridge::ToolActionId actionId) const;
+    bool isBuilderToolActionAllowed(::Atlas::Bridge::BuilderToolActionId actionId) const;
 
     void log(const std::string& message);
     void auditLog(
@@ -174,4 +174,4 @@ private:
     bool                m_running = false;
 };
 
-} // namespace NovaForge::Integration::Arbiter
+} // namespace NovaForge::Integration::AtlasAI

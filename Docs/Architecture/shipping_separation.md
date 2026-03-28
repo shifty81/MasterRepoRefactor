@@ -2,7 +2,7 @@
 
 ## Goal
 
-Shipping client and server builds must not include Arbiter UI, tooling code,
+Shipping client and server builds must not include AtlasAI UI, tooling code,
 or any development-only infrastructure.
 
 ## CMake flags
@@ -29,7 +29,7 @@ For a shipping build, set:
 2. Atlas editor systems (`Atlas/Editor/`) must only be compiled when
    `ATLAS_ENABLE_EDITOR=ON`.
 
-3. Arbiter is a C#/.NET project. It must never be referenced by C++ game
+3. AtlasAI is a C#/.NET project. It must never be referenced by C++ game
    or engine targets directly.
 
 4. Any header in `NovaForge/Integrations/Arbiter/include/` must be guarded
@@ -41,5 +41,5 @@ Before any release:
 
 1. Configure with all tooling/editor flags OFF.
 2. Confirm CMake configure succeeds.
-3. Confirm build succeeds without any Arbiter or editor artifacts.
+3. Confirm build succeeds without any AtlasAI or editor artifacts.
 4. Confirm no `ArbiterBridge*` symbols appear in shipping binaries.

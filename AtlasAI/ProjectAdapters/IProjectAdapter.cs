@@ -1,22 +1,22 @@
 // IProjectAdapter.cs
-// Generic project adapter interface for Arbiter.
+// Generic project adapter interface for AtlasAI.
 //
 // Epic 6 / Task 6.1 — Split generic modules from project-specific ones
-// Epic 6 / Task 6.2 — Project-specific code goes in Arbiter/ProjectAdapters/<ProjectName>/
+// Epic 6 / Task 6.2 — Project-specific code goes in AtlasAI/ProjectAdapters/<ProjectName>/
 //
 // Any project adapter (NovaForge, future projects) must implement this interface.
-// Arbiter's workspace and AI engine only use this interface — never the concrete type.
+// AtlasAI's workspace and AI engine only use this interface — never the concrete type.
 
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Arbiter.ProjectAdapters
+namespace AtlasAI.ProjectAdapters
 {
     /// <summary>
     /// Generic contract that every project adapter must satisfy.
-    /// The concrete implementation lives under Arbiter/ProjectAdapters/&lt;ProjectName&gt;/.
+    /// The concrete implementation lives under AtlasAI/ProjectAdapters/&lt;ProjectName&gt;/.
     /// </summary>
     public interface IProjectAdapter : IDisposable
     {
@@ -170,7 +170,7 @@ namespace Arbiter.ProjectAdapters
     // Epic 10 shared response types
     // ----------------------------------------------------------------
 
-    /// <summary>One searchable root directory surfaced to Arbiter.</summary>
+    /// <summary>One searchable root directory surfaced to AtlasAI.</summary>
     public sealed record SearchRoot(
         string Label, // e.g. "Docs", "DataTables"
         string Path,  // relative to repoRoot

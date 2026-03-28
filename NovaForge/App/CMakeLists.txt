@@ -19,15 +19,15 @@ target_include_directories(NovaForgeApp
 target_link_libraries(NovaForgeApp PUBLIC AtlasRuntime)
 
 # When bridge is enabled, NovaForgeApp links the integration layer so that
-# NovaForgeBootstrap can start the ArbiterBridgeService.
-if(NOVAFORGE_ENABLE_ARBITER_INTEGRATION AND NOVAFORGE_ENABLE_BRIDGE_SERVER)
-    target_link_libraries(NovaForgeApp PRIVATE NovaForgeIntegrationArbiter)
+# NovaForgeBootstrap can start the AtlasBridgeService.
+if(NOVAFORGE_ENABLE_ATLASAI_INTEGRATION AND NOVAFORGE_ENABLE_BRIDGE_SERVER)
+    target_link_libraries(NovaForgeApp PRIVATE NovaForgeIntegrationAtlasAI)
     target_compile_definitions(NovaForgeApp
         PRIVATE NOVAFORGE_BRIDGE_SERVER_ENABLED=1)
     target_include_directories(NovaForgeApp
         PRIVATE
-            "${CMAKE_SOURCE_DIR}/NovaForge/Integrations/Arbiter/include"
-            "${CMAKE_SOURCE_DIR}/Shared/ArbiterBridgeContract/include"
+            "${CMAKE_SOURCE_DIR}/NovaForge/Integrations/AtlasAI/include"
+            "${CMAKE_SOURCE_DIR}/Shared/AtlasBridgeContract/include"
     )
 endif()
 

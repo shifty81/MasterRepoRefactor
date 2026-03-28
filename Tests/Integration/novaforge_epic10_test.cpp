@@ -10,21 +10,21 @@
 //
 // All tests run in-process; no HTTP server is required.
 
-#include "ArbiterBridgeService.h"
+#include "AtlasBridgeService.h"
 #include "BridgeAuditLogger.h"
 
 #include <cassert>
 #include <cstdlib>
 #include <string>
 
-using namespace NovaForge::Integration::Arbiter;
-using namespace Arbiter::Bridge;
+using namespace NovaForge::Integration::AtlasAI;
+using namespace Atlas::Bridge;
 
 // ============================================================
 // Helpers
 // ============================================================
 
-static std::string connectSession(ArbiterBridgeService& svc,
+static std::string connectSession(AtlasBridgeService& svc,
                                   const std::string& projectId = "novaforge")
 {
     SessionConnectRequest req;
@@ -42,7 +42,7 @@ static std::string connectSession(ArbiterBridgeService& svc,
 static void testTask101_SearchRoots()
 {
     BridgeAuditLogger    logger;
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     svc.setAuditLogger(&logger);
     svc.start({});
 
@@ -100,7 +100,7 @@ static void testTask101_SearchRoots()
 static void testTask102_BuilderTools()
 {
     BridgeAuditLogger    logger;
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     svc.setAuditLogger(&logger);
     svc.start({});
 
@@ -179,7 +179,7 @@ static void testTask102_BuilderTools()
 
 static void testTask103_EditorState()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     svc.start({});
     const std::string token = connectSession(svc);
 
@@ -212,7 +212,7 @@ static void testTask103_EditorState()
 static void testTask104_CodegenWorkflow()
 {
     BridgeAuditLogger    logger;
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     svc.setAuditLogger(&logger);
     svc.start({});
 
@@ -304,7 +304,7 @@ static void testTask104_CodegenWorkflow()
 static void testTask105_WorkspaceDashboard()
 {
     BridgeAuditLogger    logger;
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     svc.setAuditLogger(&logger);
     svc.start({});
 
@@ -379,7 +379,7 @@ static void testTask105_WorkspaceDashboard()
 static void testAuditLogCoverage()
 {
     BridgeAuditLogger    logger;
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     svc.setAuditLogger(&logger);
     svc.start({});
 

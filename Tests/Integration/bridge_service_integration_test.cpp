@@ -1,10 +1,10 @@
 // bridge_service_integration_test.cpp
-// Integration test: exercises ArbiterBridgeService together with
+// Integration test: exercises AtlasBridgeService together with
 // BridgeSessionManager and BridgeAuditLogger end-to-end.
 //
 // No real HTTP server is required — the service operates on in-process calls.
 
-#include "ArbiterBridgeService.h"
+#include "AtlasBridgeService.h"
 #include "BridgeAuditLogger.h"
 #include "BridgeSessionManager.h"
 
@@ -12,14 +12,14 @@
 #include <cstdlib>
 #include <string>
 
-using namespace NovaForge::Integration::Arbiter;
-using namespace Arbiter::Bridge;
+using namespace NovaForge::Integration::AtlasAI;
+using namespace Atlas::Bridge;
 
 // ============================================================
 // Helpers
 // ============================================================
 
-static void startService(ArbiterBridgeService& svc,
+static void startService(AtlasBridgeService& svc,
                          BridgeAuditLogger*    logger = nullptr)
 {
     if (logger)
@@ -34,7 +34,7 @@ static void startService(ArbiterBridgeService& svc,
     assert(svc.isRunning());
 }
 
-static std::string connectAndGetToken(ArbiterBridgeService& svc)
+static std::string connectAndGetToken(AtlasBridgeService& svc)
 {
     SessionConnectRequest req;
     req.protocolVersion = kProtocolVersion;
@@ -53,7 +53,7 @@ static std::string connectAndGetToken(ArbiterBridgeService& svc)
 
 static void testLifecycle()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     assert(!svc.isRunning());
 
     BridgeServiceConfig cfg;
@@ -70,7 +70,7 @@ static void testLifecycle()
 
 static void testSessionConnect()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     startService(svc);
     auto token = connectAndGetToken(svc);
     // UUID v4 tokens have the format xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (36 chars)
@@ -79,7 +79,7 @@ static void testSessionConnect()
 
 static void testSessionConnectVersionMismatch()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     startService(svc);
 
     SessionConnectRequest req;
@@ -93,7 +93,7 @@ static void testSessionConnectVersionMismatch()
 
 static void testGetProjectInfoRequiresSession()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     startService(svc);
 
     // Without a valid token the result has the sentinel projectId
@@ -110,7 +110,7 @@ static void testGetProjectInfoRequiresSession()
 
 static void testRunBuildRequiresSession()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     startService(svc);
 
     BuildTarget target;
@@ -129,7 +129,7 @@ static void testRunBuildRequiresSession()
 
 static void testGetEditorSelection()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     startService(svc);
     auto token = connectAndGetToken(svc);
 
@@ -140,7 +140,7 @@ static void testGetEditorSelection()
 
 static void testToolActionDryRunAllowed()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     startService(svc);
     auto token = connectAndGetToken(svc);
 
@@ -155,7 +155,7 @@ static void testToolActionDryRunAllowed()
 
 static void testToolActionDeniedWithoutWriteAuth()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     startService(svc);
     auto token = connectAndGetToken(svc);
 
@@ -171,7 +171,7 @@ static void testToolActionDeniedWithoutWriteAuth()
 
 static void testToolActionNotWhitelisted()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     startService(svc);
     auto token = connectAndGetToken(svc);
 
@@ -186,7 +186,7 @@ static void testToolActionNotWhitelisted()
 
 static void testDisconnectSession()
 {
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     startService(svc);
     auto token = connectAndGetToken(svc);
 
@@ -202,7 +202,7 @@ static void testDisconnectSession()
 static void testAuditLogging()
 {
     BridgeAuditLogger    logger;
-    ArbiterBridgeService svc;
+    AtlasBridgeService svc;
     startService(svc, &logger);
     auto token = connectAndGetToken(svc);
 
@@ -224,7 +224,7 @@ static void testAuditLogging()
 
 static void testServiceNotRunning()
 {
-    ArbiterBridgeService svc; // not started
+    AtlasBridgeService svc; // not started
 
     BuildTarget target;
     target.name = "NovaForgeClient";
