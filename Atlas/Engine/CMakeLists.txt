@@ -14,6 +14,16 @@ set(ATLAS_ENGINE_SOURCES
     Audio/AudioSystem.cpp
     Networking/NetSession.cpp
     Scripting/ScriptingVM.cpp
+    # J3 — Keybind config
+    Config/KeybindConfig.cpp
+    # J4 — Save/load extensions
+    SaveLoad/SaveLoadExtensions.cpp
+    # J5 — Asset import rules
+    AssetPipeline/AssetImportRules.cpp
+    # J6 — PCG determinism engine
+    PCG/PCGDeterminismEngine.cpp
+    # J8 — Schema version registry
+    Config/SchemaVersionRegistry.cpp
     # add source files here as engine systems are implemented
 )
 
@@ -28,6 +38,9 @@ target_include_directories(AtlasEngine
              "${CMAKE_CURRENT_SOURCE_DIR}/Audio"
              "${CMAKE_CURRENT_SOURCE_DIR}/Networking"
              "${CMAKE_CURRENT_SOURCE_DIR}/Scripting"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Config"
+             "${CMAKE_CURRENT_SOURCE_DIR}/SaveLoad"
+             "${CMAKE_CURRENT_SOURCE_DIR}/PCG"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 

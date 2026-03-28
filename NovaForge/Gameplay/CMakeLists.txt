@@ -74,6 +74,11 @@ set(NOVAFORGE_GAMEPLAY_SOURCES
     # War / Sector system (I3)
     WarSector/WarSectorSystem.cpp
 
+    # J1/J2/J7 — Gameplay connectors
+    Integration/GameplayConnector.cpp
+    Integration/ContractRewardConnector.cpp
+    Integration/MarketContractBridge.cpp
+
     # Characters (Phase 1)
     Characters/CharacterSystem.cpp
     Characters/CharacterControllerShell.cpp
@@ -106,6 +111,7 @@ target_include_directories(NovaForgeGameplay
              "${CMAKE_CURRENT_SOURCE_DIR}/Season"
              "${CMAKE_CURRENT_SOURCE_DIR}/Anomaly"
              "${CMAKE_CURRENT_SOURCE_DIR}/WarSector"
+             "${CMAKE_CURRENT_SOURCE_DIR}/Integration"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
