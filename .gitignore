@@ -13,6 +13,7 @@ dist/
 build/
 Build/
 !Scripts/Build/
+!Logs/build/
 out/
 target/
 obj/
@@ -31,6 +32,16 @@ bin/
 *~
 .DS_Store
 Thumbs.db
+
+# Logs and runtime files
+*.pid
+*.seed
+*.lock
+!package-lock.json
+!yarn.lock
+# Repository-level log directories — files ARE tracked so debug sessions can
+# be reviewed in the repo.  Run Scripts/Logging/clear_logs.sh locally once
+# issues are resolved.
 
 # Environment and secrets
 .env

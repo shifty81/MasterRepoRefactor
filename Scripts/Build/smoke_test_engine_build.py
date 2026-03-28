@@ -7,6 +7,11 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
+sys.path.insert(0, str(REPO_ROOT))
+from Shared.Logging.log_utils import get_tool_logger
+
+logger = get_tool_logger(__name__, subsystem="build")
+
 PASS = 0
 FAIL = 0
 FAILURES: list[str] = []
@@ -16,11 +21,11 @@ def check(condition: bool, label: str) -> None:
     global PASS, FAIL
     if condition:
         PASS += 1
-        print(f"  [PASS] {label}")
+        logger.info("  [PASS] %s", label)
     else:
         FAIL += 1
         FAILURES.append(label)
-        print(f"  [FAIL] {label}")
+        logger.warning("  [FAIL] %s", label)
 
 
 # ---------------------------------------------------------------------------
@@ -109,23 +114,23 @@ def check_phase11_headers() -> None:
 # main
 # ---------------------------------------------------------------------------
 def main() -> int:
-    print("=" * 60)
-    print("  Engine Build Smoke Test")
-    print("=" * 60)
+    logger.info("=" * 60)
+    logger.info("  Engine Build Smoke Test")
+    logger.info("=" * 60)
 
     check_cmake_targets()
     check_key_headers()
     check_external_deps()
     check_phase11_headers()
 
-    print("\n" + "=" * 60)
+    logger.info("\n" + "=" * 60)
     total = PASS + FAIL
-    print(f"  Results: {PASS}/{total} passed, {FAIL} failed")
+    logger.info("  Results: %d/%d passed, %d failed", PASS, total, FAIL)
     if FAILURES:
-        print("\n  Failed checks:")
+        logger.warning("\n  Failed checks:")
         for f in FAILURES:
-            print(f"    - {f}")
-    print("=" * 60)
+            logger.warning("    - %s", f)
+    logger.info("=" * 60)
 
     return 0 if FAIL == 0 else 1
 
