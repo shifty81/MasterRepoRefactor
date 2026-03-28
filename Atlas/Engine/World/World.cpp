@@ -101,5 +101,7 @@ EntityRegistry& World::GetEntityRegistry() { return *Entities; }
 ComponentRegistry& World::GetComponentRegistry() { return *Components; }
 StructureRegistry& World::GetStructureRegistry() { return *Structures; }
 VoxelSubsystem& World::GetVoxelSubsystem() { return *Voxels; }
+const VoxelSubsystem& World::GetVoxelSubsystem() const { return *Voxels; }
 ModuleSubsystem& World::GetModuleSubsystem() { return *Modules; }
+const ModuleSubsystem& World::GetModuleSubsystem() const { return *Modules; }
 const std::string& World::GetWorldName() const { return WorldName; }

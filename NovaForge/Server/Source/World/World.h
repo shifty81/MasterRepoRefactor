@@ -1,19 +1,21 @@
 #pragma once
 
+#include "Entity/ComponentRegistry.h"
+#include "Entity/EntityRegistry.h"
+#include "Modules/ModuleSubsystem.h"
+#include "Voxel/StructureRegistry.h"
+#include "Voxel/VoxelSubsystem.h"
+#include "World/SystemScheduler.h"
+
 #include <memory>
 #include <string>
 
 class DataRegistry;
-class EntityRegistry;
-class ComponentRegistry;
-class StructureRegistry;
-class VoxelSubsystem;
-class ModuleSubsystem;
-class SystemScheduler;
 
 class World
 {
 public:
+    ~World();
     bool Initialize(DataRegistry& InDataRegistry);
     void Tick(float DeltaTime);
     void Shutdown();
@@ -22,7 +24,9 @@ public:
     ComponentRegistry& GetComponentRegistry();
     StructureRegistry& GetStructureRegistry();
     VoxelSubsystem& GetVoxelSubsystem();
+    const VoxelSubsystem& GetVoxelSubsystem() const;
     ModuleSubsystem& GetModuleSubsystem();
+    const ModuleSubsystem& GetModuleSubsystem() const;
 
     const std::string& GetWorldName() const;
 

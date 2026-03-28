@@ -1,8 +1,7 @@
 #include "Core/GameOrchestrator.h"
-#include "Debug/DevOverlayState.h"
-#include "Integration/IntegrationCoordinator.h"
-#include "Save/SaveManager.h"
-#include "UI/VerticalSliceUI.h"
+#include <iostream>
+
+GameOrchestrator::~GameOrchestrator() = default;
 #include <iostream>
 
 bool GameOrchestrator::Initialize()

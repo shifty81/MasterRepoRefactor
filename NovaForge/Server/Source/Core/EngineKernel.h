@@ -1,15 +1,16 @@
 #pragma once
 
-#include <memory>
+#include "Data/DataRegistry.h"
+#include "Rendering/Renderer.h"
+#include "Tooling/ToolingSubsystem.h"
+#include "World/World.h"
 
-class DataRegistry;
-class World;
-class Renderer;
-class ToolingSubsystem;
+#include <memory>
 
 class EngineKernel
 {
 public:
+    ~EngineKernel();
     bool Initialize();
     void Tick(float DeltaTime);
     void Shutdown();

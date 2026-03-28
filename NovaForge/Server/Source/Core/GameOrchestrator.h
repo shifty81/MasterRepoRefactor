@@ -1,16 +1,17 @@
 #pragma once
 
+#include "Debug/DevOverlayState.h"
+#include "Integration/IntegrationCoordinator.h"
+#include "Save/SaveManager.h"
+#include "UI/VerticalSliceUI.h"
+
 #include <memory>
 #include <string>
-
-class VerticalSliceUI;
-class SaveManager;
-class DevOverlayState;
-class IntegrationCoordinator;
 
 class GameOrchestrator
 {
 public:
+    ~GameOrchestrator();
     bool Initialize();
     void Tick(float DeltaTime);
     void Shutdown();

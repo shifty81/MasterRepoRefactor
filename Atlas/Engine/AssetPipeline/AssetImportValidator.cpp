@@ -20,36 +20,36 @@ ImportValidationResult AssetImportValidator::Validate(
     // 1. Naming check
     if (!m_rules.ValidateName(assetPath))
     {
-        result.issues.push_back({
-            EImportIssueLevel::Warning,
-            assetPath,
-            "File name does not follow the expected prefix convention.",
-            "Rename the file to include the correct prefix (e.g. SM_, T_, SFX_)."
-        });
+        ImportIssue issue;
+        issue.level      = EImportIssueLevel::Warning;
+        issue.assetPath  = assetPath;
+        issue.message    = "File name does not follow the expected prefix convention.";
+        issue.suggestion = "Rename the file to include the correct prefix (e.g. SM_, T_, SFX_).";
+        result.issues.push_back(issue);
         // Warning only — import is still permitted.
     }
 
     // 2. Destination path check
     if (!destinationPath.empty() && !m_rules.ValidatePath(assetPath, destinationPath))
     {
-        result.issues.push_back({
-            EImportIssueLevel::Error,
-            assetPath,
-            "Destination path does not match the canonical import directory.",
-            "Move the file to the correct content subdirectory."
-        });
+        ImportIssue issue;
+        issue.level      = EImportIssueLevel::Error;
+        issue.assetPath  = assetPath;
+        issue.message    = "Destination path does not match the canonical import directory.";
+        issue.suggestion = "Move the file to the correct content subdirectory.";
+        result.issues.push_back(issue);
         result.passed = false;
     }
 
     // 3. Extension presence check
     if (assetPath.rfind('.') == std::string::npos)
     {
-        result.issues.push_back({
-            EImportIssueLevel::Error,
-            assetPath,
-            "File has no extension; type cannot be determined.",
-            "Add the correct file extension before importing."
-        });
+        ImportIssue issue;
+        issue.level      = EImportIssueLevel::Error;
+        issue.assetPath  = assetPath;
+        issue.message    = "File has no extension; type cannot be determined.";
+        issue.suggestion = "Add the correct file extension before importing.";
+        result.issues.push_back(issue);
         result.passed = false;
     }
 

@@ -4,6 +4,18 @@
 
 namespace atlas {
 
+// Platform-safe local time helper
+static std::tm safe_localtime(const std::time_t& t)
+{
+    std::tm result{};
+#ifdef _MSC_VER
+    localtime_s(&result, &t);
+#else
+    localtime_r(&t, &result);
+#endif
+    return result;
+}
+
 std::ofstream FileLogger::s_logFile;
 std::mutex FileLogger::s_mutex;
 std::streambuf* FileLogger::s_origCout = nullptr;
@@ -29,10 +41,10 @@ bool FileLogger::init(const std::string& logDir, const std::string& logFile) {
 
     // Write header with timestamp
     std::time_t now = std::time(nullptr);
-    std::tm* tm = std::localtime(&now);
+    std::tm tmVal = safe_localtime(now);
     s_logFile << "=== Nova Forge Client Log ===" << std::endl;
     s_logFile << "Started: "
-              << std::put_time(tm, "%Y-%m-%d %H:%M:%S")
+              << std::put_time(&tmVal, "%Y-%m-%d %H:%M:%S")
               << std::endl;
     s_logFile << "==============================" << std::endl;
     s_logFile.flush();
@@ -73,10 +85,10 @@ void FileLogger::shutdown() {
 
     if (s_logFile.is_open()) {
         std::time_t now = std::time(nullptr);
-        std::tm* tm = std::localtime(&now);
+        std::tm tmVal = safe_localtime(now);
         s_logFile << "==============================" << std::endl;
         s_logFile << "Ended: "
-                  << std::put_time(tm, "%Y-%m-%d %H:%M:%S")
+                  << std::put_time(&tmVal, "%Y-%m-%d %H:%M:%S")
                   << std::endl;
         s_logFile.close();
     }
@@ -88,8 +100,8 @@ void FileLogger::log(const std::string& message) {
     std::lock_guard<std::mutex> lock(s_mutex);
     if (s_logFile.is_open()) {
         std::time_t now = std::time(nullptr);
-        std::tm* tm = std::localtime(&now);
-        s_logFile << "[" << std::put_time(tm, "%H:%M:%S") << "] "
+        std::tm tmVal = safe_localtime(now);
+        s_logFile << "[" << std::put_time(&tmVal, "%H:%M:%S") << "] "
                   << message << std::endl;
         s_logFile.flush();
     }

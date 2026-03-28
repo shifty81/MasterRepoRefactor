@@ -256,6 +256,7 @@ void Application::handleMouseButton(int button, int action, int mods, double x, 
             if (m_radialMenuOpen) {
                 // Confirm selection
                 auto confirmedAction = m_radialMenu->Confirm();
+                (void)confirmedAction;
                 m_radialMenuOpen = false;
                 m_radialMenu->Close();
             }

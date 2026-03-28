@@ -3,9 +3,11 @@
 #include "Shared/Logging/MasterLogger.h"
 #include <iostream>
 
+App::~App() = default;
+
 bool App::Initialize()
 {
-    MasterLogger::Init("./Logs/server", "masterrepo_server.log");
+    MasterRepo::MasterLogger::Init("./Logs/server", "masterrepo_server.log");
     MR_LOG_INFO("App::Initialize — starting MasterRepo Phase 2 Runtime");
 
     Kernel = std::make_unique<EngineKernel>();
@@ -48,5 +50,5 @@ void App::Shutdown()
     bRunning = false;
     std::cout << "=== MasterRepo Phase 2 Runtime Shutdown ===\n";
     MR_LOG_INFO("App::Shutdown — complete");
-    MasterLogger::Shutdown();
+    MasterRepo::MasterLogger::Shutdown();
 }

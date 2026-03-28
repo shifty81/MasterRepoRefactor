@@ -256,7 +256,6 @@ void warpProgressIndicator(AtlasContext& ctx, Vec2 pos,
     auto& rr = ctx.renderer();
 
     float barW = 200.0f, barH = 22.0f;
-    float totalH = barH + 18.0f;  // bar + text row
     Rect bar = {pos.x - barW * 0.5f, pos.y, barW, barH};
 
     // Phase-dependent accent colour

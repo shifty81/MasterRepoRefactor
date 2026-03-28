@@ -4,6 +4,7 @@
 #pragma once
 #include "Widgets/UIWidgetBase.h"
 
+#include <cstdint>
 #include <optional>
 #include <string>
 #include <vector>

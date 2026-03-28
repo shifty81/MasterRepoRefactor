@@ -320,7 +320,7 @@ void AtlasConsole::executeCommand(const std::string& input) {
     std::string cmd = tokens[0];
     // Convert to lowercase for case-insensitive matching
     std::transform(cmd.begin(), cmd.end(), cmd.begin(),
-                   [](unsigned char c) { return std::tolower(c); });
+                   [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
 
     auto it = m_commands.find(cmd);
     if (it != m_commands.end()) {

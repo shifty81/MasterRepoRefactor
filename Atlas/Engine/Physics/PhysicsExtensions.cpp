@@ -63,6 +63,7 @@ RayCastHit PhysicsLayerManager::Raycast(const PhysicsWorld& world,
     best.distance = ray.maxDistance;
 
     size_t count = world.BodyCount();
+    (void)count;
     // We iterate body IDs via the collision-layer entries since we don't have
     // direct iteration on the base world — use registered entries.
     for (const auto& entry : m_entries)

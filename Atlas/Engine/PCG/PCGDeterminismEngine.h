@@ -154,7 +154,7 @@ public:
     void              RegenerateDirty();
 
     /// Auto-assign deterministic seed from master + generator ID hash.
-    uint64_t          AutoAssignSeed(const std::string& generatorId);
+    uint64_t          AutoAssignSeed(const std::string& generatorId) const;
 
     // ---- determinism helpers -------------------------------------------
     DeterministicRNG  CreateRNG(const std::string& generatorId) const;
