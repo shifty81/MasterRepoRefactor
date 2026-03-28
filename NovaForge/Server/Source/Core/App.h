@@ -7,6 +7,7 @@ class EngineKernel;
 class App
 {
 public:
+    ~App();
     bool Initialize();
     void Run();
     void Shutdown();

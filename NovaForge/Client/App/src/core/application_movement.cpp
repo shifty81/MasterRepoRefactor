@@ -158,6 +158,7 @@ void Application::updateLocalMovement(float deltaTime) {
     static constexpr float WARP_SPEED = 5000.0f;            // Simulated warp speed m/s
     static constexpr float WARP_EXIT_DIST = 100.0f;         // Exit warp at this range
     static constexpr float ALIGN_TURN_RATE = 1.5f;          // rad/s — how fast ship rotates toward target
+    (void)ALIGN_TURN_RATE;
     static constexpr float ALIGN_SPEED_FRACTION = 0.75f;    // Must reach 75% max speed to warp
 
     // ── Standard FPS-style direct ship flight ─────────────────────────

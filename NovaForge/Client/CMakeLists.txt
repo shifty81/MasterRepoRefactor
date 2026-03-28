@@ -6,7 +6,7 @@ if(NOT TARGET NovaForge::nlohmann_json)
     add_library(NovaForge_nlohmann_json INTERFACE)
     add_library(NovaForge::nlohmann_json ALIAS NovaForge_nlohmann_json)
     target_include_directories(NovaForge_nlohmann_json INTERFACE
-        "${CMAKE_CURRENT_SOURCE_DIR}/App/external/nlohmann"
+        "${CMAKE_CURRENT_SOURCE_DIR}/App/external"
     )
 endif()
 
@@ -64,6 +64,10 @@ target_link_libraries(NovaForgeClient
         NovaForge::stb
         NovaForge::tinygltf
         NovaForge::tinyobjloader
+        glm::glm
+    PRIVATE
+        $<$<TARGET_EXISTS:glfw>:glfw>
+        $<$<TARGET_EXISTS:GLEW::GLEW>:GLEW::GLEW>
 )
 
 masterrepo_set_compiler_warnings(NovaForgeClient)

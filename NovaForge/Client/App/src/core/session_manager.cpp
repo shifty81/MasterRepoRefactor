@@ -197,7 +197,7 @@ std::vector<SessionManager::SessionInfo> SessionManager::scanLAN() {
     
     // Send discovery packet
     const char* discoverMsg = "NOVAFORGE_OFFLINE_DISCOVER";
-    sendto(sock, discoverMsg, strlen(discoverMsg), 0, (sockaddr*)&broadcastAddr, sizeof(broadcastAddr));
+    sendto(sock, discoverMsg, static_cast<int>(strlen(discoverMsg)), 0, (sockaddr*)&broadcastAddr, sizeof(broadcastAddr));
     
     // Wait for responses (with 1 second timeout)
     auto startTime = std::chrono::steady_clock::now();
@@ -219,7 +219,9 @@ std::vector<SessionManager::SessionInfo> SessionManager::scanLAN() {
             if (response.find("NOVAFORGE_OFFLINE_SESSION:") == 0) {
                 // Parse session info
                 SessionInfo info;
-                info.host_address = inet_ntoa(senderAddr.sin_addr);
+                char addrBuf[INET_ADDRSTRLEN] = {};
+                inet_ntop(AF_INET, &senderAddr.sin_addr, addrBuf, INET_ADDRSTRLEN);
+                info.host_address = addrBuf;
                 // Additional parsing would go here
                 sessions.push_back(info);
             }

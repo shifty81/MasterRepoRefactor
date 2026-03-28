@@ -56,6 +56,42 @@ const std::vector<ModuleDefinition>& DataRegistry::GetLoadedModuleDefinitions() 
     return ModuleDefinitions;
 }
 
+const RecipeDefinition* DataRegistry::FindRecipeDefinition(const std::string& RecipeId) const
+{
+    for (const auto& Recipe : RecipeDefinitions)
+    {
+        if (Recipe.Id == RecipeId) return &Recipe;
+    }
+    return nullptr;
+}
+
+const PlayerDefinition* DataRegistry::FindPlayerDefinition(const std::string& PlayerId) const
+{
+    for (const auto& Player : PlayerDefinitions)
+    {
+        if (Player.Id == PlayerId) return &Player;
+    }
+    return nullptr;
+}
+
+const ItemDefinition* DataRegistry::FindItemDefinition(const std::string& ItemId) const
+{
+    for (const auto& Item : ItemDefinitions)
+    {
+        if (Item.Id == ItemId) return &Item;
+    }
+    return nullptr;
+}
+
+const MissionDefinition* DataRegistry::FindMissionDefinition(const std::string& MissionId) const
+{
+    for (const auto& Mission : MissionDefinitions)
+    {
+        if (Mission.Id == MissionId) return &Mission;
+    }
+    return nullptr;
+}
+
 bool DataRegistry::LoadModuleDefinitions(const std::string& ModuleDirectory)
 {
     namespace fs = std::filesystem;

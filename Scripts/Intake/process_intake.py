@@ -95,6 +95,16 @@ def _classify_file(path: Path) -> ClassificationResult:
             "zip_archive",
         )
 
+    # ---- Build / runtime logs --------------------------------------------
+    if suffix == ".log":
+        return ClassificationResult(
+            path,
+            REPO_ROOT / "Docs" / "Archive" / "BuildLogs" / path.name,
+            "build_log",
+            confident=True,
+            note="Build/runtime log — archived for debugging reference.",
+        )
+
     # ---- Documentation ----------------------------------------------------
     if suffix in (".md", ".rst"):
         for signals, dest_dir, label in _DOC_SIGNALS:

@@ -1385,7 +1385,6 @@ void AtlasHUD::drawDockablePanel(AtlasContext& ctx, const char* title,
 void AtlasHUD::drawSystemInfo(AtlasContext& ctx) {
     if (m_systemName.empty()) return;
 
-    auto& r = ctx.renderer();
     const Theme& t = ctx.theme();
 
     float x = m_sidebarWidth + 10.0f;

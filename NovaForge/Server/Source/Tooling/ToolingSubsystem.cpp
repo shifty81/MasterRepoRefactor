@@ -16,3 +16,9 @@ void ToolingSubsystem::Shutdown()
 {
     std::cout << "[Tooling] Shutdown\n";
 }
+
+void ToolingSubsystem::ToggleOverlay()
+{
+    bOverlayEnabled = !bOverlayEnabled;
+    std::cout << "[Tooling] Overlay " << (bOverlayEnabled ? "Enabled" : "Disabled") << "\n";
+}

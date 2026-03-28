@@ -28,6 +28,10 @@ target_include_directories(NovaForgeServer
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Source"
 )
 
+target_link_libraries(NovaForgeServer
+    PRIVATE MasterLogger
+)
+
 masterrepo_set_compiler_warnings(NovaForgeServer)
 
 # ── CTest integration ─────────────────────────────────────────────────────────

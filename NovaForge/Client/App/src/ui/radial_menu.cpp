@@ -338,7 +338,6 @@ void RadialMenu::RenderAtlas(atlas::AtlasContext& ctx) {
     r.drawCircleOutline(center, OUTER_RADIUS, accentDim, 1.5f);
 
     // Draw segment divider lines and labels
-    float pi2 = 2.0f * static_cast<float>(M_PI);
     for (int i = 0; i < static_cast<int>(m_segments.size()); ++i) {
         const auto& seg = m_segments[i];
         bool highlighted = (seg.action == m_highlightedAction && m_highlightedAction != Action::NONE);

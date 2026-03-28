@@ -22,7 +22,9 @@ public:
     ComponentRegistry& GetComponentRegistry();
     StructureRegistry& GetStructureRegistry();
     VoxelSubsystem& GetVoxelSubsystem();
+    const VoxelSubsystem& GetVoxelSubsystem() const;
     ModuleSubsystem& GetModuleSubsystem();
+    const ModuleSubsystem& GetModuleSubsystem() const;
 
     const std::string& GetWorldName() const;
 

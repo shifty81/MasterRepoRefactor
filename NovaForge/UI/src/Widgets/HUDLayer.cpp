@@ -26,11 +26,6 @@ void HUDLayer::PushAlert(const std::string& text, float durationSeconds)
     m_alerts.push_back({ text, durationSeconds, 0.f });
 }
 
-const std::vector<HUDAlertMessage>& HUDLayer::GetAlerts() const
-{
-    return m_alerts;
-}
-
 void HUDLayer::ClearExpiredAlerts()
 {
     m_alerts.erase(

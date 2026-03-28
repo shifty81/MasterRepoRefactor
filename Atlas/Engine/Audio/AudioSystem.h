@@ -5,6 +5,7 @@
 #pragma once
 #include "Audio/AudioEngine.h"
 
+#include <array>
 #include <functional>
 #include <optional>
 #include <string>

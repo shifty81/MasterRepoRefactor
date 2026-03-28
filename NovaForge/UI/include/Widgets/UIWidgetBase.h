@@ -2,6 +2,7 @@
 // NovaForge UI — base widget interface and common widget types.
 
 #pragma once
+#include <cstdint>
 #include <functional>
 #include <string>
 #include <vector>

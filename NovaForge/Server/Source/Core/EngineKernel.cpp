@@ -6,6 +6,8 @@
 #include "Shared/Logging/MasterLogger.h"
 #include <iostream>
 
+EngineKernel::~EngineKernel() = default;
+
 bool EngineKernel::Initialize()
 {
     MR_LOG_INFO("EngineKernel::Initialize — begin");

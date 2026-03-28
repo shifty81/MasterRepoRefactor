@@ -61,8 +61,14 @@ bool SaveLoadManager::SaveWorld(const WorldSaveData& data)
 {
     // Upsert.
     for (auto& d : m_saves)
-        if (d.slotId == data.slotId) { d = data; ++m_saveCount;
-            if (m_saveCb) m_saveCb(data.slotId, true); return true; }
+    {
+        if (d.slotId == data.slotId) {
+            d = data;
+            ++m_saveCount;
+            if (m_saveCb) m_saveCb(data.slotId, true);
+            return true;
+        }
+    }
     m_saves.push_back(data);
     ++m_saveCount;
     if (m_saveCb) m_saveCb(data.slotId, true);

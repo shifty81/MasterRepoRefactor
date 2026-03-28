@@ -725,7 +725,6 @@ float AtlasRenderer::drawText(const std::string& text, Vec2 pos,
     glBindTexture(GL_TEXTURE_2D, m_fontTexture);
 
     float atlasW = static_cast<float>(kFontCharCount * kFontGlyphW);
-    float atlasH = static_cast<float>(kFontGlyphH);
     float gw = kFontGlyphW * scale;
     float gh = kFontGlyphH * scale;
     float cx = pos.x;
