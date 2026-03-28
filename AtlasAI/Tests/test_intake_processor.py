@@ -337,7 +337,7 @@ class TestUnknownClassification:
 
 ROOT_ALLOWLIST = {
     "Atlas", "AtlasAI", "NovaForge", "Shared", "Services", "Tools",
-    "ThirdParty", "Tests", "Scripts", "Docs", "cmake", "Intake", "Build",
+    "ThirdParty", "Tests", "Scripts", "Docs", "cmake", "Intake", "DropBox", "Build",
     "CMakeLists.txt", "README.md", "LICENSE", ".gitignore",
     ".git", ".github", ".pytest_cache", ".venv", "venv", "env",
     ".editorconfig", ".clang-format", ".clang-tidy",
@@ -361,7 +361,7 @@ class TestValidateRoot:
         clean = ["Atlas", "AtlasAI", "NovaForge", "CMakeLists.txt",
                  "README.md", "LICENSE", ".gitignore", "Docs",
                  "Scripts", "Shared", "Tests", "Tools", "ThirdParty",
-                 "Services", "cmake", "Intake"]
+                 "Services", "cmake", "Intake", "DropBox"]
         assert check_root_violations(clean) == []
 
     def test_stray_zip_is_violation(self):
@@ -686,3 +686,221 @@ class TestCppContentClassification:
         r = classify_cpp_content("mystery.cpp", content)
         assert r.label == ClassificationLabel.Unclassified
         assert r.confident is False
+
+
+# =============================================================================
+# Tests — DropBox staging area
+# =============================================================================
+
+class TestDropBoxValidation:
+    """DropBox/ must be in the root allowlist and git-ignored for binary/archive types."""
+
+    def test_dropbox_is_allowed_at_root(self):
+        """DropBox is a sanctioned root directory and must not trigger root violations."""
+        updated_allowlist = ROOT_ALLOWLIST | {"DropBox"}
+        violations = [name for name in ["DropBox"]
+                      if name not in updated_allowlist]
+        assert violations == [], "DropBox must be in the root allowlist"
+
+    def test_dropbox_in_validate_root_allowlist(self):
+        """validate_root.py ALLOWLIST must include DropBox."""
+        validate_root_path = (
+            Path(__file__).resolve().parents[2]
+            / "Scripts" / "Validate" / "validate_root.py"
+        )
+        assert validate_root_path.exists(), "validate_root.py must exist"
+        source = validate_root_path.read_text(encoding="utf-8")
+        assert '"DropBox"' in source, (
+            'validate_root.py ALLOWLIST must contain "DropBox"'
+        )
+
+    def test_dropbox_gitignore_exists(self):
+        """DropBox/.gitignore must exist to prevent binary/archive files from being tracked."""
+        dropbox_gitignore = (
+            Path(__file__).resolve().parents[2] / "DropBox" / ".gitignore"
+        )
+        assert dropbox_gitignore.exists(), "DropBox/.gitignore must exist"
+
+    def test_dropbox_gitignore_covers_zip(self):
+        """DropBox/.gitignore must include *.zip pattern."""
+        dropbox_gitignore = (
+            Path(__file__).resolve().parents[2] / "DropBox" / ".gitignore"
+        )
+        content = dropbox_gitignore.read_text(encoding="utf-8")
+        assert "*.zip" in content, "DropBox/.gitignore must ignore *.zip"
+
+    def test_dropbox_gitignore_covers_common_archive_types(self):
+        """DropBox/.gitignore must cover major archive/binary formats."""
+        dropbox_gitignore = (
+            Path(__file__).resolve().parents[2] / "DropBox" / ".gitignore"
+        )
+        content = dropbox_gitignore.read_text(encoding="utf-8")
+        for pattern in ("*.7z", "*.rar", "*.tar", "*.exe"):
+            assert pattern in content, (
+                f"DropBox/.gitignore must ignore {pattern}"
+            )
+
+    def test_dropbox_readme_exists(self):
+        """DropBox/README.md must exist to document the intake workflow."""
+        dropbox_readme = (
+            Path(__file__).resolve().parents[2] / "DropBox" / "README.md"
+        )
+        assert dropbox_readme.exists(), "DropBox/README.md must exist"
+
+    def test_dropbox_readme_mentions_process_intake(self):
+        """DropBox/README.md must reference process_intake.py."""
+        dropbox_readme = (
+            Path(__file__).resolve().parents[2] / "DropBox" / "README.md"
+        )
+        content = dropbox_readme.read_text(encoding="utf-8")
+        assert "process_intake.py" in content, (
+            "DropBox/README.md must mention process_intake.py"
+        )
+
+
+class TestDropBoxClassification:
+    """Files dropped in DropBox are classified identically to files in Intake/."""
+
+    def test_zip_from_dropbox_routes_to_zipfiles(self):
+        r = classify_filename("SomePack.zip")
+        assert r.label == ClassificationLabel.ZipArchive
+        assert "ZipFiles" in r.destination
+
+    def test_7z_from_dropbox_routes_to_zipfiles(self):
+        r = classify_filename("SomePack.7z")
+        assert r.label == ClassificationLabel.ZipArchive
+        assert "ZipFiles" in r.destination
+
+    def test_rar_from_dropbox_routes_to_zipfiles(self):
+        r = classify_filename("SomePack.rar")
+        assert r.label == ClassificationLabel.ZipArchive
+        assert "ZipFiles" in r.destination
+
+    def test_md_from_dropbox_still_classified_as_doc(self):
+        r = classify_filename("DESIGN_BRIEF.md")
+        assert r.label in (
+            ClassificationLabel.DesignDoc,
+            ClassificationLabel.DesignDocDefault,
+        )
+
+
+class TestDropBoxFilesystemIntegration:
+    """Filesystem-level tests using a temp dir to verify DropBox scanning."""
+
+    @pytest.fixture
+    def tmp_repo(self, tmp_path):
+        """Create a minimal tmp repo with both Intake/ and DropBox/ staging areas."""
+        (tmp_path / "Intake").mkdir()
+        (tmp_path / "DropBox").mkdir()
+        (tmp_path / "Docs" / "Archive" / "ZipFiles").mkdir(parents=True)
+        (tmp_path / "Docs" / "Archive" / "Chats").mkdir(parents=True)
+        (tmp_path / "Docs" / "Design").mkdir(parents=True)
+        return tmp_path
+
+    def _route_file(self, src: Path, dest_dir: Path) -> Path:
+        dest = dest_dir / src.name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        if not dest.exists():
+            shutil.move(str(src), str(dest))
+        return dest
+
+    def test_zip_in_dropbox_can_be_routed(self, tmp_repo):
+        """A zip placed in DropBox/ should be classifiable and routable."""
+        zip_file = tmp_repo / "DropBox" / "NewContent.zip"
+        zip_file.touch()
+        r = classify_filename(zip_file.name)
+        assert r.label == ClassificationLabel.ZipArchive
+        dest = self._route_file(zip_file, tmp_repo / "Docs" / "Archive" / "ZipFiles")
+        assert dest.exists()
+        assert not zip_file.exists()
+
+    def test_md_in_dropbox_can_be_routed(self, tmp_repo):
+        """A markdown dropped in DropBox/ is classified and moves to Docs/."""
+        md_file = tmp_repo / "DropBox" / "DESIGN_SPEC.md"
+        md_file.write_text("# spec")
+        r = classify_filename(md_file.name)
+        assert "Design" in r.destination
+        dest = self._route_file(md_file, tmp_repo / "Docs" / "Design")
+        assert dest.exists()
+
+    def test_dropbox_empty_after_routing(self, tmp_repo):
+        """After routing all items, DropBox/ (minus README/.gitignore) should be empty."""
+        files = {
+            "TestBundle.zip": tmp_repo / "Docs" / "Archive" / "ZipFiles",
+            "DESIGN_DOC.md": tmp_repo / "Docs" / "Design",
+        }
+        for name, dest_dir in files.items():
+            (tmp_repo / "DropBox" / name).touch()
+
+        for name, dest_dir in files.items():
+            src = tmp_repo / "DropBox" / name
+            if src.exists():
+                self._route_file(src, dest_dir)
+
+        remaining = [
+            f for f in (tmp_repo / "DropBox").iterdir()
+            if f.name not in ("README.md", ".gitignore")
+        ]
+        assert len(remaining) == 0, f"DropBox still has unrouted items: {remaining}"
+
+    def test_both_intake_and_dropbox_scanned(self, tmp_repo):
+        """Both Intake/ and DropBox/ should be scanned independently."""
+        (tmp_repo / "Intake" / "intake_doc.md").write_text("# doc")
+        (tmp_repo / "DropBox" / "dropbox_pack.zip").touch()
+
+        # Simulate scanning both
+        all_files = (
+            list((tmp_repo / "Intake").iterdir()) +
+            list((tmp_repo / "DropBox").iterdir())
+        )
+        all_files = [f for f in all_files
+                     if f.name not in ("README.md", ".gitignore") and not f.name.startswith(".")]
+
+        assert len(all_files) == 2
+        names = {f.name for f in all_files}
+        assert "intake_doc.md" in names
+        assert "dropbox_pack.zip" in names
+
+
+class TestProcessIntakeScript:
+    """Tests that verify the process_intake.py script exposes the DropBox scanning feature."""
+
+    def test_process_intake_defines_dropbox_dir(self):
+        """process_intake.py must define DROPBOX_DIR pointing to DropBox/."""
+        script_path = (
+            Path(__file__).resolve().parents[2]
+            / "Scripts" / "Intake" / "process_intake.py"
+        )
+        source = script_path.read_text(encoding="utf-8")
+        assert "DROPBOX_DIR" in source, (
+            "process_intake.py must define DROPBOX_DIR"
+        )
+        assert '"DropBox"' in source or "'DropBox'" in source, (
+            'process_intake.py must reference the "DropBox" directory'
+        )
+
+    def test_process_intake_accepts_source_argument(self):
+        """process_intake.py must accept a --source argument with dropbox option."""
+        script_path = (
+            Path(__file__).resolve().parents[2]
+            / "Scripts" / "Intake" / "process_intake.py"
+        )
+        source = script_path.read_text(encoding="utf-8")
+        assert "--source" in source, (
+            "process_intake.py must support --source CLI argument"
+        )
+        assert "dropbox" in source, (
+            "process_intake.py --source must accept 'dropbox' option"
+        )
+
+    def test_process_intake_scans_dropbox_dir(self):
+        """process_intake.py must call _scan_staging_dir on DROPBOX_DIR."""
+        script_path = (
+            Path(__file__).resolve().parents[2]
+            / "Scripts" / "Intake" / "process_intake.py"
+        )
+        source = script_path.read_text(encoding="utf-8")
+        assert "_scan_staging_dir" in source, (
+            "process_intake.py must define _scan_staging_dir to handle DropBox"
+        )
+

@@ -1,0 +1,74 @@
+# DropBox — binary/large-file gitignore
+# Files dropped here for intake are intentionally kept LOCAL ONLY.
+# Once processed through process_intake.py, these files are no longer needed.
+
+# --- Archive formats ---
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.bz2
+*.xz
+
+# --- Windows installer / macOS disk image / Linux package ---
+*.exe
+*.msi
+*.dmg
+*.pkg
+*.deb
+*.rpm
+*.appimage
+
+# --- 3-D source assets (commit ASSET_MANIFEST.json + runtime data instead) ---
+*.fbx
+*.obj
+*.dae
+*.blend
+*.max
+*.mb
+*.ma
+
+# --- Source art ---
+*.psd
+*.ai
+*.sketch
+*.xcf
+*.kra
+
+# --- Video ---
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+*.wmv
+*.flv
+
+# --- Audio blobs ---
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.aac
+*.wma
+
+# --- But DO track text / code files so lightweight drops can be versioned ---
+!*.md
+!*.txt
+!*.json
+!*.yaml
+!*.yml
+!*.h
+!*.hpp
+!*.cpp
+!*.cs
+!*.py
+!*.sh
+!*.bat
+!*.cmake
+!.gitignore

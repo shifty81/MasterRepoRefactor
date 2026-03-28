@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""process_intake.py — Classify and route files from Intake/ to canonical destinations.
+"""process_intake.py — Classify and route files from Intake/ and DropBox/ to canonical destinations.
 
 Usage:
-    python3 Scripts/Intake/process_intake.py [--dry-run] [--verbose]
+    python3 Scripts/Intake/process_intake.py [--dry-run] [--verbose] [--source {intake,dropbox,all}]
 
 Options:
     --dry-run    Print routing decisions without moving any files.
     --verbose    Print a line for every file examined (including skipped ones).
     --classify   Alias for --dry-run (explicit classify-only mode).
+    --source     Which staging area to scan: 'intake', 'dropbox', or 'all' (default: all).
 
 Exit codes:
     0  All items classified and routed (or dry-run complete with no unclassified items).
@@ -26,9 +27,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-REPO_ROOT  = Path(__file__).resolve().parents[2]
-INTAKE_DIR = REPO_ROOT / "Intake"
-LOG_DIR    = REPO_ROOT / "Logs" / "intake"
+REPO_ROOT    = Path(__file__).resolve().parents[2]
+INTAKE_DIR   = REPO_ROOT / "Intake"
+DROPBOX_DIR  = REPO_ROOT / "DropBox"
+LOG_DIR      = REPO_ROOT / "Logs" / "intake"
 
 sys.path.insert(0, str(REPO_ROOT))
 from Shared.Logging.log_utils import get_tool_logger
@@ -339,40 +341,75 @@ def _write_audit(results: list[ClassificationResult], dry_run: bool):
 
 
 # ---------------------------------------------------------------------------
+# Staging-area scanner
+# ---------------------------------------------------------------------------
+
+# Files inside any staging directory that are always skipped (never classified).
+_STAGING_SKIP_NAMES: frozenset[str] = frozenset({"README.md", ".gitignore"})
+
+
+def _scan_staging_dir(staging_dir: Path) -> list[ClassificationResult]:
+    """Return classification results for all processable items in a staging directory."""
+    results: list[ClassificationResult] = []
+    if not staging_dir.is_dir():
+        return results
+    items = sorted(staging_dir.iterdir())
+    items = [p for p in items
+             if p.name not in _STAGING_SKIP_NAMES and not p.name.startswith(".")]
+    for item in items:
+        if item.is_dir():
+            results.extend(_classify_directory(item))
+        else:
+            results.append(_classify_file(item))
+    return results
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Classify and route files from Intake/ to canonical destinations.")
+        description="Classify and route files from Intake/ and DropBox/ to canonical destinations.")
     parser.add_argument("--dry-run", "--classify", action="store_true",
                         help="Print routing decisions without moving files.")
     parser.add_argument("--verbose", action="store_true",
                         help="Print a line for every examined file.")
+    parser.add_argument("--source", choices=["intake", "dropbox", "all"], default="all",
+                        help="Which staging area to scan (default: all).")
     args = parser.parse_args()
 
-    if not INTAKE_DIR.is_dir():
+    scan_intake  = args.source in ("intake",  "all")
+    scan_dropbox = args.source in ("dropbox", "all")
+
+    if scan_intake and not INTAKE_DIR.is_dir():
         logger.error("Intake/ directory not found at: %s", INTAKE_DIR)
         return 2
 
-    # Gather all items (files and directories) directly inside Intake/
-    items = sorted(INTAKE_DIR.iterdir())
-    # Filter out the README and hidden files
-    items = [p for p in items
-             if p.name != "README.md" and not p.name.startswith(".")]
-
-    if not items:
-        logger.info("Intake/ is empty — nothing to process.")
-        return 0
-
     all_results: list[ClassificationResult] = []
 
-    for item in items:
-        if item.is_dir():
-            dir_results = _classify_directory(item)
-            all_results.extend(dir_results)
+    if scan_intake:
+        intake_results = _scan_staging_dir(INTAKE_DIR)
+        if intake_results:
+            logger.info("Scanning Intake/ — %d item(s)", len(intake_results))
+            all_results.extend(intake_results)
         else:
-            all_results.append(_classify_file(item))
+            logger.info("Intake/ is empty — nothing to process.")
+
+    if scan_dropbox:
+        if not DROPBOX_DIR.is_dir():
+            logger.warning("DropBox/ directory not found at: %s — skipping.", DROPBOX_DIR)
+        else:
+            dropbox_results = _scan_staging_dir(DROPBOX_DIR)
+            if dropbox_results:
+                logger.info("Scanning DropBox/ — %d item(s)", len(dropbox_results))
+                all_results.extend(dropbox_results)
+            else:
+                logger.info("DropBox/ is empty — nothing to process.")
+
+    if not all_results:
+        logger.info("Nothing to process in any staging area.")
+        return 0
 
     # Print summary
     unclassified = [r for r in all_results if not r.confident]

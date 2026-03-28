@@ -67,8 +67,22 @@ temp/
 *.tmp
 *.temp
 
-# Zip archives — all zips are archived in Docs/Archive/ZipFiles/; none should appear at repo root
+# Zip archives and binary archives
+# Raw archives must never be committed to root or DropBox.
+# Integrate their contents and archive the zip in Docs/Archive/ZipFiles/ (or keep locally).
+# DropBox/ has its own .gitignore for the same purpose.
 
+# Root-level zip/archive files (keep locally, not in git)
+/*.zip
+/*.7z
+/*.rar
+/*.tar
+/*.tar.gz
+/*.tgz
+/*.tar.bz2
+/*.tar.xz
+
+# Historical root files (kept for backwards compat with any existing local clones)
 MasterRepoRefactor-main.zip
 resolve-zip-conflict.bat
 New Text Document.txt
