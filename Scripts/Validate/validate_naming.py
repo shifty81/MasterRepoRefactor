@@ -25,7 +25,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 CPP_EXTS = (".h", ".hpp", ".hxx", ".cpp", ".cxx", ".cc")
 CS_EXTS  = (".cs",)
-ALL_SRC_EXTS = CPP_EXTS + CS_EXTS
+ALL_SRC_EXTS = CPP_EXTS + CS_EXTS + (".c",)
 
 LEGACY_NAME_RE = re.compile(r'\barbiter\b', re.IGNORECASE)
 
@@ -150,7 +150,7 @@ def run_atlasai_namespace_check() -> int:
         if not content.strip():
             continue  # skip empty files
         # Look for a namespace declaration; it should be AtlasAI.*
-        ns_match = re.search(r'\bnamespace\s+(\S+)', content)
+        ns_match = re.search(r'\bnamespace\s+([\w.]+)', content)
         if ns_match and not ns_match.group(1).startswith("AtlasAI"):
             bad_files.append(f)
 

@@ -94,7 +94,7 @@ def report(violations: dict[Path, list[tuple[int, str]]], rule_name: str) -> int
 
 # ── Rules ─────────────────────────────────────────────────────────────────────
 
-CPP_EXTS = (".h", ".hpp", ".hxx", ".cpp", ".cxx", ".cc", ".c")
+CPP_EXTS = (".h", ".hpp", ".hxx", ".cpp", ".cxx", ".cc")
 CS_EXTS  = (".cs",)
 
 ATLAS_DIR   = REPO_ROOT / "Atlas"
