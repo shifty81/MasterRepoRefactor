@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9]*'
+
+jobs:
+  build-installer:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Inno Setup Installer
+        run: iscc.exe AtlasAI/Installer/atlasai_setup.iss
+        shell: cmd
+
+      - name: Sign Installer
+        if: env.CODESIGN_PFX != ''
+        env:
+          CODESIGN_PFX: ${{ secrets.CODESIGN_PFX }}
+        run: |
+          signtool.exe sign /fd sha256 /f cert.pfx /p "$env:CODESIGN_PFX" AtlasAI/Installer/Output/AtlasAISetup.exe
+        shell: pwsh
+
+      - name: Upload Release Artifact
+        uses: softprops/action-gh-release@v2
+        with:
+          files: AtlasAI/Installer/Output/AtlasAISetup.exe
+
+  build-python-package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build Python package
+        run: |
+          pip install build
+          python -m build AtlasAI/
+
+      - name: Upload Python packages
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            AtlasAI/dist/*.whl
+            AtlasAI/dist/*.tar.gz

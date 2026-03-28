@@ -8,6 +8,7 @@
 
 <br/><br/>
 
+[![Latest Release](https://img.shields.io/github/v/release/shifty81/MasterRepoRefactor)](https://github.com/shifty81/MasterRepoRefactor/releases/latest)
 [![C++ Tests](https://img.shields.io/badge/C%2B%2B%20Tests-7%20passing-brightgreen?style=flat-square&logo=c%2B%2B)](Tests/)
 [![Python Tests](https://img.shields.io/badge/Python%20Tests-263%20passing-brightgreen?style=flat-square&logo=python)](AtlasAI/Tests/)
 [![CMake](https://img.shields.io/badge/Build-CMake%203.20%2B-blue?style=flat-square&logo=cmake)](CMakeLists.txt)
