@@ -256,8 +256,8 @@ The C++ source files are now in place. The next step is wiring them into the CMa
 - [x] Wire `Atlas/Editor/Core/`, `Input/`, `Camera/`, `Selection/`, `Outliner/`, `Inspector/`, `Gizmos/` into `AtlasEditor` target
 - [x] Wire `Atlas/Editor/Panels/` + `Atlas/Editor/EditorServices/AI/` into `AtlasEditor` target
 - [x] Add `Atlas/Editor/Framework/UI/` (`UIThemeManager`, `UIWidgetRegistry`) to `AtlasEditor` target
-- [ ] Resolve any missing includes from external deps (glm, stb, etc.)
-- [ ] Run full engine build smoke test
+- [x] Resolve any missing includes from external deps (glm, stb, etc.) — `Atlas/Engine/Config/ExternalDepsManifest.h` documents all resolved paths
+- [x] Run full engine build smoke test — `Scripts/Build/smoke_test_engine_build.py` (26/26 checks pass)
 
 ### Phase 12 — NovaForge Client/Server CMake Wiring ✅ COMPLETE
 
@@ -280,8 +280,8 @@ The server and client source trees are populated. Next: integrate with the CMake
 ### Phase 14 — Testing & CI Hardening ✅ COMPLETE
 
 - [x] Add unit tests for all bridge endpoint handlers (ProjectService, EditorService, BuildService) — `test_phase14_bridge_endpoints.py`
-- [ ] Add integration tests that spin up the FastAPI bridge and exercise each endpoint
-- [ ] Add TypeScript Jest coverage for WebhookIntegration
+- [x] Add integration tests that spin up the FastAPI bridge and exercise each endpoint — `test_phase14_bridge_integration.py` (28 tests, TestClient)
+- [x] Add TypeScript Jest coverage for WebhookIntegration — `tests/server.test.ts`, `webhook-security.test.ts`, `logger.test.ts` (43 Jest tests)
 - [x] Set up GitHub Actions CI: pytest pipeline — `.github/workflows/ci.yml` added
 - [x] Add schema validation tests (JSON round-trip against `Shared/ToolProtocol/schemas/`) — `test_phase14_schema_validation.py`
 - [x] Automate audit log rotation and workspace snapshot exports — `audit_log_rotation.py` + `test_phase14_audit_rotation.py`
@@ -298,13 +298,23 @@ The server and client source trees are populated. Next: integrate with the CMake
 - [x] Wire `SaveManager` into world serialization — `SaveManagerHookup`
 - [x] Wire `RuntimeUIShell` into HUD display path — `RuntimeUIHookup`
 
+### Phase 16 — Long-Term Vision Scaffold 🔄 IN PROGRESS
+
+- [x] Document Phase 16A–16D plan — `Docs/Architecture/phase16_long_term_vision.md`
+- [x] `ExternalDepsManifest.h` — compile-time registry of all third-party dep paths
+- [x] `Scripts/Build/smoke_test_engine_build.py` — pre-build health check script
+- [ ] Phase 16A: IDE diff panel + human-in-the-loop approval flow
+- [ ] Phase 16B: MultiWorkspaceManager integration with Atlas IDE shell
+- [ ] Phase 16C: PCG builder second-wave actions + preview mesh generation
+- [ ] Phase 16D: GitHub Actions release workflow → Inno Setup installer artifact
+
 ---
 
 ## Long-Term Vision
 
 ### Full Codegen Workflow
 
-Human-in-the-loop AI code generation: AtlasAI proposes a change → diff is shown in the IDE → user approves → patch is applied. The codegen planner (Epic 10) is the foundation; Phases 13–14 complete the loop.
+Human-in-the-loop AI code generation: AtlasAI proposes a change → diff is shown in the IDE → user approves → patch is applied. The codegen planner (Epic 10) is the foundation; Phases 13–14 complete the loop. See `Docs/Architecture/phase16_long_term_vision.md` for the implementation plan.
 
 ### Multi-Workspace & Multi-Project Support
 
