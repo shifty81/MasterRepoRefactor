@@ -104,6 +104,50 @@ public:
         const std::string&                              sessionToken,
         const ::Arbiter::Bridge::ToolActionRequest&     request);
 
+    // --------------------------------------------------------
+    // Epic 10 / Task 10.1 — Search roots  GET /project/search-roots
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::ProjectSearchRoots getSearchRoots(
+        const std::string& sessionToken) const;
+
+    // --------------------------------------------------------
+    // Epic 10 / Task 10.2 — Builder / PCG tool hooks  POST /editor/tools/builder
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::BuilderToolResult runBuilderTool(
+        const std::string&                           sessionToken,
+        const ::Arbiter::Bridge::BuilderToolRequest& request);
+
+    // --------------------------------------------------------
+    // Epic 10 / Task 10.3 — Richer editor state  GET /editor/state
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::EditorStateSnapshot getEditorState(
+        const std::string& sessionToken) const;
+
+    // --------------------------------------------------------
+    // Epic 10 / Task 10.4 — Codegen workflow
+    //   POST /codegen/propose
+    //   GET  /codegen/diff
+    //   POST /codegen/approve
+    //   POST /codegen/apply
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::CodegenProposal proposeCodegen(
+        const std::string&                              sessionToken,
+        const ::Arbiter::Bridge::CodegenProposalRequest& request);
+
+    ::Arbiter::Bridge::CodegenDiff getCodegenDiff(
+        const std::string& sessionToken,
+        const std::string& proposalId) const;
+
+    ::Arbiter::Bridge::CodegenApplyResult approveAndApplyCodegen(
+        const std::string&                               sessionToken,
+        const ::Arbiter::Bridge::CodegenApprovalRequest& request);
+
+    // --------------------------------------------------------
+    // Epic 10 / Task 10.5 — Workspace dashboard  GET /workspace/dashboard
+    // --------------------------------------------------------
+    ::Arbiter::Bridge::WorkspaceDashboard getWorkspaceDashboard(
+        const std::string& sessionToken) const;
+
 private:
     struct Impl;
     std::unique_ptr<Impl> m_impl;
@@ -111,6 +155,7 @@ private:
     bool validateSession(const std::string& token) const;
     bool validateWriteSession(const std::string& token) const;
     bool isToolActionAllowed(::Arbiter::Bridge::ToolActionId actionId) const;
+    bool isBuilderToolActionAllowed(::Arbiter::Bridge::BuilderToolActionId actionId) const;
 
     void log(const std::string& message);
     void auditLog(
@@ -121,7 +166,7 @@ private:
         bool               success,
         const std::string& summary,
         bool               wasDryRun  = false,
-        const std::string& failReason = {});
+        const std::string& failReason = {}) const;
 
     BridgeLogCallback   m_logCallback;
     BridgeAuditLogger*  m_auditLogger = nullptr;

@@ -84,6 +84,17 @@ namespace Arbiter.ProjectAdapters.NovaForge
         public IReadOnlyList<string> GetAllowedToolActions() =>
             _manifest.SafetySettings.AllowedToolActions;
 
+        /// <summary>Returns the list of allowed builder tool action names.</summary>
+        public IReadOnlyList<string> GetAllowedBuilderToolActions() =>
+            new List<string>
+            {
+                "ValidateData", "RunPCGPreview", "OpenScene", "FocusEntity",
+                "RegenerateSchemas",
+                // Epic 10 / Task 10.2
+                "RunBuilderInspect", "RunPCGDiagnostics",
+                "GeneratePCGPreview", "ValidateBuilderData",
+            };
+
         // ----------------------------------------------------------------
         // Session management  (Task 4.1 prerequisite — /session/connect)
         // ----------------------------------------------------------------
@@ -279,12 +290,204 @@ namespace Arbiter.ProjectAdapters.NovaForge
             System.IO.Path.Combine(repoRoot, _manifest.RepoPaths.DocsRoot);
 
         // ----------------------------------------------------------------
+        // Epic 10 / Task 10.1 — Search roots  GET /project/search-roots
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Returns the full set of searchable project roots
+        /// (docs, data, content, config, source).
+        /// </summary>
+        public async Task<BridgeResponse> GetSearchRootsAsync(
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, "project/search-roots");
+                AddSessionHeader(request);
+                var response = await _http.SendAsync(request, cancellationToken);
+                string content = await response.Content.ReadAsStringAsync(cancellationToken);
+                return new BridgeResponse(response.IsSuccessStatusCode, content);
+            }
+            catch (Exception ex)
+            {
+                return new BridgeResponse(false, ex.Message);
+            }
+        }
+
+        // ----------------------------------------------------------------
+        // Epic 10 / Task 10.2 — Builder / PCG tool hooks
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Runs a whitelisted builder or PCG tool hook.
+        /// Defaults to dry-run for safety.
+        /// </summary>
+        public async Task<BridgeResponse> RunBuilderToolAsync(
+            string            actionName,
+            string?           sceneTarget       = null,
+            string?           parameter         = null,
+            bool              dryRun            = true,
+            CancellationToken cancellationToken  = default)
+        {
+            if (!IsBuilderActionAllowed(actionName))
+                return new BridgeResponse(false,
+                    $"Builder tool action '{actionName}' is not in the allowed list.");
+
+            var payload = new
+            {
+                action      = actionName,
+                sceneTarget = sceneTarget ?? string.Empty,
+                parameter   = parameter   ?? string.Empty,
+                dryRun      = dryRun,
+            };
+
+            return await PostEnvelopeAsync(
+                "editor/tools/builder",
+                BuildEnvelope("ToolService", "RunBuilderTool", payload),
+                cancellationToken);
+        }
+
+        // ----------------------------------------------------------------
+        // Epic 10 / Task 10.3 — Richer editor state  GET /editor/state
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Returns the full editor state snapshot including active map, mode,
+        /// world state, selected components, and simulation state.
+        /// </summary>
+        public async Task<BridgeResponse> GetEditorStateAsync(
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, "editor/state");
+                AddSessionHeader(request);
+                var response = await _http.SendAsync(request, cancellationToken);
+                string content = await response.Content.ReadAsStringAsync(cancellationToken);
+                return new BridgeResponse(response.IsSuccessStatusCode, content);
+            }
+            catch (Exception ex)
+            {
+                return new BridgeResponse(false, ex.Message);
+            }
+        }
+
+        // ----------------------------------------------------------------
+        // Epic 10 / Task 10.4 — Codegen proposal workflow
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Proposes a code-generation change for human review.
+        /// Returns a proposal ID used in the diff / approve steps.
+        /// Never applies changes directly.
+        /// </summary>
+        public async Task<BridgeResponse> ProposeCodegenAsync(
+            string            description,
+            string            targetFile,
+            string?           context           = null,
+            CancellationToken cancellationToken  = default)
+        {
+            var payload = new
+            {
+                description = description,
+                targetFile  = targetFile,
+                context     = context ?? string.Empty,
+                dryRun      = true,
+            };
+
+            return await PostEnvelopeAsync(
+                "codegen/propose",
+                BuildEnvelope("CodegenService", "ProposeCodegen", payload),
+                cancellationToken);
+        }
+
+        /// <summary>Gets the unified-diff preview for a pending codegen proposal.</summary>
+        public async Task<BridgeResponse> GetCodegenDiffAsync(
+            string            proposalId,
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var request = new HttpRequestMessage(
+                    HttpMethod.Get, $"codegen/diff/{Uri.EscapeDataString(proposalId)}");
+                AddSessionHeader(request);
+                var response = await _http.SendAsync(request, cancellationToken);
+                string content = await response.Content.ReadAsStringAsync(cancellationToken);
+                return new BridgeResponse(response.IsSuccessStatusCode, content);
+            }
+            catch (Exception ex)
+            {
+                return new BridgeResponse(false, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Approves or rejects a pending codegen proposal.
+        /// Approval requires a write-authorized bridge session.
+        /// Rejection simply discards the proposal; no write auth is required.
+        /// </summary>
+        public async Task<BridgeResponse> ApproveCodegenAsync(
+            string            proposalId,
+            bool              approved,
+            string?           comment           = null,
+            CancellationToken cancellationToken  = default)
+        {
+            var payload = new
+            {
+                proposalId = proposalId,
+                approved   = approved,
+                comment    = comment ?? string.Empty,
+            };
+
+            return await PostEnvelopeAsync(
+                "codegen/approve",
+                BuildEnvelope("CodegenService", "ApproveCodegen", payload),
+                cancellationToken);
+        }
+
+        // ----------------------------------------------------------------
+        // Epic 10 / Task 10.5 — Workspace dashboard  GET /workspace/dashboard
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Returns the aggregated workspace dashboard from the backend bridge service.
+        /// Includes build health, recent actions, search roots, and project status.
+        /// </summary>
+        public async Task<BridgeResponse> GetWorkspaceDashboardAsync(
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, "workspace/dashboard");
+                AddSessionHeader(request);
+                var response = await _http.SendAsync(request, cancellationToken);
+                string content = await response.Content.ReadAsStringAsync(cancellationToken);
+                return new BridgeResponse(response.IsSuccessStatusCode, content);
+            }
+            catch (Exception ex)
+            {
+                return new BridgeResponse(false, ex.Message);
+            }
+        }
+
+        // ----------------------------------------------------------------
         // Private helpers
         // ----------------------------------------------------------------
 
         private bool IsActionAllowed(string actionName)
         {
             foreach (var allowed in _manifest.SafetySettings.AllowedToolActions)
+            {
+                if (string.Equals(allowed, actionName,
+                        StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
+        }
+
+        private bool IsBuilderActionAllowed(string actionName)
+        {
+            foreach (var allowed in GetAllowedBuilderToolActions())
             {
                 if (string.Equals(allowed, actionName,
                         StringComparison.OrdinalIgnoreCase))

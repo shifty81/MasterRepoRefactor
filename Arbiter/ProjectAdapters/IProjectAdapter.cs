@@ -95,8 +95,85 @@ namespace Arbiter.ProjectAdapters
             string?           parameter         = null,
             bool              dryRun            = true,
             CancellationToken cancellationToken  = default);
+
+        // ----------------------------------------------------------------
+        // Epic 10 / Task 10.1 — Search roots
+        // ----------------------------------------------------------------
+
+        /// <summary>Returns the full set of searchable project roots.</summary>
+        Task<BridgeResponse> GetSearchRootsAsync(
+            CancellationToken cancellationToken = default);
+
+        // ----------------------------------------------------------------
+        // Epic 10 / Task 10.2 — Builder / PCG tool hooks
+        // ----------------------------------------------------------------
+
+        /// <summary>Returns the names of allowed builder tool actions.</summary>
+        IReadOnlyList<string> GetAllowedBuilderToolActions();
+
+        /// <summary>
+        /// Runs a whitelisted builder or PCG tool hook.
+        /// Defaults to dry-run for safety.
+        /// </summary>
+        Task<BridgeResponse> RunBuilderToolAsync(
+            string            actionName,
+            string?           sceneTarget       = null,
+            string?           parameter         = null,
+            bool              dryRun            = true,
+            CancellationToken cancellationToken  = default);
+
+        // ----------------------------------------------------------------
+        // Epic 10 / Task 10.3 — Richer editor state
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Returns the full editor state snapshot including active map,
+        /// mode, world state, selected components, and simulation state.
+        /// </summary>
+        Task<BridgeResponse> GetEditorStateAsync(
+            CancellationToken cancellationToken = default);
+
+        // ----------------------------------------------------------------
+        // Epic 10 / Task 10.4 — Codegen proposal workflow
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Proposes a code-generation change.
+        /// Always creates a proposal + diff for human review; never writes directly.
+        /// </summary>
+        Task<BridgeResponse> ProposeCodegenAsync(
+            string            description,
+            string            targetFile,
+            string?           context           = null,
+            CancellationToken cancellationToken  = default);
+
+        /// <summary>Gets the diff preview for a pending codegen proposal.</summary>
+        Task<BridgeResponse> GetCodegenDiffAsync(
+            string            proposalId,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Approves or rejects a pending proposal.
+        /// Approval requires a write-authorized session.
+        /// </summary>
+        Task<BridgeResponse> ApproveCodegenAsync(
+            string            proposalId,
+            bool              approved,
+            string?           comment           = null,
+            CancellationToken cancellationToken  = default);
     }
 
     /// <summary>Simple success/body pair returned by all bridge calls.</summary>
     public sealed record BridgeResponse(bool Success, string Body);
+
+    // ----------------------------------------------------------------
+    // Epic 10 shared response types
+    // ----------------------------------------------------------------
+
+    /// <summary>One searchable root directory surfaced to Arbiter.</summary>
+    public sealed record SearchRoot(
+        string Label, // e.g. "Docs", "DataTables"
+        string Path,  // relative to repoRoot
+        string Kind   // "docs" | "config" | "data" | "content" | "source"
+    );
 }

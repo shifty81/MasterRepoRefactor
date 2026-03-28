@@ -2,12 +2,14 @@
 // Central workspace manager for Arbiter.
 //
 // Epic 6 / Task 6.5 — Standardize workspace loading
+// Epic 10 / Task 10.5 — Workspace dashboard surface
 //
 // Responsibilities:
 // - Locate the project manifest for a given repo root
 // - Instantiate and activate the correct IProjectAdapter
 // - Manage the connection lifecycle (connect / disconnect)
 // - Expose the active adapter to the rest of Arbiter (shell, AI engine, etc.)
+// - Surface the workspace dashboard and search roots for the shell UI
 //
 // Rules:
 // - Generic: must not hard-code any project-specific logic.
@@ -15,6 +17,7 @@
 // - The workspace is the single source of truth for the active project.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,7 +29,7 @@ namespace Arbiter.HostApp.Workspace
 {
     /// <summary>
     /// Manages the active project workspace for Arbiter.
-    /// Load a workspace by calling <see cref="LoadFromRepoRootAsync"/>.
+    /// Load a workspace by calling <see cref="LoadFromRepoRoot"/>.
     /// </summary>
     public sealed class ArbiterWorkspace : IDisposable
     {
@@ -93,6 +96,48 @@ namespace Arbiter.HostApp.Workspace
         {
             if (_adapter != null)
                 await _adapter.DisconnectSessionAsync(cancellationToken);
+        }
+
+        // ----------------------------------------------------------------
+        // Epic 10 / Task 10.1 — Search roots
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Returns the full set of searchable project roots from the backend.
+        /// Requires an active session.
+        /// </summary>
+        public async Task<BridgeResponse> GetSearchRootsAsync(
+            CancellationToken cancellationToken = default)
+        {
+            if (_adapter == null)
+                return new BridgeResponse(false, "No project adapter loaded.");
+
+            return await _adapter.GetSearchRootsAsync(cancellationToken);
+        }
+
+        // ----------------------------------------------------------------
+        // Epic 10 / Task 10.5 — Workspace dashboard
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Returns an aggregated workspace dashboard snapshot from the bridge backend.
+        /// Includes build health, recent actions, search roots, and project status.
+        /// Requires an active session.
+        /// </summary>
+        public async Task<BridgeResponse> GetDashboardAsync(
+            CancellationToken cancellationToken = default)
+        {
+            if (_adapter == null)
+                return new BridgeResponse(false, "No project adapter loaded.");
+
+            // The dashboard is served by the backend bridge service.
+            // The adapter routes to GET /workspace/dashboard via a GET request.
+            // Use a helper on the NovaForge adapter if available, otherwise fall back.
+            if (_adapter is NovaForgeProjectAdapter nfAdapter)
+                return await nfAdapter.GetWorkspaceDashboardAsync(cancellationToken);
+
+            // Generic fallback: not supported for unknown adapters
+            return new BridgeResponse(false, "Dashboard not supported by this adapter.");
         }
 
         // ----------------------------------------------------------------

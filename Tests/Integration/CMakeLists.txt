@@ -22,6 +22,13 @@ if(NOVAFORGE_ENABLE_ARBITER_INTEGRATION)
         SOURCES novaforge_workflow_test.cpp
         DEPS    NovaForgeIntegrationArbiter
     )
+
+    # Epic 10 — Second-wave improvements: tasks 10.1–10.5.
+    masterrepo_add_test(
+        NovaForgeEpic10Test
+        SOURCES novaforge_epic10_test.cpp
+        DEPS    NovaForgeIntegrationArbiter
+    )
 endif()
 
 message(STATUS "Tests/Integration: configured")

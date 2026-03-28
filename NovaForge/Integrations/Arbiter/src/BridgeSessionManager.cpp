@@ -122,6 +122,14 @@ void BridgeSessionManager::revokeAll()
         session.active = false;
 }
 
+size_t BridgeSessionManager::activeSessionCount() const
+{
+    size_t count = 0;
+    for (const auto& [token, session] : m_impl->sessions)
+        if (session.active) ++count;
+    return count;
+}
+
 // ============================================================
 // Helpers
 // ============================================================

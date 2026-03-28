@@ -59,12 +59,17 @@ public:
     /// Revokes all active sessions.
     void revokeAll();
 
+    /// Returns the number of currently active sessions.
+    size_t activeSessionCount() const;
+
+    /// Returns the current UTC time formatted as ISO 8601.
+    static std::string utcNowIso8601();
+
 private:
     struct Impl;
     std::unique_ptr<Impl> m_impl;
 
     std::string generateToken();
-    static std::string utcNowIso8601();
 };
 
 } // namespace NovaForge::Integration::Arbiter
