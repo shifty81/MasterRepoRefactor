@@ -1,0 +1,60 @@
+{
+  "command_envelope": {
+    "CommandId": "string",
+    "CorrelationId": "string",
+    "Origin": "string",
+    "RequestedBy": "string",
+    "TargetSubsystem": "string",
+    "Verb": "string",
+    "Parameters": "object",
+    "DryRun": "bool",
+    "CapabilityTags": [
+      "string"
+    ],
+    "ValidationRules": [
+      "string"
+    ],
+    "RollbackToken": "string",
+    "Timestamp": "string",
+    "ExpectedArtifacts": [
+      "string"
+    ]
+  },
+  "runtime_debug_examples": [
+    {
+      "Verb": "TriggerBreach",
+      "TargetSubsystem": "Runtime.Hazards",
+      "Parameters": {
+        "AssemblyId": "starter_derelict_a",
+        "NodeId": "hull_panel_03"
+      },
+      "CapabilityTags": [
+        "runtime.debug",
+        "runtime.hazard"
+      ]
+    },
+    {
+      "Verb": "SaveCheckpoint",
+      "TargetSubsystem": "Runtime.SaveLoad",
+      "Parameters": {
+        "SlotName": "pre_reactor_extract"
+      },
+      "CapabilityTags": [
+        "runtime.save"
+      ]
+    }
+  ],
+  "builder_examples": [
+    {
+      "Verb": "DetachNode",
+      "TargetSubsystem": "Runtime.BuilderRuntime",
+      "Parameters": {
+        "AssemblyId": "starter_derelict_a",
+        "NodeId": "reactor_regulator_mount"
+      },
+      "CapabilityTags": [
+        "builder.mutate"
+      ]
+    }
+  ]
+}

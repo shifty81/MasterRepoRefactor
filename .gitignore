@@ -68,6 +68,7 @@ temp/
 *.temp
 
 # Zip archives — all zips are archived in Docs/Archive/ZipFiles/; none should appear at repo root
+MasterRepoRefactor-main.zip
 
 # Binary mesh/asset files — not stored in source control.
 # Add them locally to NovaForge/Content/Meshes/ after downloading the free placeholder assets.

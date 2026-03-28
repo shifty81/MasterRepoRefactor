@@ -1,42 +1,66 @@
 [
-{
-"id": "runtime-gameplay-overview",
-"title": "Runtime gameplay overview",
-"kind": "knowledge_chunk",
-"summary": "Runtime owns the NovaForge playable loop, binding ship interior traversal, airlock use, EVA, salvage, repair, mission resolution, and save/load.",
-"source": "docs/EXPANDED_RUNTIME_GAMEPLAY_SPEC.md",
-"keywords": ["runtime", "gameplay", "mission", "salvage", "save/load", "airlock", "eva"],
-},
-{
-"id": "vertical-slice-state-model",
-"title": "Vertical slice phase state model",
-"kind": "state_machine",
-"summary": "The vertical slice uses explicit states: Booting, InShip, AirlockCycling, EVA, SalvageActive, HazardResponse, ReturnTransit, MissionComplete, Debrief, SavePending.",
-"source": "docs/EXPANDED_RUNTIME_GAMEPLAY_SPEC.md",
-"keywords": ["state machine", "game mode", "phase transitions", "vertical slice"],
-},
-{
-"id": "rig-controller-contract",
-"title": "Rig controller responsibilities",
-"kind": "code_contract",
-"summary": "RigController owns first-person possession, movement mode switching, interaction focus, equipped tool routing, and tool update hooks.",
-"source": "code/Runtime/Player/RigController.h",
-"keywords": ["rig", "player", "first person", "controller", "tool", "movement"],
-},
-{
-"id": "session-bootstrap-contract",
-"title": "Session bootstrap responsibilities",
-"kind": "code_contract",
-"summary": "SessionBootstrap owns scenario load, optional save restore, deterministic seed injection, player rig spawn, and startup mission context.",
-"source": "code/Runtime/Session/SessionBootstrap.h",
-"keywords": ["bootstrap", "session", "scenario", "save", "seed", "spawn"],
-},
-{
-"id": "arbiter-use-guidance",
-"title": "Arbiter use guidance for runtime gameplay",
-"kind": "operational_rule",
-"summary": "Arbiter should use these files for planning, scaffolding, and documentation grounding, but runtime mutations should still go through the project command gateway.",
-"source": "arbiter/INGESTION_MANIFEST.json",
-"keywords": ["arbiter", "ingestion", "planning", "command gateway"],
-},
+  {
+    "id": "runtime-gameplay-overview",
+    "title": "Runtime gameplay overview",
+    "kind": "knowledge_chunk",
+    "summary": "Runtime owns the NovaForge playable loop, binding ship interior traversal, airlock use, EVA, salvage, repair, mission resolution, and save/load.",
+    "source": "docs/EXPANDED_RUNTIME_GAMEPLAY_SPEC.md",
+    "keywords": ["runtime", "gameplay", "mission", "salvage", "save/load", "airlock", "eva"]
+  },
+  {
+    "id": "vertical-slice-state-model",
+    "title": "Vertical slice phase state model",
+    "kind": "state_machine",
+    "summary": "The vertical slice uses explicit states: Booting, InShip, AirlockCycling, EVA, SalvageActive, HazardResponse, ReturnTransit, MissionComplete, Debrief, SavePending.",
+    "source": "docs/EXPANDED_RUNTIME_GAMEPLAY_SPEC.md",
+    "keywords": ["state machine", "game mode", "phase transitions", "vertical slice"]
+  },
+  {
+    "id": "rig-controller-contract",
+    "title": "Rig controller responsibilities",
+    "kind": "code_contract",
+    "summary": "RigController owns first-person possession, movement mode switching, interaction focus, equipped tool routing, and tool update hooks.",
+    "source": "code/Runtime/Player/RigController.h",
+    "keywords": ["rig", "player", "first person", "controller", "tool", "movement"]
+  },
+  {
+    "id": "session-bootstrap-contract",
+    "title": "Session bootstrap responsibilities",
+    "kind": "code_contract",
+    "summary": "SessionBootstrap owns scenario load, optional save restore, deterministic seed injection, player rig spawn, and startup mission context.",
+    "source": "code/Runtime/Session/SessionBootstrap.h",
+    "keywords": ["bootstrap", "session", "scenario", "save", "seed", "spawn"]
+  },
+  {
+    "id": "arbiter-use-guidance",
+    "title": "Arbiter use guidance for runtime gameplay",
+    "kind": "operational_rule",
+    "summary": "Arbiter should use these files for planning, scaffolding, and documentation grounding, but runtime mutations should still go through the project command gateway.",
+    "source": "arbiter/INGESTION_MANIFEST.json",
+    "keywords": ["arbiter", "ingestion", "planning", "command gateway"]
+  },
+  {
+    "id": "builder-salvage-overview",
+    "title": "Builder and salvage overview",
+    "kind": "knowledge_chunk",
+    "summary": "BuilderRuntime materializes authored assemblies into live nodes, while Salvage manages scan, detach, loot, repair, and delta recording.",
+    "source": "docs/EXPANDED_BUILDER_SALVAGE_SPEC.md",
+    "keywords": ["builder", "salvage", "assembly", "snap graph", "repair"]
+  },
+  {
+    "id": "save-seed-delta-rule",
+    "title": "Save uses seed plus deltas",
+    "kind": "operational_rule",
+    "summary": "WorldInstanceSave should prefer deterministic reconstruction from seed plus runtime deltas instead of full-world blob serialization.",
+    "source": "docs/EXPANDED_SAVELOAD_CONTRACTS.md",
+    "keywords": ["save", "load", "deterministic", "seed", "deltas"]
+  },
+  {
+    "id": "gateway-command-envelope",
+    "title": "Gateway command envelope",
+    "kind": "schema_rule",
+    "summary": "All Arbiter mutation requests must be wrapped in a validated command envelope containing command id, target subsystem, verb, parameters, validation, capabilities, and rollback context.",
+    "source": "docs/EXPANDED_ARBITER_COMMAND_GATEWAY.md",
+    "keywords": ["arbiter", "gateway", "command", "validation", "rollback"]
+  }
 ]
