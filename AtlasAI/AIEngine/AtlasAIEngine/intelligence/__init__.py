@@ -148,6 +148,24 @@ from .inventory_body_loader import (
     InventoryItemManifest,
     InventorySlotManifest,
 )
+from .distance_field_pipeline import (
+    DistanceFieldPipeline,
+    DistanceFieldEntry,
+    ShadowConfigEntry,
+    FieldBlendOpEntry,
+)
+from .animation_compression_pipeline import (
+    AnimationCompressionPipeline,
+    CompressionSchemeEntry,
+    TrackCompressionEntry,
+    CompressionPreviewEntry,
+)
+from .loot_body_loader import (
+    LootBodyLoader,
+    LootBodyManifest,
+    LootTableManifest,
+    LootEntryManifest,
+)
 
 __all__ = [
     "ClangdBridge",
@@ -371,4 +389,7 @@ __all__ = [
     "ProceduralTerrainPipeline", "TerrainGenEntry", "BiomeLayerEntry", "ErosionSimEntry",
     "SkeletalMeshPipeline", "BoneEntry", "WeightPaintEntry", "MeshLODEntry",
     "InventoryBodyLoader", "InventoryBodyManifest", "InventoryItemManifest", "InventorySlotManifest",
+    "DistanceFieldPipeline", "DistanceFieldEntry", "ShadowConfigEntry", "FieldBlendOpEntry",
+    "AnimationCompressionPipeline", "CompressionSchemeEntry", "TrackCompressionEntry", "CompressionPreviewEntry",
+    "LootBodyLoader", "LootBodyManifest", "LootTableManifest", "LootEntryManifest",
 ]
