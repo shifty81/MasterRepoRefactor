@@ -7,6 +7,8 @@
 #include "World.h"
 #include <iostream>
 
+GameOrchestrator::~GameOrchestrator() = default;
+
 bool GameOrchestrator::Initialize()
 {
     Data = std::make_unique<DataRegistry>();
