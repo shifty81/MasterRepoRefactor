@@ -1,5 +1,5 @@
-[log] Session started — 2026-03-29T04:11:09Z
-[log] Log file: /c/GIT PROJECTS/MasterRepoRefactor/Logs/build/build_20260329_001109.log
+[log] Session started — 2026-03-29T05:14:18Z
+[log] Log file: /c/GIT PROJECTS/MasterRepoRefactor/Logs/build/build_20260329_011418.log
 ================================================================
   MasterRepo Build
   Config  : Debug
@@ -10,7 +10,7 @@
 ================================================================
 
 ──────────────────────────────────────────────────────────────
-  [2026-03-29T04:11:09Z] CMake Configure
+  [2026-03-29T05:14:18Z] CMake Configure
 ──────────────────────────────────────────────────────────────
 [cmake] Configuring ...
 -- Building for: Visual Studio 17 2022
@@ -87,12 +87,12 @@ CMake Deprecation Warning at Build/_deps/glew-src/CMakeLists.txt:1 (cmake_minimu
 -- AtlasSessionService: configured
 -- AtlasTelemetryService: configured
 -- Services: configured
--- Configuring done (23.3s)
+-- Configuring done (22.1s)
 -- Generating done (0.5s)
 -- Build files have been written to: C:/GIT PROJECTS/MasterRepoRefactor/Build
 
 ──────────────────────────────────────────────────────────────
-  [2026-03-29T04:11:33Z] CMake Build
+  [2026-03-29T05:14:40Z] CMake Build
 ──────────────────────────────────────────────────────────────
 [cmake] Building with 8 jobs ...
 MSBuild version 17.14.40+3e7442088 for .NET Framework
@@ -100,91 +100,91 @@ MSBuild version 17.14.40+3e7442088 for .NET Framework
   1>Checking Build System
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Build/_deps/glfw-src/src/CMakeLists.txt
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Build/_deps/glm-src/glm/CMakeLists.txt
-  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Build/_deps/glew-src/CMakeLists.txt
-  context.c
-  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/NovaForge/Server/CMakeLists.txt
-  glm.cpp
-  glew.c
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Atlas/Core/CMakeLists.txt
+  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Build/_deps/glew-src/CMakeLists.txt
+  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/NovaForge/Server/CMakeLists.txt
+  context.c
+  glm.cpp
   AtlasCore_stub.cpp
+  glew.c
   App.cpp
   init.c
   input.c
-  monitor.c
   AtlasCore.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Core\Debug\AtlasCore.lib
-  libglew_static.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\_deps\glew-build\lib\Debug\glewd.lib
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/NovaForge/Save/CMakeLists.txt
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Atlas/Engine/CMakeLists.txt
-  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Services/AtlasTelemetryService/CMakeLists.txt
+  monitor.c
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Services/AtlasSessionService/CMakeLists.txt
+  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Services/AtlasTelemetryService/CMakeLists.txt
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/NovaForge/UI/CMakeLists.txt
-  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Services/AtlasBuildService/CMakeLists.txt
-  platform.c
-  RuntimeUIShell.cpp
-  AtlasBuildService.cpp
   AtlasEngine_stub.cpp
-  AtlasSessionService.cpp
-  AtlasTelemetryService.cpp
-  SaveManager.cpp
   Renderer.cpp
+  libglew_static.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\_deps\glew-build\lib\Debug\glewd.lib
+  AtlasSessionService.cpp
+  RuntimeUIShell.cpp
+  platform.c
+  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Services/AtlasBuildService/CMakeLists.txt
+  SaveManager.cpp
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Services/AtlasWorldService/CMakeLists.txt
+  AtlasTelemetryService.cpp
   vulkan.c
   window.c
+  AtlasBuildService.cpp
   egl_context.c
-  AtlasWorldService.cpp
-  osmesa_context.c
-  HUDLayer.cpp
   SaveSystem.cpp
-  null_init.c
-  glm.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\_deps\glm-build\glm\Debug\glm.lib
-  AtlasBuildService.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Services\AtlasBuildService\Debug\AtlasBuildService.lib
+  osmesa_context.c
   RenderViewport.cpp
-  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Atlas/UI/CMakeLists.txt
-  null_monitor.c
+  HUDLayer.cpp
+  AtlasWorldService.cpp
+  glm.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\_deps\glm-build\glm\Debug\glm.lib
+  null_init.c
   AtlasTelemetryService.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Services\AtlasTelemetryService\Debug\AtlasTelemetryService.lib
+  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Atlas/UI/CMakeLists.txt
   AtlasUI_stub.cpp
+  null_monitor.c
   AtlasSessionService.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Services\AtlasSessionService\Debug\AtlasSessionService.lib
-  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Services/AtlasAssetService/CMakeLists.txt
-  null_window.c
-  AtlasAssetService.cpp
   Generating Code...
-  AtlasUI.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\UI\Debug\AtlasUI.lib
   EngineKernel.cpp
+  null_window.c
+  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Services/AtlasAssetService/CMakeLists.txt
+  AtlasBuildService.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Services\AtlasBuildService\Debug\AtlasBuildService.lib
   InventoryScreen.cpp
+  AtlasAssetService.cpp
+  AtlasUI.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\UI\Debug\AtlasUI.lib
   null_joystick.c
-  AtlasWorldService.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Services\AtlasWorldService\Debug\AtlasWorldService.lib
-  NovaForgeSave.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Save\Debug\NovaForgeSave.lib
-  win32_module.c
   InputManager.cpp
+  NovaForgeSave.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Save\Debug\NovaForgeSave.lib
+  AtlasWorldService.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Services\AtlasWorldService\Debug\AtlasWorldService.lib
+  win32_module.c
   win32_time.c
-  AtlasAssetService.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Services\AtlasAssetService\Debug\AtlasAssetService.lib
   win32_thread.c
   ContractBoardUI.cpp
+  AtlasAssetService.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Services\AtlasAssetService\Debug\AtlasAssetService.lib
   win32_init.c
-  win32_joystick.c
   InputContextManager.cpp
+  win32_joystick.c
   win32_monitor.c
   StationTerminalUI.cpp
   win32_window.c
-  Generating Code...
   AssetNamingRules.cpp
   GameOrchestrator.cpp
+  Generating Code...
   Compiling...
   wgl_context.c
   Generating Code...
   FleetProgressionPanel.cpp
+  AssetImportValidator.cpp
   glfw.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\_deps\glfw-build\src\Debug\glfw3.lib
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/NovaForge/Client/CMakeLists.txt
-  AssetImportValidator.cpp
   audio_generator.cpp
   audio_manager.cpp
   character_animation_system.cpp
   DataRegistry.cpp
-  Generating Code...
   PhysicsWorld.cpp
+  Generating Code...
   NovaForgeUI.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\UI\Debug\NovaForgeUI.lib
-  character_mesh_system.cpp
   PhysicsExtensions.cpp
+  character_mesh_system.cpp
   AudioEngine.cpp
   equipment_attachment_system.cpp
   DevOverlayState.cpp
@@ -207,13 +207,13 @@ MSBuild version 17.14.40+3e7442088 for .NET Framework
   CraftingSystem.cpp
   PCGDeterminismEngine.cpp
   EVAMovementController.cpp
-  application_movement.cpp
   SchemaVersionRegistry.cpp
+  application_movement.cpp
   EVATransitionController.cpp
-  EconomySystem.cpp
   SceneNode.cpp
-  application_rendering.cpp
+  EconomySystem.cpp
   SceneGraph.cpp
+  application_rendering.cpp
   EndgameGateSystem.cpp
   Generating Code...
   SurvivalController.cpp
@@ -223,50 +223,50 @@ MSBuild version 17.14.40+3e7442088 for .NET Framework
   FactionSystem.cpp
   Generating Code...
   AtlasEngine.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Engine\Debug\AtlasEngine.lib
-  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/NovaForge/Gameplay/CMakeLists.txt
-  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Atlas/Runtime/CMakeLists.txt
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/NovaForge/World/CMakeLists.txt
+  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Atlas/Runtime/CMakeLists.txt
+  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/NovaForge/Gameplay/CMakeLists.txt
   AtlasRuntime_stub.cpp
   NovaForgeWorld_stub.cpp
   NovaForgeGameplay_stub.cpp
   World.cpp
   CombatSystem.cpp
-  FleetSystem.cpp
   AtlasRuntime.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Runtime\Debug\AtlasRuntime.lib
   Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/Atlas/Editor/CMakeLists.txt
+  FleetSystem.cpp
   AtlasEditor_stub.cpp
   EditorShell.cpp
   TradeMarket.cpp
   Generating Code...
   NovaForgeWorld.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\World\Debug\NovaForgeWorld.lib
-  GameplayManager.cpp
   ResourceRegistry.cpp
+  GameplayManager.cpp
   EditorModeController.cpp
   embedded_server.cpp
   LootResolver.cpp
-  Generating Code...
   EditorInputRouter.cpp
+  Generating Code...
+  FactionRegistry.cpp
   Compiling...
   GameplaySessionController.cpp
-  FactionRegistry.cpp
   EditorCameraController.cpp
   ExteriorInteractionSystem.cpp
-  entity.cpp
   MissionRegistry.cpp
+  entity.cpp
   SelectionSystem.cpp
-  InteractionSystem.cpp
   MiningSystem.cpp
+  InteractionSystem.cpp
   entity_manager.cpp
   SceneOutliner.cpp
   ExplorationSystem.cpp
   InteriorInteractionSystem.cpp
   PCGWorldGen.cpp
-  InventorySystem.cpp
   PropertyInspector.cpp
+  InventorySystem.cpp
   entity_message_parser.cpp
   GizmoSystem.cpp
-  ManufacturingSystem.cpp
   ProgressionSystem.cpp
+  ManufacturingSystem.cpp
   CommandStack.cpp
   PlayerController.cpp
   MetaProgressionSystem.cpp
@@ -276,28 +276,28 @@ MSBuild version 17.14.40+3e7442088 for .NET Framework
   PropertyEditCommand.cpp
   SalvageSystem.cpp
   MissionSystem.cpp
-  file_logger.cpp
   VoxelEditCommand.cpp
+  file_logger.cpp
   StationServices.cpp
   ValidationSystem.cpp
   PlayerController.cpp
-  game_client.cpp
   ManufacturingQueue.cpp
   VoxelChunkEditor.cpp
-  ProgressionSystem.cpp
+  game_client.cpp
   ContractRewardSystem.cpp
+  ProgressionSystem.cpp
   VoxelEditorMode.cpp
   FleetSystem.cpp
   SalvageSystem.cpp
-  WorldSimSystem.cpp
   PCGDebugSystem.cpp
+  WorldSimSystem.cpp
   SeasonResetSystem.cpp
   InventorySystem.cpp
   SceneHierarchySystem.cpp
   SectorSystem.cpp
-  session_manager.cpp
   Generating Code...
   PlacementSystem.cpp
+  session_manager.cpp
   Compiling...
   StorageSystem.cpp
   ServiceTerminalSystem.cpp
@@ -309,75 +309,81 @@ MSBuild version 17.14.40+3e7442088 for .NET Framework
   PrefabManager.cpp
   UnifiedDataRegistry.cpp
   ShipProgressionSystem.cpp
-  ship_physics.cpp
   EditorDockLayout.cpp
+  ship_physics.cpp
   TitanRaceSystem.cpp
   StationServiceSystem.cpp
-C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\core\ship_physics.cpp(373,11): error C2220: the following warning is treated as an error [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\core\ship_physics.cpp(373,11): warning C4189: 'currentSpeed': local variable is initialized but not referenced [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-  Generating Code...
   DiffReviewPanel.cpp
+  Generating Code...
   AnomalySystem.cpp
   StorageSystem.cpp
-  Compiling...
-  solar_system_scene.cpp
   DesignDocPanel.cpp
   WarSectorSystem.cpp
+  Compiling...
+  solar_system_scene.cpp
   TetherController.cpp
   FeatureChecklistPanel.cpp
   GameplayConnector.cpp
   Generating Code...
-  editor_command_bus.cpp
   ContractRewardConnector.cpp
+  ADLPanel.cpp
+  editor_command_bus.cpp
   Compiling...
   TitanConstructionSystem.cpp
-  ADLPanel.cpp
-  editor_event_bus.cpp
   MarketContractBridge.cpp
   ConsolePanel.cpp
+  editor_event_bus.cpp
   TradeSystem.cpp
+  CharacterSystem.cpp
   editor_tool_layer.cpp
   scene_bookmark_manager.cpp
   ECSInspectorPanel.cpp
-C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.h(4,10): error C1083: Cannot open include file: '../../engine/net/NetContext.h': No such file or directory [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
-  (compiling source file '../../../Atlas/Editor/Panels/ConsolePanel.cpp')
+C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(17,26): error C2027: use of undefined type 'atlas::AtlasContext' [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
+      C:\GIT PROJECTS\MasterRepoRefactor\Atlas\cpp_client\include\ui\atlas\atlas_widgets.h(22,7):
+      see declaration of 'atlas::AtlasContext'
   
-  CharacterSystem.cpp
+C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(17,17): error C2737: 'pad': const object must be initialized [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
+C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(18,26): error C2027: use of undefined type 'atlas::AtlasContext' [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
+      C:\GIT PROJECTS\MasterRepoRefactor\Atlas\cpp_client\include\ui\atlas\atlas_widgets.h(22,7):
+      see declaration of 'atlas::AtlasContext'
+  
+C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(18,17): error C2737: 'rowH': const object must be initialized [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
+C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(20,27): error C2027: use of undefined type 'atlas::AtlasContext' [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
+      C:\GIT PROJECTS\MasterRepoRefactor\Atlas\cpp_client\include\ui\atlas\atlas_widgets.h(22,7):
+      see declaration of 'atlas::AtlasContext'
+  
+C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(20,17): error C2737: 'headerH': const object must be initialized [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
+C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(31,5): error C3861: 'combatLogWidget': identifier not found [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
+C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(45,34): error C3867: 'atlas::TextInputState::text': non-standard syntax; use '&' to create a pointer to member [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
+C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(79,39): warning C4244: 'argument': conversion from 'uint64_t' to 'atlas::ecs::EntityID', possible loss of data [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
+C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(80,35): warning C4244: 'argument': conversion from 'uint64_t' to 'atlas::ecs::EntityID', possible loss of data [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
   UpgradeSystem.cpp
-C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ECSInspectorPanel.h(4,10): error C1083: Cannot open include file: '../../cpp_client/include/ui/atlas/atlas_widgets.h': No such file or directory [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
-  (compiling source file '../../../Atlas/Editor/Panels/ECSInspectorPanel.cpp')
-  
-  NetInspectorPanel.cpp
   CharacterControllerShell.cpp
   WarSystem.cpp
-C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\NetInspectorPanel.h(3,10): error C1083: Cannot open include file: '../../engine/net/NetContext.h': No such file or directory [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
-  (compiling source file '../../../Atlas/Editor/Panels/NetInspectorPanel.cpp')
-  
-  AIAggregator.cpp
-  LocalLLMBackend.cpp
-  undoable_command_bus.cpp
+  NetInspectorPanel.cpp
   AnimationController.cpp
   WorldSimController.cpp
-  network_manager.cpp
+  undoable_command_bus.cpp
+  AIAggregator.cpp
   EquipmentSystem.cpp
+  LocalLLMBackend.cpp
   InputConfig.cpp
-C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\EditorServices\AI\LocalLLMBackend.cpp(322,28): error C2220: the following warning is treated as an error [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
-C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\EditorServices\AI\LocalLLMBackend.cpp(322,28): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details. [C:\GIT PROJECTS\MasterRepoRefactor\Build\Atlas\Editor\AtlasEditor.vcxproj]
-  TemplateAIBackend.cpp
+  network_manager.cpp
   InputRouter.cpp
   MechPossessionSystem.cpp
   IntegrationCoordinator.cpp
-  UIThemeManager.cpp
+  TemplateAIBackend.cpp
   CharacterStateAuthority.cpp
   AIBridgeAdapter.cpp
-  UIWidgetRegistry.cpp
-  TaskParserBridge.cpp
+  UIThemeManager.cpp
   CharacterTransitionRules.cpp
-  Generating Code...
+  TaskParserBridge.cpp
+  UIWidgetRegistry.cpp
   LegacySourceClassifier.cpp
   AnimationLayerSystem.cpp
   protocol_handler.cpp
   DataConversionUtils.cpp
+  Generating Code...
   IKSystem.cpp
   FactionAdapter.cpp
   ItemAdapter.cpp
@@ -385,27 +391,25 @@ C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\EditorServices\AI\LocalLLMBacken
   LegacyDataAdapter.cpp
   CharacterEditorSystem.cpp
   MissionAdapter.cpp
-  tcp_client.cpp
-  ModuleAdapter.cpp
   Generating Code...
-  NovaForgeIngestionManifest.cpp
+  ModuleAdapter.cpp
+  tcp_client.cpp
   Compiling...
   ToolInteractionShell.cpp
+  NovaForgeIngestionManifest.cpp
   RecipeAdapter.cpp
   Generating Code...
-  asteroid_field_renderer.cpp
-  CraftingBridgeAdapter.cpp
   NovaForgeGameplay.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Gameplay\Debug\NovaForgeGameplay.lib
+  CraftingBridgeAdapter.cpp
+  asteroid_field_renderer.cpp
   Generating Code...
   Compiling...
   InteractionBridgeAdapter.cpp
-C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\rendering\asteroid_field_renderer.cpp(343,73): error C2220: the following warning is treated as an error [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\rendering\asteroid_field_renderer.cpp(343,73): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
   InventoryBridgeAdapter.cpp
   camera.cpp
   ToolingBridgeAdapter.cpp
-  damage_effect_helper.cpp
   WorkspaceBridgeAdapter.cpp
+  damage_effect_helper.cpp
   ModuleRegistry.cpp
   frustum_culler.cpp
   ModuleSubsystem.cpp
@@ -418,8 +422,8 @@ C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\rendering\asteroid_f
   SaveManager.cpp
   lighting.cpp
   ToolingSubsystem.cpp
-  lod_manager.cpp
   RuntimeHUDController.cpp
+  lod_manager.cpp
   RuntimeHUDRenderer.cpp
   mesh.cpp
   RuntimeUIHooks.cpp
@@ -428,23 +432,6 @@ C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\rendering\asteroid_f
   StructureRegistry.cpp
   VoxelSubsystem.cpp
   SystemScheduler.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,24): error C2220: the following warning is treated as an error [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-  (compiling source file '../../../NovaForge/Client/App/src/rendering/model.cpp')
-  
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,24): warning C4244: '=': conversion from 'int' to 'char', possible loss of data [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-  (compiling source file '../../../NovaForge/Client/App/src/rendering/model.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,24):
-      the template instantiation context (the oldest one first) is
-          C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\rendering\model.cpp(60,14):
-          see reference to function template instantiation '_OutIt std::transform<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,int(__cdecl *)(int)>(const _InIt,const _InIt,_OutIt,_Fn)' being compiled
-          with
-          [
-              _OutIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
-              _Elem=char,
-              _InIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
-              _Fn=int (__cdecl *)(int)
-          ]
-  
   World.cpp
   Generating Code...
   Generating Code...
@@ -455,41 +442,7 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.3313
   post_processing.cpp
   procedural_mesh_ops.cpp
   procedural_ship_generator.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,24): error C2220: the following warning is treated as an error [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-  (compiling source file '../../../NovaForge/Client/App/src/rendering/procedural_ship_generator.cpp')
-  
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,24): warning C4244: '=': conversion from 'int' to 'char', possible loss of data [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-  (compiling source file '../../../NovaForge/Client/App/src/rendering/procedural_ship_generator.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,24):
-      the template instantiation context (the oldest one first) is
-          C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\rendering\procedural_ship_generator.cpp(901,10):
-          see reference to function template instantiation '_OutIt std::transform<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,int(__cdecl *)(int)>(const _InIt,const _InIt,_OutIt,_Fn)' being compiled
-          with
-          [
-              _OutIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
-              _Elem=char,
-              _InIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
-              _Fn=int (__cdecl *)(int)
-          ]
-  
   reference_model_analyzer.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,24): error C2220: the following warning is treated as an error [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-  (compiling source file '../../../NovaForge/Client/App/src/rendering/reference_model_analyzer.cpp')
-  
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,24): warning C4244: '=': conversion from 'int' to 'char', possible loss of data [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-  (compiling source file '../../../NovaForge/Client/App/src/rendering/reference_model_analyzer.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\algorithm(3456,24):
-      the template instantiation context (the oldest one first) is
-          C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\rendering\reference_model_analyzer.cpp(144,10):
-          see reference to function template instantiation '_OutIt std::transform<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,int(__cdecl *)(int)>(const _InIt,const _InIt,_OutIt,_Fn)' being compiled
-          with
-          [
-              _OutIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
-              _Elem=char,
-              _InIt=std::_String_iterator<std::_String_val<std::_Simple_types<char>>>,
-              _Fn=int (__cdecl *)(int)
-          ]
-  
   renderer.cpp
   resolution_manager.cpp
   shader.cpp
@@ -497,34 +450,3 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.3313
   ship_generation_rules.cpp
   ship_part_library.cpp
   station_renderer.cpp
-  texture.cpp
-  visual_effects.cpp
-  warp_effect_renderer.cpp
-  window.cpp
-  atlas_console.cpp
-  atlas_context.cpp
-  atlas_hud.cpp
-  Generating Code...
-C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\rendering\station_renderer.cpp(535): error C2220: the following warning is treated as an error [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-C:\GIT PROJECTS\MasterRepoRefactor\NovaForge\Client\App\src\rendering\station_renderer.cpp(535): warning C4701: potentially uninitialized local variable 'normal' used [C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\NovaForgeClient.vcxproj]
-  Compiling...
-  atlas_pause_menu.cpp
-  atlas_renderer.cpp
-  atlas_title_screen.cpp
-  atlas_widgets.cpp
-  atlas_widgets_cards.cpp
-  atlas_widgets_effects.cpp
-  atlas_widgets_forms.cpp
-  atlas_widgets_hud.cpp
-  atlas_widgets_lists.cpp
-  atlas_widgets_menus.cpp
-  atlas_widgets_panels.cpp
-  atlas_widgets_sidebar.cpp
-  context_menu.cpp
-  entity_picker.cpp
-  input_handler.cpp
-  layout_manager.cpp
-  radial_menu.cpp
-  rml_ui_manager.cpp
-  star_map.cpp
-  Generating Code...
