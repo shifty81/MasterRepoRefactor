@@ -57,7 +57,7 @@ bool Model::loadFromFile(const std::string& path) {
     if (dotPos != std::string::npos) {
         extension = path.substr(dotPos + 1);
         // Convert to lowercase
-        std::transform(extension.begin(), extension.end(), extension.begin(), ::tolower);
+        std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
     }
 
     if (extension == "obj") {
@@ -183,7 +183,7 @@ bool Model::loadGLTF(const std::string& path) {
     size_t dotPos = path.find_last_of('.');
     if (dotPos != std::string::npos) {
         extension = path.substr(dotPos + 1);
-        std::transform(extension.begin(), extension.end(), extension.begin(), ::tolower);
+        std::transform(extension.begin(), extension.end(), extension.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
     }
 
     if (extension == "glb") {
@@ -347,11 +347,11 @@ std::string Model::findOBJModelPath(const std::string& shipType, const std::stri
 
     // Convert faction to lowercase for filename matching
     std::string factionLower = faction;
-    std::transform(factionLower.begin(), factionLower.end(), factionLower.begin(), ::tolower);
+    std::transform(factionLower.begin(), factionLower.end(), factionLower.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
 
     // Convert shipType to lowercase once before the directory loop
     std::string shipTypeLower = shipType;
-    std::transform(shipTypeLower.begin(), shipTypeLower.end(), shipTypeLower.begin(), ::tolower);
+    std::transform(shipTypeLower.begin(), shipTypeLower.end(), shipTypeLower.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
 
     for (const auto& dir : searchDirs) {
         if (!std::filesystem::exists(dir)) continue;
@@ -366,7 +366,7 @@ std::string Model::findOBJModelPath(const std::string& shipType, const std::stri
 
                 // Check if filename starts with the faction (case-insensitive)
                 std::string filenameLower = filename;
-                std::transform(filenameLower.begin(), filenameLower.end(), filenameLower.begin(), ::tolower);
+                std::transform(filenameLower.begin(), filenameLower.end(), filenameLower.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
 
                 if (filenameLower.find(factionLower + "_") != 0) continue;
 

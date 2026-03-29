@@ -230,6 +230,37 @@ struct PanelState {
     bool  compactRows = false;   // compact row display mode
 };
 
+// ── Text Input State ────────────────────────────────────────────────
+
+/** Persistent state for a single-line text input widget. */
+struct TextInputState {
+    static constexpr int kBufferSize = 256;
+    char  buffer[kBufferSize] = {};  ///< UTF-8 text content
+    int   cursorPos  = 0;            ///< cursor byte offset
+    int   selectFrom = 0;            ///< selection anchor
+    bool  focused    = false;        ///< input has keyboard focus
+    bool  committed  = false;        ///< Enter was pressed this frame
+
+    /** Return current string view (null-terminated). */
+    const char* text() const { return buffer; }
+
+    /** Write into buffer; clamps to kBufferSize-1 chars. */
+    void setText(const char* s) {
+        int n = 0;
+        while (s && *s && n < kBufferSize - 1) buffer[n++] = *s++;
+        buffer[n] = '\0';
+        cursorPos = n;
+    }
+
+    /** Clear the buffer and reset state. */
+    void clear() {
+        buffer[0] = '\0';
+        cursorPos = 0;
+        selectFrom = 0;
+        committed = false;
+    }
+};
+
 // ── Widget IDs ──────────────────────────────────────────────────────
 
 using WidgetID = uint32_t;

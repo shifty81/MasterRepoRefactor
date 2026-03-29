@@ -141,7 +141,7 @@ std::vector<float> ReferenceModelAnalyzer::profileToRadiusMultipliers(
 
 std::string ReferenceModelAnalyzer::inferFaction(const std::string& filename) {
     std::string lower = filename;
-    std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+    std::transform(lower.begin(), lower.end(), lower.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
 
     if (lower.find("solari") != std::string::npos) return "Solari";
     if (lower.find("veyren") != std::string::npos) return "Veyren";
@@ -159,7 +159,7 @@ std::string ReferenceModelAnalyzer::inferFaction(const std::string& filename) {
 
 std::string ReferenceModelAnalyzer::inferClass(const std::string& filename, int vertexCount) {
     std::string lower = filename;
-    std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+    std::transform(lower.begin(), lower.end(), lower.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
 
     // Try to match from filename
     if (lower.find("titan") != std::string::npos) return "Titan";
@@ -295,7 +295,7 @@ int ReferenceModelAnalyzer::analyzeDirectory(const std::string& dirPath) {
     for (const auto& entry : std::filesystem::directory_iterator(dirPath)) {
         if (!entry.is_regular_file()) continue;
         std::string ext = entry.path().extension().string();
-        std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+        std::transform(ext.begin(), ext.end(), ext.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
         if (ext == ".obj") {
             if (analyzeOBJ(entry.path().string())) {
                 count++;
@@ -339,7 +339,7 @@ int ReferenceModelAnalyzer::analyzeArchive(const std::string& archivePath,
 
     // Determine extraction command based on extension
     std::string ext = fs::path(archivePath).extension().string();
-    std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+    std::transform(ext.begin(), ext.end(), ext.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
 
     // Use canonical paths to ensure we operate on real filesystem locations
     std::string safeArchive = fs::canonical(archivePath).string();
@@ -367,7 +367,7 @@ int ReferenceModelAnalyzer::analyzeArchive(const std::string& archivePath,
     for (const auto& entry : fs::recursive_directory_iterator(extractDir)) {
         if (!entry.is_regular_file()) continue;
         std::string fext = entry.path().extension().string();
-        std::transform(fext.begin(), fext.end(), fext.begin(), ::tolower);
+        std::transform(fext.begin(), fext.end(), fext.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
         if (fext == ".obj") {
             if (analyzeOBJ(entry.path().string())) {
                 count++;

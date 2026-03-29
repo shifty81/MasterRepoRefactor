@@ -370,7 +370,6 @@ bool ShipPhysics::isAlignedForWarp() const {
         return false;
     }
     
-    float currentSpeed = glm::length(m_velocity);
     float speedInDirection = glm::dot(m_velocity, m_desiredDirection);
     
     // Must be at 75% of max velocity in the desired direction

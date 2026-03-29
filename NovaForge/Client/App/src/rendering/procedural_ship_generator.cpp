@@ -898,7 +898,7 @@ std::string ProceduralShipGenerator::findSeedOBJ(const std::string& faction,
     // smaller ships use the Intergalactic Spaceship.
     // Use case-insensitive comparison via lowercase conversion.
     std::string lowerClass = shipClass;
-    std::transform(lowerClass.begin(), lowerClass.end(), lowerClass.begin(), ::tolower);
+    std::transform(lowerClass.begin(), lowerClass.end(), lowerClass.begin(), [](unsigned char c){ return static_cast<char>(::tolower(c)); });
     bool isCapital = (lowerClass == "battleship" || lowerClass == "carrier" ||
                       lowerClass == "dreadnought" || lowerClass == "titan" ||
                       lowerClass == "marauder");

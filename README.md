@@ -268,18 +268,121 @@ MasterRepoRefactor/
 
 ## Build
 
-This project uses **CMake 3.20+**.
+This project uses **CMake 3.20+** with a set of convenience shell scripts in
+`Scripts/` that wrap CMake, CTest, and Python tooling into a consistent
+developer workflow.
+
+### Prerequisites
+
+| Tool | Minimum version | Notes |
+|------|----------------|-------|
+| CMake | 3.20 | Required for all C++ builds |
+| C++ compiler | MSVC 2022 / GCC 12 / Clang 15 | C++20 required |
+| Python | 3.11+ | AtlasAI engine, tests, and scripts |
+| Git | 2.40+ | |
+| Ninja / MSBuild | latest | Optional — CMake selects the default generator |
+
+Run the one-time bootstrap to verify all prerequisites are present:
 
 ```bash
-# Configure
-cmake -B Build -S .
-
-# Build all targets
-cmake --build Build --parallel 4
-
-# Run all tests
-ctest --test-dir Build
+bash Scripts/Bootstrap/bootstrap.sh
 ```
+
+---
+
+### Quick Start (Linux / macOS / Git Bash)
+
+```bash
+# 1. Clone
+git clone https://github.com/shifty81/MasterRepoRefactor.git
+cd MasterRepoRefactor
+
+# 2. Bootstrap (checks cmake, compiler, python, git)
+bash Scripts/Bootstrap/bootstrap.sh
+
+# 3. Build (Debug by default)
+bash Scripts/Build/build.sh
+
+# 4. Run tests
+bash Scripts/Build/test.sh
+```
+
+---
+
+### Build Script Reference
+
+All scripts live under `Scripts/` and are run from the **repo root**.
+
+#### `Scripts/Build/build.sh` — Configure and build
+
+```
+Usage:
+  bash Scripts/Build/build.sh [options]
+
+Options:
+  -c, --config <Debug|Release|Shipping>   Build configuration (default: Debug)
+  -j, --jobs <N>                          Parallel jobs   (default: auto-detect)
+  -t, --tests                             Enable test targets
+  -b, --bridge                            Enable AtlasAI bridge integration
+      --clean                             Delete Build/ before configuring
+  -h, --help                              Show help
+```
+
+```bash
+# Debug build (default)
+bash Scripts/Build/build.sh
+
+# Release build with tests, 8 parallel jobs
+bash Scripts/Build/build.sh --config Release --tests --jobs 8
+
+# Shipping build (no editor / AI tooling code)
+bash Scripts/Build/build.sh --config Shipping
+
+# Clean rebuild in Release
+bash Scripts/Build/build.sh --config Release --clean
+```
+
+#### `Scripts/Build/test.sh` — Run CTest
+
+```
+Usage:
+  bash Scripts/Build/test.sh [options]
+
+Options:
+  -c, --config <Debug|Release>    Build configuration (default: Debug)
+  -v, --verbose                   Verbose test output
+  -f, --filter <pattern>          Run only tests matching regex pattern
+  -h, --help                      Show help
+```
+
+```bash
+# Run all tests (Debug)
+bash Scripts/Build/test.sh
+
+# Run only tests matching "AtlasEditor"
+bash Scripts/Build/test.sh --filter AtlasEditor
+
+# Verbose output
+bash Scripts/Build/test.sh --verbose
+```
+
+#### `Scripts/Build/clean.sh` — Remove build artefacts
+
+```bash
+bash Scripts/Build/clean.sh
+```
+
+#### `Scripts/CI/ci_build.sh` — Full CI pipeline (build + test)
+
+```bash
+# Uses Release config and all tests by default
+bash Scripts/CI/ci_build.sh
+
+# Override via environment variables
+CI_BUILD_CONFIG=Debug CI_BUILD_JOBS=4 bash Scripts/CI/ci_build.sh
+```
+
+---
 
 ### CMake Targets
 
@@ -296,14 +399,21 @@ ctest --test-dir Build
 | `NovaForgeIntegrationAtlasAI` | NovaForge | AtlasAI bridge integration layer |
 | `AtlasBridgeContract` | Shared | Header-only bridge interface |
 
-### Shipping Build (no tooling / AI code)
+### Shipping Build (no editor / AI code)
 
 ```bash
-cmake -DMASTERREPO_BUILD_EDITOR=OFF \
+bash Scripts/Build/build.sh --config Shipping
+
+# Or directly with CMake:
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DMASTERREPO_BUILD_EDITOR=OFF \
       -DNOVAFORGE_ENABLE_ARBITER_INTEGRATION=OFF \
       -DMASTERREPO_BUILD_TOOLS=OFF \
       -B Build -S .
+cmake --build Build --parallel
 ```
+
+---
 
 ### AtlasAI Python Engine
 
@@ -313,10 +423,44 @@ pip install -r requirements.txt
 python server.py
 ```
 
-**Tests:**
+**Run Python tests (repo root):**
 ```bash
 python3 -m pytest AtlasAI/Tests/ -v
 ```
+
+**Run a single test phase:**
+```bash
+python3 -m pytest AtlasAI/Tests/test_phase27a_tooling_p12.py -v
+```
+
+---
+
+### Validate Repo Structure
+
+```bash
+# Check dependency boundaries (no cross-zone violations)
+python3 Scripts/Validate/validate_boundaries.py
+
+# Check file naming conventions
+python3 Scripts/Validate/validate_naming.py
+
+# Full repo health check
+python3 Scripts/Validate/validate_root.py
+```
+
+---
+
+### Troubleshooting
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `cmake not found` | CMake not installed | Run `Scripts/Bootstrap/bootstrap.sh` |
+| `Build/ not found` | Tests run before build | Run `build.sh` first |
+| `C4267` / `C4244` warnings as errors | MSVC strict mode | Already patched in source; ensure you have the latest code |
+| `C1083: Cannot open include` | Stale CMake cache | Run `build.sh --clean` to wipe `Build/` and reconfigure |
+| Python tests fail to import | Missing dependencies | `pip install -r AtlasAI/AIEngine/requirements.txt` |
+
+For more, see [NovaForge/Docs/guides/TROUBLESHOOTING_VS2022.md](NovaForge/Docs/guides/TROUBLESHOOTING_VS2022.md).
 
 ---
 
