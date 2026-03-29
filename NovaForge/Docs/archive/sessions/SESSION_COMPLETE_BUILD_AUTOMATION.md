@@ -240,7 +240,7 @@ python3 build_cpp_client.py
 
 # Run
 cd cpp_client/build/bin
-./eve_client "MyName"
+./nova_forge_client "MyName"
 ```
 
 ### Scenario 2: Windows Visual Studio Developer

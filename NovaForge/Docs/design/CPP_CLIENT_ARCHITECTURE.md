@@ -129,7 +129,7 @@ This document outlines the architecture for transitioning the NovaForge client f
 ### 1. Client Application
 
 ```cpp
-class EVEOfflineClient {
+class NovaForgeClient {
 private:
     // Core systems
     std::unique_ptr<RenderSystem> renderer;

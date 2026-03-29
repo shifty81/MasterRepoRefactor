@@ -480,7 +480,7 @@ See [tools/README.md](../tools/README.md) for more modding utilities.
 # Build and run
 ./scripts/build_all.sh
 cd build/bin
-./eve_client "YourName"
+./nova_forge_client "YourName"
 ```
 
 ### Step 3: Test In-Game

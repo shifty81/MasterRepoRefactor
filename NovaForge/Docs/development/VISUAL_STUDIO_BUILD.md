@@ -96,22 +96,22 @@ cmake .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release
 ### Step 2: Open Solution in Visual Studio
 
 ```cmd
-start EVEOfflineClient.sln
+start NovaForge.sln
 ```
 
-Or navigate to `cpp_client/build_vs/` and double-click `EVEOfflineClient.sln`
+Or navigate to `cpp_client/build_vs/` and double-click `NovaForge.sln`
 
 ### Step 3: Build in Visual Studio
 
 1. Select build configuration (Debug or Release) from the toolbar
-2. Right-click `eve_client` project → **Set as Startup Project**
+2. Right-click `nova_forge_client` project → **Set as Startup Project**
 3. Press **F7** or **Build → Build Solution**
 
 ### Step 4: Run the Client
 
 - Press **F5** to run with debugging
 - Or press **Ctrl+F5** to run without debugging
-- Executable location: `build_vs/bin/Release/eve_client.exe` (or Debug)
+- Executable location: `build_vs/bin/Release/nova_forge_client.exe` (or Debug)
 
 ## Configuration Options
 
@@ -154,8 +154,8 @@ cmake .. -DCMAKE_BUILD_TYPE=Release
 After generating the solution, you'll see these projects:
 
 ```
-Solution 'EVEOfflineClient'
-├── eve_client (Main executable - Set as Startup Project)
+Solution 'NovaForgeClient'
+├── nova_forge_client (Main executable - Set as Startup Project)
 ├── test_asteroid_field
 ├── test_lighting
 ├── test_shadow_mapping
@@ -222,7 +222,7 @@ vcpkg install openal-soft:x64-windows
 **Common causes**:
 1. **DLL not found**: Copy required DLLs from vcpkg\installed\x64-windows\bin\ to your exe directory
 2. **Working directory wrong**: Set working directory in Visual Studio:
-   - Right-click eve_client → Properties → Debugging → Working Directory
+   - Right-click nova_forge_client → Properties → Debugging → Working Directory
    - Set to: `$(TargetDir)` or `$(ProjectDir)\..\bin\$(Configuration)`
 
 ## Advanced Options

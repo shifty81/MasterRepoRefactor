@@ -253,7 +253,7 @@ cd NOVAFORGE
 
 ```bash
 cd build/bin
-./eve_client "YourName"
+./nova_forge_client "YourName"
 ```
 
 ### Step 3 — Verify Ship Renders

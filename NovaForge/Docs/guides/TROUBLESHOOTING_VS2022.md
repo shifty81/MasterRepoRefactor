@@ -275,7 +275,7 @@ cmake --build . --config Release
 
 ### Executable crashes immediately on startup
 
-**Symptoms**: eve_client.exe crashes with no error message or "Application Error".
+**Symptoms**: nova_forge_client.exe crashes with no error message or "Application Error".
 
 **Solution 1 - Missing DLLs**:
 If using dynamic linking, copy DLLs to exe directory:
@@ -292,7 +292,7 @@ cmake .. -G "Visual Studio 17 2022" -A x64 -DVCPKG_TARGET_TRIPLET=x64-windows-st
 
 **Solution 2 - Wrong working directory**:
 In Visual Studio:
-1. Right-click eve_client project
+1. Right-click nova_forge_client project
 2. Properties → Debugging
 3. Set Working Directory to: `$(TargetDir)` or `$(ProjectDir)..\bin\$(Configuration)`
 

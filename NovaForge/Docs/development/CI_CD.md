@@ -98,17 +98,17 @@ After successful builds, artifacts are available for download:
 3. Download artifacts at the bottom
 
 **Contents:**
-- `eve_client` (or `eve_client.exe`)
+- `nova_forge_client` (or `nova_forge_client.exe`)
 - `shaders/` directory
 - `assets/` directory
 
 **Usage:**
 ```bash
 # Linux/macOS
-./eve_client "YourName"
+./nova_forge_client "YourName"
 
 # Windows
-eve_client.exe "YourName"
+nova_forge_client.exe "YourName"
 ```
 
 ## Build Status Badges

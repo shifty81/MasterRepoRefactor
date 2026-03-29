@@ -4,7 +4,7 @@
 Your build was failing with:
 ```
 CMake Error: Cannot find source file: external/imgui/imgui.cpp
-No SOURCES given to target: eve_client
+No SOURCES given to target: nova_forge_client
 ```
 
 Even though you had vcpkg installed with 601MB of dependencies.

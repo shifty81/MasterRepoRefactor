@@ -21,7 +21,7 @@ namespace atlas {
  * Simple file logger that duplicates stdout/stderr to a log file.
  * 
  * When the application starts, call FileLogger::init() to begin
- * capturing all std::cout and std::cerr output to "logs/eve_client.log".
+ * capturing all std::cout and std::cerr output to "logs/nova_forge_client.log".
  * This ensures error messages are preserved even if the console window
  * closes immediately on crash or exit.
  */
@@ -33,7 +33,7 @@ public:
      * Redirects std::cout and std::cerr to also write to the file.
      */
     static bool init(const std::string& logDir = "logs",
-                     const std::string& logFile = "eve_client.log");
+                     const std::string& logFile = "nova_forge_client.log");
 
     /**
      * Shut down file logging and restore original stream buffers.

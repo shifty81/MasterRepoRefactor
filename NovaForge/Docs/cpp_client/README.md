@@ -296,7 +296,7 @@ cmake .. -DBUILD_TESTS=OFF
 
 ```bash
 cd build/bin
-./eve_client "CharacterName"
+./nova_forge_client "CharacterName"
 ```
 
 ### Connecting to Server
@@ -305,7 +305,7 @@ By default, connects to `localhost:8765`. To connect to a remote server, you'll 
 1. Edit configuration file
 2. Use command line arguments (future):
    ```bash
-   ./eve_client "CharacterName" --host game.server.com --port 8765
+   ./nova_forge_client "CharacterName" --host game.server.com --port 8765
    ```
 
 ## Project Structure
@@ -434,7 +434,7 @@ Enable verbose logging:
 
 Use built-in profiling:
 ```bash
-./eve_client --profile
+./nova_forge_client --profile
 ```
 
 ## Platform-Specific Notes
@@ -489,7 +489,7 @@ Fatal error: Failed to initialize renderer
 - **Recommended**: Run the client from the `build/bin/` directory:
   ```bash
   cd build/bin
-  ./eve_client "CharacterName"
+  ./nova_forge_client "CharacterName"
   ```
 
 - **Alternative**: If running from the repository root, symlinks have been created:

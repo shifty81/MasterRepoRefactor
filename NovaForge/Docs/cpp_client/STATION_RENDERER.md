@@ -219,7 +219,7 @@ cd cpp_client
 mkdir build && cd build
 cmake ..
 make
-./eve_client
+./nova_forge_client
 ```
 
 ## Related Files

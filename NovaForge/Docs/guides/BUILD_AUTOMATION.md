@@ -166,7 +166,7 @@ After building:
 
 ```bash
 cd cpp_client/build/bin
-./eve_client "YourName"
+./nova_forge_client "YourName"
 ```
 
 ## Documentation

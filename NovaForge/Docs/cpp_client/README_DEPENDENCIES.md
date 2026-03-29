@@ -120,7 +120,7 @@ cmake -DCMAKE_BUILD_TYPE=Release -DUSE_SYSTEM_LIBS=ON -DBUILD_TESTS=ON ..
 make -j$(nproc)
 
 # Or specific targets
-make eve_client                  # Main executable
+make nova_forge_client                  # Main executable
 make test_asteroid_field         # Asteroid field test
 make test_lighting               # Lighting test
 make test_shadow_mapping         # Shadow mapping test
@@ -129,7 +129,7 @@ make test_shadow_mapping         # Shadow mapping test
 #### 4. Run
 ```bash
 # Main application
-./bin/eve_client
+./bin/nova_forge_client
 
 # Tests
 ./bin/test_asteroid_field
@@ -350,7 +350,7 @@ export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 4. **Launch Application:**
    ```bash
-   ./bin/eve_client
+   ./bin/nova_forge_client
    ```
 
 ## Support Resources
