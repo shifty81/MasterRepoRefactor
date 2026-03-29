@@ -130,6 +130,24 @@ from .achievement_body_loader import (
     AchievementProgressManifest,
     AchievementRewardManifest,
 )
+from .procedural_terrain_pipeline import (
+    ProceduralTerrainPipeline,
+    TerrainGenEntry,
+    BiomeLayerEntry,
+    ErosionSimEntry,
+)
+from .skeletal_mesh_pipeline import (
+    SkeletalMeshPipeline,
+    BoneEntry,
+    WeightPaintEntry,
+    MeshLODEntry,
+)
+from .inventory_body_loader import (
+    InventoryBodyLoader,
+    InventoryBodyManifest,
+    InventoryItemManifest,
+    InventorySlotManifest,
+)
 
 __all__ = [
     "ClangdBridge",
@@ -350,4 +368,7 @@ __all__ = [
     "RigidBodyJointPipeline", "JointEntry", "JointConstraintEntry", "JointVisualizationEntry",
     "DataValidatorPipeline", "ValidationRuleEntry", "ValidationResultEntry", "ValidationReportEntry",
     "AchievementBodyLoader", "AchievementBodyManifest", "AchievementProgressManifest", "AchievementRewardManifest",
+    "ProceduralTerrainPipeline", "TerrainGenEntry", "BiomeLayerEntry", "ErosionSimEntry",
+    "SkeletalMeshPipeline", "BoneEntry", "WeightPaintEntry", "MeshLODEntry",
+    "InventoryBodyLoader", "InventoryBodyManifest", "InventoryItemManifest", "InventorySlotManifest",
 ]
