@@ -2,7 +2,7 @@
 #include "../ui/EditorPanel.h"
 #include "../../engine/ecs/ECS.h"
 #include "../../Engine/Networking/NetContext.h"
-#include "../../engine/sim/TickScheduler.h"
+#include "../../Engine/Simulation/TickScheduler.h"
 #include "../../cpp_client/include/ui/atlas/atlas_widgets.h"
 #include "../ai/AIAggregator.h"
 #include <string>

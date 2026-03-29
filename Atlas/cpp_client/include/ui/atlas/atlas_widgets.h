@@ -19,7 +19,7 @@
 namespace atlas {
 
 // ── Forward declarations ─────────────────────────────────────────────
-struct AtlasContext;
+class AtlasContext;
 
 // ── Panel API ────────────────────────────────────────────────────────
 
@@ -35,6 +35,8 @@ struct PanelFlags {
 bool panelBegin(AtlasContext& ctx, const char* title,
                 Rect& bounds, const PanelFlags& flags = {},
                 bool* open = nullptr);
+bool panelBeginStateful(AtlasContext& ctx, const char* title,
+                        PanelState& state, const PanelFlags& flags = {});
 void panelEnd(AtlasContext& ctx);
 
 // ── Buttons ──────────────────────────────────────────────────────────
@@ -87,15 +89,24 @@ void targetCard(AtlasContext& ctx, const Rect& r, const OverviewEntry& target,
 
 bool textInput(AtlasContext& ctx, const Rect& r, TextInputState& state,
                const char* placeholder = nullptr);
+bool textInput(AtlasContext& ctx, const char* id, const Rect& r,
+               TextInputState& state, const char* placeholder = nullptr);
 
 // ── Label / Separator / Tree ─────────────────────────────────────────
 
 void label(AtlasContext& ctx, Vec2 pos, const char* text,
            const Color& color = {200, 200, 200, 255});
+inline void label(AtlasContext& ctx, Vec2 pos, const std::string& text,
+                  const Color& color = {200, 200, 200, 255}) {
+    label(ctx, pos, text.c_str(), color);
+}
 void separator(AtlasContext& ctx, const Rect& r);
+void separator(AtlasContext& ctx, Vec2 pos, float width);
 bool treeNode(AtlasContext& ctx, WidgetID id, const Rect& r,
               const char* label, bool& expanded);
 void scrollbar(AtlasContext& ctx, const Rect& r,
                float contentHeight, float& scrollOffset);
+void scrollbar(AtlasContext& ctx, const Rect& trackRect,
+               float& scrollOffset, float contentHeight, float viewHeight);
 
 } // namespace atlas
