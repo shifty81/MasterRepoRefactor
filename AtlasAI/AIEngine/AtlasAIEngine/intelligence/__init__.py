@@ -28,6 +28,9 @@ from .nav_mesh_loader import NavMeshLoader, NavMeshManifest, NavMeshAABB, NavMes
 from .physics_simulation_cache import PhysicsSimulationCache, PhysicsSimulationEntry, PhysicsFrameData, CachePolicy
 from .behavior_tree_compiler import BehaviorTreeCompiler, BTSourceTree, BTNodeDef, BTCompileResult, BTBytecodeInstruction
 from .physics_body_loader import PhysicsBodyLoader, PhysicsBodyManifest, PhysicsMaterialDef, ColliderDef
+from .audio_effect_pipeline import AudioEffectPipeline, AudioEffectJob, AudioProcessResult, EQBand, CompressorSettings, ReverbSettings, NormalisationSettings
+from .cloth_simulation_cache import ClothSimulationCache, ClothSimEntry, ClothFrameSnapshot, ClothCachePolicy
+from .audio_body_loader import AudioBodyLoader, AudioBodyManifest, AttenuationCurveDef, ReverbZoneDef
 
 __all__ = [
     "ClangdBridge",
@@ -113,4 +116,19 @@ __all__ = [
     "PhysicsBodyManifest",
     "PhysicsMaterialDef",
     "ColliderDef",
+    "AudioEffectPipeline",
+    "AudioEffectJob",
+    "AudioProcessResult",
+    "EQBand",
+    "CompressorSettings",
+    "ReverbSettings",
+    "NormalisationSettings",
+    "ClothSimulationCache",
+    "ClothSimEntry",
+    "ClothFrameSnapshot",
+    "ClothCachePolicy",
+    "AudioBodyLoader",
+    "AudioBodyManifest",
+    "AttenuationCurveDef",
+    "ReverbZoneDef",
 ]
