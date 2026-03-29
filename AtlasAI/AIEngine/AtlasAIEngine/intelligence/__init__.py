@@ -34,6 +34,9 @@ from .audio_body_loader import AudioBodyLoader, AudioBodyManifest, AttenuationCu
 from .vfx_graph_compiler import VFXGraphCompiler, VFXEmitterNode, VFXLinkEdge, VFXGraphAsset
 from .light_baking_pipeline import LightBakingPipeline, BakeJob, ProbeCluster, BakeResult
 from .vfx_body_loader import VFXBodyLoader, VFXBodyManifest, EmitterBoundsDef, SimulationSettingsDef
+from .particle_system_pipeline import ParticleSystemPipeline, ParticleEmitterDef, ParticleModuleDef, ParticlePipelineResult
+from .procedural_mesh_pipeline import ProceduralMeshPipeline, MeshGenerationParams, MeshGenerationResult, ProceduralMeshBatch
+from .animation_body_loader import AnimationBodyLoader, AnimationBodyManifest, AnimationClipDef, AnimationBlendWeightDef
 
 __all__ = [
     "ClangdBridge",
@@ -146,4 +149,16 @@ __all__ = [
     "VFXBodyManifest",
     "EmitterBoundsDef",
     "SimulationSettingsDef",
+    "ParticleSystemPipeline",
+    "ParticleEmitterDef",
+    "ParticleModuleDef",
+    "ParticlePipelineResult",
+    "ProceduralMeshPipeline",
+    "MeshGenerationParams",
+    "MeshGenerationResult",
+    "ProceduralMeshBatch",
+    "AnimationBodyLoader",
+    "AnimationBodyManifest",
+    "AnimationClipDef",
+    "AnimationBlendWeightDef",
 ]
