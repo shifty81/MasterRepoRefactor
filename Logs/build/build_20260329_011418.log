@@ -450,3 +450,36 @@ C:\GIT PROJECTS\MasterRepoRefactor\Atlas\Editor\Panels\ConsolePanel.cpp(80,35): 
   ship_generation_rules.cpp
   ship_part_library.cpp
   station_renderer.cpp
+  texture.cpp
+  visual_effects.cpp
+  warp_effect_renderer.cpp
+  window.cpp
+  atlas_console.cpp
+  atlas_context.cpp
+  atlas_hud.cpp
+  Generating Code...
+  Compiling...
+  atlas_pause_menu.cpp
+  atlas_renderer.cpp
+  atlas_title_screen.cpp
+  atlas_widgets.cpp
+  atlas_widgets_cards.cpp
+  atlas_widgets_effects.cpp
+  atlas_widgets_forms.cpp
+  atlas_widgets_hud.cpp
+  atlas_widgets_lists.cpp
+  atlas_widgets_menus.cpp
+  atlas_widgets_panels.cpp
+  atlas_widgets_sidebar.cpp
+  context_menu.cpp
+  entity_picker.cpp
+  input_handler.cpp
+  layout_manager.cpp
+  radial_menu.cpp
+  rml_ui_manager.cpp
+  star_map.cpp
+  Generating Code...
+  NovaForgeClient.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\Debug\NovaForgeClient.lib
+  Building Custom Rule C:/GIT PROJECTS/MasterRepoRefactor/NovaForge/Client/CMakeLists.txt
+  main.cpp
+  NovaForgeClientApp.vcxproj -> C:\GIT PROJECTS\MasterRepoRefactor\Build\NovaForge\Client\Debug\NovaForgeClientApp.exe
