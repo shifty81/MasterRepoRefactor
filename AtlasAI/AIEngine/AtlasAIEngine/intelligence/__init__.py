@@ -37,6 +37,9 @@ from .vfx_body_loader import VFXBodyLoader, VFXBodyManifest, EmitterBoundsDef, S
 from .particle_system_pipeline import ParticleSystemPipeline, ParticleEmitterDef, ParticleModuleDef, ParticlePipelineResult
 from .procedural_mesh_pipeline import ProceduralMeshPipeline, MeshGenerationParams, MeshGenerationResult, ProceduralMeshBatch
 from .animation_body_loader import AnimationBodyLoader, AnimationBodyManifest, AnimationClipDef, AnimationBlendWeightDef
+from .render_pipeline_cache import RenderPipelineCache, RenderPassDef, RenderPipelineEntry, PipelineCacheStats
+from .world_streaming_pipeline import WorldStreamingPipeline, StreamingZoneDef, StreamingLODRule, WorldStreamingResult
+from .render_body_loader import RenderBodyLoader, RenderBodyManifest, MaterialSlotDef, LODEntryDef
 
 __all__ = [
     "ClangdBridge",
@@ -161,4 +164,16 @@ __all__ = [
     "AnimationBodyManifest",
     "AnimationClipDef",
     "AnimationBlendWeightDef",
+    "RenderPipelineCache",
+    "RenderPassDef",
+    "RenderPipelineEntry",
+    "PipelineCacheStats",
+    "WorldStreamingPipeline",
+    "StreamingZoneDef",
+    "StreamingLODRule",
+    "WorldStreamingResult",
+    "RenderBodyLoader",
+    "RenderBodyManifest",
+    "MaterialSlotDef",
+    "LODEntryDef",
 ]
