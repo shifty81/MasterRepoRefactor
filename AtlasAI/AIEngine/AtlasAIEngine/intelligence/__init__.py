@@ -52,6 +52,9 @@ from .ui_body_loader import UIBodyLoader, UIBodyManifest, UIStyleManifest, UILay
 from .world_partition_pipeline import WorldPartitionPipeline, WorldPartitionEntry, StreamingCellDef, HLODLayerConfig
 from .data_layer_pipeline import DataLayerPipeline, DataLayerSpec, DataLayerActorAssignment, DataLayerState
 from .network_body_loader import NetworkBodyLoader, NetworkBodyManifest, ReplicationConfigManifest, NetworkPropertyManifest
+from .matchmaking_pipeline import MatchmakingPipeline, MatchmakingRuleSet, MatchSession, MatchResult
+from .conversation_graph_pipeline import ConversationGraphPipeline, ConversationNodeDef, ConversationEdgeDef, ConversationGraphEntry
+from .game_body_loader import GameBodyLoader, GameBodyManifest, SpawnConfigManifest, GameEventManifest
 
 __all__ = [
     "ClangdBridge",
@@ -236,4 +239,16 @@ __all__ = [
     "NetworkBodyManifest",
     "ReplicationConfigManifest",
     "NetworkPropertyManifest",
+    "MatchmakingPipeline",
+    "MatchmakingRuleSet",
+    "MatchSession",
+    "MatchResult",
+    "ConversationGraphPipeline",
+    "ConversationNodeDef",
+    "ConversationEdgeDef",
+    "ConversationGraphEntry",
+    "GameBodyLoader",
+    "GameBodyManifest",
+    "SpawnConfigManifest",
+    "GameEventManifest",
 ]
