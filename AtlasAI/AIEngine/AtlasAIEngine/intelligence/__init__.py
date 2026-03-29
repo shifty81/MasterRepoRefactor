@@ -25,6 +25,9 @@ from .scene_partition_loader import ScenePartitionLoader, ScenePartitionManifest
 from .mesh_simplification_pipeline import MeshSimplificationPipeline, SimplificationTarget, SimplificationResult, SimplificationBatch
 from .animation_retarget_pipeline import AnimationRetargetPipeline, RetargetProfile, BoneMapping, RetargetJob, RetargetResult
 from .nav_mesh_loader import NavMeshLoader, NavMeshManifest, NavMeshAABB, NavMeshNode, NavMeshEdge
+from .physics_simulation_cache import PhysicsSimulationCache, PhysicsSimulationEntry, PhysicsFrameData, CachePolicy
+from .behavior_tree_compiler import BehaviorTreeCompiler, BTSourceTree, BTNodeDef, BTCompileResult, BTBytecodeInstruction
+from .physics_body_loader import PhysicsBodyLoader, PhysicsBodyManifest, PhysicsMaterialDef, ColliderDef
 
 __all__ = [
     "ClangdBridge",
@@ -97,4 +100,17 @@ __all__ = [
     "NavMeshAABB",
     "NavMeshNode",
     "NavMeshEdge",
+    "PhysicsSimulationCache",
+    "PhysicsSimulationEntry",
+    "PhysicsFrameData",
+    "CachePolicy",
+    "BehaviorTreeCompiler",
+    "BTSourceTree",
+    "BTNodeDef",
+    "BTCompileResult",
+    "BTBytecodeInstruction",
+    "PhysicsBodyLoader",
+    "PhysicsBodyManifest",
+    "PhysicsMaterialDef",
+    "ColliderDef",
 ]
