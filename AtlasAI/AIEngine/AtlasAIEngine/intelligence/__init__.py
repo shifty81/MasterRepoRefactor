@@ -76,6 +76,24 @@ from .script_body_loader import (
     ScriptConfigManifest,
     ScriptBindingManifest,
 )
+from .curve_linear_color_pipeline import (
+    CurveLinearColorPipeline,
+    ColorCurveEntry,
+    ColorKeyframeEntry,
+    GradientBakeDef,
+)
+from .network_profiler_pipeline import (
+    NetworkProfilerPipeline,
+    ProfilerSessionEntry,
+    NetworkSampleEntry,
+    NetworkAnomalyEntry,
+)
+from .dialog_body_loader import (
+    DialogBodyLoader,
+    DialogBodyManifest,
+    DialogLineManifest,
+    DialogResponseManifest,
+)
 
 __all__ = [
     "ClangdBridge",
@@ -287,4 +305,7 @@ __all__ = [
     "ChaosDestructionPipeline", "GeometryCollectionEntry", "GeometryFragmentDef", "DestructionEventDef",
     "HairGroomPipeline", "GroomAssetEntry", "GroomStrandDef", "GroomLODEntry",
     "ScriptBodyLoader", "ScriptBodyManifest", "ScriptConfigManifest", "ScriptBindingManifest",
+    "CurveLinearColorPipeline", "ColorCurveEntry", "ColorKeyframeEntry", "GradientBakeDef",
+    "NetworkProfilerPipeline", "ProfilerSessionEntry", "NetworkSampleEntry", "NetworkAnomalyEntry",
+    "DialogBodyLoader", "DialogBodyManifest", "DialogLineManifest", "DialogResponseManifest",
 ]
