@@ -339,8 +339,8 @@ glm::vec4 AsteroidFieldRenderer::getAsteroidColor(int meshType, int seed) const 
         {0.55f, 0.5f, 0.45f}, // Tan (some ores)
     };
     
-    int colorIndex = static_cast<int>(r1 * baseColors.size());
-    if (colorIndex >= baseColors.size()) colorIndex = baseColors.size() - 1;
+    int colorIndex = static_cast<int>(r1 * static_cast<float>(baseColors.size()));
+    if (colorIndex >= static_cast<int>(baseColors.size())) colorIndex = static_cast<int>(baseColors.size()) - 1;
     
     glm::vec3 color = baseColors[colorIndex];
     

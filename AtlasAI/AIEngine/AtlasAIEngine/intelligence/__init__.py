@@ -22,6 +22,15 @@ from .terrain_chunk_loader import TerrainChunkLoader, TerrainChunkManifest, Chun
 from .texture_atlas_packer import TextureAtlasPacker, AtlasSheet, AtlasRegion
 from .lod_generation_pipeline import LODGenerationPipeline, LODJob, LODSettings, LODResult
 from .scene_partition_loader import ScenePartitionLoader, ScenePartitionManifest, PartitionBounds, PartitionPortal
+from .mesh_simplification_pipeline import MeshSimplificationPipeline, SimplificationTarget, SimplificationResult, SimplificationBatch
+from .animation_retarget_pipeline import AnimationRetargetPipeline, RetargetProfile, BoneMapping, RetargetJob, RetargetResult
+from .nav_mesh_loader import NavMeshLoader, NavMeshManifest, NavMeshAABB, NavMeshNode, NavMeshEdge
+from .physics_simulation_cache import PhysicsSimulationCache, PhysicsSimulationEntry, PhysicsFrameData, CachePolicy
+from .behavior_tree_compiler import BehaviorTreeCompiler, BTSourceTree, BTNodeDef, BTCompileResult, BTBytecodeInstruction
+from .physics_body_loader import PhysicsBodyLoader, PhysicsBodyManifest, PhysicsMaterialDef, ColliderDef
+from .audio_effect_pipeline import AudioEffectPipeline, AudioEffectJob, AudioProcessResult, EQBand, CompressorSettings, ReverbSettings, NormalisationSettings
+from .cloth_simulation_cache import ClothSimulationCache, ClothSimEntry, ClothFrameSnapshot, ClothCachePolicy
+from .audio_body_loader import AudioBodyLoader, AudioBodyManifest, AttenuationCurveDef, ReverbZoneDef
 
 __all__ = [
     "ClangdBridge",
@@ -80,4 +89,46 @@ __all__ = [
     "ScenePartitionManifest",
     "PartitionBounds",
     "PartitionPortal",
+    "MeshSimplificationPipeline",
+    "SimplificationTarget",
+    "SimplificationResult",
+    "SimplificationBatch",
+    "AnimationRetargetPipeline",
+    "RetargetProfile",
+    "BoneMapping",
+    "RetargetJob",
+    "RetargetResult",
+    "NavMeshLoader",
+    "NavMeshManifest",
+    "NavMeshAABB",
+    "NavMeshNode",
+    "NavMeshEdge",
+    "PhysicsSimulationCache",
+    "PhysicsSimulationEntry",
+    "PhysicsFrameData",
+    "CachePolicy",
+    "BehaviorTreeCompiler",
+    "BTSourceTree",
+    "BTNodeDef",
+    "BTCompileResult",
+    "BTBytecodeInstruction",
+    "PhysicsBodyLoader",
+    "PhysicsBodyManifest",
+    "PhysicsMaterialDef",
+    "ColliderDef",
+    "AudioEffectPipeline",
+    "AudioEffectJob",
+    "AudioProcessResult",
+    "EQBand",
+    "CompressorSettings",
+    "ReverbSettings",
+    "NormalisationSettings",
+    "ClothSimulationCache",
+    "ClothSimEntry",
+    "ClothFrameSnapshot",
+    "ClothCachePolicy",
+    "AudioBodyLoader",
+    "AudioBodyManifest",
+    "AttenuationCurveDef",
+    "ReverbZoneDef",
 ]

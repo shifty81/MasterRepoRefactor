@@ -1,6 +1,6 @@
 #pragma once
 #include "../ui/EditorPanel.h"
-#include "../../engine/net/NetContext.h"
+#include "../../Engine/Networking/NetContext.h"
 #include "../../cpp_client/include/ui/atlas/atlas_widgets.h"
 #include <string>
 

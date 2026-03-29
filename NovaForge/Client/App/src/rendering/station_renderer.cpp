@@ -509,7 +509,7 @@ std::shared_ptr<Mesh> StationRenderer::createKeldariStation() {
     
     // Add box faces with proper vertex data
     for (int face = 0; face < 6; face++) {
-        glm::vec3 normal;
+        glm::vec3 normal{0.0f, 0.0f, 0.0f};
         switch(face) {
             case 0: normal = glm::vec3(0, 0, -1); break; // front
             case 1: normal = glm::vec3(0, 0, 1); break;  // back
