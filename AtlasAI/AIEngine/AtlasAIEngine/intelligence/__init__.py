@@ -10,6 +10,9 @@ from .scene_graph_snapshot import SceneGraphSnapshot, SnapshotDiff
 from .agent_action_log import AgentActionLog, ActionEntry
 from .content_hash_registry import ContentHashRegistry, ContentHashEntry
 from .content_pack_loader import ContentPackLoader, ContentPackManifest
+from .ai_build_monitor import AIBuildMonitor, BuildDiagnostic, BuildSummary
+from .layout_diff_reporter import LayoutDiffReporter, LayoutDiffReport, LayoutDiffEntry
+from .runtime_bundle_loader import RuntimeBundleLoader, BundleManifest, AssetRef
 
 __all__ = [
     "ClangdBridge",
@@ -33,4 +36,13 @@ __all__ = [
     "ContentHashEntry",
     "ContentPackLoader",
     "ContentPackManifest",
+    "AIBuildMonitor",
+    "BuildDiagnostic",
+    "BuildSummary",
+    "LayoutDiffReporter",
+    "LayoutDiffReport",
+    "LayoutDiffEntry",
+    "RuntimeBundleLoader",
+    "BundleManifest",
+    "AssetRef",
 ]
