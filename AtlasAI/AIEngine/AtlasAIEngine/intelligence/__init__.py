@@ -13,6 +13,9 @@ from .content_pack_loader import ContentPackLoader, ContentPackManifest
 from .ai_build_monitor import AIBuildMonitor, BuildDiagnostic, BuildSummary
 from .layout_diff_reporter import LayoutDiffReporter, LayoutDiffReport, LayoutDiffEntry
 from .runtime_bundle_loader import RuntimeBundleLoader, BundleManifest, AssetRef
+from .asset_dependency_graph import AssetDependencyGraph, AssetNode
+from .build_cache_manager import BuildCacheManager, CacheEntry
+from .streaming_region_loader import StreamingRegionLoader, StreamingRegionManifest, RegionBounds
 
 __all__ = [
     "ClangdBridge",
@@ -45,4 +48,11 @@ __all__ = [
     "RuntimeBundleLoader",
     "BundleManifest",
     "AssetRef",
+    "AssetDependencyGraph",
+    "AssetNode",
+    "BuildCacheManager",
+    "CacheEntry",
+    "StreamingRegionLoader",
+    "StreamingRegionManifest",
+    "RegionBounds",
 ]
