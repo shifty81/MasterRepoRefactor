@@ -94,6 +94,24 @@ from .dialog_body_loader import (
     DialogLineManifest,
     DialogResponseManifest,
 )
+from .morph_target_pipeline import (
+    MorphTargetPipeline,
+    MorphTargetEntry,
+    CorrectiveShapeEntry,
+    MorphBlendPresetEntry,
+)
+from .asset_bundle_pipeline import (
+    AssetBundlePipeline,
+    AssetBundleEntry,
+    BundlePatchEntry,
+    BundleManifestEntry,
+)
+from .quest_body_loader import (
+    QuestBodyLoader,
+    QuestBodyManifest,
+    QuestObjectiveManifest,
+    QuestRewardManifest,
+)
 
 __all__ = [
     "ClangdBridge",
@@ -308,4 +326,7 @@ __all__ = [
     "CurveLinearColorPipeline", "ColorCurveEntry", "ColorKeyframeEntry", "GradientBakeDef",
     "NetworkProfilerPipeline", "ProfilerSessionEntry", "NetworkSampleEntry", "NetworkAnomalyEntry",
     "DialogBodyLoader", "DialogBodyManifest", "DialogLineManifest", "DialogResponseManifest",
+    "MorphTargetPipeline", "MorphTargetEntry", "CorrectiveShapeEntry", "MorphBlendPresetEntry",
+    "AssetBundlePipeline", "AssetBundleEntry", "BundlePatchEntry", "BundleManifestEntry",
+    "QuestBodyLoader", "QuestBodyManifest", "QuestObjectiveManifest", "QuestRewardManifest",
 ]
