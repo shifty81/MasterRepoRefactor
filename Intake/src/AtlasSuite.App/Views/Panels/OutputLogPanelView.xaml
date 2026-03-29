@@ -1,0 +1,7 @@
+<UserControl x:Class="AtlasSuite.App.Views.Panels.OutputLogPanelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="8">
+        <ListBox ItemsSource="{Binding Entries}" />
+    </Grid>
+</UserControl>

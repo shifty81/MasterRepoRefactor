@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "atlas://security/session_capabilities.schema.json",
+  "title": "Session Capabilities",
+  "type": "object",
+  "required": ["schemaVersion", "modes"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "generatedBy": { "type": "string" },
+    "lastUpdatedUtc": { "type": "string" },
+    "modes": {
+      "type": "object",
+      "propertyNames": { "type": "string", "minLength": 1 },
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string", "minLength": 1 },
+        "uniqueItems": true
+      }
+    }
+  },
+  "additionalProperties": false
+}

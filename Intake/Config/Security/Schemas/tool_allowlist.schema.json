@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "atlas://security/tool_allowlist.schema.json",
+  "title": "Tool Allowlist",
+  "type": "object",
+  "required": ["schemaVersion", "tools"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "generatedBy": { "type": "string" },
+    "lastUpdatedUtc": { "type": "string" },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["toolId", "exe", "allowedArgs", "workingRootPolicy", "timeoutSeconds"],
+        "properties": {
+          "toolId": { "type": "string", "minLength": 1 },
+          "exe": { "type": "string", "minLength": 1 },
+          "allowedArgs": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+          "workingRootPolicy": { "type": "string", "enum": ["repo_only", "repo_or_build_dir_only", "sandbox_only"] },
+          "timeoutSeconds": { "type": "integer", "minimum": 1 },
+          "networkAccess": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>AtlasSuite.Plugin.Sample</AssemblyName>
+    <RootNamespace>AtlasSuite.Plugin.Sample</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AtlasSuite.Core\AtlasSuite.Core.csproj" />
+    <ProjectReference Include="..\AtlasSuite.Plugins.Abstractions\AtlasSuite.Plugins.Abstractions.csproj" />
+  </ItemGroup>
+</Project>
