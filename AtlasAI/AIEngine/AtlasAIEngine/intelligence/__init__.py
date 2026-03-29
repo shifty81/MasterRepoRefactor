@@ -34,6 +34,30 @@ from .audio_body_loader import AudioBodyLoader, AudioBodyManifest, AttenuationCu
 from .vfx_graph_compiler import VFXGraphCompiler, VFXEmitterNode, VFXLinkEdge, VFXGraphAsset
 from .light_baking_pipeline import LightBakingPipeline, BakeJob, ProbeCluster, BakeResult
 from .vfx_body_loader import VFXBodyLoader, VFXBodyManifest, EmitterBoundsDef, SimulationSettingsDef
+from .particle_system_pipeline import ParticleSystemPipeline, ParticleEmitterDef, ParticleModuleDef, ParticlePipelineResult
+from .procedural_mesh_pipeline import ProceduralMeshPipeline, MeshGenerationParams, MeshGenerationResult, ProceduralMeshBatch
+from .animation_body_loader import AnimationBodyLoader, AnimationBodyManifest, AnimationClipDef, AnimationBlendWeightDef
+from .render_pipeline_cache import RenderPipelineCache, RenderPassDef, RenderPipelineEntry, PipelineCacheStats
+from .world_streaming_pipeline import WorldStreamingPipeline, StreamingZoneDef, StreamingLODRule, WorldStreamingResult
+from .render_body_loader import RenderBodyLoader, RenderBodyManifest, MaterialSlotDef, LODEntryDef
+from .lighting_bake_pipeline import LightingBakePipeline, BakePassDef, LightmapEntry, BakeBudget
+from .collision_mesh_pipeline import CollisionMeshPipeline, CollisionShapeDef, CollisionMeshEntry, CollisionBuildResult
+from .light_body_loader import LightBodyLoader, LightBodyManifest, LightColorDef, ShadowSettingsDef
+from .vfx_bake_pipeline import VFXBakePipeline, VFXBakePassDef, VFXBakeEntry, VFXAtlasSettings
+from .ik_solve_pipeline import IKSolvePipeline, IKJointDef, IKChainEntry, IKSolveResult
+from .fx_body_loader import FXBodyLoader, FXBodyManifest, FXEmitSettingsDef, FXSimSettingsDef
+from .gameplay_ability_pipeline import GameplayAbilityPipeline, AbilityEntry, AbilityCostDef, AbilityEffectDef
+from .environment_query_pipeline import EnvironmentQueryPipeline, EQSGeneratorConfig, EQSTestConfig, EQSQueryResult
+from .ui_body_loader import UIBodyLoader, UIBodyManifest, UIStyleManifest, UILayoutManifest
+from .world_partition_pipeline import WorldPartitionPipeline, WorldPartitionEntry, StreamingCellDef, HLODLayerConfig
+from .data_layer_pipeline import DataLayerPipeline, DataLayerSpec, DataLayerActorAssignment, DataLayerState
+from .network_body_loader import NetworkBodyLoader, NetworkBodyManifest, ReplicationConfigManifest, NetworkPropertyManifest
+from .matchmaking_pipeline import MatchmakingPipeline, MatchmakingRuleSet, MatchSession, MatchResult
+from .conversation_graph_pipeline import ConversationGraphPipeline, ConversationNodeDef, ConversationEdgeDef, ConversationGraphEntry
+from .game_body_loader import GameBodyLoader, GameBodyManifest, SpawnConfigManifest, GameEventManifest
+from .ability_debug_pipeline import AbilityDebugPipeline, AbilitySnapshot, AttributeRecord, AbilityDebugFrame
+from .landscape_spline_pipeline import LandscapeSplinePipeline, SplinePointDef, SplineSegmentDef, LandscapeSplineEntry
+from .event_body_loader import EventBodyLoader, EventBodyManifest, TriggerConfigManifest, EventPayloadManifest
 
 __all__ = [
     "ClangdBridge",
@@ -146,4 +170,100 @@ __all__ = [
     "VFXBodyManifest",
     "EmitterBoundsDef",
     "SimulationSettingsDef",
+    "ParticleSystemPipeline",
+    "ParticleEmitterDef",
+    "ParticleModuleDef",
+    "ParticlePipelineResult",
+    "ProceduralMeshPipeline",
+    "MeshGenerationParams",
+    "MeshGenerationResult",
+    "ProceduralMeshBatch",
+    "AnimationBodyLoader",
+    "AnimationBodyManifest",
+    "AnimationClipDef",
+    "AnimationBlendWeightDef",
+    "RenderPipelineCache",
+    "RenderPassDef",
+    "RenderPipelineEntry",
+    "PipelineCacheStats",
+    "WorldStreamingPipeline",
+    "StreamingZoneDef",
+    "StreamingLODRule",
+    "WorldStreamingResult",
+    "RenderBodyLoader",
+    "RenderBodyManifest",
+    "MaterialSlotDef",
+    "LODEntryDef",
+    "LightingBakePipeline",
+    "BakePassDef",
+    "LightmapEntry",
+    "BakeBudget",
+    "CollisionMeshPipeline",
+    "CollisionShapeDef",
+    "CollisionMeshEntry",
+    "CollisionBuildResult",
+    "LightBodyLoader",
+    "LightBodyManifest",
+    "LightColorDef",
+    "ShadowSettingsDef",
+    "VFXBakePipeline",
+    "VFXBakePassDef",
+    "VFXBakeEntry",
+    "VFXAtlasSettings",
+    "IKSolvePipeline",
+    "IKJointDef",
+    "IKChainEntry",
+    "IKSolveResult",
+    "FXBodyLoader",
+    "FXBodyManifest",
+    "FXEmitSettingsDef",
+    "FXSimSettingsDef",
+    "GameplayAbilityPipeline",
+    "AbilityEntry",
+    "AbilityCostDef",
+    "AbilityEffectDef",
+    "EnvironmentQueryPipeline",
+    "EQSGeneratorConfig",
+    "EQSTestConfig",
+    "EQSQueryResult",
+    "UIBodyLoader",
+    "UIBodyManifest",
+    "UIStyleManifest",
+    "UILayoutManifest",
+    "WorldPartitionPipeline",
+    "WorldPartitionEntry",
+    "StreamingCellDef",
+    "HLODLayerConfig",
+    "DataLayerPipeline",
+    "DataLayerSpec",
+    "DataLayerActorAssignment",
+    "DataLayerState",
+    "NetworkBodyLoader",
+    "NetworkBodyManifest",
+    "ReplicationConfigManifest",
+    "NetworkPropertyManifest",
+    "MatchmakingPipeline",
+    "MatchmakingRuleSet",
+    "MatchSession",
+    "MatchResult",
+    "ConversationGraphPipeline",
+    "ConversationNodeDef",
+    "ConversationEdgeDef",
+    "ConversationGraphEntry",
+    "GameBodyLoader",
+    "GameBodyManifest",
+    "SpawnConfigManifest",
+    "GameEventManifest",
+    "AbilityDebugPipeline",
+    "AbilitySnapshot",
+    "AttributeRecord",
+    "AbilityDebugFrame",
+    "LandscapeSplinePipeline",
+    "SplinePointDef",
+    "SplineSegmentDef",
+    "LandscapeSplineEntry",
+    "EventBodyLoader",
+    "EventBodyManifest",
+    "TriggerConfigManifest",
+    "EventPayloadManifest",
 ]

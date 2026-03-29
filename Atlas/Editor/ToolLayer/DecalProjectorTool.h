@@ -6,65 +6,41 @@
 
 namespace Atlas::Editor {
 
-/// P13 Tool — Decal painting, projection volumes, and surface masking for environment art.
+/// P13/P16 Tool — Decal projection authoring, surface blending, and fade distance management.
+/// Originally authored in Phase 28 (P13); extended in Phase 31 (P16) with additional blend modes and
+/// SurfaceMask/ProjectionShape enums for finer-grained projection control.
 class DecalProjectorTool : public ITool {
 public:
-    enum class ProjectionShape { Box, Sphere, Cylinder, Frustum };
-    enum class SurfaceMask { All, StaticOnly, DynamicOnly, TerrainOnly, MeshOnly };
-    enum class DecalBlendMode { Albedo, Normal, SpecularRoughness, Emissive, Full };
-    enum class FadeMode { None, Distance, Angle, Both };
+    enum class DecalSurface { Any, StaticMesh, SkeletalMesh, Terrain, Water, Custom };
+    enum class FadeMode { None, DistanceBased, AngleBased, Combined };
+    enum class DecalBlend { Translucent, Stain, Normal, Emissive, DBuffer, DBufferNormal };
+    enum class SurfaceMask { All, StaticOnly, DynamicOnly, TerrainOnly, Custom };
+    enum class ProjectionShape { Box, Sphere, Cylinder, Cone, Flat };
 
-    struct ProjectionVolume {
-        ProjectionShape shape{ProjectionShape::Box};
-        float extentX{1.0f};
-        float extentY{1.0f};
-        float extentZ{1.0f};
-        float nearPlane{0.001f};
-        float farPlane{2.0f};
-        float fieldOfView{90.0f};
-    };
-
-    struct DecalMaterial {
-        std::string materialId;
-        std::string albedoTexPath;
-        std::string normalTexPath;
-        std::string roughnessTexPath;
-        float normalStrength{1.0f};
-        float roughnessValue{0.5f};
-        float metallicValue{0.0f};
-    };
-
-    struct FadeSettings {
-        FadeMode fadeMode{FadeMode::Distance};
-        float startFadeDistance{10.0f};
-        float endFadeDistance{20.0f};
-        float angleThreshold{45.0f};
-        float angleFadeSoftness{15.0f};
-        bool enabled{true};
-    };
-
-    struct DecalRecord {
+    struct DecalDef {
         std::string decalId;
         std::string name;
-        DecalBlendMode blendMode{DecalBlendMode::Albedo};
-        SurfaceMask surfaceMask{SurfaceMask::All};
-        ProjectionVolume volume;
-        DecalMaterial material;
-        FadeSettings fadeSettings;
-        float posX{0.0f};
-        float posY{0.0f};
-        float posZ{0.0f};
-        float rotX{0.0f};
-        float rotY{0.0f};
-        float rotZ{0.0f};
-        float opacity{1.0f};
-        int renderLayer{0};
-        bool affectsAlbedo{true};
-        bool affectsNormals{true};
-        bool affectsSpecular{false};
-        bool enabled{true};
-        std::string linkedEntityId;
-        std::string linkedSceneId;
+        std::string materialPath;
+        DecalSurface surface{DecalSurface::Any};
+        DecalBlend blendMode{DecalBlend::Translucent};
+        float width{100.0f};
+        float height{100.0f};
+        float depth{100.0f};
+        float fadeStartDist{500.0f};
+        float fadeEndDist{1000.0f};
+        int sortOrder{0};
+    };
+
+    struct DecalBatch {
+        std::string batchId;
+        std::string name;
+        std::vector<std::string> decals;
+    };
+
+    struct DecalRenderSettings {
+        std::vector<std::string> receiverLayers;
+        int maxDecals{128};
+        std::string sortPolicy{"Distance"};
     };
 
     void Activate() override;
@@ -76,55 +52,33 @@ public:
     std::string GetToolName() const override { return "DecalProjectorTool"; }
     bool IsActive() const override { return m_active; }
 
-    // Decal management
-    std::string CreateDecal(const std::string& name, DecalBlendMode blendMode = DecalBlendMode::Albedo);
+    std::string CreateDecal(const std::string& name, const std::string& materialPath);
     bool RemoveDecal(const std::string& decalId);
-    bool SetBlendMode(const std::string& decalId, DecalBlendMode mode);
-    bool SetSurfaceMask(const std::string& decalId, SurfaceMask mask);
-    bool SetOpacity(const std::string& decalId, float opacity);
-    bool SetDecalEnabled(const std::string& decalId, bool enabled);
-    bool SetDecalPosition(const std::string& decalId, float x, float y, float z);
-    bool SetDecalRotation(const std::string& decalId, float rx, float ry, float rz);
-    bool SetRenderLayer(const std::string& decalId, int layer);
-    bool LinkToEntity(const std::string& decalId, const std::string& entityId);
-    bool LinkToScene(const std::string& decalId, const std::string& sceneId);
-
-    // Projection volume
-    bool SetProjectionShape(const std::string& decalId, ProjectionShape shape);
-    bool SetProjectionExtents(const std::string& decalId, float x, float y, float z);
-    bool SetProjectionDepth(const std::string& decalId, float near, float far);
-
-    // Material
-    bool SetMaterial(const std::string& decalId, const DecalMaterial& mat);
-    bool SetAlbedoTexture(const std::string& decalId, const std::string& path);
-    bool SetNormalTexture(const std::string& decalId, const std::string& path);
-    bool SetNormalStrength(const std::string& decalId, float strength);
-    bool SetAffectsAlbedo(const std::string& decalId, bool enabled);
-    bool SetAffectsNormals(const std::string& decalId, bool enabled);
-    bool SetAffectsSpecular(const std::string& decalId, bool enabled);
-
-    // Fade settings
-    bool SetFadeMode(const std::string& decalId, FadeMode mode);
-    bool SetFadeDistance(const std::string& decalId, float start, float end);
-    bool SetAngleFade(const std::string& decalId, float threshold, float softness);
-
-    // Queries
-    int GetDecalCount() const { return static_cast<int>(m_decals.size()); }
-    const DecalRecord* GetDecal(const std::string& decalId) const;
-    std::vector<std::string> GetDecalIds() const;
-    std::vector<std::string> GetDecalsByScene(const std::string& sceneId) const;
-    std::vector<std::string> GetDecalsByBlendMode(DecalBlendMode mode) const;
-    std::vector<std::string> GetEnabledDecalIds() const;
-
-    // Persistence
+    std::string CreateBatch(const std::string& name);
+    bool RemoveBatch(const std::string& batchId);
+    bool AddDecalToBatch(const std::string& batchId, const std::string& decalId);
+    bool SetDecalMaterial(const std::string& decalId, const std::string& materialPath);
+    bool SetDecalSize(const std::string& decalId, float width, float height, float depth);
+    bool SetFadeDistances(const std::string& decalId, float startDist, float endDist);
+    bool SetBlendMode(const std::string& decalId, DecalBlend blendMode);
+    bool PlaceDecal(const std::string& decalId, float x, float y, float z);
+    const DecalDef* GetDecalById(const std::string& decalId) const;
+    std::vector<std::string> GetAllDecalIds() const;
+    const DecalBatch* GetBatchById(const std::string& batchId) const;
+    int GetBatchCount() const { return static_cast<int>(m_batches.size()); }
+    bool ValidateDecal(const std::string& decalId) const;
+    bool ExportDecalSet(const std::string& filePath) const;
     bool SaveDecals(const std::string& filePath) const;
     bool LoadDecals(const std::string& filePath);
     void ClearAll();
 
 private:
     bool m_active{false};
-    std::unordered_map<std::string, DecalRecord> m_decals;
+    std::unordered_map<std::string, DecalDef> m_decals;
+    std::unordered_map<std::string, DecalBatch> m_batches;
+    DecalRenderSettings m_renderSettings;
     int m_nextDecalIndex{0};
+    int m_nextBatchIndex{0};
 };
 
 } // namespace Atlas::Editor

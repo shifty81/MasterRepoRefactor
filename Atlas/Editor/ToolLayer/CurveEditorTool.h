@@ -6,13 +6,15 @@
 
 namespace Atlas::Editor {
 
-/// P13 Tool — Animation curve editing with keyframes, tangent handles, and spline interpolation.
+/// P13/P20 Tool — Animation curve editing with keyframes, tangent handles, spline interpolation, and curve asset authoring.
 class CurveEditorTool : public ITool {
 public:
     enum class InterpolationType { Constant, Linear, Bezier, Hermite, CatmullRom };
-    enum class TangentMode { Auto, Free, Linear, Flat, Broken, ClampedAuto };
+    enum class InterpolationMode { Linear, Constant, Cubic, Ease, EaseIn, EaseOut, Custom };
+    enum class TangentMode { Auto, Free, Linear, Flat, Broken, ClampedAuto, Break, User, Clamped, Custom };
     enum class CurveWrapMode { Once, Loop, PingPong, ClampForever };
     enum class CurveDataType { Float, Vector2, Vector3, Color, Quaternion };
+    enum class CurveUsageType { Animation, Material, Gameplay, VFX, Audio, Scalar, Custom };
 
     struct Keyframe {
         std::string keyId;
@@ -70,6 +72,25 @@ public:
         std::string linkedSceneId;
     };
 
+    struct CurveTrackDef {
+        std::string trackId;
+        std::string name;
+        CurveUsageType usageType{CurveUsageType::Animation};
+        std::vector<std::string> keyIds;
+        float minValue{0.0f};
+        float maxValue{1.0f};
+        bool clampOutput{false};
+    };
+
+    struct CurveAssetDef {
+        std::string assetId;
+        std::string name;
+        std::vector<std::string> trackIds;
+        float duration{1.0f};
+        bool looping{false};
+        std::string category;
+    };
+
     void Activate() override;
     void Deactivate() override;
     void Update(float deltaTime) override;
@@ -81,6 +102,7 @@ public:
 
     // Curve management
     std::string CreateCurve(const std::string& name);
+    std::string CreateCurveAsset(const CurveAssetDef& def);
     bool RemoveCurve(const std::string& curveId);
     bool SetWrapMode(const std::string& curveId, CurveWrapMode pre, CurveWrapMode post);
     bool SetCurveDuration(const std::string& curveId, float duration);
