@@ -19,6 +19,9 @@ from .streaming_region_loader import StreamingRegionLoader, StreamingRegionManif
 from .shader_permutation_cache import ShaderPermutationCache, ShaderVariant
 from .asset_import_pipeline import AssetImportPipeline, ImportJob, ImportSettings
 from .terrain_chunk_loader import TerrainChunkLoader, TerrainChunkManifest, ChunkCoord
+from .texture_atlas_packer import TextureAtlasPacker, AtlasSheet, AtlasRegion
+from .lod_generation_pipeline import LODGenerationPipeline, LODJob, LODSettings, LODResult
+from .scene_partition_loader import ScenePartitionLoader, ScenePartitionManifest, PartitionBounds, PartitionPortal
 
 __all__ = [
     "ClangdBridge",
@@ -66,4 +69,15 @@ __all__ = [
     "TerrainChunkLoader",
     "TerrainChunkManifest",
     "ChunkCoord",
+    "TextureAtlasPacker",
+    "AtlasSheet",
+    "AtlasRegion",
+    "LODGenerationPipeline",
+    "LODJob",
+    "LODSettings",
+    "LODResult",
+    "ScenePartitionLoader",
+    "ScenePartitionManifest",
+    "PartitionBounds",
+    "PartitionPortal",
 ]
