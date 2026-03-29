@@ -43,8 +43,34 @@
       "name": "Dev Anomaly Site",
       "orbit_radius": 1.8,
       "anomaly_class": "A"
+    },
+    {
+      "id": "moon_001",
+      "type": "Moon",
+      "name": "Dev Moon Alpha",
+      "orbit_radius": 1.003,
+      "radius": 1737,
+      "parent": "planet_001",
+      "pcg_seed": 43
+    },
+    {
+      "id": "stargate_001",
+      "type": "Stargate",
+      "name": "Dev Stargate Alpha",
+      "orbit_radius": 4.8,
+      "destination_system": "dev_solar_system_002"
+    },
+    {
+      "id": "ship_spawn_001",
+      "type": "ShipSpawnPoint",
+      "name": "Dev Spawn Alpha",
+      "orbit_radius": 1.5,
+      "faction": "developer",
+      "max_ships": 5
     }
   ],
+  "ship_spawn_points": 1,
+  "total_celestials": 8,
   "npc_factions": ["developer_pirates", "dev_npcs"],
   "pcg_config": "solar_system_pcg_config.json"
 }
