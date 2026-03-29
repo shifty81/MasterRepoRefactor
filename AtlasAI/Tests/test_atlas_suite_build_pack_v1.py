@@ -1,26 +1,30 @@
 """test_atlas_suite_build_pack_v1.py
 
 Pytest suite verifying that AtlasSuiteBuildPackV1 was correctly read,
-its errors were fixed, and its contents were properly integrated and archived.
+its errors were fixed, and its contents were properly integrated.
+
+Note: The zip archive has been removed from the repository as part of the
+zip-audit cleanup (2026-03-29) to trim repo size. All content from the zip
+has been fully integrated under Atlas/UI/AtlasSuite/RuntimeScaffold/.
 """
 
-import zipfile
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SCAFFOLD = REPO_ROOT / "Atlas" / "UI" / "AtlasSuite" / "RuntimeScaffold"
-ARCHIVE_ZIP = REPO_ROOT / "Docs" / "Archive" / "ZipFiles" / "AtlasSuiteBuildPackV1.zip"
 INTAKE_LOG = REPO_ROOT / "Docs" / "Archive" / "AtlasSuiteBuildPackV1_intake_log.md"
 INTAKE_DIR = REPO_ROOT / "Intake"
 
 
 # ---------------------------------------------------------------------------
-# Archival
+# Archival / Cleanup verification
 # ---------------------------------------------------------------------------
 
 class TestArchival:
-    def test_zip_archived_in_docs(self):
-        assert ARCHIVE_ZIP.exists(), "AtlasSuiteBuildPackV1.zip must be in Docs/Archive/ZipFiles/"
+    def test_zip_removed_from_archive(self):
+        """AtlasSuiteBuildPackV1.zip must have been removed (zip cleanup, 2026-03-29)."""
+        assert not (REPO_ROOT / "Docs" / "Archive" / "ZipFiles" / "AtlasSuiteBuildPackV1.zip").exists(), \
+            "AtlasSuiteBuildPackV1.zip should have been deleted during zip audit cleanup"
 
     def test_intake_log_exists(self):
         assert INTAKE_LOG.exists(), "Intake processing log must exist in Docs/Archive/"
@@ -42,30 +46,6 @@ class TestArchival:
     def test_zip_is_not_at_repo_root(self):
         """AtlasSuiteBuildPackV1.zip must NOT live at repo root (intake policy violation)."""
         assert not (REPO_ROOT / "AtlasSuiteBuildPackV1.zip").exists()
-
-
-# ---------------------------------------------------------------------------
-# Archive zip integrity
-# ---------------------------------------------------------------------------
-
-class TestArchiveZipIntegrity:
-    def test_zip_is_valid(self):
-        assert zipfile.is_zipfile(ARCHIVE_ZIP)
-
-    def test_zip_contains_readme(self):
-        with zipfile.ZipFile(ARCHIVE_ZIP) as zf:
-            names = zf.namelist()
-        assert any("README" in n for n in names)
-
-    def test_zip_contains_core_project(self):
-        with zipfile.ZipFile(ARCHIVE_ZIP) as zf:
-            names = zf.namelist()
-        assert any("AtlasSuite.Core.csproj" in n for n in names)
-
-    def test_zip_contains_view_model_base(self):
-        with zipfile.ZipFile(ARCHIVE_ZIP) as zf:
-            names = zf.namelist()
-        assert any("ViewModelBase.cs" in n for n in names)
 
 
 # ---------------------------------------------------------------------------
