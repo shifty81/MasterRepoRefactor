@@ -130,6 +130,60 @@ from .achievement_body_loader import (
     AchievementProgressManifest,
     AchievementRewardManifest,
 )
+from .procedural_terrain_pipeline import (
+    ProceduralTerrainPipeline,
+    TerrainGenEntry,
+    BiomeLayerEntry,
+    ErosionSimEntry,
+)
+from .skeletal_mesh_pipeline import (
+    SkeletalMeshPipeline,
+    BoneEntry,
+    WeightPaintEntry,
+    MeshLODEntry,
+)
+from .inventory_body_loader import (
+    InventoryBodyLoader,
+    InventoryBodyManifest,
+    InventoryItemManifest,
+    InventorySlotManifest,
+)
+from .distance_field_pipeline import (
+    DistanceFieldPipeline,
+    DistanceFieldEntry,
+    ShadowConfigEntry,
+    FieldBlendOpEntry,
+)
+from .animation_compression_pipeline import (
+    AnimationCompressionPipeline,
+    CompressionSchemeEntry,
+    TrackCompressionEntry,
+    CompressionPreviewEntry,
+)
+from .loot_body_loader import (
+    LootBodyLoader,
+    LootBodyManifest,
+    LootTableManifest,
+    LootEntryManifest,
+)
+from .subsurface_scatter_pipeline import (
+    SubsurfaceScatterPipeline,
+    SSSProfileEntry,
+    TransmissionEntry,
+    SSSKernelEntry,
+)
+from .vector_field_pipeline import (
+    VectorFieldPipeline,
+    VectorFieldEntry,
+    FlowVisualizationEntry,
+    ParticleCouplingEntry,
+)
+from .trap_body_loader import (
+    TrapBodyLoader,
+    TrapBodyManifest,
+    TrapTriggerZoneManifest,
+    TrapEffectManifest,
+)
 
 __all__ = [
     "ClangdBridge",
@@ -350,4 +404,13 @@ __all__ = [
     "RigidBodyJointPipeline", "JointEntry", "JointConstraintEntry", "JointVisualizationEntry",
     "DataValidatorPipeline", "ValidationRuleEntry", "ValidationResultEntry", "ValidationReportEntry",
     "AchievementBodyLoader", "AchievementBodyManifest", "AchievementProgressManifest", "AchievementRewardManifest",
+    "ProceduralTerrainPipeline", "TerrainGenEntry", "BiomeLayerEntry", "ErosionSimEntry",
+    "SkeletalMeshPipeline", "BoneEntry", "WeightPaintEntry", "MeshLODEntry",
+    "InventoryBodyLoader", "InventoryBodyManifest", "InventoryItemManifest", "InventorySlotManifest",
+    "DistanceFieldPipeline", "DistanceFieldEntry", "ShadowConfigEntry", "FieldBlendOpEntry",
+    "AnimationCompressionPipeline", "CompressionSchemeEntry", "TrackCompressionEntry", "CompressionPreviewEntry",
+    "LootBodyLoader", "LootBodyManifest", "LootTableManifest", "LootEntryManifest",
+    "SubsurfaceScatterPipeline", "SSSProfileEntry", "TransmissionEntry", "SSSKernelEntry",
+    "VectorFieldPipeline", "VectorFieldEntry", "FlowVisualizationEntry", "ParticleCouplingEntry",
+    "TrapBodyLoader", "TrapBodyManifest", "TrapTriggerZoneManifest", "TrapEffectManifest",
 ]
