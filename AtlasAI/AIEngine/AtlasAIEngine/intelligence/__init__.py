@@ -46,6 +46,9 @@ from .light_body_loader import LightBodyLoader, LightBodyManifest, LightColorDef
 from .vfx_bake_pipeline import VFXBakePipeline, VFXBakePassDef, VFXBakeEntry, VFXAtlasSettings
 from .ik_solve_pipeline import IKSolvePipeline, IKJointDef, IKChainEntry, IKSolveResult
 from .fx_body_loader import FXBodyLoader, FXBodyManifest, FXEmitSettingsDef, FXSimSettingsDef
+from .gameplay_ability_pipeline import GameplayAbilityPipeline, AbilityEntry, AbilityCostDef, AbilityEffectDef
+from .environment_query_pipeline import EnvironmentQueryPipeline, EQSGeneratorConfig, EQSTestConfig, EQSQueryResult
+from .ui_body_loader import UIBodyLoader, UIBodyManifest, UIStyleManifest, UILayoutManifest
 
 __all__ = [
     "ClangdBridge",
@@ -206,4 +209,16 @@ __all__ = [
     "FXBodyManifest",
     "FXEmitSettingsDef",
     "FXSimSettingsDef",
+    "GameplayAbilityPipeline",
+    "AbilityEntry",
+    "AbilityCostDef",
+    "AbilityEffectDef",
+    "EnvironmentQueryPipeline",
+    "EQSGeneratorConfig",
+    "EQSTestConfig",
+    "EQSQueryResult",
+    "UIBodyLoader",
+    "UIBodyManifest",
+    "UIStyleManifest",
+    "UILayoutManifest",
 ]
