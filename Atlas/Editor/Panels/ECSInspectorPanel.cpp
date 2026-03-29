@@ -1,4 +1,5 @@
 #include "ECSInspectorPanel.h"
+#include "../../cpp_client/include/ui/atlas/atlas_context.h"
 #include "../../cpp_client/include/ui/atlas/atlas_widgets.h"
 #include <algorithm>
 #include <sstream>

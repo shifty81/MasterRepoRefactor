@@ -4,7 +4,7 @@
 #include "../../Engine/Networking/NetContext.h"
 #include "../../Engine/Simulation/TickScheduler.h"
 #include "../../cpp_client/include/ui/atlas/atlas_widgets.h"
-#include "../ai/AIAggregator.h"
+#include "../EditorServices/AI/AIAggregator.h"
 #include <string>
 #include <vector>
 #include <sstream>

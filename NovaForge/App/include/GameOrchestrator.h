@@ -13,6 +13,7 @@ class EditorShell;
 class GameOrchestrator
 {
 public:
+    ~GameOrchestrator();
     bool Initialize();
     bool StartVerticalSliceSession();
     void Tick(float DeltaTime);
