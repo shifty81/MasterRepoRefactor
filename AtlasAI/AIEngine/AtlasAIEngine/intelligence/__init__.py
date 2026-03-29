@@ -55,6 +55,9 @@ from .network_body_loader import NetworkBodyLoader, NetworkBodyManifest, Replica
 from .matchmaking_pipeline import MatchmakingPipeline, MatchmakingRuleSet, MatchSession, MatchResult
 from .conversation_graph_pipeline import ConversationGraphPipeline, ConversationNodeDef, ConversationEdgeDef, ConversationGraphEntry
 from .game_body_loader import GameBodyLoader, GameBodyManifest, SpawnConfigManifest, GameEventManifest
+from .ability_debug_pipeline import AbilityDebugPipeline, AbilitySnapshot, AttributeRecord, AbilityDebugFrame
+from .landscape_spline_pipeline import LandscapeSplinePipeline, SplinePointDef, SplineSegmentDef, LandscapeSplineEntry
+from .event_body_loader import EventBodyLoader, EventBodyManifest, TriggerConfigManifest, EventPayloadManifest
 
 __all__ = [
     "ClangdBridge",
@@ -251,4 +254,16 @@ __all__ = [
     "GameBodyManifest",
     "SpawnConfigManifest",
     "GameEventManifest",
+    "AbilityDebugPipeline",
+    "AbilitySnapshot",
+    "AttributeRecord",
+    "AbilityDebugFrame",
+    "LandscapeSplinePipeline",
+    "SplinePointDef",
+    "SplineSegmentDef",
+    "LandscapeSplineEntry",
+    "EventBodyLoader",
+    "EventBodyManifest",
+    "TriggerConfigManifest",
+    "EventPayloadManifest",
 ]
