@@ -49,6 +49,9 @@ from .fx_body_loader import FXBodyLoader, FXBodyManifest, FXEmitSettingsDef, FXS
 from .gameplay_ability_pipeline import GameplayAbilityPipeline, AbilityEntry, AbilityCostDef, AbilityEffectDef
 from .environment_query_pipeline import EnvironmentQueryPipeline, EQSGeneratorConfig, EQSTestConfig, EQSQueryResult
 from .ui_body_loader import UIBodyLoader, UIBodyManifest, UIStyleManifest, UILayoutManifest
+from .world_partition_pipeline import WorldPartitionPipeline, WorldPartitionEntry, StreamingCellDef, HLODLayerConfig
+from .data_layer_pipeline import DataLayerPipeline, DataLayerSpec, DataLayerActorAssignment, DataLayerState
+from .network_body_loader import NetworkBodyLoader, NetworkBodyManifest, ReplicationConfigManifest, NetworkPropertyManifest
 
 __all__ = [
     "ClangdBridge",
@@ -221,4 +224,16 @@ __all__ = [
     "UIBodyManifest",
     "UIStyleManifest",
     "UILayoutManifest",
+    "WorldPartitionPipeline",
+    "WorldPartitionEntry",
+    "StreamingCellDef",
+    "HLODLayerConfig",
+    "DataLayerPipeline",
+    "DataLayerSpec",
+    "DataLayerActorAssignment",
+    "DataLayerState",
+    "NetworkBodyLoader",
+    "NetworkBodyManifest",
+    "ReplicationConfigManifest",
+    "NetworkPropertyManifest",
 ]
