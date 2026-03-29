@@ -112,6 +112,24 @@ from .quest_body_loader import (
     QuestObjectiveManifest,
     QuestRewardManifest,
 )
+from .rigid_body_joint_pipeline import (
+    RigidBodyJointPipeline,
+    JointEntry,
+    JointConstraintEntry,
+    JointVisualizationEntry,
+)
+from .data_validator_pipeline import (
+    DataValidatorPipeline,
+    ValidationRuleEntry,
+    ValidationResultEntry,
+    ValidationReportEntry,
+)
+from .achievement_body_loader import (
+    AchievementBodyLoader,
+    AchievementBodyManifest,
+    AchievementProgressManifest,
+    AchievementRewardManifest,
+)
 
 __all__ = [
     "ClangdBridge",
@@ -329,4 +347,7 @@ __all__ = [
     "MorphTargetPipeline", "MorphTargetEntry", "CorrectiveShapeEntry", "MorphBlendPresetEntry",
     "AssetBundlePipeline", "AssetBundleEntry", "BundlePatchEntry", "BundleManifestEntry",
     "QuestBodyLoader", "QuestBodyManifest", "QuestObjectiveManifest", "QuestRewardManifest",
+    "RigidBodyJointPipeline", "JointEntry", "JointConstraintEntry", "JointVisualizationEntry",
+    "DataValidatorPipeline", "ValidationRuleEntry", "ValidationResultEntry", "ValidationReportEntry",
+    "AchievementBodyLoader", "AchievementBodyManifest", "AchievementProgressManifest", "AchievementRewardManifest",
 ]
