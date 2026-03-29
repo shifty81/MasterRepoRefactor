@@ -2,6 +2,8 @@
 #include "GameOrchestrator.h"
 #include <iostream>
 
+App::~App() = default;
+
 bool App::Initialize()
 {
     Orchestrator = std::make_unique<GameOrchestrator>();

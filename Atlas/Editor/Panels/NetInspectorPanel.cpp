@@ -1,4 +1,5 @@
 #include "NetInspectorPanel.h"
+#include "../../cpp_client/include/ui/atlas/atlas_context.h"
 #include <algorithm>
 #include <numeric>
 

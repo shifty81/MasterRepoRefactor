@@ -317,9 +317,13 @@ std::string LocalLLMBackend::HttpPost(const std::string& url,
 std::string LocalLLMBackend::EnvOrDefault(const char* name,
                                             const char* fallback) {
 #ifdef _MSC_VER
-#pragma warning(suppress : 4996)  // getenv is safe here; we copy immediately
+#pragma warning(push)
+#pragma warning(disable : 4996)  // getenv: we copy immediately into std::string
 #endif
     const char* val = std::getenv(name);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
     return (val && val[0] != '\0') ? std::string(val) : std::string(fallback);
 }
 
