@@ -16,6 +16,9 @@ from .runtime_bundle_loader import RuntimeBundleLoader, BundleManifest, AssetRef
 from .asset_dependency_graph import AssetDependencyGraph, AssetNode
 from .build_cache_manager import BuildCacheManager, CacheEntry
 from .streaming_region_loader import StreamingRegionLoader, StreamingRegionManifest, RegionBounds
+from .shader_permutation_cache import ShaderPermutationCache, ShaderVariant
+from .asset_import_pipeline import AssetImportPipeline, ImportJob, ImportSettings
+from .terrain_chunk_loader import TerrainChunkLoader, TerrainChunkManifest, ChunkCoord
 
 __all__ = [
     "ClangdBridge",
@@ -55,4 +58,12 @@ __all__ = [
     "StreamingRegionLoader",
     "StreamingRegionManifest",
     "RegionBounds",
+    "ShaderPermutationCache",
+    "ShaderVariant",
+    "AssetImportPipeline",
+    "ImportJob",
+    "ImportSettings",
+    "TerrainChunkLoader",
+    "TerrainChunkManifest",
+    "ChunkCoord",
 ]
