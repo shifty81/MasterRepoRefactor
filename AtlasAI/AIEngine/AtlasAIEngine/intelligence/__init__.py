@@ -7,6 +7,9 @@ from .delta_edit_store import DeltaEditStore, DeltaEdit
 from .scene_query_engine import SceneQueryEngine, SceneEntityRecord
 from .layout_export_bridge import LayoutExportBridge, LayoutEntry
 from .scene_graph_snapshot import SceneGraphSnapshot, SnapshotDiff
+from .agent_action_log import AgentActionLog, ActionEntry
+from .content_hash_registry import ContentHashRegistry, ContentHashEntry
+from .content_pack_loader import ContentPackLoader, ContentPackManifest
 
 __all__ = [
     "ClangdBridge",
@@ -24,4 +27,10 @@ __all__ = [
     "LayoutEntry",
     "SceneGraphSnapshot",
     "SnapshotDiff",
+    "AgentActionLog",
+    "ActionEntry",
+    "ContentHashRegistry",
+    "ContentHashEntry",
+    "ContentPackLoader",
+    "ContentPackManifest",
 ]
