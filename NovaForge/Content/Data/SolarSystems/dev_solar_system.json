@@ -1,0 +1,50 @@
+{
+  "id": "dev_solar_system_001",
+  "name": "Dev Solar System Alpha",
+  "version": "1.0",
+  "star": {
+    "type": "G-type",
+    "radius": 695700,
+    "luminosity": 1.0
+  },
+  "celestials": [
+    {
+      "id": "planet_001",
+      "type": "Planet",
+      "name": "Forge Prime",
+      "orbit_radius": 1.0,
+      "radius": 6371,
+      "pcg_seed": 42
+    },
+    {
+      "id": "station_001",
+      "type": "Station",
+      "name": "Dev Station Alpha",
+      "orbit_radius": 1.2,
+      "faction": "developer"
+    },
+    {
+      "id": "asteroid_belt_001",
+      "type": "AsteroidBelt",
+      "name": "Dev Belt",
+      "orbit_radius": 2.2,
+      "ore_types": ["veldspar", "scordite", "pyroxeres"]
+    },
+    {
+      "id": "wormhole_001",
+      "type": "Wormhole",
+      "name": "Dev Wormhole",
+      "orbit_radius": 3.5,
+      "destination": "null_sec_001"
+    },
+    {
+      "id": "anomaly_001",
+      "type": "Anomaly",
+      "name": "Dev Anomaly Site",
+      "orbit_radius": 1.8,
+      "anomaly_class": "A"
+    }
+  ],
+  "npc_factions": ["developer_pirates", "dev_npcs"],
+  "pcg_config": "solar_system_pcg_config.json"
+}
