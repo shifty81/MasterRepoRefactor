@@ -53,7 +53,7 @@ void ECSInspectorPanel::Draw() {
             // Search text input
             Rect searchRect{x, y, contentW, rowH + 4};
             if (textInput(*ctx, "##search", searchRect, m_searchInput, "Search entities...")) {
-                m_searchFilter = m_searchInput.text;
+                m_searchFilter = m_searchInput.text();
             }
             y += rowH + 8;
 

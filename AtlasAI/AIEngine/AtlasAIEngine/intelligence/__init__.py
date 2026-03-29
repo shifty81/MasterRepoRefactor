@@ -31,6 +31,9 @@ from .physics_body_loader import PhysicsBodyLoader, PhysicsBodyManifest, Physics
 from .audio_effect_pipeline import AudioEffectPipeline, AudioEffectJob, AudioProcessResult, EQBand, CompressorSettings, ReverbSettings, NormalisationSettings
 from .cloth_simulation_cache import ClothSimulationCache, ClothSimEntry, ClothFrameSnapshot, ClothCachePolicy
 from .audio_body_loader import AudioBodyLoader, AudioBodyManifest, AttenuationCurveDef, ReverbZoneDef
+from .vfx_graph_compiler import VFXGraphCompiler, VFXEmitterNode, VFXLinkEdge, VFXGraphAsset
+from .light_baking_pipeline import LightBakingPipeline, BakeJob, ProbeCluster, BakeResult
+from .vfx_body_loader import VFXBodyLoader, VFXBodyManifest, EmitterBoundsDef, SimulationSettingsDef
 
 __all__ = [
     "ClangdBridge",
@@ -131,4 +134,16 @@ __all__ = [
     "AudioBodyManifest",
     "AttenuationCurveDef",
     "ReverbZoneDef",
+    "VFXGraphCompiler",
+    "VFXEmitterNode",
+    "VFXLinkEdge",
+    "VFXGraphAsset",
+    "LightBakingPipeline",
+    "BakeJob",
+    "ProbeCluster",
+    "BakeResult",
+    "VFXBodyLoader",
+    "VFXBodyManifest",
+    "EmitterBoundsDef",
+    "SimulationSettingsDef",
 ]

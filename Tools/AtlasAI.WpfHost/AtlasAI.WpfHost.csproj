@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>AtlasAI.WpfHost</RootNamespace>
+    <AssemblyName>AtlasAI.WpfHost</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AtlasAI.Shell\AtlasAI.Shell.csproj"/>
+    <ProjectReference Include="..\AtlasAI.Panels\AtlasAI.Panels.csproj"/>
+    <ProjectReference Include="..\AtlasAI.Workspace\AtlasAI.Workspace.csproj"/>
+  </ItemGroup>
+</Project>
