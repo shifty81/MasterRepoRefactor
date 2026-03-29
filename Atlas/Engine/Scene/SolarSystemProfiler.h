@@ -6,49 +6,41 @@
 
 namespace Atlas::Engine {
 
-/// Phase 28C — Solar system profiler for runtime performance analysis, resource
-/// tracking, and simulation quality metrics across multi-system space scenes.
+/// Phase 28C/31C — Profiler for solar system simulation performance metrics, tick budgets, and bottleneck detection.
+/// Phase 28C introduced the record registry API (RegisterRecord, TakeSnapshot, RunAnalysis, GetBottleneckMetrics).
+/// Phase 31C extended the profiler with SamplingMode, MetricSeries, and detailed configuration support.
 class SolarSystemProfiler {
 public:
-    enum class ProfilerState { Idle, Profiling, Paused, Completed };
-    enum class MetricCategory { Rendering, Simulation, Streaming, AI, Network };
-    enum class SampleResolution { Low, Medium, High, Ultra };
+    enum class ProfilerState { Idle, Profiling, Paused, Complete, Error };
+    enum class MetricCategory { Simulation, Physics, AI, Rendering, Streaming, Audio, Network };
+    enum class SamplingMode { Continuous, Sampled, OnDemand, Triggered };
+    enum class SampleResolution { Low, Medium, High, Ultra, Adaptive };
 
     struct ProfileMetric {
         std::string metricId;
+        MetricCategory category{MetricCategory::Simulation};
         std::string name;
-        MetricCategory category{MetricCategory::Rendering};
         float value{0.0f};
-        float minValue{0.0f};
-        float maxValue{0.0f};
-        float avgValue{0.0f};
-        std::string unit;
-        bool enabled{true};
+        float budgetMs{16.67f};
+        SampleResolution resolution{SampleResolution::Medium};
     };
 
     struct SystemLoadSnapshot {
         std::string snapshotId;
-        std::string systemId;
-        float cpuUsagePercent{0.0f};
-        float gpuUsagePercent{0.0f};
-        float memoryUsageMB{0.0f};
-        float drawCallCount{0.0f};
-        int activeCelestials{0};
-        float simulationStepMs{0.0f};
-        std::string timestamp;
+        double timestamp{0.0};
+        std::vector<ProfileMetric> metrics;
+        float cpuLoad{0.0f};
+        float gpuLoad{0.0f};
+        float memoryMb{0.0f};
     };
 
     struct ProfileSession {
         std::string sessionId;
         std::string systemId;
-        std::string systemName;
-        float durationSeconds{0.0f};
-        SampleResolution resolution{SampleResolution::Medium};
-        bool captureGPU{true};
-        bool captureCPU{true};
-        bool captureMemory{true};
-        bool captureNetwork{false};
-        std::string outputPath;
+        double startTime{0.0};
+        double endTime{0.0};
+        SamplingMode mode{SamplingMode::Continuous};
+        std::vector<std::string> snapshotIds;
     };
 
     struct ProfileRecord {
@@ -57,73 +49,91 @@ public:
         std::string systemName;
         ProfilerState state{ProfilerState::Idle};
         ProfileSession session;
-        std::vector<ProfileMetric> metrics;
-        std::vector<SystemLoadSnapshot> snapshots;
-        float avgFrameTimeMs{0.0f};
-        float peakFrameTimeMs{0.0f};
-        float avgCelestialCount{0.0f};
+        std::vector<std::string> metrics;
         int totalSamples{0};
         bool analysisComplete{false};
-        std::string createdAt;
-        std::string completedAt;
-        std::string notes;
     };
 
-    // Record management
-    void RegisterRecord(const ProfileRecord& entry);
-    const ProfileRecord* FindRecord(const std::string& id) const;
+    struct ProfileSample {
+        std::string sampleId;
+        MetricCategory category{MetricCategory::Simulation};
+        std::string label;
+        float durationMs{0.0f};
+        float memoryKb{0.0f};
+        int frameIndex{0};
+        double timestamp{0.0};
+    };
+
+    struct MetricSeries {
+        std::string seriesId;
+        MetricCategory category{MetricCategory::Simulation};
+        std::string label;
+        std::vector<std::string> samples;
+        int maxSamples{1000};
+        float rollingAvg{0.0f};
+    };
+
+    struct ProfilerConfig {
+        std::string configId;
+        SamplingMode samplingMode{SamplingMode::Continuous};
+        float sampleRate{60.0f};
+        float budgetMs{16.67f};
+        std::vector<MetricCategory> categories;
+        bool captureStackTrace{false};
+    };
+
+    // Phase 28C — record registry methods
+    bool RegisterRecord(const ProfileRecord& record);
+    bool RemoveRecord(const std::string& recordId);
+    const ProfileRecord* FindRecord(const std::string& recordId) const;
     std::vector<std::string> ListRecordIds() const;
-    bool HasRecord(const std::string& id) const;
-    void RemoveRecord(const std::string& id);
-    size_t Count() const;
+    bool HasRecord(const std::string& recordId) const;
+    int Count() const { return static_cast<int>(m_records.size()); }
     void Clear();
 
-    // Profiling control
-    bool StartProfiling(const std::string& recordId);
-    bool PauseProfiling(const std::string& recordId);
-    bool ResumeProfiling(const std::string& recordId);
-    bool StopProfiling(const std::string& recordId);
-    bool IsProfiling(const std::string& recordId) const;
-    float GetProgress(const std::string& recordId) const;
+    // Snapshot / analysis
+    SystemLoadSnapshot TakeSnapshot(const std::string& systemId);
+    bool RunAnalysis(const std::string& recordId);
+    std::vector<ProfileMetric> GetBottleneckMetrics(float thresholdMs = 8.0f) const;
 
-    // Metric management
-    bool AddMetric(const std::string& recordId, const ProfileMetric& metric);
-    bool RemoveMetric(const std::string& recordId, const std::string& metricId);
-    const ProfileMetric* GetMetric(const std::string& recordId,
-                                    const std::string& metricId) const;
-    std::vector<ProfileMetric> GetMetricsByCategory(const std::string& recordId,
-                                                      MetricCategory category) const;
+    // Profiler lifecycle
+    bool StartProfiling();
+    bool StopProfiling();
+    bool PauseProfiling();
+    bool ResumeProfiling();
 
-    // Snapshot management
-    bool TakeSnapshot(const std::string& recordId);
-    bool AddSnapshot(const std::string& recordId, const SystemLoadSnapshot& snapshot);
-    int GetSnapshotCount(const std::string& recordId) const;
-    std::vector<SystemLoadSnapshot> GetSnapshots(const std::string& recordId) const;
+    // Recording
+    bool RecordSample(const ProfileSample& sample);
+    bool RecordSeries(const MetricSeries& series);
+
+    // Queries
+    const ProfileSample* GetSample(const std::string& sampleId) const;
+    const MetricSeries* GetSeries(const std::string& seriesId) const;
+    std::vector<std::string> GetAllSampleIds() const;
+    std::vector<std::string> GetSeriesByCategory(MetricCategory category) const;
+    ProfilerState GetProfilerState() const { return m_state; }
+
+    // Configuration
+    bool SetConfig(const ProfilerConfig& config);
+    const ProfilerConfig& GetConfig() const { return m_config; }
 
     // Analysis
-    bool RunAnalysis(const std::string& recordId);
-    float GetAverageFrameTime(const std::string& recordId) const;
-    float GetPeakMemoryUsage(const std::string& recordId) const;
-    std::vector<std::string> GetBottleneckMetrics(const std::string& recordId) const;
-    std::vector<std::string> FindByState(ProfilerState state) const;
-    std::vector<std::string> FindBySystem(const std::string& systemId) const;
-    std::vector<std::string> GetCompletedRecordIds() const;
-
-    // Statistics
-    int GetProfilingCount() const;
-    float GetTotalProfiledTime() const;
-
-    // Callbacks
-    using ProfileCompleteCallback = std::function<void(const std::string&)>;
-    void SetOnProfileCompleteCallback(ProfileCompleteCallback cb);
+    float GetAverageForCategory(MetricCategory category) const;
+    float GetPeakForCategory(MetricCategory category) const;
+    std::vector<std::string> DetectBottlenecks(float thresholdMs = 8.0f) const;
 
     // Persistence
-    bool SaveProfile(const std::string& recordId, const std::string& filePath) const;
+    bool ExportProfile(const std::string& filePath) const;
     bool LoadProfile(const std::string& filePath);
+    void ClearSamples();
+    void Reset();
 
 private:
+    ProfilerState m_state{ProfilerState::Idle};
+    ProfilerConfig m_config;
+    std::unordered_map<std::string, ProfileSample> m_samples;
+    std::unordered_map<std::string, MetricSeries> m_series;
     std::unordered_map<std::string, ProfileRecord> m_records;
-    ProfileCompleteCallback m_onProfileComplete;
 };
 
 } // namespace Atlas::Engine

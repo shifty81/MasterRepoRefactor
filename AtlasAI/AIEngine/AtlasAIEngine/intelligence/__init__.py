@@ -40,6 +40,9 @@ from .animation_body_loader import AnimationBodyLoader, AnimationBodyManifest, A
 from .render_pipeline_cache import RenderPipelineCache, RenderPassDef, RenderPipelineEntry, PipelineCacheStats
 from .world_streaming_pipeline import WorldStreamingPipeline, StreamingZoneDef, StreamingLODRule, WorldStreamingResult
 from .render_body_loader import RenderBodyLoader, RenderBodyManifest, MaterialSlotDef, LODEntryDef
+from .lighting_bake_pipeline import LightingBakePipeline, BakePassDef, LightmapEntry, BakeBudget
+from .collision_mesh_pipeline import CollisionMeshPipeline, CollisionShapeDef, CollisionMeshEntry, CollisionBuildResult
+from .light_body_loader import LightBodyLoader, LightBodyManifest, LightColorDef, ShadowSettingsDef
 
 __all__ = [
     "ClangdBridge",
@@ -176,4 +179,16 @@ __all__ = [
     "RenderBodyManifest",
     "MaterialSlotDef",
     "LODEntryDef",
+    "LightingBakePipeline",
+    "BakePassDef",
+    "LightmapEntry",
+    "BakeBudget",
+    "CollisionMeshPipeline",
+    "CollisionShapeDef",
+    "CollisionMeshEntry",
+    "CollisionBuildResult",
+    "LightBodyLoader",
+    "LightBodyManifest",
+    "LightColorDef",
+    "ShadowSettingsDef",
 ]
