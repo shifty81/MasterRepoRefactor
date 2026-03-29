@@ -43,6 +43,9 @@ from .render_body_loader import RenderBodyLoader, RenderBodyManifest, MaterialSl
 from .lighting_bake_pipeline import LightingBakePipeline, BakePassDef, LightmapEntry, BakeBudget
 from .collision_mesh_pipeline import CollisionMeshPipeline, CollisionShapeDef, CollisionMeshEntry, CollisionBuildResult
 from .light_body_loader import LightBodyLoader, LightBodyManifest, LightColorDef, ShadowSettingsDef
+from .vfx_bake_pipeline import VFXBakePipeline, VFXBakePassDef, VFXBakeEntry, VFXAtlasSettings
+from .ik_solve_pipeline import IKSolvePipeline, IKJointDef, IKChainEntry, IKSolveResult
+from .fx_body_loader import FXBodyLoader, FXBodyManifest, FXEmitSettingsDef, FXSimSettingsDef
 
 __all__ = [
     "ClangdBridge",
@@ -191,4 +194,16 @@ __all__ = [
     "LightBodyManifest",
     "LightColorDef",
     "ShadowSettingsDef",
+    "VFXBakePipeline",
+    "VFXBakePassDef",
+    "VFXBakeEntry",
+    "VFXAtlasSettings",
+    "IKSolvePipeline",
+    "IKJointDef",
+    "IKChainEntry",
+    "IKSolveResult",
+    "FXBodyLoader",
+    "FXBodyManifest",
+    "FXEmitSettingsDef",
+    "FXSimSettingsDef",
 ]
