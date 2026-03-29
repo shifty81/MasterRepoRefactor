@@ -303,10 +303,10 @@ The server and client source trees are populated. Next: integrate with the CMake
 - [x] Document Phase 16A–16D plan — `Docs/Architecture/phase16_long_term_vision.md`
 - [x] `ExternalDepsManifest.h` — compile-time registry of all third-party dep paths
 - [x] `Scripts/Build/smoke_test_engine_build.py` — pre-build health check script
-- [ ] Phase 16A: IDE diff panel + human-in-the-loop approval flow
-- [ ] Phase 16B: MultiWorkspaceManager integration with Atlas IDE shell
-- [ ] Phase 16C: PCG builder second-wave actions + preview mesh generation
-- [ ] Phase 16D: GitHub Actions release workflow → Inno Setup installer artifact
+- [x] Phase 16A: IDE diff panel + human-in-the-loop approval flow
+- [x] Phase 16B: MultiWorkspaceManager integration with Atlas IDE shell
+- [x] Phase 16C: PCG builder second-wave actions + preview mesh generation
+- [x] Phase 16D: GitHub Actions release workflow → Inno Setup installer artifact
 
 ---
 

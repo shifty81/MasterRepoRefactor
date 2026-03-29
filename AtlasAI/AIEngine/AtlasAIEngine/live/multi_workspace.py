@@ -22,6 +22,14 @@ class WorkspaceSession:
     active: bool = True
 
 
+@dataclass
+class WorkspaceChangedEvent:
+    """Emitted when a workspace session is activated or closed."""
+
+    workspace_id: str
+    event_type: str  # e.g. "activated" or "closed"
+
+
 class MultiWorkspaceManager:
     """Manages a pool of :class:`WorkspaceSession` objects.
 
@@ -40,6 +48,7 @@ class MultiWorkspaceManager:
 
     def __init__(self) -> None:
         self._sessions: dict[str, WorkspaceSession] = {}
+        self._active_session_id: Optional[str] = None
 
     # ── session lifecycle ──────────────────────────────────────────────────
 
@@ -99,3 +108,47 @@ class MultiWorkspaceManager:
         session.active = False
         logger.info("MultiWorkspaceManager: closed session %s", session_id)
         return True
+
+    # ── Phase 16B lifecycle extensions ────────────────────────────────────
+
+    def activate(self, session_id: str) -> bool:
+        """Set *session_id* as the currently active workspace.
+
+        Returns:
+            ``True`` if the session exists, ``False`` otherwise.
+        """
+        if session_id not in self._sessions:
+            logger.warning(
+                "MultiWorkspaceManager.activate: unknown session %s", session_id
+            )
+            return False
+        self._active_session_id = session_id
+        logger.info("MultiWorkspaceManager: activated session %s", session_id)
+        return True
+
+    def close(self, session_id: str) -> bool:
+        """Mark *session_id* as inactive without removing it from the pool.
+
+        Unlike :meth:`close_session`, this method keeps the session object in
+        ``_sessions`` so callers can still inspect it after closure.
+
+        Returns:
+            ``True`` if the session exists, ``False`` otherwise.
+        """
+        session = self._sessions.get(session_id)
+        if session is None:
+            logger.warning(
+                "MultiWorkspaceManager.close: unknown session %s", session_id
+            )
+            return False
+        session.active = False
+        if self._active_session_id == session_id:
+            self._active_session_id = None
+        logger.info("MultiWorkspaceManager: closed session %s", session_id)
+        return True
+
+    def get_active_session(self) -> Optional[WorkspaceSession]:
+        """Return the currently active :class:`WorkspaceSession`, or ``None``."""
+        if self._active_session_id is None:
+            return None
+        return self._sessions.get(self._active_session_id)
