@@ -96,7 +96,7 @@ Phase 5 focuses on implementing 3D graphics and polishing the visual experience 
 from panda3d.core import *
 from direct.showbase.ShowBase import ShowBase
 
-class EVEOfflineClient(ShowBase):
+class NovaForgeClient(ShowBase):
     def __init__(self):
         ShowBase.__init__(self)
         

@@ -32,7 +32,7 @@ python3 build_cpp_client.py
 
 # Run
 cd cpp_client/build/bin
-./eve_client "YourName"
+./nova_forge_client "YourName"
 ```
 
 ### Windows
@@ -57,7 +57,7 @@ python build_cpp_client.py --vcpkg C:\path\to\vcpkg
 
 REM Run
 cd cpp_client\build\bin\Release
-eve_client.exe "YourName"
+nova_forge_client.exe "YourName"
 ```
 
 ### macOS
@@ -71,7 +71,7 @@ python3 build_cpp_client.py
 
 # Run
 cd cpp_client/build/bin
-./eve_client "YourName"
+./nova_forge_client "YourName"
 ```
 
 ## Build Options
@@ -129,7 +129,7 @@ cmake --build . --config Release  # Windows
 
 # Run
 cd bin
-./eve_client "YourName"
+./nova_forge_client "YourName"
 ```
 
 ## Troubleshooting
@@ -172,7 +172,7 @@ After building, you'll have:
 ```
 cpp_client/build/
 ├── bin/
-│   ├── eve_client          # Main executable
+│   ├── nova_forge_client          # Main executable
 │   ├── test_network        # Test programs
 │   ├── test_entity_sync
 │   ├── test_lighting
@@ -188,7 +188,7 @@ cpp_client/build/
 
 ```bash
 cd cpp_client/build/bin
-./eve_client "CharacterName"
+./nova_forge_client "CharacterName"
 ```
 
 ### Connect to Server
@@ -202,7 +202,7 @@ python server/server.py
 
 **Then start C++ client:**
 ```bash
-./eve_client "YourName"
+./nova_forge_client "YourName"
 ```
 
 ### Running Tests
@@ -264,7 +264,7 @@ python3 build_cpp_client.py --debug --clean --verbose
 
 # Run
 cd cpp_client/build/bin
-./eve_client "YourName"
+./nova_forge_client "YourName"
 
 # Visual Studio (Windows — use Git Bash)
 ./scripts/build_all.sh

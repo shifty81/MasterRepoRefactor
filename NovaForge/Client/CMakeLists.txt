@@ -78,6 +78,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/App/src/main.cpp")
     add_executable(NovaForgeClientApp
         "${CMAKE_CURRENT_SOURCE_DIR}/App/src/main.cpp"
     )
+    set_target_properties(NovaForgeClientApp PROPERTIES OUTPUT_NAME "nova_forge_client")
     target_link_libraries(NovaForgeClientApp PRIVATE NovaForgeClient)
     masterrepo_set_compiler_warnings(NovaForgeClientApp)
 endif()

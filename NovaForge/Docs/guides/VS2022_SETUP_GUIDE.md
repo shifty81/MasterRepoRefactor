@@ -113,7 +113,7 @@ cmake .. -G "Visual Studio 17 2022" -A x64 -DUSE_SYSTEM_LIBS=OFF -DBUILD_TESTS=O
 
 Then open the solution:
 ```cmd
-start EVEOfflineClient.sln
+start NovaForge.sln
 ```
 
 ### 5. Configure and Build in Visual Studio
@@ -121,7 +121,7 @@ start EVEOfflineClient.sln
 Once the solution is open in Visual Studio 2022:
 
 1. **Set Startup Project**
-   - Right-click on `eve_client` project in Solution Explorer
+   - Right-click on `nova_forge_client` project in Solution Explorer
    - Select **"Set as Startup Project"**
 
 2. **Select Build Configuration**
@@ -164,12 +164,12 @@ After building, you'll have:
 NovaForge/
 ├── cpp_client/
 │   ├── build_vs/              # Build directory (created by CMake)
-│   │   ├── EVEOfflineClient.sln  # Visual Studio solution file
+│   │   ├── NovaForge.sln  # Visual Studio solution file
 │   │   └── bin/
 │   │       ├── Release/
-│   │       │   └── eve_client.exe  # Main executable (Release)
+│   │       │   └── nova_forge_client.exe  # Main executable (Release)
 │   │       └── Debug/
-│   │           └── eve_client.exe  # Main executable (Debug)
+│   │           └── nova_forge_client.exe  # Main executable (Debug)
 │   │
 │   ├── include/               # Header files
 │   ├── src/                   # Source files
@@ -229,7 +229,7 @@ If still experiencing issues, ensure the batch file uses proper syntax with quot
    - Or use static linking (see Option B in dependencies)
 
 2. **Working directory not set correctly**
-   - Right-click `eve_client` → **Properties** → **Debugging**
+   - Right-click `nova_forge_client` → **Properties** → **Debugging**
    - Set **Working Directory** to: `$(TargetDir)` or `$(ProjectDir)\..\bin\$(Configuration)`
 
 3. **Shaders or assets not copied**
@@ -247,7 +247,7 @@ Then re-run CMake configuration.
 ### Visual Studio can't find the solution file
 
 Make sure you're opening the correct file:
-- Location: `cpp_client\build_vs\EVEOfflineClient.sln`
+- Location: `cpp_client\build_vs\NovaForge.sln`
 - If it doesn't exist, run `./scripts/build_all.sh` first to generate it
 
 ### For more detailed troubleshooting
@@ -325,7 +325,7 @@ cmake .. -G "Visual Studio 17 2022" -A x64
 cmake --build . --config Release
 ```
 
-The server executable will be at: `cpp_server\build\bin\Release\eve_dedicated_server.exe`
+The server executable will be at: `cpp_server\build\bin\Release\nova_forge_dedicated_server.exe`
 
 ## Additional Resources
 

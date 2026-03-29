@@ -145,7 +145,7 @@ cmake -DCMAKE_BUILD_TYPE=Release -DUSE_SYSTEM_LIBS=ON ..
 make -j$(nproc)
 
 # Or specific targets
-make eve_client                 # Main client
+make nova_forge_client                 # Main client
 make test_asteroid_field        # Test: Asteroid field rendering
 make test_lighting              # Test: Dynamic lighting
 make test_shadow_mapping        # Test: Shadow mapping
@@ -153,7 +153,7 @@ make test_shadow_mapping        # Test: Shadow mapping
 
 #### Step 3: Run
 ```bash
-./bin/eve_client
+./bin/nova_forge_client
 ./bin/test_asteroid_field
 ./bin/test_lighting
 ./bin/test_shadow_mapping
@@ -197,7 +197,7 @@ ctest --verbose
 ```bash
 cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_SYSTEM_LIBS=ON ..
 make -j$(nproc)
-gdb ./bin/eve_client
+gdb ./bin/nova_forge_client
 ```
 
 ### CMake Build Options
@@ -276,7 +276,7 @@ sudo apt-get install libgl1-mesa-dev
 
 3. **Run the main application**:
    ```bash
-   ./bin/eve_client
+   ./bin/nova_forge_client
    ```
 
 4. **Deploy**:
@@ -316,5 +316,5 @@ Run these commands to get started:
 cd cpp_client/build
 cmake -DCMAKE_BUILD_TYPE=Release -DUSE_SYSTEM_LIBS=ON ..
 make -j$(nproc)
-./bin/eve_client
+./bin/nova_forge_client
 ```

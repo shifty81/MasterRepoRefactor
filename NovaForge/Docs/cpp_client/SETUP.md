@@ -108,7 +108,7 @@ After building, the executable will be in `build/bin/`:
 
 ```bash
 cd build/bin
-./eve_client "YourCharacterName"
+./nova_forge_client "YourCharacterName"
 ```
 
 ## Testing the Build
@@ -119,7 +119,7 @@ To verify everything works:
 cd cpp_client/build/bin
 
 # Should see window with starfield (if display available)
-./eve_client TestPlayer
+./nova_forge_client TestPlayer
 
 # In headless environment, should fail gracefully with message:
 # "Fatal error: Failed to initialize GLFW"
@@ -168,7 +168,7 @@ ls build/bin/shaders/
 This was an issue with the CMakeLists.txt not declaring C language.
 Make sure line 2 of `CMakeLists.txt` reads:
 ```cmake
-project(EVEOfflineClient VERSION 1.0.0 LANGUAGES C CXX)
+project(NovaForge VERSION 1.0.0 LANGUAGES C CXX)
 ```
 
 ## Project Structure
@@ -177,7 +177,7 @@ project(EVEOfflineClient VERSION 1.0.0 LANGUAGES C CXX)
 cpp_client/
 ├── build/                  # Build directory (created by cmake)
 │   └── bin/
-│       ├── eve_client      # Executable
+│       ├── nova_forge_client      # Executable
 │       ├── shaders/        # GLSL shaders (auto-copied)
 │       └── assets/         # Game assets (auto-copied)
 │

@@ -73,15 +73,15 @@ start build/Atlas.sln
 
 | What | Where |
 |------|-------|
-| **Solution File** | `cpp_client\build_vs\EVEOfflineClient.sln` |
-| **Executable** | `cpp_client\build_vs\bin\Release\eve_client.exe` |
+| **Solution File** | `cpp_client\build_vs\NovaForge.sln` |
+| **Executable** | `cpp_client\build_vs\bin\Release\nova_forge_client.exe` |
 | **Source Code** | `cpp_client\src\` and `cpp_client\include\` |
 | **Shaders** | `cpp_client\shaders\` |
 | **Assets** | `cpp_client\assets\` |
 
 ## 🔧 In Visual Studio
 
-1. **Set Startup Project**: Right-click `eve_client` → "Set as Startup Project"
+1. **Set Startup Project**: Right-click `nova_forge_client` → "Set as Startup Project"
 2. **Build**: Press `F7` or Build → Build Solution
 3. **Run**: Press `F5` (with debugging) or `Ctrl+F5` (without)
 4. **Build Configuration**: Select `Debug` or `Release` from toolbar dropdown

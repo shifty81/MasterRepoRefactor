@@ -161,12 +161,12 @@ make test_asteroid_field
 make test_lighting
 make test_shadow_mapping
 # or
-make eve_client        # Main client only
+make nova_forge_client        # Main client only
 ```
 
 ### Step 3: Run
 ```bash
-./bin/eve_client       # Main application
+./bin/nova_forge_client       # Main application
 ./bin/test_asteroid_field  # Test executable
 ```
 
@@ -270,8 +270,8 @@ To verify all dependencies are correctly set up, run:
 ```bash
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DUSE_SYSTEM_LIBS=ON ..
-make eve_client
-./bin/eve_client --version  # If version flag is supported
+make nova_forge_client
+./bin/nova_forge_client --version  # If version flag is supported
 ```
 
 Or run test builds:

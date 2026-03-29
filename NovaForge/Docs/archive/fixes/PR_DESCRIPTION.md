@@ -6,7 +6,7 @@ Users were encountering CMake configuration failures when building the C++ clien
 
 ```
 CMake Error: Cannot find source file: external/imgui/imgui.cpp
-No SOURCES given to target: eve_client
+No SOURCES given to target: nova_forge_client
 No SOURCES given to target: test_lighting
 No SOURCES given to target: test_ui_system
 ...
@@ -76,8 +76,8 @@ set(IMGUI_SOURCES
     external/imgui/imgui_draw.cpp
     ...
 )
-add_executable(eve_client ${CLIENT_SOURCES} ${IMGUI_SOURCES})
-target_link_libraries(eve_client glfw OpenGL::GL)
+add_executable(nova_forge_client ${CLIENT_SOURCES} ${IMGUI_SOURCES})
+target_link_libraries(nova_forge_client glfw OpenGL::GL)
 ```
 
 ### After
@@ -98,9 +98,9 @@ if(NOT USE_VCPKG_IMGUI AND EXISTS external/imgui/imgui.cpp)
 endif()
 
 # Link appropriately
-target_link_libraries(eve_client glfw OpenGL::GL)
+target_link_libraries(nova_forge_client glfw OpenGL::GL)
 if(USE_VCPKG_IMGUI)
-    target_link_libraries(eve_client imgui::imgui)
+    target_link_libraries(nova_forge_client imgui::imgui)
 endif()
 ```
 

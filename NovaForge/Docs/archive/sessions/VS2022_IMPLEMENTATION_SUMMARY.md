@@ -124,7 +124,7 @@ We've added comprehensive Visual Studio 2022 build support with:
 
 5. **Open in Visual Studio**
    ```cmd
-   start cpp_client\build_vs\EVEOfflineClient.sln
+   start cpp_client\build_vs\NovaForge.sln
    ```
 
 6. **Develop**
@@ -162,10 +162,10 @@ NovaForge/
 │
 ├── cpp_client/
 │   ├── build_vs/                   # Client build directory
-│   │   ├── EVEOfflineClient.sln   # Client solution file
+│   │   ├── NovaForge.sln   # Client solution file
 │   │   └── bin/
 │   │       └── Release/
-│   │           └── eve_client.exe  # Main executable
+│   │           └── nova_forge_client.exe  # Main executable
 │   ├── src/                        # Source code
 │   ├── include/                    # Headers
 │   ├── shaders/                    # GLSL shaders
@@ -174,7 +174,7 @@ NovaForge/
 └── cpp_server/
     └── build/                      # Server build directory
         └── bin/
-            └── eve_dedicated_server.exe
+            └── nova_forge_dedicated_server.exe
 ```
 
 ## Build Options Available
@@ -182,7 +182,7 @@ NovaForge/
 ### Option 1: Individual Component Build (Client Only)
 ```cmd
 build_vs.bat
-# Opens: cpp_client\build_vs\EVEOfflineClient.sln
+# Opens: cpp_client\build_vs\NovaForge.sln
 ```
 
 ### Option 2: Unified Solution (Client + Server)

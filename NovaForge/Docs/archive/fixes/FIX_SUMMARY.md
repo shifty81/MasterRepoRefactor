@@ -5,7 +5,7 @@
 The CMake configuration was failing with these errors:
 ```
 CMake Error: Cannot find source file: external/imgui/imgui.cpp
-No SOURCES given to target: eve_client
+No SOURCES given to target: nova_forge_client
 No SOURCES given to target: test_lighting
 No SOURCES given to target: test_ui_system
 ...
@@ -110,12 +110,12 @@ After installing ImGui with the features and rebuilding:
    BUILD SUCCESSFUL
    ================================================
    
-   Executable location: build_vs\bin\Release\eve_client.exe
+   Executable location: build_vs\bin\Release\nova_forge_client.exe
    ```
 
 3. **Check for These Files**:
-   - `cpp_client\build_vs\EVEOfflineClient.sln` - Solution file
-   - `cpp_client\build_vs\bin\Release\eve_client.exe` - Main executable
+   - `cpp_client\build_vs\NovaForge.sln` - Solution file
+   - `cpp_client\build_vs\bin\Release\nova_forge_client.exe` - Main executable
    - `cpp_client\build_vs\bin\Release\test_lighting.exe` - Test executable
 
 ## If You Still Get Errors
