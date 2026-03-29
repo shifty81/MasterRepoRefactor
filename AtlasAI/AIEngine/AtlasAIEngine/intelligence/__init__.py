@@ -58,6 +58,78 @@ from .game_body_loader import GameBodyLoader, GameBodyManifest, SpawnConfigManif
 from .ability_debug_pipeline import AbilityDebugPipeline, AbilitySnapshot, AttributeRecord, AbilityDebugFrame
 from .landscape_spline_pipeline import LandscapeSplinePipeline, SplinePointDef, SplineSegmentDef, LandscapeSplineEntry
 from .event_body_loader import EventBodyLoader, EventBodyManifest, TriggerConfigManifest, EventPayloadManifest
+from .chaos_destruction_pipeline import (
+    ChaosDestructionPipeline,
+    GeometryCollectionEntry,
+    GeometryFragmentDef,
+    DestructionEventDef,
+)
+from .hair_groom_pipeline import (
+    HairGroomPipeline,
+    GroomAssetEntry,
+    GroomStrandDef,
+    GroomLODEntry,
+)
+from .script_body_loader import (
+    ScriptBodyLoader,
+    ScriptBodyManifest,
+    ScriptConfigManifest,
+    ScriptBindingManifest,
+)
+from .curve_linear_color_pipeline import (
+    CurveLinearColorPipeline,
+    ColorCurveEntry,
+    ColorKeyframeEntry,
+    GradientBakeDef,
+)
+from .network_profiler_pipeline import (
+    NetworkProfilerPipeline,
+    ProfilerSessionEntry,
+    NetworkSampleEntry,
+    NetworkAnomalyEntry,
+)
+from .dialog_body_loader import (
+    DialogBodyLoader,
+    DialogBodyManifest,
+    DialogLineManifest,
+    DialogResponseManifest,
+)
+from .morph_target_pipeline import (
+    MorphTargetPipeline,
+    MorphTargetEntry,
+    CorrectiveShapeEntry,
+    MorphBlendPresetEntry,
+)
+from .asset_bundle_pipeline import (
+    AssetBundlePipeline,
+    AssetBundleEntry,
+    BundlePatchEntry,
+    BundleManifestEntry,
+)
+from .quest_body_loader import (
+    QuestBodyLoader,
+    QuestBodyManifest,
+    QuestObjectiveManifest,
+    QuestRewardManifest,
+)
+from .rigid_body_joint_pipeline import (
+    RigidBodyJointPipeline,
+    JointEntry,
+    JointConstraintEntry,
+    JointVisualizationEntry,
+)
+from .data_validator_pipeline import (
+    DataValidatorPipeline,
+    ValidationRuleEntry,
+    ValidationResultEntry,
+    ValidationReportEntry,
+)
+from .achievement_body_loader import (
+    AchievementBodyLoader,
+    AchievementBodyManifest,
+    AchievementProgressManifest,
+    AchievementRewardManifest,
+)
 
 __all__ = [
     "ClangdBridge",
@@ -266,4 +338,16 @@ __all__ = [
     "EventBodyManifest",
     "TriggerConfigManifest",
     "EventPayloadManifest",
+    "ChaosDestructionPipeline", "GeometryCollectionEntry", "GeometryFragmentDef", "DestructionEventDef",
+    "HairGroomPipeline", "GroomAssetEntry", "GroomStrandDef", "GroomLODEntry",
+    "ScriptBodyLoader", "ScriptBodyManifest", "ScriptConfigManifest", "ScriptBindingManifest",
+    "CurveLinearColorPipeline", "ColorCurveEntry", "ColorKeyframeEntry", "GradientBakeDef",
+    "NetworkProfilerPipeline", "ProfilerSessionEntry", "NetworkSampleEntry", "NetworkAnomalyEntry",
+    "DialogBodyLoader", "DialogBodyManifest", "DialogLineManifest", "DialogResponseManifest",
+    "MorphTargetPipeline", "MorphTargetEntry", "CorrectiveShapeEntry", "MorphBlendPresetEntry",
+    "AssetBundlePipeline", "AssetBundleEntry", "BundlePatchEntry", "BundleManifestEntry",
+    "QuestBodyLoader", "QuestBodyManifest", "QuestObjectiveManifest", "QuestRewardManifest",
+    "RigidBodyJointPipeline", "JointEntry", "JointConstraintEntry", "JointVisualizationEntry",
+    "DataValidatorPipeline", "ValidationRuleEntry", "ValidationResultEntry", "ValidationReportEntry",
+    "AchievementBodyLoader", "AchievementBodyManifest", "AchievementProgressManifest", "AchievementRewardManifest",
 ]
