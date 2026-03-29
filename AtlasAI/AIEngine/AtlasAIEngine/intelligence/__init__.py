@@ -58,6 +58,24 @@ from .game_body_loader import GameBodyLoader, GameBodyManifest, SpawnConfigManif
 from .ability_debug_pipeline import AbilityDebugPipeline, AbilitySnapshot, AttributeRecord, AbilityDebugFrame
 from .landscape_spline_pipeline import LandscapeSplinePipeline, SplinePointDef, SplineSegmentDef, LandscapeSplineEntry
 from .event_body_loader import EventBodyLoader, EventBodyManifest, TriggerConfigManifest, EventPayloadManifest
+from .chaos_destruction_pipeline import (
+    ChaosDestructionPipeline,
+    GeometryCollectionEntry,
+    GeometryFragmentDef,
+    DestructionEventDef,
+)
+from .hair_groom_pipeline import (
+    HairGroomPipeline,
+    GroomAssetEntry,
+    GroomStrandDef,
+    GroomLODEntry,
+)
+from .script_body_loader import (
+    ScriptBodyLoader,
+    ScriptBodyManifest,
+    ScriptConfigManifest,
+    ScriptBindingManifest,
+)
 
 __all__ = [
     "ClangdBridge",
@@ -266,4 +284,7 @@ __all__ = [
     "EventBodyManifest",
     "TriggerConfigManifest",
     "EventPayloadManifest",
+    "ChaosDestructionPipeline", "GeometryCollectionEntry", "GeometryFragmentDef", "DestructionEventDef",
+    "HairGroomPipeline", "GroomAssetEntry", "GroomStrandDef", "GroomLODEntry",
+    "ScriptBodyLoader", "ScriptBodyManifest", "ScriptConfigManifest", "ScriptBindingManifest",
 ]
