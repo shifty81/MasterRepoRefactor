@@ -83,7 +83,7 @@ public:
     bool PauseProfiling(const std::string& recordId);
     bool ResumeProfiling(const std::string& recordId);
     bool StopProfiling(const std::string& recordId);
-    bool IsProfileing(const std::string& recordId) const;
+    bool IsProfiling(const std::string& recordId) const;
     float GetProgress(const std::string& recordId) const;
 
     // Metric management

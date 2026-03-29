@@ -212,8 +212,9 @@ class TestChatPanelNamespace(unittest.TestCase):
 
 class TestAppXamlContent(unittest.TestCase):
     def test_app_xaml_startup_uri(self):
-        content = _read(WPF_HOST / "App.xaml")
-        self.assertIn("StartupUri", content)
+        content = _read(WPF_HOST / "App.xaml.cs")
+        # ShellWindow is in a separate library; App.xaml.cs programmatically shows it
+        self.assertIn("ShellWindow", content)
 
     def test_app_xaml_application_element(self):
         content = _read(WPF_HOST / "App.xaml")
