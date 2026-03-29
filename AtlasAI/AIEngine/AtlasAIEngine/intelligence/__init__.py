@@ -22,6 +22,9 @@ from .terrain_chunk_loader import TerrainChunkLoader, TerrainChunkManifest, Chun
 from .texture_atlas_packer import TextureAtlasPacker, AtlasSheet, AtlasRegion
 from .lod_generation_pipeline import LODGenerationPipeline, LODJob, LODSettings, LODResult
 from .scene_partition_loader import ScenePartitionLoader, ScenePartitionManifest, PartitionBounds, PartitionPortal
+from .mesh_simplification_pipeline import MeshSimplificationPipeline, SimplificationTarget, SimplificationResult, SimplificationBatch
+from .animation_retarget_pipeline import AnimationRetargetPipeline, RetargetProfile, BoneMapping, RetargetJob, RetargetResult
+from .nav_mesh_loader import NavMeshLoader, NavMeshManifest, NavMeshAABB, NavMeshNode, NavMeshEdge
 
 __all__ = [
     "ClangdBridge",
@@ -80,4 +83,18 @@ __all__ = [
     "ScenePartitionManifest",
     "PartitionBounds",
     "PartitionPortal",
+    "MeshSimplificationPipeline",
+    "SimplificationTarget",
+    "SimplificationResult",
+    "SimplificationBatch",
+    "AnimationRetargetPipeline",
+    "RetargetProfile",
+    "BoneMapping",
+    "RetargetJob",
+    "RetargetResult",
+    "NavMeshLoader",
+    "NavMeshManifest",
+    "NavMeshAABB",
+    "NavMeshNode",
+    "NavMeshEdge",
 ]
