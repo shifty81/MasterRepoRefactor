@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>AtlasSuite.Core</AssemblyName>
+    <RootNamespace>AtlasSuite.Core</RootNamespace>
+  </PropertyGroup>
+</Project>

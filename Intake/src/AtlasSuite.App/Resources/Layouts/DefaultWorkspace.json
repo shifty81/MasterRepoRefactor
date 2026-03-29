@@ -1,0 +1,10 @@
+{
+  "name": "Default",
+  "panels": [
+    { "panelId": "panel.projectExplorer", "dock": 0, "order": 0 },
+    { "panelId": "panel.sceneViewport", "dock": 3, "order": 1 },
+    { "panelId": "panel.inspector", "dock": 1, "order": 2 },
+    { "panelId": "panel.atlasAi", "dock": 1, "order": 3 },
+    { "panelId": "panel.outputLog", "dock": 2, "order": 4 }
+  ]
+}

@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>AtlasSuite.Modules.AI</AssemblyName>
+    <RootNamespace>AtlasSuite.Modules.AI</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AtlasSuite.Core\AtlasSuite.Core.csproj" />
+  </ItemGroup>
+</Project>

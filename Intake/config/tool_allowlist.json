@@ -1,0 +1,8 @@
+[
+  {
+    "toolId": "cmake_build",
+    "exe": "cmake.exe",
+    "allowedArgs": ["--build", "--preset", "--config"],
+    "networkAccess": false
+  }
+]

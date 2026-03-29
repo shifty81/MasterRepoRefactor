@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "atlas://security/shipping_feature_policy.schema.json",
+  "title": "Shipping Feature Policy",
+  "type": "object",
+  "required": ["schemaVersion", "bridge", "editor", "ai", "web"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "generatedBy": { "type": "string" },
+    "lastUpdatedUtc": { "type": "string" },
+    "bridge": { "type": "boolean" },
+    "editor": { "type": "boolean" },
+    "ai": { "type": "boolean" },
+    "web": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,69 @@
+{
+  "required_top_level_dirs": [
+    "AI",
+    "Agents",
+    "Builder",
+    "Config",
+    "Core",
+    "Docs",
+    "Editor",
+    "Engine",
+    "PCG",
+    "Projects",
+    "Runtime",
+    "Tests",
+    "Tools",
+    "UI"
+  ],
+  "required_pack_docs": [
+    "README.md",
+    "standards/MASTER_PROJECT_STANDARD.md",
+    "systems/AI_ARBITER.md",
+    "systems/CORE.md",
+    "systems/ENGINE.md",
+    "systems/EDITOR.md",
+    "systems/BUILDER.md",
+    "systems/PCG.md",
+    "systems/RUNTIME_AND_PROJECTS.md",
+    "systems/TOOLS_AND_AGENTS.md",
+    "systems/ARCHIVE_AND_LEGACY.md",
+    "systems/CONFIG_AND_SCHEMAS.md"
+  ],
+  "canonical_terms": {
+    "rig": [
+      "rig"
+    ],
+    "forbidden_gameplay_terms": [
+      "spacesuit backpack assembly"
+    ]
+  },
+  "banned_tokens": [
+    "EVE Online",
+    "Eve Online",
+    "EVEONLINE"
+  ],
+  "duplicate_domain_pairs": [
+    [
+      "Core/Localization",
+      "Core/Localisation"
+    ]
+  ],
+  "required_json_files": [
+    "Config/AI.json",
+    "Config/Builder.json",
+    "Config/Editor.json",
+    "Config/Engine.json"
+  ],
+  "warn_on_missing_readme_dirs": [
+    "AI",
+    "Builder",
+    "Core",
+    "Editor",
+    "Engine",
+    "PCG",
+    "Projects",
+    "Runtime",
+    "Tools",
+    "UI"
+  ]
+}

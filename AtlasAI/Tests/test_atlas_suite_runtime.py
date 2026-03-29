@@ -515,27 +515,37 @@ class TestNovaForgeContentCombatRepair:
 
 
 # ---------------------------------------------------------------------------
-# Archive — zips and chats moved correctly
+# Archive — zips removed (zip audit cleanup 2026-03-29), chats moved correctly
 # ---------------------------------------------------------------------------
 
 class TestArchive:
-    def test_atlas_suite_pack_archived(self):
-        assert _p("Docs/Archive/ZipFiles/atlas_suite_pack.zip").exists()
+    """All atlas_suite zip files were removed during the zip audit (2026-03-29)
+    to trim repo size. Their content has been fully integrated into the repo.
+    These tests now verify the zips are gone and content is present."""
 
-    def test_devworld_pack_archived(self):
-        assert _p("Docs/Archive/ZipFiles/atlas_suite_devworld_pack.zip").exists()
+    def test_atlas_suite_pack_removed(self):
+        assert not _p("Docs/Archive/ZipFiles/atlas_suite_pack.zip").exists(), \
+            "atlas_suite_pack.zip should have been deleted during zip audit cleanup"
 
-    def test_vehicle_pack_archived(self):
-        assert _p("Docs/Archive/ZipFiles/atlas_suite_vehicle_pack.zip").exists()
+    def test_devworld_pack_removed(self):
+        assert not _p("Docs/Archive/ZipFiles/atlas_suite_devworld_pack.zip").exists(), \
+            "atlas_suite_devworld_pack.zip should have been deleted during zip audit cleanup"
 
-    def test_rig_pack_archived(self):
-        assert _p("Docs/Archive/ZipFiles/atlas_suite_rig_pack.zip").exists()
+    def test_vehicle_pack_removed(self):
+        assert not _p("Docs/Archive/ZipFiles/atlas_suite_vehicle_pack.zip").exists(), \
+            "atlas_suite_vehicle_pack.zip should have been deleted during zip audit cleanup"
 
-    def test_builder_salvage_pack_archived(self):
-        assert _p("Docs/Archive/ZipFiles/atlas_suite_builder_salvage_pack.zip").exists()
+    def test_rig_pack_removed(self):
+        assert not _p("Docs/Archive/ZipFiles/atlas_suite_rig_pack.zip").exists(), \
+            "atlas_suite_rig_pack.zip should have been deleted during zip audit cleanup"
 
-    def test_combat_repair_pack_archived(self):
-        assert _p("Docs/Archive/ZipFiles/atlas_suite_combat_repair_pack.zip").exists()
+    def test_builder_salvage_pack_removed(self):
+        assert not _p("Docs/Archive/ZipFiles/atlas_suite_builder_salvage_pack.zip").exists(), \
+            "atlas_suite_builder_salvage_pack.zip should have been deleted during zip audit cleanup"
+
+    def test_combat_repair_pack_removed(self):
+        assert not _p("Docs/Archive/ZipFiles/atlas_suite_combat_repair_pack.zip").exists(), \
+            "atlas_suite_combat_repair_pack.zip should have been deleted during zip audit cleanup"
 
     def test_chat_export_1_archived(self):
         assert _p("Docs/Archive/Chats/New Text Document.txt").exists()

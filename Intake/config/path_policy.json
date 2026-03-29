@@ -1,0 +1,7 @@
+{
+  "protectedRoots": ["/Atlas", "/NovaForge"],
+  "generatedRoots": ["/Generated", "/Docs/Generated"],
+  "archiveRoots": ["/Archive"],
+  "sandboxRoots": ["/Local"],
+  "externalSyncRoots": ["/ExternalSync"]
+}
